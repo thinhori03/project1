@@ -8,4 +8,4 @@
 ### initial project
 1. gradle-project (branch) for project1 with gradle
 2. maven-project (branch) for project1 with maven
-3. we just apply **one of there** branches
+3. we just apply **one of them** (branch)
