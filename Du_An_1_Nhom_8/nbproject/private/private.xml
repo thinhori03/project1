@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ngtnthori03/.ntzoe-home/draft/project1/Du_An_1_Nhom_8/src/view/QL_HoaDon.java</file>
-            <file>file:/home/ngtnthori03/.ntzoe-home/draft/project1/Du_An_1_Nhom_8/src/view/Form_BanHang.java</file>
-            <file>file:/home/ngtnthori03/.ntzoe-home/draft/project1/Du_An_1_Nhom_8/src/view/QL_NhanVien.java</file>
-            <file>file:/home/ngtnthori03/.ntzoe-home/draft/project1/Du_An_1_Nhom_8/src/view/QL_SanPham.java</file>
-            <file>file:/home/ngtnthori03/.ntzoe-home/draft/project1/Du_An_1_Nhom_8/src/view/QL_khuyenMai.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/dto/VoucherDTO.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/model/VoucherModel.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/repository/HoaDonRepository.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/data/QueryGenerator.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/data/DataField.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/service/DBConnect.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/data/DataTable.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/repository/VoucherRepository.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/data/DataId.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/Main.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/EditField.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/model/HoaDonModel.java</file>
         </group>
     </open-files>
 </project-private>
