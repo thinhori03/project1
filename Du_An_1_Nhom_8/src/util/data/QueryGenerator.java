@@ -127,7 +127,11 @@ public class QueryGenerator<TTable extends Object> {
             }
         }
 
-        sb.append(" WHERE " + this.fields.get(0) + " = ?");
+        DataField idName = this.idField.getAnnotation(DataField.class);
+
+        sb.append(" WHERE " + idName.name() + " = ?");
+
+        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
         return sb.toString();
     }
 
@@ -234,11 +238,19 @@ public class QueryGenerator<TTable extends Object> {
                     generateUpdateQuery()
             );
 
-            for (int i = 0; i < this.fieldRef.size(); ++i) {
-                this.fieldRef.get(i).setAccessible(true);
+            try {
+                for (int i = 0; i < this.fieldRef.size(); ++i) {
+                    this.fieldRef.get(i).setAccessible(true);
 
-                preStat.setObject(i+1, this.fieldRef.get(i));
+                    preStat.setObject(i+1, this.fieldRef.get(i).get(object));
+                }
 
+                this.idField.setAccessible(true);
+                preStat.setObject(this.fieldRef.size() + 1,
+                        this.idField.get(object));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
             }
 
             return preStat.executeUpdate() >0;

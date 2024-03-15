@@ -40,4 +40,9 @@ public class VoucherRepository {
         
         return this.queryGenerator.executeInsert(connection, obj);
     }
+
+    public boolean update(VoucherModel obj) {
+
+        return this.queryGenerator.executeUpdate(connection, obj);
+    }
 }

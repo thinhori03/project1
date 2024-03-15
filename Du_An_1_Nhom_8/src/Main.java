@@ -14,8 +14,11 @@ public class Main {
             
             VoucherModel vm = vr.findById("v000000001");
             
-            System.out.println(vm.getMaVoucher());
-
+            
+            vm.setSoLuong(123);
+            
+            vr.update(vm);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
