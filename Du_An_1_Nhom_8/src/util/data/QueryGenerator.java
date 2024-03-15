@@ -226,6 +226,31 @@ public class QueryGenerator<TTable extends Object> {
         return null;
     }
 
+    public boolean executeUpdate(Connection connection,  TTable object) {
+
+        try {
+
+            PreparedStatement preStat = connection.prepareStatement(
+                    generateUpdateQuery()
+            );
+
+            for (int i = 0; i < this.fieldRef.size(); ++i) {
+                this.fieldRef.get(i).setAccessible(true);
+
+                preStat.setObject(i+1, this.fieldRef.get(i));
+
+            }
+
+            return preStat.executeUpdate() >0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return false;
+        }
+
+    }
+
     public TTable executeFindById(Connection connection, String id) {
 
         try {

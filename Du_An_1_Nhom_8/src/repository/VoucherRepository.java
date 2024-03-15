@@ -5,9 +5,7 @@
 package repository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import model.VoucherModel;
 import service.DBConnect;
 import util.data.QueryGenerator;
