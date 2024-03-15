@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -20,11 +21,13 @@ import java.util.stream.Collectors;
  */
 public class QueryGenerator<TTable extends Object> {
 
-    private String table_namw;
-    private List<String> fields;
+    private final String table_namw;
+    private final List<String> fields;
 
-    private List<Field> fieldRef;
-    private Class<TTable> table;
+    private final List<Field> fieldRef;
+    private final Class<TTable> table;
+
+    private final Field idField;
 
     public QueryGenerator(Class<TTable> _table) {
         this.table = _table;
@@ -38,7 +41,12 @@ public class QueryGenerator<TTable extends Object> {
         this.fieldRef = Arrays.asList(this.table.getDeclaredFields())
                 .stream()
                 .filter((o) -> (o.isAnnotationPresent(DataField.class)))
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
+
+        this.idField = Arrays.asList(this.table.getDeclaredFields())
+                .stream()
+                .filter((o) -> (o.isAnnotationPresent(DataField.class)))
+                .findFirst().get();
     }
 
     public TTable map(ResultSet resultSet) throws SQLException {
@@ -77,10 +85,10 @@ public class QueryGenerator<TTable extends Object> {
         }
         sb.append("\t" + table_namw + "." + fields.get(fields.size() - 1));
 
-        sb.append(new String("\n FROM ")
+        sb.append("\n FROM "
                 .concat(table_namw));
 
-        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
+        System.out.println("\n\n\n" + sb + "\n\n\n");
 
         return sb.toString();
     }
@@ -102,7 +110,7 @@ public class QueryGenerator<TTable extends Object> {
         }
         sb.append(" ) \n");
 
-        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
+        System.out.println("\n\n\n" + sb + "\n\n\n");
         return sb.toString();
     }
 
@@ -123,12 +131,32 @@ public class QueryGenerator<TTable extends Object> {
         return sb.toString();
     }
 
-    public PreparedStatement generatePrepareSeatement(PreparedStatement prepStat, Object ...o) {
+    public String genFindById() {
+
+        StringBuilder sb = new StringBuilder(
+                this.generateSelectAllQuery()
+                );
+
+        DataField idName = idField.getAnnotation(DataField.class);
+
+        if (Optional.of(idName).isPresent()) {
+
+            sb.append(" WHERE ")
+                    .append(table_namw + "." + idName.name() + " = ?");
+
+        }
+
+        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
+
+        return sb.toString();
+    }
+
+    public PreparedStatement generatePrepareSeatement(PreparedStatement prepStat, Object... o) {
 
 
         try {
             for (int i = 0; i < o.length; ++i) {
-                prepStat.setObject(i+1, o);
+                prepStat.setObject(i + 1, o);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -153,7 +181,7 @@ public class QueryGenerator<TTable extends Object> {
             ).executeQuery();
 
             while (resultSet.isBeforeFirst()) {
-                obj =  this.table.getConstructor().newInstance();
+                obj = this.table.getConstructor().newInstance();
 
                 ret.add(this.map(resultSet));
             }
@@ -183,7 +211,7 @@ public class QueryGenerator<TTable extends Object> {
             for (int i = 0; i < this.fieldRef.size(); ++i) {
                 this.fieldRef.get(i).setAccessible(true);
 
-                preStat.setObject(i+1,
+                preStat.setObject(i + 1,
                         this.fieldRef.get(i).get(obj));
             }
 
@@ -192,6 +220,27 @@ public class QueryGenerator<TTable extends Object> {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public TTable executeFindById(Connection connection, String id) {
+
+        try {
+
+            PreparedStatement preStat = connection.prepareStatement(
+                    this.genFindById()
+            );
+
+            preStat.setObject(1, id);
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            return this.map(resultSet);
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

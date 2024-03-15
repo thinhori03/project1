@@ -33,9 +33,9 @@ public class VoucherRepository {
         return this.queryGenerator.executeFindAll(connection);
     }
 
-    public VoucherModel findById(String voucherId) {
+    public VoucherModel findById(String maVoucher) {
 
-        return null;
+        return this.queryGenerator.executeFindById(connection, maVoucher);
     }
     
     public VoucherModel add(VoucherModel obj) {

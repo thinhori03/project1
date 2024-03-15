@@ -17,6 +17,7 @@ CREATE TABLE VOUCHER(
 
 import java.util.Date;
 import util.data.DataField;
+import util.data.DataId;
 import util.data.DataTable;
 
 /**
@@ -27,6 +28,7 @@ import util.data.DataTable;
 @DataTable(name = "VOUCHER")
 public class VoucherModel {
 
+    @DataId
     @DataField(name = "MAV")
     private String maVoucher;
 

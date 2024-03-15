@@ -16,15 +16,10 @@ public class Main {
         VoucherRepository vr = new VoucherRepository();
 
         try {
-
-            for (VoucherModel vm : vr.getAll()) {
-                System.out.println(vm.getMaVoucher());
-
-                // test insertion
-                vm.setMaVoucher("v000000006");
-                vr.add(vm);
-                break;
-            }
+            
+            VoucherModel vm = vr.findById("v000000001");
+            
+            System.out.println(vm.getMaVoucher());
 
         } catch (Exception e) {
             e.printStackTrace();
