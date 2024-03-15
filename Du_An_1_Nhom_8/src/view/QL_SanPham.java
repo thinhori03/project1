@@ -385,7 +385,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         if (sanpham.UpdateSanPham(ma, this.readFrom()) > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công ");
             this.fillTable(sanpham.getAll());
-//            clear();
+            clear();
         } else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
         }
