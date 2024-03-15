@@ -4,9 +4,6 @@
  */
 package util.data;
 
-import com.sun.jdi.connect.Connector;
-import model.VoucherModel;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
