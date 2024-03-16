@@ -1,0 +1,138 @@
+-- db.sql clone from google drive: 16-03-2023
+
+CREATE DATABASE Du_An_Nhom_8
+go
+USE Du_An_Nhom_8
+go
+
+CREATE TABLE NHAN_VIEN
+(
+    MANV      INT IDENTITY (1,1) PRIMARY KEY,
+    TENNV     NVARCHAR(100),
+    SDT       CHAR(14),
+    EMAIL     VARCHAR(50),
+    GIOTINH   NVARCHAR(50),
+    MATKHAU   varchar(100),
+    CCCD      VARCHAR(14),
+    VAITRO    varchar(50),
+    TRANGTHAI varchar(100)
+)
+
+CREATE TABLE SAN_PHAM
+(
+    MASP  INT IDENTITY (1,1) PRIMARY KEY,
+    TENSP NVARCHAR(100)
+)
+CREATE TABLE MAU_SAC
+(
+    MAMAU  INT IDENTITY (1,1) PRIMARY KEY,
+    TENMAU NVARCHAR(100)
+)
+
+CREATE TABLE SIZE
+(
+    MASIZE  INT IDENTITY (1,1) PRIMARY KEY,
+    TENSIZE NVARCHAR(10)
+)
+
+
+CREATE TABLE KHUYEN_MAI
+(
+    MAKM        INT IDENTITY (1,1) PRIMARY KEY,
+    NGAYBATDAU  DATE,
+    NGAYKETTHUC DATE,
+    SOLUONG     INT,
+    GIA         FLOAT
+)
+
+CREATE TABLE VOUCHER
+(
+    MAV         VARCHAR(10) PRIMARY KEY,
+    GIATRI      FLOAT,
+    NGAYBATDAU  DATE,
+    NGAYKETTHUC DATE,
+    DIEUKIEN    FLOAT
+)
+
+CREATE TABLE KHACH_HANG
+(
+    MAKH     INT IDENTITY (1,1) PRIMARY KEY,
+    TENKH    NVARCHAR(100),
+    SDT      CHAR(14),
+    GIOITINH NVARCHAR(10),
+    EMAIL    NVARCHAR(100),
+    NGAYSINH DATE,
+    DIACHI   VARCHAR(100)
+)
+
+create table LICH_SU_GIA
+(
+    MALSG       INT IDENTITY (1,1) primary key,
+    MASPCT      int,
+    GIA         float,
+    NGAYBATDAU  date,
+    NGAYKETTHUC date
+)
+CREATE TABLE SAN_PHAM_CHI_TIET
+(
+    MASPCT    INT IDENTITY (1,1) PRIMARY KEY,
+    TENSP     NVARCHAR(100),
+    SOLUONG   INT,
+    MASIZE    INT references SIZE (MASIZE),
+    MAMAU     INT references MAU_SAC (MAMAU),
+    MAKM      INT references KHUYEN_MAI (MAKM),
+    MASP      INT references SAN_PHAM (MASP),
+    TRANGTHAI VARCHAR(100),
+    MALSG     int references LICH_SU_GIA (MALSG)
+)
+
+
+CREATE TABLE HOA_DON
+(
+    MAHD          INT IDENTITY (1,1) PRIMARY KEY,
+    MAKH          INT references KHACH_HANG (MAKH),
+    MANV          INT references NHAN_VIEN (MANV),
+    TRANGTHAI     VARCHAR(100),
+    PHUONGTHUC    VARCHAR(100),
+    MAV           VARCHAR(10) references VOUCHER (MAV),
+    NGAYTAO       DATE,
+    NGAYTHANHTOAN DATE
+)
+CREATE TABLE HOA_DON_CHI_TIET
+(
+    MAHDCT   INT IDENTITY (1,1) PRIMARY KEY,
+    MAHD     INT references HOA_DON (MAHD),
+    MASPCT   INT references SAN_PHAM_CHI_TIET (MASPCT),
+    SOLUONG  INT,
+    MAUSAC   VARCHAR(100),
+    THOIGIAN DATE,
+    MAKM     INT references KHUYEN_MAI (MAKM),
+    MALSG    int references LICH_SU_GIA (MALSG)
+)
+
+insert into KHACH_HANG (TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)
+values ('Nguyen Van A', '0123456789', 'Nam', 'nguyenvana@gmail.com', '02/02/2004', 'Kieu Mai , Ha Noi')
+
+update KHACH_HANG
+set TENKH    = 'Nguyen Van A',
+    SDT      = '0123456798',
+    GIOITINH=N'Nữ',
+    EMAIl    = 'nguyenvana@gmail.com',
+    NGAYSINH = '02/02/2004',
+    DIACHI   = 'Kieu Mai , Ha Noi'
+where MAKH = 2
+
+
+-- select *
+-- from KHACH_HANG
+--
+-- select *
+-- from HOA_DON
+--
+-- select *
+-- from HOA_DON_CHI_TIET
+--
+-- select SAN_PHAM_CHI_TIET.MASPCT, TENSP, COUNT(HOA_DON_CHI_TIET.SOLUONG), THOIGIAN, LICH_SU_GIA.GIA
+-- from SAN_PHAM_CHI_TIET
+--          join HOA_DON_CHI_TIET on HOA_DON_CHI_TIET.MASPCT = SAN_PHAM_CHI_TIET.MASPCT
+--          join LICH_SU_GIA on LICH_SU_GIA.MALSG = HOA_DON_CHI_TIET.MALSG
