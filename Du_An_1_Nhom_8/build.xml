@@ -70,4 +70,32 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+    <!-- compile *.java files -->
+    <target name="build">
+        <mkdir dir="build/classes" />
+        <javac srcdir="./src" destdir="./build/classes">
+            <classpath>
+                <pathelement path="./lib/mssql-jdbc-12.2.0.jre11.jar" />
+                <pathelement path="./lib/jcalendar-1.4.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- create jar file -->
+    <target name="pack" depends="build">
+        <jar destfile="./build/jar/project1.jar" basedir="./build/classes">
+            <zipgroupfileset dir="lib" includes="jcalendar-1.4.jar"/>
+            <zipgroupfileset dir="lib" includes="mssql-jdbc-12.2.0.jre11.jar"/>
+            <manifest>
+
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="execute" depends="pack">
+        <java jar="./build/jar/project1.jar" fork="true">
+        </java>
+    </target>
 </project>

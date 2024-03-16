@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5584ff9a-d98d-423f-80a9-01693f3ab455" name="Changes" comment="" />
+    <list default="true" id="5584ff9a-d98d-423f-80a9-01693f3ab455" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/Du_An_Nhom_8.FbWPMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/Du_An_Nhom_8.FbWPMw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/Du_An_Nhom_8.FbWPMw/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/master.YiqNvw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/master.YiqNvw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e5218bb-ff25-4d23-ad25-f67deeb22ece/storage_v2/_src_/database/master.YiqNvw/schema/sys.zb4BAA.meta" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +79,7 @@
     "Kotlin script (Beta).build.gradle.kts.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "bill-and-voucher",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -203,6 +213,7 @@
       <workItem from="1709984111601" duration="4863000" />
       <workItem from="1709989177433" duration="2667000" />
       <workItem from="1710148725991" duration="610000" />
+      <workItem from="1710589138960" duration="19000" />
     </task>
     <servers />
   </component>

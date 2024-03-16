@@ -2,7 +2,9 @@
 import model.VoucherModel;
 import repository.VoucherRepository;
 
- *
+import java.util.Date;
+
+/*
  * @author ngtnthori03
  */
 public class Main {
@@ -12,13 +14,16 @@ public class Main {
 
         try {
             
-            VoucherModel vm = vr.findById("v000000001");
-            
-            
-            vm.setSoLuong(123);
-            
+            VoucherModel vm = new VoucherModel();
+
+            vm.setMaVoucher("V000000003");
+            vm.setGiaTri(0);
+            vm.setDiauKien(100000);
+            vm.setNgayBatDau(new Date());
+            vm.setNgyKetThuc(new Date());
+
             vr.update(vm);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

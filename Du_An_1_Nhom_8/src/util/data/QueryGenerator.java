@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * @author ngtnthori03
  */
-public class QueryGenerator<TTable extends Object> {
+public class QueryGenerator<TTable, TId> {
 
     private final String table_namw;
     private final List<String> fields;
@@ -263,7 +263,7 @@ public class QueryGenerator<TTable extends Object> {
 
     }
 
-    public TTable executeFindById(Connection connection, String id) {
+    public TTable executeFindById(Connection connection, TId id) {
 
         try {
 

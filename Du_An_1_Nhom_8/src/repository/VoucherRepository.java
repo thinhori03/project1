@@ -18,7 +18,7 @@ public class VoucherRepository {
 
     private java.sql.Connection connection;
 
-    private QueryGenerator<VoucherModel> queryGenerator;
+    private QueryGenerator<VoucherModel, String> queryGenerator;
 
     public VoucherRepository() {
 
