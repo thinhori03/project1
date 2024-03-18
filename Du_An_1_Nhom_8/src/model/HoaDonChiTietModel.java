@@ -1,6 +1,7 @@
 package model;
 
 import util.data.DataField;
+import util.data.DataGenerate;
 import util.data.DataId;
 import util.data.DataTable;
 
@@ -25,6 +26,7 @@ import java.util.Date;
 public class HoaDonChiTietModel {
 
     @DataId
+    @DataGenerate
     @DataField(name = "MAHDCT")
     private int maHDCT;
 
@@ -68,8 +70,6 @@ public class HoaDonChiTietModel {
     /**
      * constructors
      */
-
-
 
     public int getMaHDCT() {
         return maHDCT;
