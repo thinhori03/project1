@@ -19,6 +19,7 @@ CREATE TABLE HOA_DON(
  *
  * @author ngtnthori03
  */
+@DataTable(name = "HOA_DON")
 public class HoaDonModel {
 
     private int maHoaDon;
