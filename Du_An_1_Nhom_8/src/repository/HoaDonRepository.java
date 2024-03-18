@@ -19,7 +19,9 @@ import util.data.QueryGenerator;
 public class HoaDonRepository {
     
     private Connection connection;
-    
+
+    private QueryGenerator<HoaDonModel, Integer> queryGenerator;
+
     public HoaDonRepository() {
         this.connection = DBConnect.getConnection();
     }

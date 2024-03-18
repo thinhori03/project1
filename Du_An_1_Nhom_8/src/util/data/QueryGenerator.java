@@ -96,13 +96,24 @@ public class QueryGenerator<TTable, TId> {
     public String generateInsertQuery() {
         StringBuilder sb = new StringBuilder(" INSERT INTO " + table_namw);
         sb.append(" ( ");
+
         for (int i = 0; i < this.fields.size() - 1; ++i) {
+            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerate.class)) {
+                continue;
+            }
             sb.append(this.fields.get(i) + ", ");
         }
+
         sb.append(this.fields.get(this.fields.size() - 1));
         sb.append(" ) ");
         sb.append("\n\tVALUES (");
+
         for (int i = 0; i < this.fields.size(); ++i) {
+
+            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerate.class)) {
+                continue;
+            }
+
             sb.append(" ? ");
             if (i < this.fields.size() - 1) {
                 sb.append(" , ");

@@ -4,16 +4,25 @@
  */
 package model;
 
-/*
-CREATE TABLE HOA_DON(
-    MAHD INT PRIMARY KEY,
-    MAKH INT references KHACH_HANG(MAKH),
-    MANV INT references NHAN_VIEN(MANV),
-    TRANGTHAI VARCHAR(100),
-    PHUONGTHUC VARCHAR(100),
-    MAV VARCHAR(10) references VOUCHER(MAV)
-)
+/**
+ * CREATE TABLE HOA_DON
+ * (
+ *     MAHD          INT IDENTITY (1,1) PRIMARY KEY,
+ *     MAKH          INT references KHACH_HANG (MAKH),
+ *     MANV          INT references NHAN_VIEN (MANV),
+ *     TRANGTHAI     VARCHAR(100),
+ *     PHUONGTHUC    VARCHAR(100),
+ *     MAV           VARCHAR(10) references VOUCHER (MAV),
+ *     NGAYTAO       DATE,
+ *     NGAYTHANHTOAN DATE
+ * )
  */
+
+import util.data.DataField;
+import util.data.DataId;
+import util.data.DataTable;
+
+import java.util.Date;
 
 /**
  *
@@ -22,37 +31,47 @@ CREATE TABLE HOA_DON(
 @DataTable(name = "HOA_DON")
 public class HoaDonModel {
 
+    @DataId
+    @DataField(name = "MAHD")
     private int maHoaDon;
 
-    private int maNhanVien;
+    @DataField(name = "MAKH")
+    private int maKH;
 
-    private int maKhachHang;
+    @DataField(name = "MANV")
+    private int maNV;
 
+    @DataField(name = "TRANGTHAI")
     private String trangThai;
 
+    @DataField(name = "PHUONGTHUC")
     private String phuongThuc;
 
+    @DataField(name = "MAV")
     private String maVoucher;
 
+
+    @DataField(name = "NGAYTAO")
+    private Date ngayTao;
+
+    @DataField(name = "NGAYTHANHTOAN")
+    private Date ngayThanhToan;
     /*
         constructor
      */
-
     public HoaDonModel() {
     }
 
-    public HoaDonModel(int maHoaDon, int maNhanVien, int maKhachHang, String trangThai, java.lang.String phuongThuc, java.lang.String maVoucher) {
+    public HoaDonModel(int maHoaDon, int maKH, int maNV, String trangThai, String phuongThuc, String maVoucher, Date ngayTao, Date ngayThanhToan) {
         this.maHoaDon = maHoaDon;
-        this.maNhanVien = maNhanVien;
-        this.maKhachHang = maKhachHang;
+        this.maKH = maKH;
+        this.maNV = maNV;
         this.trangThai = trangThai;
         this.phuongThuc = phuongThuc;
         this.maVoucher = maVoucher;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
     }
-
-    /*
-        getter/setter
-     */
 
     public int getMaHoaDon() {
         return maHoaDon;
@@ -62,20 +81,20 @@ public class HoaDonModel {
         this.maHoaDon = maHoaDon;
     }
 
-    public int getMaNhanVien() {
-        return maNhanVien;
+    public int getMaKH() {
+        return maKH;
     }
 
-    public void setMaNhanVien(int maNhanVien) {
-        this.maNhanVien = maNhanVien;
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
     }
 
-    public int getMaKhachHang() {
-        return maKhachHang;
+    public int getMaNV() {
+        return maNV;
     }
 
-    public void setMaKhachHang(int maKhachHang) {
-        this.maKhachHang = maKhachHang;
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
     }
 
     public String getTrangThai() {
@@ -86,19 +105,35 @@ public class HoaDonModel {
         this.trangThai = trangThai;
     }
 
-    public java.lang.String getPhuongThuc() {
+    public String getPhuongThuc() {
         return phuongThuc;
     }
 
-    public void setPhuongThuc(java.lang.String phuongThuc) {
+    public void setPhuongThuc(String phuongThuc) {
         this.phuongThuc = phuongThuc;
     }
 
-    public java.lang.String getMaVoucher() {
+    public String getMaVoucher() {
         return maVoucher;
     }
 
-    public void setMaVoucher(java.lang.String maVoucher) {
+    public void setMaVoucher(String maVoucher) {
         this.maVoucher = maVoucher;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public Date getNgayThanhToan() {
+        return ngayThanhToan;
+    }
+
+    public void setNgayThanhToan(Date ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
     }
 }
