@@ -125,7 +125,8 @@ where MAKH = 2
 
 select *
 from KHACH_HANG
---
+
+
 -- select *
 -- from HOA_DON
 --

@@ -5,7 +5,6 @@ import util.data.DataGenerate;
 import util.data.DataId;
 import util.data.DataTable;
 
-import javax.xml.namespace.QName;
 import java.util.Date;
 
 /**
