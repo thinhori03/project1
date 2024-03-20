@@ -23,17 +23,14 @@ public class SanPhamService {
 
     public List<SanPham> getAll() {
         listsp = new ArrayList<>();
-        sql = "Select  spct.MASPCT,TENSP,SOLUONG,s.TENSIZE,ms.TENMAU,MAKM,TRANGTHAI,lsg.GIA from SAN_PHAM_CHI_TIET spct\n"
-                + "join SIZE s on spct.MASIZE = s.MASIZE\n"
-                + "join MAU_SAC ms on spct.MAMAU = ms.MAMAU\n"
-                + "join LICH_SU_GIA lsg on spct.MALSG = lsg.MALSG";
+        sql = "Select MASPCT,TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG from SAN_PHAM_CHI_TIET";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8)
+                        rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getInt(8)
                 );
                 listsp.add(sp);
             }
@@ -46,19 +43,18 @@ public class SanPhamService {
 
     public int ADDSanPham(SanPham sp) {
         listsp = new ArrayList<>();
-        sql = "insert into SAN_PHAM_CHI_TIET(MASPCT,TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG)values(?,?,?,?,?,?,?,?)";
+        sql = "insert into SAN_PHAM_CHI_TIET(TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG)values(?,?,?,?,?,?,?)";
         int kq = 0;
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, sp.getMaspct());
-            ps.setString(2, sp.getTen());
-            ps.setInt(3, sp.getSoluong());
-            ps.setInt(4, sp.getSize());
-            ps.setString(5, sp.getMasac());
-            ps.setString(6, sp.getMakm());
-            ps.setString(7, sp.getTrangthai());
-            ps.setFloat(8, sp.getGia());
+            ps.setString(1, sp.getTen());
+            ps.setInt(2, sp.getSoluong());
+            ps.setInt(3, sp.getSize());
+            ps.setInt(4, sp.getMasac());
+            ps.setString(5, sp.getMakm());
+            ps.setString(6, sp.getTrangthai());
+            ps.setFloat(7, sp.getId_gia());
             kq = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,10 +71,10 @@ public class SanPhamService {
             ps.setString(1, sp.getTen());
             ps.setInt(2, sp.getSoluong());
             ps.setInt(3, sp.getSize());
-            ps.setString(4, sp.getMasac());
+            ps.setInt(4, sp.getMasac());
             ps.setString(5, sp.getMakm());
             ps.setString(6, sp.getTrangthai());
-            ps.setFloat(7, sp.getGia());
+            ps.setInt(7, sp.getId_gia());
             ps.setInt(8, ma);
             kq = ps.executeUpdate();
         } catch (Exception e) {
@@ -102,10 +98,7 @@ public class SanPhamService {
     }
     public List<SanPham> TimSanPham(String ten){
         List<SanPham> listsp = new ArrayList<>();
-        sql = "Select  spct.MASPCT,TENSP,SOLUONG,s.TENSIZE,ms.TENMAU,MAKM,TRANGTHAI,lsg.GIA from SAN_PHAM_CHI_TIET spct\n"
-                + "join SIZE s on spct.MASIZE = s.MASIZE\n"
-                + "join MAU_SAC ms on spct.MAMAU = ms.MAMAU\n"
-                + "join LICH_SU_GIA lsg on spct.MALSG = lsg.MALSG where TENSP like ?";
+        sql = "Select MASPCT,TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG from SAN_PHAM_CHI_TIET where TENSP like ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -113,7 +106,7 @@ public class SanPhamService {
             rs = ps.executeQuery();
             while(rs.next()){
                 SanPham sp = new SanPham(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getFloat(8)
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getInt(8)
                 );
                 listsp.add(sp);
             }

@@ -9,7 +9,7 @@ package model;
  * @author Admin
  */
 public class KhuyenMai {
-    int makm;
+    String makm;
     String ngayBd;
     String ngayKt;
     int soluong;
@@ -18,7 +18,7 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
-    public KhuyenMai(int makm, String ngayBd, String ngayKt, int soluong, float gia) {
+    public KhuyenMai(String makm, String ngayBd, String ngayKt, int soluong, float gia) {
         this.makm = makm;
         this.ngayBd = ngayBd;
         this.ngayKt = ngayKt;
@@ -26,11 +26,11 @@ public class KhuyenMai {
         this.gia = gia;
     }
 
-    public int getMakm() {
+    public String getMakm() {
         return makm;
     }
 
-    public void setMakm(int makm) {
+    public void setMakm(String makm) {
         this.makm = makm;
     }
 
@@ -65,6 +65,8 @@ public class KhuyenMai {
     public void setGia(float gia) {
         this.gia = gia;
     }
+
+    
 
    
     public Object[] toDataRow(){

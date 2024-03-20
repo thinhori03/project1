@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +47,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
     
     KhuyenMai readFrom() {
         KhuyenMai km = new KhuyenMai();
-        km.setMakm(Integer.parseInt(txt_Ma.getText()));
+        km.setMakm(txt_Ma.getText());
         km.setNgayBd(txt_ngayBD.getText());
         km.setNgayKt(txt_ngayKT.getText());
         km.setSoluong(Integer.parseInt(txt_Soluong.getText()));
@@ -57,6 +60,72 @@ public class QL_khuyenMai extends javax.swing.JFrame {
         txt_ngayKT.setText("");
         txt_Soluong.setText("");
         txt_Gia.setText("");
+    }
+    public boolean check(){
+        if(txt_Ma.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mã khuyến mại không đucợ để trống");
+            return false;
+        }
+        String ngayBD = txt_ngayBD.getText(); 
+
+        // Kiểm tra xem ngày có rỗng không
+        if (ngayBD.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày không được để trống");
+            return false;
+        }
+
+        SimpleDateFormat dateBD = new SimpleDateFormat("yyyy/MM/dd");
+        dateBD.setLenient(false); // Tắt tính linh hoạt của SimpleDateFormat
+
+        try {
+            // Thử chuyển đổi ngày từ chuỗi thành đối tượng Date
+            Date ngay = dateBD.parse(ngayBD);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Ngày không đúng định dạng");
+            return false;
+        }
+        String ngayKT = txt_ngayKT.getText(); 
+
+        // Kiểm tra xem ngày có rỗng không
+        if (ngayBD.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày không được để trống");
+            return false;
+        }
+
+        SimpleDateFormat dateKT = new SimpleDateFormat("yyyy/MM/dd");
+        dateKT.setLenient(false); // Tắt tính linh hoạt của SimpleDateFormat
+
+        try {
+            // Thử chuyển đổi ngày từ chuỗi thành đối tượng Date
+            Date ngay = dateKT.parse(ngayBD);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Ngày không đúng định dạng");
+            return false;
+        }
+        
+        try {
+            String input = txt_Soluong.getText();
+            if(input.equals("")){
+             JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+            return false;   
+            }
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Phải nhập số nguyên");
+            return false;
+        }
+        try {
+             String input = txt_Gia.getText();
+            if(input.equals("")){
+             JOptionPane.showMessageDialog(this, "Giá không được để trống");
+            return false;   
+            }
+            Float.parseFloat(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Phải nhập số nguyên");
+            return false;
+        }
+        return true;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -286,6 +355,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(check()){
         if (kms.ADDKhuyenMai(this.readFrom()) > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
             this.fillTable(kms.getAll());
@@ -293,10 +363,12 @@ public class QL_khuyenMai extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(check()){
         index = Tbl_KhuyenMai.getSelectedRow();
         int ma = (int) Tbl_KhuyenMai.getValueAt(index, 0);
         if (kms.UpdateKhuyenMai(ma, this.readFrom()) > 0) {
@@ -305,6 +377,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
             clear();
         } else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -337,7 +410,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
             this.fillTable(kms.getAll());
         } else {
             try {
-                int ma = Integer.parseInt(text);
+                String ma = id_Timkiem.getText();
                 List<KhuyenMai> list1 = kms.TimSanPham(ma);
                 this.fillTable(list1);
             } catch (NumberFormatException e) {

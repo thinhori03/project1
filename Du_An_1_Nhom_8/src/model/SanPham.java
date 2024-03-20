@@ -4,24 +4,31 @@
  */
 package model;
 
+import service.GiaService;
+import service.Mau_Service;
+import service.SIZE_Service;
+
 /**
  *
  * @author Admin
  */
 public class SanPham {
+    GiaService gs = new GiaService();
+    SIZE_Service ss = new SIZE_Service();
+    Mau_Service ms = new Mau_Service();
     int maspct;
     String ten;
     int soluong;
     int size;
-    String masac;
+    int masac;
     String makm;
     String trangthai;
-    float gia;
+    int id_gia;
 
     public SanPham() {
     }
 
-    public SanPham(int maspct, String ten, int soluong, int size, String masac, String makm, String trangthai, float gia) {
+    public SanPham(int maspct, String ten, int soluong, int size, int masac, String makm, String trangthai, int id_gia) {
         this.maspct = maspct;
         this.ten = ten;
         this.soluong = soluong;
@@ -29,7 +36,7 @@ public class SanPham {
         this.masac = masac;
         this.makm = makm;
         this.trangthai = trangthai;
-        this.gia = gia;
+        this.id_gia = id_gia;
     }
 
     public int getMaspct() {
@@ -64,11 +71,11 @@ public class SanPham {
         this.size = size;
     }
 
-    public String getMasac() {
+    public int getMasac() {
         return masac;
     }
 
-    public void setMasac(String masac) {
+    public void setMasac(int masac) {
         this.masac = masac;
     }
 
@@ -88,26 +95,27 @@ public class SanPham {
         this.trangthai = trangthai;
     }
 
-    public float getGia() {
-        return gia;
+    public int getId_gia() {
+        return id_gia;
     }
 
-    public void setGia(float gia) {
-        this.gia = gia;
+    public void setId_gia(int id_gia) {
+        this.id_gia = id_gia;
     }
-    
-    
+
+ 
     public Object[]toDataRow(){
         return new Object[]{
-          this.getMaspct(),this.getTen(),this.getSoluong(),this.getSize(),this.getMasac(),this.getMakm(),this.getTrangthai(),this.getGia()
+          this.getMaspct(),this.getTen(),this.getSoluong(),this.ss.getBYID_Size(this.size).getTensize(),this.ms.getBYID_Mau(this.masac).getTenmau(),this.getMakm(),this.getTrangthai(),this.gs.getBYID_Gia(this.id_gia).getGia()
         };
     }
 
     @Override
     public String toString() {
-        return "SanPham{" + "maspct=" + maspct + ", ten=" + ten + ", soluong=" + soluong + ", size=" + size + ", masac=" + masac + ", makm=" + makm + ", trangthai=" + trangthai + ", gia=" + gia + '}';
+        return "SanPham{" + "gs=" + gs + ", maspct=" + maspct + ", ten=" + ten + ", soluong=" + soluong + ", size=" + size + ", masac=" + masac + ", makm=" + makm + ", trangthai=" + trangthai + ", id_gia=" + id_gia + '}';
     }
 
-   
     
+    
+ 
 }

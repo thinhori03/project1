@@ -30,7 +30,7 @@ public class KhuyenMaiService {
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(
-                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5)
+                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getFloat(5)
                 );
                 listkm.add(km);
             }
@@ -48,7 +48,7 @@ public class KhuyenMaiService {
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, km.getMakm());
+            ps.setString(1, km.getMakm());
             ps.setString(2, km.getNgayBd());
             ps.setString(3, km.getNgayKt());
             ps.setInt(4, km.getSoluong());
@@ -100,17 +100,17 @@ public class KhuyenMaiService {
         return kq;
     }
 
-    public List<KhuyenMai> TimSanPham(int ma) {
+    public List<KhuyenMai> TimSanPham(String ma) {
         List<KhuyenMai> listkm = new ArrayList<>();
-        sql = "Select *from KHUYEN_MAI where MAKM =?";
+        sql = "Select *from KHUYEN_MAI where MAKM like ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, ma);
+            ps.setString(1,"%" + ma + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(
-                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5)
+                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5)
                 );
                 listkm.add(km);
             }
