@@ -34,7 +34,17 @@ public class NhanVien {
         this.vaiTro = vaiTro;
         this.trangThai = trangThai;
     }
-
+    public NhanVien( String hoTen, String sdt, String email, String gioiTinh, String CCCD, String matKhau, String vaiTro, String trangThai) {
+        
+        this.hoTen = hoTen;
+        this.sdt = sdt;
+        this.email = email;
+        this.gioiTinh = gioiTinh;
+        this.CCCD = CCCD;
+        this.matKhau = matKhau;
+        this.vaiTro = vaiTro;
+        this.trangThai = trangThai;
+    }
     public int getMaNV() {
         return maNV;
     }

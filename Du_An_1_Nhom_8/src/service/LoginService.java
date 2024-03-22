@@ -13,11 +13,11 @@ import java.util.List;
 import model.Login;
 
 public class LoginService {
-    public Login selectByMa(String ten) {
-        String sql = "SELECT MANV, TENNV, SDT, EMAIL, GIOTINH, MATKHAU, CCCD, VAITRO, TRANGTHAI FROM NHAN_VIEN WHERE TENNV LIKE ?";
+    public Login selectByMail(String email) {
+        String sql = "SELECT MANV, TENNV, SDT, EMAIL, GIOTINH, MATKHAU, CCCD, VAITRO, TRANGTHAI FROM NHAN_VIEN WHERE EMAIL LIKE ?";
         try (
                 Connection con = DBConnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, ten);
+            ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Login login = new Login();

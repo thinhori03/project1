@@ -24,6 +24,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
     
     public QL_KhuyenMai1() {
         initComponents();
+        fillTable(kms.getAll());
     }
 
     void fillTable(List<KhuyenMai> list) {
