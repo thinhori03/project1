@@ -1,4 +1,4 @@
-package service;
+package util;
 
 public enum Vietnampattern {
 
@@ -8,12 +8,12 @@ public enum Vietnampattern {
 
     private final String value;
 
-    public Vietnampattern(final String value) {
+    Vietnampattern(final String value) {
 
         this.value = value;
     }
 
     public String getValue() {
-        this.this.value;
-    })
+        return this.value;
+    }
 }

@@ -4,19 +4,6 @@
  */
 package model;
 
-/**
- * CREATE TABLE HOA_DON
- * (
- *     MAHD          INT IDENTITY (1,1) PRIMARY KEY,
- *     MAKH          INT references KHACH_HANG (MAKH),
- *     MANV          INT references NHAN_VIEN (MANV),
- *     TRANGTHAI     VARCHAR(100),
- *     PHUONGTHUC    VARCHAR(100),
- *     MAV           VARCHAR(10) references VOUCHER (MAV),
- *     NGAYTAO       DATE,
- *     NGAYTHANHTOAN DATE
- * )
- */
 
 import util.data.DataField;
 import util.data.DataId;
@@ -27,6 +14,19 @@ import java.util.Date;
 /**
  *
  * @author ngtnthori03
+ *
+ * SQL table
+ * CREATE TABLE HOA_DON
+ * (
+ *     MAHD          varchar(20) PRIMARY KEY,
+ *     MAKH          INT references KHACH_HANG (MAKH),
+ *     MANV          INT references NHAN_VIEN (MANV),
+ *     NGAYTAO       DATETIME,
+ *     NGAYTHANHTOAN DATETIME,
+ *     TRANGTHAI     VARCHAR(100),
+ *     PHUONGTHUC    VARCHAR(100),
+ *     MAV           VARCHAR(10) references VOUCHER (MAV)
+ * )
  */
 @DataTable(name = "HOA_DON")
 public class HoaDonModel {

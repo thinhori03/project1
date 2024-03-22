@@ -23,7 +23,6 @@ import util.data.DataTable;
  *
  * @author ngtnthori03
  */
-
 @DataTable(name = "VOUCHER")
 public class VoucherModel {
 

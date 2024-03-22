@@ -1,8 +1,8 @@
 
-import model.VoucherModel;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import repository.VoucherRepository;
-
-import java.util.Date;
+import view.VoucherPanel;
 
 /*
  * @author ngtnthori03
@@ -10,23 +10,19 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        VoucherRepository vr = new VoucherRepository();
-
-        try {
-            
-            VoucherModel vm = new VoucherModel();
-
-            vm.setMaVoucher("V000000003");
-            vm.setGiaTri(0);
-            vm.setDiauKien(100000);
-            vm.setNgayBatDau(new Date());
-            vm.setNgyKetThuc(new Date());
-
-            vr.update(vm);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
+        JFrame f = new JFrame();
+        
+        f.add(new VoucherPanel());
+        
+        f.setSize(500, 500);
+        
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        f.setLocationRelativeTo(null);
+        
+        f.setVisible(true);
+        
     }
 
 }

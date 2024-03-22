@@ -26,7 +26,7 @@ public class VoucherRepository {
         this.queryGenerator = new QueryGenerator<>(VoucherModel.class);
     }
 
-    public List<VoucherModel> getAll() throws SQLException, IllegalArgumentException, IllegalAccessException {
+    public List<VoucherModel> getAll(){
         
         return this.queryGenerator.executeFindAll(connection);
     }

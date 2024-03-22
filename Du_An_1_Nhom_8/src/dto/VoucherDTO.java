@@ -91,4 +91,6 @@ public class VoucherDTO {
     public void setDiauKien(float diauKien) {
         this.diauKien = diauKien;
     }
+
+
 }

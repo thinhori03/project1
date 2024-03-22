@@ -59,8 +59,7 @@ public class QueryGenerator<TTable, TId> {
             e.printStackTrace();
         }
 
-
-        if (!resultSet.next()) {
+        if (!resultSet.isBeforeFirst()) {
             return null;
         }
 
@@ -150,7 +149,7 @@ public class QueryGenerator<TTable, TId> {
 
         StringBuilder sb = new StringBuilder(
                 this.generateSelectAllQuery()
-                );
+        );
 
         DataField idName = idField.getAnnotation(DataField.class);
 
@@ -168,7 +167,6 @@ public class QueryGenerator<TTable, TId> {
 
     public PreparedStatement generatePrepareSeatement(PreparedStatement prepStat, Object... o) {
 
-
         try {
             for (int i = 0; i < o.length; ++i) {
                 prepStat.setObject(i + 1, o);
@@ -185,8 +183,6 @@ public class QueryGenerator<TTable, TId> {
 
         List<TTable> ret = new ArrayList<>();
 
-        TTable obj = null;
-
         ResultSet resultSet = null;
 
         try {
@@ -195,22 +191,16 @@ public class QueryGenerator<TTable, TId> {
                     this.generateSelectAllQuery()
             ).executeQuery();
 
-            while (resultSet.isBeforeFirst()) {
-                obj = this.table.getConstructor().newInstance();
-
-                ret.add(this.map(resultSet));
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    ret.add(this.map(resultSet));
+                }
             }
+
+            return ret;
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
         }
 
         return ret;
@@ -241,7 +231,7 @@ public class QueryGenerator<TTable, TId> {
         return null;
     }
 
-    public boolean executeUpdate(Connection connection,  TTable object) {
+    public boolean executeUpdate(Connection connection, TTable object) {
 
         try {
 
@@ -253,7 +243,7 @@ public class QueryGenerator<TTable, TId> {
                 for (int i = 0; i < this.fieldRef.size(); ++i) {
                     this.fieldRef.get(i).setAccessible(true);
 
-                    preStat.setObject(i+1, this.fieldRef.get(i).get(object));
+                    preStat.setObject(i + 1, this.fieldRef.get(i).get(object));
                 }
 
                 this.idField.setAccessible(true);
@@ -264,7 +254,7 @@ public class QueryGenerator<TTable, TId> {
                 return false;
             }
 
-            return preStat.executeUpdate() >0;
+            return preStat.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,90 +1,103 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package util.swing;
 
-import javax.swing.*;
+import java.awt.*;
+import java.util.Optional;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
-
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.SwingUtilities;
 /**
+ *
  * @author ngtnthori03
  */
-public class ValidatedTextField extends JTextField {
+public class ValidatedTextField {
+   
+    private JTextField target;
+    
+    private String pattern;
+    
+    private String errorMessage;
+    
+    private Boolean isPopupReady;
+    
+    private Popup popup;
+    
+    private JPanel panel;
+    
+    private PopupFactory popupFactory;
+
+    private JLabel label;
+    
+    public ValidatedTextField(JTextField target, String pattern
+            , JLabel label,  String errorMessage) {
+        this.pattern = pattern;
+        this.errorMessage = errorMessage;
+        
+        this.target = target;
+        this.label = label;
+
+        this.label.setText("");
+        this.label.setForeground(Color.RED);
 
 
-    public String pattern;
-    public String err_msg;
-    public JLabel err_label;
-
-    public ValidatedTextField() {
-        this.pattern = new String("^*$");
-        this.err_msg = new String("^*$");
-        this.err_label = new JLabel("");
-        init();
-    }
-
-    // @param _pattern | regex đểcheck vaildate
-    // @Param _err_msg | mesage khi faildate fail
-    // @param _err_label | label để hiện _err_msg
-    public ValidatedTextField(String _pattern, String _err_msg, JLabel _err_label) {
-        this.pattern = _pattern;
-        this.err_msg = _err_msg;
-        this.err_label = _err_label;
-        this.err_label.setVisible(true);
-        init();
-    }
-
-    public void init() {
-
-        this.getDocument().addDocumentListener(new DocumentListener() {
+        this.isPopupReady = false;
+        
+        this.popupFactory = new PopupFactory();
+        
+        this.panel = DefaultPopupPanel.createPanel(new JLabel("error"));
+        // validation event
+        target.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                vaildate();
+                onValidate();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                vaildate();
+                onValidate();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                vaildate();
+                onValidate();
             }
         });
-        this.err_label.setForeground(Color.RED);
     }
-
-    public void setPattern(String _pattern) {
-        this.pattern = _pattern;
-    }
-
-    public void setErrorMsg(String _err_msg) {
-        this.err_msg = _err_msg;
-    }
-
-    public JLabel getLabel() {
-        return this.err_label;
-    }
-
-    public void vaildate() {
-        if (this.getText().matches(this.pattern)) {
-            this.err_label.setText("");
-        } else if (getText().isEmpty()) {
-            this.err_label.setText("thông tin không được để trống");
-        } else {
-            this.err_label.setText(this.err_msg);
+    
+    public void onValidate() {
+        if (this.target.getText().matches(pattern)) {
+           this.label.setText("");
         }
-        System.out.println(err_label.getText());
-        System.out.println(getText());
+        else {
+            this.label.setText(this.errorMessage);
+        }
     }
-
-    public boolean isResult() {
-        return this.err_label.getText().isEmpty() && !getText().isEmpty();
+    
+    public boolean isValidate() {
+        // popup ready when validation falied
+        return !isPopupReady;
     }
-
-    @Override
-    public void setText(String t) {
-        super.setText(t); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        this.err_label.setText("");
+    
+    public boolean isPopupReady() {
+        return this.isPopupReady;
+    }
+    
+    public void PreparePopupAndShow() {
+        Point p = new Point();
+        SwingUtilities.convertPointToScreen(p, this.target);
+        
+        popup = popupFactory.getPopup(target, panel, p.x
+                , p.y + panel.getPreferredSize().height);
+        
+        popup.show();
     }
 }

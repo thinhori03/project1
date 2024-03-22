@@ -3,11 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/view/VoucherPanel.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/view/LoginFrame.java</file>
             <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/data/QueryGenerator.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/DefaultPopupPanel.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/ValidatedTextField.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/Du_An_1_Nhom_8.iml</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/view/QL_HoaDon.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/ValidationDocumentListener.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/model/VoucherModel.java</file>
             <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/service/DBConnect.java</file>
             <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/repository/VoucherRepository.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/PopupNotification.java</file>
             <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/Main.java</file>
-            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/swing/EditField.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/manifest.mf</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/view/QL_NhanVien.java</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/build.xml</file>
+            <file>file:/home/ngtnthori03/.ntzoe-home/target/project1/Du_An_1_Nhom_8/src/util/Vietnampattern.java</file>
         </group>
     </open-files>
 </project-private>

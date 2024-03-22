@@ -10,14 +10,12 @@ import java.util.Date;
 /**
  * CREATE TABLE HOA_DON_CHI_TIET
  * (
- *     MAHDCT   INT IDENTITY (1,1) PRIMARY KEY,
- *     MAHD     INT references HOA_DON (MAHD),
- *     MASPCT   INT references SAN_PHAM_CHI_TIET (MASPCT),
- *     SOLUONG  INT,
- *     MAUSAC   VARCHAR(100),
- *     THOIGIAN DATE,
- *     MAKM     INT references KHUYEN_MAI (MAKM),
- *     MALSG    int references LICH_SU_GIA (MALSG)
+ *     MAHDCT  INT PRIMARY KEY identity (1,1),
+ *     MAHD    varchar(20) references HOA_DON (MAHD),
+ *     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
+ *     SOLUONG INT,
+ *     MAKM    varchar(14) references KHUYEN_MAI (MAKM),
+ *     MALSG   int references LICH_SU_GIA (MALSG)
  * )
  */
 
@@ -38,12 +36,6 @@ public class HoaDonChiTietModel {
     @DataField(name = "SOLUONG")
     private int soLuong;
 
-    @DataField(name = "MAUSAC")
-    private String mauSac;
-
-    @DataField(name = "THOIGIAN")
-    private Date thoiGian;
-
     @DataField(name = "MAKM")
     private int maKM;
 
@@ -55,13 +47,11 @@ public class HoaDonChiTietModel {
 
     }
 
-    public HoaDonChiTietModel(int maHDCT, int maHoaDon, int SPCT, int soLuong, String mauSac, Date thoiGian, int maKM, int maLSG) {
+    public HoaDonChiTietModel(int maHDCT, int maHoaDon, int SPCT, int soLuong, int maKM, int maLSG) {
         this.maHDCT = maHDCT;
         this.maHoaDon = maHoaDon;
         this.SPCT = SPCT;
         this.soLuong = soLuong;
-        this.mauSac = mauSac;
-        this.thoiGian = thoiGian;
         this.maKM = maKM;
         this.maLSG = maLSG;
     }
@@ -100,22 +90,6 @@ public class HoaDonChiTietModel {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-    }
-
-    public String getMauSac() {
-        return mauSac;
-    }
-
-    public void setMauSac(String mauSac) {
-        this.mauSac = mauSac;
-    }
-
-    public Date getThoiGian() {
-        return thoiGian;
-    }
-
-    public void setThoiGian(Date thoiGian) {
-        this.thoiGian = thoiGian;
     }
 
     public int getMaKM() {
