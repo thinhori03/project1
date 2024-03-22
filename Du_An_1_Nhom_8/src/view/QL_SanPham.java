@@ -20,6 +20,7 @@ import service.SanPhamService;
  * @author Admin
  */
 public class QL_SanPham extends javax.swing.JFrame {
+
     private SIZE_Service ss = new SIZE_Service();
     private Mau_Service ms = new Mau_Service();
     private GiaService gs = new GiaService();
@@ -73,6 +74,7 @@ public class QL_SanPham extends javax.swing.JFrame {
             sp.setTrangthai("Dừng bán");
         }
         g.setId_gia(gs.TaoMA());
+  //      g.setMaspct();
         g.setGia(Float.parseFloat(txt_LichSuGia.getText().trim()));
         g.setNgaybatdau(new Date());
         g.setNgayketthuc(new Date());
@@ -80,7 +82,8 @@ public class QL_SanPham extends javax.swing.JFrame {
         sp.setId_gia(g.getId_gia());
         return sp;
     }
-    public void clear(){
+
+    public void clear() {
         txt_MaKM.setText("");
         txt_Ten.setText("");
         txt_Soluong.setText("");
@@ -89,17 +92,18 @@ public class QL_SanPham extends javax.swing.JFrame {
         txt_LichSuGia.setText("");
         buttonGroup1.clearSelection();
     }
-    public boolean check(){
-        if(txt_Ten.getText().equals("")){
+
+    public boolean check() {
+        if (txt_Ten.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Tên không được để trống");
             return false;
         }
-        
+
         try {
             String input = txt_Soluong.getText();
-            if(input.equals("")){
-             JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
-            return false;   
+            if (input.equals("")) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+                return false;
             }
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -108,32 +112,32 @@ public class QL_SanPham extends javax.swing.JFrame {
         }
         try {
             String input = txt_Size.getText();
-            if(input.equals("")){
-             JOptionPane.showMessageDialog(this, "Size không được để trống");
-            return false;   
+            if (input.equals("")) {
+                JOptionPane.showMessageDialog(this, "Size không được để trống");
+                return false;
             }
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Phải nhập số nguyên");
             return false;
         }
-        if(txt_MauSac.getText().equals("")){
+        if (txt_MauSac.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Màu sắc không được để trống");
             return false;
         }
-        if(txt_MaKM.getText().equals("")){
+        if (txt_MaKM.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mã khuyến mại không được để trống");
             return false;
         }
-        if(!rd_Dangban.isSelected() && !rd_Dungban.isSelected()){
+        if (!rd_Dangban.isSelected() && !rd_Dungban.isSelected()) {
             JOptionPane.showMessageDialog(this, "Trạng thái không được để trống");
             return false;
         }
-         try {
-             String input = txt_LichSuGia.getText();
-            if(input.equals("")){
-             JOptionPane.showMessageDialog(this, "Giá không được để trống");
-            return false;   
+        try {
+            String input = txt_LichSuGia.getText();
+            if (input.equals("")) {
+                JOptionPane.showMessageDialog(this, "Giá không được để trống");
+                return false;
             }
             Float.parseFloat(input);
         } catch (NumberFormatException e) {
@@ -142,6 +146,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         }
         return true;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -173,6 +178,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         btn_Xóa = new javax.swing.JButton();
         txtTen = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        id_MaSP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -274,7 +280,6 @@ public class QL_SanPham extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -353,6 +358,13 @@ public class QL_SanPham extends javax.swing.JFrame {
             }
         });
 
+        id_MaSP.setText("jTextField1");
+        id_MaSP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                id_MaSPKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -361,25 +373,28 @@ public class QL_SanPham extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87)
                         .addComponent(btn_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_Xóa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))))
+                        .addGap(46, 46, 46))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(id_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(id_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_them)
@@ -423,29 +438,29 @@ public class QL_SanPham extends javax.swing.JFrame {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        if(check()){
-        if (sanpham.ADDSanPham(this.readFrom()) > 0) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
-            this.fillTable(sanpham.getAll());
-            clear();
-        } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-        }
+        if (check()) {
+            if (sanpham.ADDSanPham(this.readFrom()) > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                this.fillTable(sanpham.getAll());
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
-        if(check()){
-        index = Tbl_SanPham.getSelectedRow();
-        int ma = (int) Tbl_SanPham.getValueAt(index, 0);
-        if (sanpham.UpdateSanPham(ma, this.readFrom()) > 0) {
-            JOptionPane.showMessageDialog(this, "Sửa thành công ");
-            this.fillTable(sanpham.getAll());
-            clear();
-        } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại");
-        }
+        if (check()) {
+            index = Tbl_SanPham.getSelectedRow();
+            int ma = (int) Tbl_SanPham.getValueAt(index, 0);
+            if (sanpham.UpdateSanPham(ma, this.readFrom()) > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa thành công ");
+                this.fillTable(sanpham.getAll());
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            }
     }//GEN-LAST:event_btn_SuaActionPerformed
     }
     private void Tbl_SanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_SanPhamMouseClicked
@@ -462,14 +477,14 @@ public class QL_SanPham extends javax.swing.JFrame {
 
     private void txtTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKeyReleased
         // TODO add your handling code here:
-         String ten = txtTen.getText();
+        String ten = txtTen.getText();
         if (ten.isEmpty()) {
             this.fillTable(sanpham.getAll());
         } else {
             List<SanPham> list1 = sanpham.TimSanPham(ten);
             this.fillTable(list1);
         }
-       
+
 //        List<SanPham> list1 = sanpham.TimSanPham(ten);
 //        this.fillTable(list1);
     }//GEN-LAST:event_txtTenKeyReleased
@@ -490,6 +505,22 @@ public class QL_SanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
         }
     }//GEN-LAST:event_btn_XóaActionPerformed
+
+    private void id_MaSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_MaSPKeyReleased
+        // TODO add your handling code here:
+        String text = id_MaSP.getText();
+        if (text.isEmpty()) {
+            this.fillTable(sanpham.getAll());
+        } else {
+            try {
+                int ma = Integer.parseInt(id_MaSP.getText());
+                List<SanPham> list1 = sanpham.TimSanPham(ma);
+                this.fillTable(list1);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cần phải nhập số nguyên");
+            }
+        }
+    }//GEN-LAST:event_id_MaSPKeyReleased
 
     /**
      * @param args the command line arguments
@@ -532,6 +563,7 @@ public class QL_SanPham extends javax.swing.JFrame {
     private javax.swing.JButton btn_Xóa;
     private javax.swing.JButton btn_them;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField id_MaSP;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

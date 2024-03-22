@@ -32,7 +32,7 @@ public class GiaService {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Gia g = new Gia(
-                        rs.getInt(1), rs.getFloat(2), rs.getDate(3), rs.getDate(4)
+                     rs.getInt(1),rs.getInt(2),rs.getFloat(3),rs.getDate(4),rs.getDate(5)
                 );
                 listg.add(g);
             }
@@ -56,8 +56,8 @@ public class GiaService {
             }
             rs.next();
             Gia g = new Gia(
-                    rs.getInt(1), rs.getFloat(2), rs.getDate(3), rs.getDate(4)
-            );
+                     rs.getInt(1),rs.getInt(2),rs.getFloat(3),rs.getDate(4),rs.getDate(5)
+                );
             return g;
         } catch (Exception e) {
             e.printStackTrace();

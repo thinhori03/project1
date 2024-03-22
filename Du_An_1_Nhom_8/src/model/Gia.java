@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Gia {
     int id_gia;
+    int maspct;
     float gia;
     Date ngaybatdau;
     Date ngayketthuc;
@@ -19,8 +20,9 @@ public class Gia {
     public Gia() {
     }
 
-    public Gia(int id_gia, float gia, Date ngaybatdau, Date ngayketthuc) {
+    public Gia(int id_gia, int maspct, float gia, Date ngaybatdau, Date ngayketthuc) {
         this.id_gia = id_gia;
+        this.maspct = maspct;
         this.gia = gia;
         this.ngaybatdau = ngaybatdau;
         this.ngayketthuc = ngayketthuc;
@@ -32,6 +34,14 @@ public class Gia {
 
     public void setId_gia(int id_gia) {
         this.id_gia = id_gia;
+    }
+
+    public int getMaspct() {
+        return maspct;
+    }
+
+    public void setMaspct(int maspct) {
+        this.maspct = maspct;
     }
 
     public float getGia() {
@@ -57,5 +67,7 @@ public class Gia {
     public void setNgayketthuc(Date ngayketthuc) {
         this.ngayketthuc = ngayketthuc;
     }
+    
+    
     
 }

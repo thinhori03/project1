@@ -38,7 +38,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
     
     public void ShowFrom() {
         index = Tbl_KhuyenMai.getSelectedRow();
-        txt_Ma.setText(Tbl_KhuyenMai.getValueAt(index, 0).toString());
+        txt_MaKM.setText(Tbl_KhuyenMai.getValueAt(index, 0).toString());
         txt_ngayBD.setText(Tbl_KhuyenMai.getValueAt(index, 1).toString());
         txt_ngayKT.setText(Tbl_KhuyenMai.getValueAt(index, 2).toString());
         txt_Soluong.setText(Tbl_KhuyenMai.getValueAt(index, 3).toString());
@@ -47,7 +47,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
     
     KhuyenMai readFrom() {
         KhuyenMai km = new KhuyenMai();
-        km.setMakm(txt_Ma.getText());
+        km.setMakm(txt_MaKM.getText());
         km.setNgayBd(txt_ngayBD.getText());
         km.setNgayKt(txt_ngayKT.getText());
         km.setSoluong(Integer.parseInt(txt_Soluong.getText()));
@@ -55,14 +55,14 @@ public class QL_khuyenMai extends javax.swing.JFrame {
         return km;
     }
     public void clear(){
-        txt_Ma.setText("");
+        txt_MaKM.setText("");
         txt_ngayBD.setText("");
         txt_ngayKT.setText("");
         txt_Soluong.setText("");
         txt_Gia.setText("");
     }
     public boolean check(){
-        if(txt_Ma.getText().equals("")){
+        if(txt_MaKM.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Mã khuyến mại không đucợ để trống");
             return false;
         }
@@ -138,7 +138,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_Ma = new javax.swing.JTextField();
+        txt_MaKM = new javax.swing.JTextField();
         txt_ngayBD = new javax.swing.JTextField();
         txt_Soluong = new javax.swing.JTextField();
         txt_Gia = new javax.swing.JTextField();
@@ -216,7 +216,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_Ma)
+                        .addComponent(txt_MaKM)
                         .addComponent(txt_Soluong)
                         .addComponent(txt_Gia, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,7 +236,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_MaKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -370,7 +370,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(check()){
         index = Tbl_KhuyenMai.getSelectedRow();
-        int ma = (int) Tbl_KhuyenMai.getValueAt(index, 0);
+        String ma = Tbl_KhuyenMai.getValueAt(index, 0).toString();
         if (kms.UpdateKhuyenMai(ma, this.readFrom()) > 0) {
             JOptionPane.showMessageDialog(this, "Sửa thành công");
             this.fillTable(kms.getAll());
@@ -472,7 +472,7 @@ public class QL_khuyenMai extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txt_Gia;
-    private javax.swing.JTextField txt_Ma;
+    private javax.swing.JTextField txt_MaKM;
     private javax.swing.JTextField txt_Soluong;
     private javax.swing.JTextField txt_ngayBD;
     private javax.swing.JTextField txt_ngayKT;

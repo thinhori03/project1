@@ -126,7 +126,7 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_Ma" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_MaKM" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_Soluong" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_Gia" alignment="0" pref="138" max="32767" attributes="0"/>
                       </Group>
@@ -153,7 +153,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_Ma" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_MaKM" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -200,7 +200,7 @@
             <Property name="text" type="java.lang.String" value="Gi&#xe1;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_Ma">
+        <Component class="javax.swing.JTextField" name="txt_MaKM">
         </Component>
         <Component class="javax.swing.JTextField" name="txt_ngayBD">
         </Component>

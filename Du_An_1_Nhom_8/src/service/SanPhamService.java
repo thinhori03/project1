@@ -30,7 +30,7 @@ public class SanPhamService {
             rs = ps.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(
-                        rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getInt(8)
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getInt(8)
                 );
                 listsp.add(sp);
             }
@@ -61,7 +61,8 @@ public class SanPhamService {
         }
         return kq;
     }
-    public int UpdateSanPham(int ma,SanPham sp){
+
+    public int UpdateSanPham(int ma, SanPham sp) {
         listsp = new ArrayList<>();
         sql = "Update SAN_PHAM_CHI_TIET set TENSP = ?,SOLUONG = ?,MASIZE =?,MAMAU =?,MAKM=?,TRANGTHAI = ?,MALSG =? where MASPCT like ?";
         int kq = 0;
@@ -82,10 +83,11 @@ public class SanPhamService {
         }
         return kq;
     }
-    public int DeleteSanPham(int ma){
+
+    public int DeleteSanPham(int ma) {
         listsp = new ArrayList<>();
         sql = "DELETE FROM SAN_PHAM_CHI_TIET WHERE MASPCT LIKE ?";
-        int kq =  0;
+        int kq = 0;
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -96,15 +98,16 @@ public class SanPhamService {
         }
         return kq;
     }
-    public List<SanPham> TimSanPham(String ten){
+
+    public List<SanPham> TimSanPham(String ten) {
         List<SanPham> listsp = new ArrayList<>();
         sql = "Select MASPCT,TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG from SAN_PHAM_CHI_TIET where TENSP like ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,"%" +  ten + "%" );
+            ps.setString(1, "%" + ten + "%");
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 SanPham sp = new SanPham(
                         rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getInt(8)
                 );
@@ -116,5 +119,27 @@ public class SanPhamService {
             e.printStackTrace();
         }
         return listsp;
+    }
+
+    public List<SanPham> TimSanPham(int ma) {
+        List<SanPham> listkm = new ArrayList<>();
+        sql = "Select MASPCT,TENSP,SOLUONG,MASIZE,MAMAU,MAKM,TRANGTHAI,MALSG from SAN_PHAM_CHI_TIET where MASPCT = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, ma);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getInt(8)
+                );
+                listkm.add(sp);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listkm;
     }
 }

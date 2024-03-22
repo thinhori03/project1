@@ -18,12 +18,14 @@ import service.KhuyenMaiService;
  * @author Admin
  */
 public class QL_KhuyenMai1 extends javax.swing.JPanel {
+
     private KhuyenMaiService kms = new KhuyenMaiService();
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
-    
+
     public QL_KhuyenMai1() {
         initComponents();
+        this.fillTable(kms.getAll());
     }
 
     void fillTable(List<KhuyenMai> list) {
@@ -33,7 +35,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
             model.addRow(km.toDataRow());
         }
     }
-    
+
     public void ShowFrom() {
         index = Tbl_KhuyenMai.getSelectedRow();
         txt_Ma.setText(Tbl_KhuyenMai.getValueAt(index, 0).toString());
@@ -42,7 +44,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         txt_Soluong.setText(Tbl_KhuyenMai.getValueAt(index, 3).toString());
         txt_Gia.setText(Tbl_KhuyenMai.getValueAt(index, 4).toString());
     }
-    
+
     KhuyenMai readFrom() {
         KhuyenMai km = new KhuyenMai();
         km.setMakm(txt_Ma.getText());
@@ -52,19 +54,21 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         km.setGia(Float.parseFloat(txt_Gia.getText()));
         return km;
     }
-    public void clear(){
+
+    public void clear() {
         txt_Ma.setText("");
         txt_ngayBD.setText("");
         txt_ngayKT.setText("");
         txt_Soluong.setText("");
         txt_Gia.setText("");
     }
-     public boolean check(){
-        if(txt_Ma.getText().equals("")){
+
+    public boolean check() {
+        if (txt_Ma.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mã khuyến mại không đucợ để trống");
             return false;
         }
-        String ngayBD = txt_ngayBD.getText(); 
+        String ngayBD = txt_ngayBD.getText();
 
         // Kiểm tra xem ngày có rỗng không
         if (ngayBD.isEmpty()) {
@@ -82,7 +86,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Ngày không đúng định dạng");
             return false;
         }
-        String ngayKT = txt_ngayKT.getText(); 
+        String ngayKT = txt_ngayKT.getText();
 
         // Kiểm tra xem ngày có rỗng không
         if (ngayBD.isEmpty()) {
@@ -100,12 +104,12 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Ngày không đúng định dạng");
             return false;
         }
-        
+
         try {
             String input = txt_Soluong.getText();
-            if(input.equals("")){
-             JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
-            return false;   
+            if (input.equals("")) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+                return false;
             }
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -113,10 +117,10 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
             return false;
         }
         try {
-             String input = txt_Gia.getText();
-            if(input.equals("")){
-             JOptionPane.showMessageDialog(this, "Giá không được để trống");
-            return false;   
+            String input = txt_Gia.getText();
+            if (input.equals("")) {
+                JOptionPane.showMessageDialog(this, "Giá không được để trống");
+                return false;
             }
             Float.parseFloat(input);
         } catch (NumberFormatException e) {
@@ -125,6 +129,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         }
         return true;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -367,29 +372,29 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
 
     private void btn_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDActionPerformed
         // TODO add your handling code here:
-        if(check()){
-        if (kms.ADDKhuyenMai(this.readFrom()) > 0) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công!");
-            this.fillTable(kms.getAll());
-            clear();
-        } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-        }
+        if (check()) {
+            if (kms.ADDKhuyenMai(this.readFrom()) > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                this.fillTable(kms.getAll());
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
     }//GEN-LAST:event_btn_ADDActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
         // TODO add your handling code here:
-        if(check()){
-        index = Tbl_KhuyenMai.getSelectedRow();
-        int ma = (int) Tbl_KhuyenMai.getValueAt(index, 0);
-        if (kms.UpdateKhuyenMai(ma, this.readFrom()) > 0) {
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
-            this.fillTable(kms.getAll());
-            clear();
-        } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại");
-        }
+        if (check()) {
+            index = Tbl_KhuyenMai.getSelectedRow();
+            String ma =  Tbl_KhuyenMai.getValueAt(index, 0).toString();
+            if (kms.UpdateKhuyenMai(ma, this.readFrom()) > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                this.fillTable(kms.getAll());
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            }
         }
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
@@ -409,7 +414,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
     private void Tbl_KhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_KhuyenMaiMouseClicked
         // TODO add your handling code here:
         index = Tbl_KhuyenMai.getSelectedRow();
-        if(index > -1){
+        if (index > -1) {
             ShowFrom();
         }
     }//GEN-LAST:event_Tbl_KhuyenMaiMouseClicked

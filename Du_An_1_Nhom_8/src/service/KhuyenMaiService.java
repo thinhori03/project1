@@ -23,7 +23,7 @@ public class KhuyenMaiService {
 
     public List<KhuyenMai> getAll() {
         listkm = new ArrayList<>();
-        sql = "Select *from KHUYEN_MAI";
+        sql = "Select * from KHUYEN_MAI";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class KhuyenMaiService {
         return kq;
     }
 
-    public int UpdateKhuyenMai(int ma, KhuyenMai km) {
+    public int UpdateKhuyenMai(String ma, KhuyenMai km) {
         listkm = new ArrayList<>();
         sql = "Update KHUYEN_MAI set NGAYBATDAU = ?,NGAYKETTHUC = ?,SOLUONG= ?,GIA= ? where MAKM like ?";
         int kq = 0;
@@ -71,7 +71,7 @@ public class KhuyenMaiService {
             ps.setString(2, km.getNgayKt());
             ps.setInt(3, km.getSoluong());
             ps.setFloat(4, km.getGia());
-            ps.setInt(5, ma);
+            ps.setString(5, ma);
             kq = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
