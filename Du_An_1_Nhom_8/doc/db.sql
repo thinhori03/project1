@@ -48,7 +48,9 @@ CREATE TABLE VOUCHER
     GIATRI      FLOAT,
     NGAYBATDAU  DATE,
     NGAYKETTHUC DATE,
-    DIEUKIEN    FLOAT
+    DIEUKIEN    FLOAT,
+    ngay_tao DATETIME,
+    TRANG_THAI VARCHAR(20)  -- đang hoạt động đã hủy
 )
 
 CREATE TABLE KHACH_HANG
@@ -66,6 +68,7 @@ CREATE TABLE KHACH_HANG
 create table LICH_SU_GIA
 (
     MALSG       int primary key,
+
     GIA         float,
     NGAYBATDAU  datetime,
     NGAYKETTHUC datetime
@@ -125,10 +128,11 @@ values ('KM1', '2024-02-14', '2024-02-20', 4, 40000),
        ('KM2', '2024-02-20', '2024-02-26', 3, 50000),
        ('KM3', '2024-02-26', '2024-02-28', 6, 60000)
 
-insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN)
-values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000),
-       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000),
-       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000)
+insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, ngay_tao, TRANG_THAI)
+values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, GETDATE(), 'đang hoạt động'),
+       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, GETDATE(), 'đang hoạt động'),
+       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, GETDATE(), 'đang hoạt động')
+
 
 insert into KHACH_HANG(TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, MATKHAU, DIACHI)
 values (N'Nguyễn Văn Tuấn', 0856790234, N'Nam', 'Tuannv23@gmail.com', '1999-07-23', 'Tuan1999', N'Hà Nội'),
