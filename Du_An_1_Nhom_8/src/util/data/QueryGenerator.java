@@ -205,6 +205,14 @@ public class QueryGenerator<TTable, TId> {
         return ret;
     }
 
+    public String generateCountAll() {
+        return new StringBuilder("SELECT ")
+                .append("count(*) AS countall")
+                .append(" FROM ")
+                .append(table_namw)
+                .toString();
+    }
+
     public TTable executeInsert(Connection connection, TTable obj) {
 
         try {
@@ -284,8 +292,14 @@ public class QueryGenerator<TTable, TId> {
         return null;
     }
 
-    public Long executeCountAll() {
+    public Long executeCountAll(Connection connection) {
 
-        return 0;
+        try {
+            return connection.prepareStatement(this.generateCountAll())
+                    .executeQuery().getLong("countall");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1L;
+        }
     }
 }

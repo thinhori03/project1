@@ -70,4 +70,24 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="compile">
+        <javac srcdir="src" destdir="buid/classes">
+            <classpath>
+                <pathelement path="lib/jcalendar-1.4.jar"/>
+                <pathelement path="lib/mssql-jdbc-12.2.0.jre11.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target  name="build" depends="compile">
+        <jar destfile="build/jar/project1.jar" basedir="build/classes">
+            <zipgroupfileset dir="lib" includes="jcalendar-1.4.jar"/>
+            <zipgroupfileset dir="lib" includes="mssql-jdbc-12.2.0.jre11.jar"/>
+        </jar>
+    </target>
+
+    <target name="run" depends="build">
+        <java jar="build/jar/project1.jar" classname="Main">
+        </java>
+    </target>
 </project>
