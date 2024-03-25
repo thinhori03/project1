@@ -45,7 +45,8 @@ public class ValidatedTextField {
         this.target = target;
         this.label = label;
 
-        this.label.setText("");
+        this.label.setText(this.errorMessage);
+        this.label.setVisible(false);
         this.label.setForeground(Color.RED);
 
 
@@ -74,11 +75,11 @@ public class ValidatedTextField {
     }
     
     public void onValidate() {
-        if (this.target.getText().matches(pattern)) {
-           this.label.setText("");
+        if (this.target.getText().trim().matches(pattern)) {
+           this.label.setVisible(false);
         }
         else {
-            this.label.setText(this.errorMessage);
+            this.label.setVisible(true);
         }
     }
     

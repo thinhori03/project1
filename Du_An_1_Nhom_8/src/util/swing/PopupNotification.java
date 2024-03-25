@@ -12,31 +12,35 @@ public class PopupNotification {
     private final JComponent target;
 
     private final JComponent component;
+    
+    private final JComponent src;
 
     private JPanel panel;
 
     private Popup popup;
+    
+    private Point targetPoint;
 
-    public PopupNotification(JComponent target, JComponent component) {
+    public PopupNotification(JComponent target, JComponent src, JComponent component) {
 
         this.target = target;
-
         this.component = component;
+        this.src = src;
+        
+        this.targetPoint = new Point();
 
         this.panel = new JPanel();
-
         this.panel.add(this.component);
 
-        this.target.addMouseListener(new MouseAdapter() {
+        this.src.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
 
-                Point p = new Point();
-
-                SwingUtilities.convertPointToScreen(p, target);
+                targetPoint = new Point();
+                SwingUtilities.convertPointToScreen(targetPoint, target);
 
                 popup = PopupFactory.getSharedInstance()
-                        .getPopup(target, panel, p.x, p.y - panel.getHeight());
+                        .getPopup(src, panel, targetPoint.x, targetPoint.y - panel.getHeight() - 10);
 
                 popup.show();
 
