@@ -32,22 +32,22 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
         Tong();
     }
 
-    public void LoadData(ArrayList<ThongKeModel> list){
-    defaultTableModel = (DefaultTableModel) tblThongKe.getModel();
-    defaultTableModel.setRowCount(0);
+    public void LoadData(ArrayList<ThongKeModel> list) {
+        defaultTableModel = (DefaultTableModel) tblThongKe.getModel();
+        defaultTableModel.setRowCount(0);
         for (ThongKeModel tk : list) {
             defaultTableModel.addRow(new Object[]{
-            tk.getMa(),
-             tk.getTen(),
-             tk.getSl(),
-            tk.getNgay(),
-            tk.getGia(),
-            tk.thanhTien()
-           
+                tk.getMa(),
+                tk.getTen(),
+                tk.getSl(),
+                tk.getNgay(),
+                tk.getGia(),
+                tk.thanhTien()
+
             });
         }
     }
-    
+
     private void Tong() {
         DecimalFormat x = new DecimalFormat("###,###,###");
         int Tong = 0;
@@ -73,7 +73,6 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabelTongDanhThu = new javax.swing.JLabel();
-        btnTimKiem = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongKe = new javax.swing.JTable();
@@ -83,17 +82,16 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Tìm Kiếm Theo Ngày");
 
         jLabelTongDanhThu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelTongDanhThu.setText(" DOANH THU :");
-
-        btnTimKiem.setText("Tìm Kiếm ");
-        btnTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTimKiemMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,18 +100,17 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabelTongDanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(188, 188, 188))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnTimKiem)
-                        .addGap(35, 35, 35))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,10 +125,8 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTimKiem))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -204,21 +199,21 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblThongKeMouseClicked
 
-    private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        String ngay = txtTimKiem.getText();
+          String ngay = txtTimKiem.getText();
 
         ArrayList<ThongKeModel> list = ql.timKiem(ngay);
         if (list.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Khong co thong ke");
         } else {
             LoadData(list);
+                    Tong();
+
         }
-    }//GEN-LAST:event_btnTimKiemMouseClicked
+    }//GEN-LAST:event_txtTimKiemKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
