@@ -19,7 +19,8 @@ public class ThongKeConnection {
 "	 from HOA_DON_CHI_TIET\n" +
 "	 join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT\n" +
 "	 join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG\n" +
-"	 join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD" ;
+"	 join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD\n" +
+"	 join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP\n" ;
         ArrayList<ThongKeModel> list  = new ArrayList<>();
         try (Connection conn = dBConnect.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql)){
@@ -41,11 +42,12 @@ public class ThongKeConnection {
     
     public ArrayList<ThongKeModel> timkiem (String ngay1){
             String sql = " select HOA_DON_CHI_TIET.MASPCT, TENSP ,HOA_DON_CHI_TIET.SOLUONG,GIA,NGAYTHANHTOAN\n" +
-"	 from HOA_DON_CHI_TIET\n" +
-"	 join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT\n" +
-"	 join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG\n" +
-"	 join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD\n" +
-"	 where NGAYTHANHTOAN  like '%" + ngay1 + "%'";
+"		 from HOA_DON_CHI_TIET\n" +
+"		 join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT\n" +
+"		 join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG\n" +
+"		 join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD\n" +
+"		 join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP\n" +
+"		 where NGAYTHANHTOAN like '%" + ngay1 + "%'";
             ArrayList<ThongKeModel> list = new ArrayList<>();
             try (Connection conn = dBConnect.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql)){
