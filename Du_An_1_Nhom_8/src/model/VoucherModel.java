@@ -4,6 +4,10 @@
  */
 package model;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
 import java.util.Date;
 import util.data.DataField;
 import util.data.DataId;
@@ -45,6 +49,18 @@ public class VoucherModel {
 
     @DataField(name = "ngay_tao")
     private Data ngayTao;
+<<<<<<< HEAD
+=======
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+
+    /*
+        contructors
+     */
+    public VoucherModel() {
+    }
+>>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
