@@ -45,17 +45,23 @@ public class VoucherModel {
 
     @DataField(name = "ngay_tao")
     private Data ngayTao;
+  
     @DataField(name = "TRANG_THAI")
     private String trangThai;
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
   
-      /*
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+
+        /*
         contructors
      */
     public VoucherModel() {
     }
+  
 
     public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
         this.maVoucher = maVoucher;
