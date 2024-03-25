@@ -48,7 +48,7 @@ public class VoucherPanel extends javax.swing.JPanel {
         voucherModel.setDiauKien(Float.parseFloat(condPrice.getText().trim()));
         voucherModel.setGiaTri(Float.parseFloat(price.getText().trim()));
         voucherModel.setNgayBatDau(startDate.getDate());
-        voucherModel.setNgyKetThuc(endDate.getDate());
+        voucherModel.setNgayKetThuc(endDate.getDate());
     }
 
     /**

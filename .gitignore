@@ -2,3 +2,7 @@
 /Du_An_1_Nhom_8/dist/
 /**/.idea
 /Du_An_1_Nhom_8/nbproject/private/
+/**/gradle
+/**/.gradle
+/**/*.jar
+/**/*.class

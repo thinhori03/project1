@@ -286,6 +286,6 @@ public class QueryGenerator<TTable, TId> {
 
     public Long executeCountAll() {
 
-        return 0;
+        return 0L;
     }
 }
