@@ -4,7 +4,6 @@
  */
 package model;
 
-
 import java.util.Date;
 import util.data.DataField;
 import util.data.DataId;
@@ -50,23 +49,16 @@ public class VoucherModel {
     @DataField(name = "TRANG_THAI")
     private String trangThai;
 
-    /*
-        contructors
-     */
-    public VoucherModel() {
-    }
-
-    public VoucherModel(String maVoucher, float giaTri, Date ngayBatDau, Date ngyKetThuc, float diauKien) {
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
         this.maVoucher = maVoucher;
         this.giaTri = giaTri;
+        this.ngayBatDau = ngayBatDau;
         this.ngyKetThuc = ngyKetThuc;
         this.diauKien = diauKien;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
     }
 
-
-    /*
-        getter/setter
-     */
     public String getMaVoucher() {
         return maVoucher;
     }
@@ -105,5 +97,21 @@ public class VoucherModel {
 
     public void setDiauKien(double diauKien) {
         this.diauKien = diauKien;
+    }
+
+    public Data getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Data ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 }

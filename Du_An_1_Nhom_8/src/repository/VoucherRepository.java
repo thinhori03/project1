@@ -4,11 +4,11 @@
  */
 package repository;
 
-import java.sql.SQLException;
-import java.util.List;
 import model.HoaDonModel;
 import service.DBConnect;
 import util.data.QueryGenerator;
+
+import java.util.List;
 
 /**
  *

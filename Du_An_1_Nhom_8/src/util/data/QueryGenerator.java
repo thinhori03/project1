@@ -5,7 +5,6 @@
 package util.data;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -97,7 +96,7 @@ public class QueryGenerator<TTable, TId> {
         sb.append(" ( ");
 
         for (int i = 0; i < this.fields.size() - 1; ++i) {
-            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerate.class)) {
+            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerated.class)) {
                 continue;
             }
             sb.append(this.fields.get(i) + ", ");
@@ -109,7 +108,7 @@ public class QueryGenerator<TTable, TId> {
 
         for (int i = 0; i < this.fields.size(); ++i) {
 
-            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerate.class)) {
+            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerated.class)) {
                 continue;
             }
 
@@ -283,5 +282,10 @@ public class QueryGenerator<TTable, TId> {
         }
 
         return null;
+    }
+
+    public Long executeCountAll() {
+
+        return 0;
     }
 }

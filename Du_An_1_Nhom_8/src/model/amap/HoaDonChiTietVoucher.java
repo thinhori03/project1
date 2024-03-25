@@ -1,4 +1,4 @@
-package icon.amap;
+package model.amap;
 
 import util.data.DataField;
 import util.data.DataTable;
