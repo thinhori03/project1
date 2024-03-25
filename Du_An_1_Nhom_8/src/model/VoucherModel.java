@@ -4,15 +4,6 @@
  */
 package model;
 
-/*
-CREATE TABLE VOUCHER(
-    MAV VARCHAR(10) PRIMARY KEY,
-    GIATRI FLOAT,
-    NGAYBATDAU DATE,
-    NGAYKETTHUC DATE,
-    DIEUKIEN FLOAT
-)
-*/
 
 import java.util.Date;
 import util.data.DataField;
@@ -22,6 +13,17 @@ import util.data.DataTable;
 /**
  *
  * @author ngtnthori03
+ *
+ * CREATE TABLE VOUCHER
+ * (
+ *     MAV         VARCHAR(10) PRIMARY KEY,
+ *     GIATRI      FLOAT,
+ *     NGAYBATDAU  DATE,
+ *     NGAYKETTHUC DATE,
+ *     DIEUKIEN    FLOAT,
+ *     ngay_tao    DATETIME,
+ *     TRANG_THAI  VARCHAR(20) -- đang hoạt động đã hủy
+ * )
  */
 @DataTable(name = "VOUCHER")
 public class VoucherModel {
@@ -41,6 +43,12 @@ public class VoucherModel {
 
     @DataField(name = "DIEUKIEN")
     private double diauKien;
+
+    @DataField(name = "ngay_tao")
+    private Data ngayTao;
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
 
     /*
         contructors
