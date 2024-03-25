@@ -13,16 +13,9 @@ import util.data.DataTable;
  *
  * @author ngtnthori03
  *
- * CREATE TABLE VOUCHER
- * (
- *     MAV         VARCHAR(10) PRIMARY KEY,
- *     GIATRI      FLOAT,
- *     NGAYBATDAU  DATE,
- *     NGAYKETTHUC DATE,
- *     DIEUKIEN    FLOAT,
- *     ngay_tao    DATETIME,
- *     TRANG_THAI  VARCHAR(20) -- đang hoạt động, đã hủy
- * )
+ * CREATE TABLE VOUCHER ( MAV VARCHAR(10) PRIMARY KEY, GIATRI FLOAT, NGAYBATDAU
+ * DATE, NGAYKETTHUC DATE, DIEUKIEN FLOAT, ngay_tao DATETIME, TRANG_THAI
+ * VARCHAR(20) -- đang hoạt động, đã hủy )
  */
 @DataTable(name = "VOUCHER")
 public class VoucherModel {
@@ -44,35 +37,17 @@ public class VoucherModel {
     private double diauKien;
 
     @DataField(name = "ngay_tao")
-<<<<<<< HEAD
     private Date ngayTao;
-=======
-    private Data ngayTao;
-  
-    @DataField(name = "TRANG_THAI")
-    private String trangThai;
-
-    @DataField(name = "TRANG_THAI")
-    private String trangThai;
-  
->>>>>>> 218fdeec819cf4df7bed4cce35958e97f8143dcc
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
 
-        /*
+    /*
         contructors
      */
     public VoucherModel() {
     }
-<<<<<<< HEAD
-
-    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngayKetThuc, double diauKien, Date ngayTao, String trangThai) {
-=======
-  
-
-    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
->>>>>>> 218fdeec819cf4df7bed4cce35958e97f8143dcc
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Date ngayTao, String trangThai) {
         this.maVoucher = maVoucher;
         this.giaTri = giaTri;
         this.ngayBatDau = ngayBatDau;
@@ -138,5 +113,4 @@ public class VoucherModel {
         this.trangThai = trangThai;
     }
 
-    
 }
