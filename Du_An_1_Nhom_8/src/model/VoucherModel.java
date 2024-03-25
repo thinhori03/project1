@@ -44,18 +44,35 @@ public class VoucherModel {
     private double diauKien;
 
     @DataField(name = "ngay_tao")
+<<<<<<< HEAD
     private Date ngayTao;
+=======
+    private Data ngayTao;
+  
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+  
+>>>>>>> 218fdeec819cf4df7bed4cce35958e97f8143dcc
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
 
-    /*
+        /*
         contructors
      */
     public VoucherModel() {
     }
+<<<<<<< HEAD
 
     public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngayKetThuc, double diauKien, Date ngayTao, String trangThai) {
+=======
+  
+
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
+>>>>>>> 218fdeec819cf4df7bed4cce35958e97f8143dcc
         this.maVoucher = maVoucher;
         this.giaTri = giaTri;
         this.ngayBatDau = ngayBatDau;
