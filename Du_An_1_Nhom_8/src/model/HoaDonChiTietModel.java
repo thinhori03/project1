@@ -1,11 +1,9 @@
 package model;
 
 import util.data.DataField;
-import util.data.DataGenerate;
+import util.data.DataGenerated;
 import util.data.DataId;
 import util.data.DataTable;
-
-import java.util.Date;
 
 /**
  * CREATE TABLE HOA_DON_CHI_TIET
@@ -14,8 +12,7 @@ import java.util.Date;
  *     MAHD    varchar(20) references HOA_DON (MAHD),
  *     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
  *     SOLUONG INT,
- *     MAKM    varchar(14) references KHUYEN_MAI (MAKM),
- *     MALSG   int references LICH_SU_GIA (MALSG)
+ *     MALSG   int -- giá hiện tại
  * )
  */
 
@@ -23,7 +20,7 @@ import java.util.Date;
 public class HoaDonChiTietModel {
 
     @DataId
-    @DataGenerate
+    @DataGenerated
     @DataField(name = "MAHDCT")
     private int maHDCT;
 
