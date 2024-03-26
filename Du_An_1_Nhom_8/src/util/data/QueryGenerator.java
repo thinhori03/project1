@@ -21,12 +21,16 @@ import java.util.stream.Collectors;
 public class QueryGenerator<TTable, TId> {
 
     private final String table_namw;
+    
     private final List<String> fields;
 
     private final List<Field> fieldRef;
+    
     private final Class<TTable> table;
 
     private final Field idField;
+
+    private final List<Field> generatedFields;
 
     public QueryGenerator(Class<TTable> _table) {
         this.table = _table;
@@ -46,6 +50,11 @@ public class QueryGenerator<TTable, TId> {
                 .stream()
                 .filter((o) -> (o.isAnnotationPresent(DataField.class)))
                 .findFirst().get();
+
+        this.generatedFields = Arrays.asList(this.table.getDeclaredFields())
+                .stream()
+                .filter((o) -> (o.isAnnotationPresent(DataGenerated.class)))
+                .collect(Collectors.toList());
     }
 
     public TTable map(ResultSet resultSet) throws SQLException {
@@ -69,9 +78,21 @@ public class QueryGenerator<TTable, TId> {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-            i.setAccessible(false);
         }
         return result;
+    }
+
+    public TTable mapGeneratedFields(ResultSet rs, TTable object) {
+
+        for (Field i : this.generatedFields) {
+            i.setAccessible(true);
+            try {
+                i.set(object, resultSet.getObject(i.getAnnotation(DataField.class).name()));
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return object;
     }
 
     public String generateSelectAllQuery() {
