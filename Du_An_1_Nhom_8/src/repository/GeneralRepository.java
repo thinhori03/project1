@@ -12,12 +12,12 @@ import util.data.QueryGenerator;
  *
  * @author ngtnthori03
  */
-public class GrneralRepository<TTable, TId> {
+public class GeneralRepository<TTable, TId> {
 
     private final Connection connection;
-    private QueryGenerator<TTable, TId> queryGenerator;
+    private final QueryGenerator<TTable, TId> queryGenerator; 
 
-    public GrneralRepository(Class<TTable> tableClass) {
+    public GeneralRepository(Class<TTable> tableClass) {
 
         this.connection = DBConnect.getConnection();
 

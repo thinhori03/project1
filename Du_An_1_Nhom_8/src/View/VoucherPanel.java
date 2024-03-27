@@ -1,6 +1,8 @@
 package View;
 
 import model.VoucherModel;
+import service.VoucherService;
+import util.TrangThaiVoucher;
 import util.swing.ErrLabel;
 import util.swing.PopupNotification;
 import util.swing.ValidatedTextField;
@@ -17,6 +19,7 @@ public class VoucherPanel extends javax.swing.JPanel {
     
     private VoucherModel voucherModel;
     
+    private VoucherService voucherService;
     
     /**
      * Creates new form VoucherPanel
@@ -50,7 +53,29 @@ public class VoucherPanel extends javax.swing.JPanel {
         voucherModel.setNgayBatDau(startDate.getDate());
         voucherModel.setNgyKetThuc(endDate.getDate());
     }
+    
+    public void map() {
+        
+        this.voucherModel = new VoucherModel();
+        
+        this.voucherModel.setGiaTri(
+                Float.parseFloat(price.getText().trim())
+        );
+        
+        this.voucherModel.setNgayTao(new Date());;
+        
+        this.voucherModel.setDiauKien(
+                Float.parseFloat(condPrice.getText().trim())
+        );
+               
+        this.voucherModel.setNgayBatDau(startDate.getDate());
 
+        this.voucherModel.setNgayKetThuc(endDate.getDate());
+        
+        this.voucherModel.setTrangThai(
+                TrangThaiVoucher.DANG_HOAT_DONG.getValue());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,6 +121,11 @@ public class VoucherPanel extends javax.swing.JPanel {
         jLabel5.setText("dieu kien");
 
         jButton5.setText("add voucher");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("tai lai");
 
@@ -181,6 +211,14 @@ public class VoucherPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        this.map();
+        
+        this.voucherService.addVoucher(this.voucherModel);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
