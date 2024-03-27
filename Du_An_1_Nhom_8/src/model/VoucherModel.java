@@ -56,7 +56,7 @@ public class VoucherModel {
     }
 
 
-    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Date ngayTao, String trangThai) {
 
         this.maVoucher = maVoucher;
         this.giaTri = giaTri;
@@ -108,11 +108,11 @@ public class VoucherModel {
     }
 
 
-    public Data getNgayTao() {
+    public Date getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Data ngayTao) {
+    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
 
