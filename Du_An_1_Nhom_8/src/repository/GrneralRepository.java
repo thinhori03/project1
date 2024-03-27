@@ -24,6 +24,9 @@ public class GrneralRepository<TTable, TId> {
         this.queryGenerator = new QueryGenerator<>(tableClass);
     }
 
+    /*
+     * @return null iff insert failed elsse entity with all generated columns will be returned
+    */
     public TTable add(TTable table) {
         return this.queryGenerator.executeInsert(connection, table);
     }
