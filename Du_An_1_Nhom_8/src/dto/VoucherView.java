@@ -4,10 +4,6 @@
  */
 package dto;
 
-import java.util.List;
-import javax.swing.table.TableModel;
-import model.VoucherModel;
-
 /**
  *
  * @author ngtnthori03

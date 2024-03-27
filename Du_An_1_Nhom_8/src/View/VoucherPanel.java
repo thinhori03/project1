@@ -1,5 +1,6 @@
 package View;
 
+import java.util.Date;
 import model.VoucherModel;
 import service.VoucherService;
 import util.TrangThaiVoucher;
@@ -44,16 +45,7 @@ public class VoucherPanel extends javax.swing.JPanel {
     
     /**
      * mapping value to VoucherModel
-     */
-    public void map() {
-        this.voucherModel = new VoucherModel();
-        
-        voucherModel.setDiauKien(Float.parseFloat(condPrice.getText().trim()));
-        voucherModel.setGiaTri(Float.parseFloat(price.getText().trim()));
-        voucherModel.setNgayBatDau(startDate.getDate());
-        voucherModel.setNgyKetThuc(endDate.getDate());
-    }
-    
+     */    
     public void map() {
         
         this.voucherModel = new VoucherModel();
@@ -62,7 +54,7 @@ public class VoucherPanel extends javax.swing.JPanel {
                 Float.parseFloat(price.getText().trim())
         );
         
-        this.voucherModel.setNgayTao(new Date());;
+        this.voucherModel.setNgayTao(new Date());
         
         this.voucherModel.setDiauKien(
                 Float.parseFloat(condPrice.getText().trim())
