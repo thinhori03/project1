@@ -31,9 +31,10 @@ public class GrneralRepository<TTable, TId> {
         return this.queryGenerator.executeInsert(connection, table);
     }
 
+    
     public boolean update(TTable table) {
            return this.queryGenerator.executeUpdate(connection, table);
-    }4
+    }
     
     public Long count() {
         return this.queryGenerater.exwcuteCountAll(connection);;
