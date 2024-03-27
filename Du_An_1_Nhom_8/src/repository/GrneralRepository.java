@@ -30,14 +30,17 @@ public class GrneralRepository<TTable, TId> {
 
     public boolean update(TTable table) {
            return this.queryGenerator.executeUpdate(connection, table);
-    }
+    }4
     
     public Long count() {
-        
-        return 0L;
+        return this.queryGenerater.exwcuteCountAll(connection);;
     }
     
     public TTable findById(TId id) {
         return this.queryGenerator.executeFindById(connection, id);
     }
+
+    public Long pageCount(int items) (
+        return this.count() / items;
+    )
 }
