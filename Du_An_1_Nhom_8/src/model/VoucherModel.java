@@ -1,0 +1,133 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
+import java.util.Date;
+import util.data.DataField;
+import util.data.DataId;
+import util.data.DataTable;
+
+/**
+ *
+ * @author ngtnthori03
+ *
+ * CREATE TABLE VOUCHER
+ * (
+ *     MAV         VARCHAR(10) PRIMARY KEY,
+ *     GIATRI      FLOAT,
+ *     NGAYBATDAU  DATE,
+ *     NGAYKETTHUC DATE,
+ *     DIEUKIEN    FLOAT,
+ *     ngay_tao    DATETIME,
+ *     TRANG_THAI  VARCHAR(20) -- đang hoạt động đã hủy
+ * )
+ */
+@DataTable(name = "VOUCHER")
+public class VoucherModel {
+
+    @DataId
+    @DataField(name = "MAV")
+    private String maVoucher;
+
+    @DataField(name = "GIATRI")
+    private double giaTri;
+
+    @DataField(name = "NGAYBATDAU")
+    private Date ngayBatDau;
+
+    @DataField(name = "NGAYKETTHUC")
+    private Date ngyKetThuc;
+
+    @DataField(name = "DIEUKIEN")
+    private double diauKien;
+
+    @DataField(name = "ngay_tao")
+    private Data ngayTao;
+<<<<<<< HEAD
+=======
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+
+    /*
+        contructors
+     */
+    public VoucherModel() {
+    }
+>>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
+
+    @DataField(name = "TRANG_THAI")
+    private String trangThai;
+
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
+        this.maVoucher = maVoucher;
+        this.giaTri = giaTri;
+        this.ngayBatDau = ngayBatDau;
+        this.ngyKetThuc = ngyKetThuc;
+        this.diauKien = diauKien;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
+
+    public String getMaVoucher() {
+        return maVoucher;
+    }
+
+    public void setMaVoucher(String maVoucher) {
+        this.maVoucher = maVoucher;
+    }
+
+    public double getGiaTri() {
+        return giaTri;
+    }
+
+    public void setGiaTri(double giaTri) {
+        this.giaTri = giaTri;
+    }
+
+    public Date getNgayBatDau() {
+        return ngayBatDau;
+    }
+
+    public void setNgayBatDau(Date ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
+    }
+
+    public Date getNgyKetThuc() {
+        return ngyKetThuc;
+    }
+
+    public void setNgyKetThuc(Date ngyKetThuc) {
+        this.ngyKetThuc = ngyKetThuc;
+    }
+
+    public double getDiauKien() {
+        return diauKien;
+    }
+
+    public void setDiauKien(double diauKien) {
+        this.diauKien = diauKien;
+    }
+
+    public Data getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Data ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+}

@@ -30,7 +30,7 @@ public class KhachHangConnection {
                 String email = rs.getString("EMAIL");
                 String ngay = rs.getString("NGAYSINH");
                 String diaChi = rs.getString("DIACHI");
-                KhachHangModel kh = new KhachHangModel( ten, sdt, gioiTinh, email, ngay, diaChi);
+                KhachHangModel kh = new KhachHangModel(ma,ten,sdt, gioiTinh, email, ngay, diaChi);
 
                 list.add(kh);
 

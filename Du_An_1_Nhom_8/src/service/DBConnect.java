@@ -17,11 +17,19 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class DBConnect {
+<<<<<<< HEAD
 public static final String HOSTNAME = "HOANGICH-2004\\SQLEXPRESS";
     public static final String PORT = "1433";
     public static final String DBNAME = "DU_AN_NHOM_8";
     public static final String USERNAME = "Hoangich";
     public static final String PASSWORD = "Hoangich2004";
+=======
+public static final String HOSTNAME = "NauTi\\SQLEXPRESS";
+    public static final String PORT = "1433";
+    public static final String DBNAME = "DU_AN_NHOM_8";
+    public static final String USERNAME = "sa";
+    public static final String PASSWORD = "123";
+>>>>>>> 222908cdc8a0471a3552766c491334dd30d28710
 
     /**
      * Get connection to MSSQL Server
