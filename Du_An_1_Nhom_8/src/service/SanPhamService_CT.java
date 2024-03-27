@@ -32,8 +32,8 @@ public class SanPhamService_CT {
             rs = ps.executeQuery();
             while (rs.next()) {
                 SanPham_CT sp = new SanPham_CT(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getFloat(6)
-                );
+                        rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getFloat(7)
+               );
                 listsp.add(sp);
             }
             return listsp;
@@ -98,7 +98,7 @@ public class SanPhamService_CT {
             rs = ps.executeQuery();
             while (rs.next()) {
                 SanPham_CT sp = new SanPham_CT(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getFloat(6)
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
                 );
                 listsp.add(sp);
             }
@@ -122,7 +122,7 @@ public class SanPhamService_CT {
             rs = ps.executeQuery();
             while (rs.next()) {
                 SanPham_CT sp = new SanPham_CT(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getFloat(6)
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
                 );
                 listkm.add(sp);
             }

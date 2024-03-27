@@ -4,10 +4,7 @@
  */
 package model;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
 import java.util.Date;
 import util.data.DataField;
 import util.data.DataId;
@@ -48,9 +45,7 @@ public class VoucherModel {
     private double diauKien;
 
     @DataField(name = "ngay_tao")
-    private Data ngayTao;
-<<<<<<< HEAD
-=======
+    private Date ngayTao;
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
@@ -60,12 +55,12 @@ public class VoucherModel {
      */
     public VoucherModel() {
     }
->>>>>>> f1300c55166aa38fbd11e6b0f6dd28a885a0b0b7
 
-    @DataField(name = "TRANG_THAI")
-    private String trangThai;
 
-    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Data ngayTao, String trangThai) {
+//    @DataField(name = "TRANG_THAI")
+//    private String trangThai;
+
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngyKetThuc, double diauKien, Date ngayTao, String trangThai) {
         this.maVoucher = maVoucher;
         this.giaTri = giaTri;
         this.ngayBatDau = ngayBatDau;
@@ -115,11 +110,11 @@ public class VoucherModel {
         this.diauKien = diauKien;
     }
 
-    public Data getNgayTao() {
+    public Date getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Data ngayTao) {
+    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
 

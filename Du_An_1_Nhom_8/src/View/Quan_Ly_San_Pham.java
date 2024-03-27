@@ -56,6 +56,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     public void ClearFrom_SP() {
         txt_Ma.setText("");
         txt_Ten.setText("");
+        buttonGroup1.clearSelection();
     }
 
     public void clearFrom() {
@@ -64,7 +65,6 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         txt_SoLuong.setText("");
         cbo_Size.setSelectedIndex(-1);
         cbo_Mau_Sac.setSelectedIndex(-1);
-        buttonGroup1.clearSelection();
         txt_Gia.setText("");
     }
 
@@ -86,7 +86,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         index = Tbl_SanPham.getSelectedRow();
         txt_Ma.setText(Tbl_SanPham.getValueAt(index, 0).toString());
         txt_Ten.setText(Tbl_SanPham.getValueAt(index, 1).toString());
-        trangthai = (String) tbl_SanPham_CT.getValueAt(index, 2).toString();
+        trangthai = (String) Tbl_SanPham.getValueAt(index, 2).toString();
         if (trangthai.equalsIgnoreCase("Đang bán")) {
             rd_Dangban.setSelected(true);
         } else if (trangthai.equalsIgnoreCase("Dừng bán")) {
