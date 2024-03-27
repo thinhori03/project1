@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Gia;
 import model.SanPham;
-import service.GiaService;
+import model.SanPham_CT;
+import service.SanPham_Service;
 import service.Mau_Service;
 import service.SIZE_Service;
-import service.SanPhamService;
+import service.SanPhamService_CT;
 
 /**
  *
@@ -23,8 +23,8 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
     private SIZE_Service ss = new SIZE_Service();
     private Mau_Service ms = new Mau_Service();
-    private GiaService gs = new GiaService();
-    private SanPhamService sanpham = new SanPhamService();
+    private SanPham_Service gs = new SanPham_Service();
+    private SanPhamService_CT sanpham = new SanPhamService_CT();
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
 
@@ -34,10 +34,10 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
     }
 
-    public void fillTable(List<SanPham> list) {
+    public void fillTable(List<SanPham_CT> list) {
         model = (DefaultTableModel) Tbl_SanPham.getModel();
         model.setRowCount(0);
-        for (SanPham sp : list) {
+        for (SanPham_CT sp : list) {
             model.addRow(sp.toDataRow());
         }
     }
@@ -60,9 +60,9 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         txt_LichSuGia.setText(Tbl_SanPham.getValueAt(index, 7).toString());
     }
 
-    SanPham readFrom() {
-        SanPham sp = new SanPham();
-        Gia g = new Gia();
+    SanPham_CT readFrom() {
+        SanPham_CT sp = new SanPham_CT();
+        SanPham g = new SanPham();
         sp.setTen(txt_Ten.getText());
         sp.setSoluong(Integer.parseInt(txt_Soluong.getText()));
         sp.setSize(ss.getSize(txt_Size.getText().trim()));
@@ -288,9 +288,9 @@ public class QL_SanPham1 extends javax.swing.JPanel {
                 .addComponent(btn_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(189, 189, 189))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,7 +298,9 @@ public class QL_SanPham1 extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(id_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -310,9 +312,9 @@ public class QL_SanPham1 extends javax.swing.JPanel {
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(id_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ADD)
                     .addComponent(btn_Update)
@@ -380,7 +382,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
                         .addComponent(rd_Dangban, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(rd_Dungban, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,7 +486,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         if (ten.isEmpty()) {
             this.fillTable(sanpham.getAll());
         } else {
-            List<SanPham> list1 = sanpham.TimSanPham(ten);
+            List<SanPham_CT> list1 = sanpham.TimSanPham(ten);
             this.fillTable(list1);
         }
 
@@ -525,7 +527,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         } else {
             try {
                 int ma = Integer.parseInt(id_MaSP.getText());
-                List<SanPham> list1 = sanpham.TimSanPham(ma);
+                List<SanPham_CT> list1 = sanpham.TimSanPham(ma);
                 this.fillTable(list1);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Cần phải nhập số nguyên");

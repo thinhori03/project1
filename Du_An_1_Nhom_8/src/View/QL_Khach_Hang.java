@@ -16,9 +16,6 @@ import service.KhachHangservice;
  */
 public class QL_Khach_Hang extends javax.swing.JPanel {
 
-    /**
-     * Creates new form QL_Khach_Hang
-     */
     KhachHangservice ql = new KhachHangservice();
     DefaultTableModel defaultTableModel;
 
@@ -84,7 +81,8 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         txtTimkiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
 
-        jLabel1.setText("KHACH HANG ");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setText("QUẢN LÝ KHÁCH HÀNG");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -319,29 +317,30 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(41, 41, 41))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(646, 646, 646)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(31, 31, 31))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -352,24 +351,24 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(525, 525, 525)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(501, 501, 501)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,15 +400,15 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
-     public void Clear(){
-    txtTen.setText(""); 
-    txtSDT.setText("");
-    txtEmail.setText("");
-    txtNgaySinh.setText("");
-    buttonGroup1.clearSelection();
-    
-    txtDiaChi.setText("");
-    
+    public void Clear() {
+        txtTen.setText("");
+        txtSDT.setText("");
+        txtEmail.setText("");
+        txtNgaySinh.setText("");
+        buttonGroup1.clearSelection();
+
+        txtDiaChi.setText("");
+
     }
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
@@ -425,7 +424,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         String dc = txtDiaChi.getText();
         String ngay = txtNgaySinh.getText();
 
-        KhachHangModel kh = new KhachHangModel( ten, sdt, gt, email, dc, ngay);
+        KhachHangModel kh = new KhachHangModel(ten, sdt, gt, email, dc, ngay);
         String kq = ql.Add(kh);
         JOptionPane.showMessageDialog(this, kq);
         LoadData(ql.getlist());
@@ -434,20 +433,20 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
-       String ten = txtTen.getText();
-       Integer sdt = Integer.parseInt(txtSDT.getText());
-       String gt = "";
-       if(rdNam.isSelected()){
-       gt= "Nam";
-       }else {
-       gt= "Nữ";
-       }
-       
-       String mail = txtEmail.getText();
-       
-       String ngay = txtNgaySinh.getText();
-       String dc = txtDiaChi.getText();
-        KhachHangModel kh = new KhachHangModel( ten, sdt, gt, mail, ngay, dc);
+        String ten = txtTen.getText();
+        Integer sdt = Integer.parseInt(txtSDT.getText());
+        String gt = "";
+        if (rdNam.isSelected()) {
+            gt = "Nam";
+        } else {
+            gt = "Nữ";
+        }
+
+        String mail = txtEmail.getText();
+
+        String ngay = txtNgaySinh.getText();
+        String dc = txtDiaChi.getText();
+        KhachHangModel kh = new KhachHangModel(ten, sdt, gt, mail, ngay, dc);
         String kq = ql.Update(kh);
         JOptionPane.showMessageDialog(this, kq);
         LoadData(ql.getlist());
@@ -469,6 +468,14 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         txtMaKhachHang.setText(tblKhachHang.getValueAt(i, 0).toString());
         txtTen.setText(tblKhachHang.getValueAt(i, 1).toString());
         txtSDT.setText(tblKhachHang.getValueAt(i, 2).toString());
+        String gioiTinh = tblKhachHang.getValueAt(i, 3).toString();
+
+        if (gioiTinh.equalsIgnoreCase("Nam")) {
+            rdNam.setSelected(true);
+
+        } else {
+            rdNu.setSelected(true);
+        }
         txtEmail.setText(tblKhachHang.getValueAt(i, 4).toString());
         txtDiaChi.setText(tblKhachHang.getValueAt(i, 5).toString());
         txtNgaySinh.setText(tblKhachHang.getValueAt(i, 6).toString());
@@ -476,11 +483,11 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
         // TODO add your handling code here:
-        String ten=  txtTimkiem.getText();
+        String ten = txtTimkiem.getText();
         ArrayList<KhachHangModel> list = ql.timKiem(ten);
-        if(list.isEmpty()){
-        JOptionPane.showMessageDialog(this, "Khong tim thay");
-        }else{
+        if (list.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Khong tim thay");
+        } else {
             LoadData(list);
         }
     }//GEN-LAST:event_btnTimKiemMouseClicked
@@ -489,8 +496,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaKhachHangActionPerformed
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;

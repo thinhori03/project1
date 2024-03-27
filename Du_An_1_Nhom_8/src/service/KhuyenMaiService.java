@@ -23,7 +23,7 @@ public class KhuyenMaiService {
 
     public List<KhuyenMai> getAll() {
         listkm = new ArrayList<>();
-        sql = "Select * from KHUYEN_MAI";
+        sql = "Select*from KHUYEN_MAI_COUPON";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class KhuyenMaiService {
     public int ADDKhuyenMai(KhuyenMai km) {
         listkm = new ArrayList<>();
         int kq = 0;
-        sql = "insert into KHUYEN_MAI(MAKM,NGAYBATDAU,NGAYKETTHUC,SOLUONG,GIA)values(?,?,?,?,?)";
+        sql = "insert into KHUYEN_MAI_COUPON(MAKM,NGAYBATDAU,NGAYKETTHUC,SOLUONG,GIA)values(?,?,?,?,?)";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class KhuyenMaiService {
 
     public int UpdateKhuyenMai(String ma, KhuyenMai km) {
         listkm = new ArrayList<>();
-        sql = "Update KHUYEN_MAI set NGAYBATDAU = ?,NGAYKETTHUC = ?,SOLUONG= ?,GIA= ? where MAKM like ?";
+        sql = "Update KHUYEN_MAI_COUPON set NGAYBATDAU = ?,NGAYKETTHUC = ?,SOLUONG= ?,GIA= ? where MAKM like ?";
         int kq = 0;
         try {
             con = DBConnect.getConnection();
@@ -102,7 +102,7 @@ public class KhuyenMaiService {
 
     public List<KhuyenMai> TimSanPham(String ma) {
         List<KhuyenMai> listkm = new ArrayList<>();
-        sql = "Select *from KHUYEN_MAI where MAKM like ?";
+        sql = "Select *from KHUYEN_MAI_COUPON where MAKM like ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);

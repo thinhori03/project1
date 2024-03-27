@@ -3,17 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/model/SanPham_CT.java</file>
             <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/QL_SanPham1.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/Quan_Ly_San_Pham.java</file>
             <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/QL_khuyenMai.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/SanPhamService_CT.java</file>
             <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/model/SanPham.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/main.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/SanPhamService.java</file>
             <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/KhuyenMaiService.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/QL_SanPham.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/view/QL_KhuyenMai1.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/GiaService.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/DBConnect.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/model/Gia.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/model/KhuyenMai.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DUAN1/project1/Du_An_1_Nhom_8/src/service/SanPham_Service.java</file>
         </group>
     </open-files>
 </project-private>
