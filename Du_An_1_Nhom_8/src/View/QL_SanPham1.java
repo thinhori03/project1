@@ -75,6 +75,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         }
         g.setId_gia(gs.TaoMA());
         g.setGia(Float.parseFloat(txt_LichSuGia.getText().trim()));
+        
         g.setNgaybatdau(new Date());
         g.setNgayketthuc(new Date());
         gs.ADDGia(g);

@@ -23,19 +23,18 @@ public class SanPham_CT {
     int soluong;
     int size;
     int masac;
-    String trangthai;
+    
     float gia;
 
     public SanPham_CT() {
     }
 
-    public SanPham_CT(int maSP, String ten, int soluong, int size, int masac, String trangthai, float gia) {
+    public SanPham_CT(int maSP, String ten, int soluong, int size, int masac, float gia) {
         this.maSP = maSP;
         this.ten = ten;
         this.soluong = soluong;
         this.size = size;
         this.masac = masac;
-        this.trangthai = trangthai;
         this.gia = gia;
     }
 
@@ -103,14 +102,6 @@ public class SanPham_CT {
         this.masac = masac;
     }
 
-    public String getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(String trangthai) {
-        this.trangthai = trangthai;
-    }
-
     public float getGia() {
         return gia;
     }
@@ -118,16 +109,19 @@ public class SanPham_CT {
     public void setGia(float gia) {
         this.gia = gia;
     }
+    
 
     public Object[] toDataRow() {
         return new Object[]{
-            this.getMaSP(), this.getTen(), this.getSoluong(), ss.getBYID_Size(this.getSize()).getTensize(), ms.getBYID_Mau(this.getMasac()).getTenmau(), this.getTrangthai(), this.getGia()
+            this.getMaSP(), this.getTen(), this.getSoluong(), ss.getBYID_Size(this.getSize()).getTensize(), ms.getBYID_Mau(this.getMasac()).getTenmau(), this.getGia()
         };
     }
 
     @Override
     public String toString() {
-        return "SanPham{" + "gs=" + gs + ", ss=" + ss + ", ms=" + ms + ", maSP=" + maSP + ", ten=" + ten + ", soluong=" + soluong + ", size=" + size + ", masac=" + masac + ", trangthai=" + trangthai + ", gia=" + gia + '}';
+        return "SanPham_CT{" + "gs=" + gs + ", ss=" + ss + ", ms=" + ms + ", maSP=" + maSP + ", ten=" + ten + ", soluong=" + soluong + ", size=" + size + ", masac=" + masac + ", gia=" + gia + '}';
     }
+
+    
 
 }

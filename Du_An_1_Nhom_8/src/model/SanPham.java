@@ -13,14 +13,15 @@ import java.util.Date;
 public class SanPham {
     int masp;
     String tensp;
-   
+    String trangthai;
 
     public SanPham() {
     }
 
-    public SanPham(int masp, String tensp) {
+    public SanPham(int masp, String tensp, String trangthai) {
         this.masp = masp;
         this.tensp = tensp;
+        this.trangthai = trangthai;
     }
 
     public int getMasp() {
@@ -38,9 +39,19 @@ public class SanPham {
     public void setTensp(String tensp) {
         this.tensp = tensp;
     }
+
+    public String getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    
     public Object[] toDataRow(){
         return new Object[]{
-            this.getMasp(),this.getTensp()
+            this.getMasp(),this.getTensp(),this.getTrangthai()
         };
     }
     

@@ -31,7 +31,8 @@ public class SanPham_Service {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2));
+                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
                 listsp.add(sp);
             }
             return listsp;
@@ -41,12 +42,13 @@ public class SanPham_Service {
         return null;
     }
     public int ADD_SP(SanPham sp) {
-        sql = "INSERT INTO SAN_PHAM(TENSP)VALUES(?)";
+        sql = "INSERT INTO SAN_PHAM(TENSP,TRANGTHAI)VALUES(?,?)";
         int kq = 0;
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, sp.getTensp());
+            ps.setString(2, sp.getTrangthai());
             kq = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +78,8 @@ public class SanPham_Service {
             ps.setString(1, "%" + ten + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2));
+                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
                 listspT.add(sp);
             }
             rs.close();
@@ -96,7 +99,8 @@ public class SanPham_Service {
             ps.setInt(1, ma);
             rs = ps.executeQuery();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2));
+                SanPham sp = new SanPham(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
                 listspM.add(sp);
                 
             }
