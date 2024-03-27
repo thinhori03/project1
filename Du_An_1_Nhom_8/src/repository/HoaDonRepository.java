@@ -5,11 +5,6 @@
 package repository;
 
 import model.HoaDonModel;
-import service.DBConnect;
-import util.data.QueryGenerator;
-
-import java.sql.Connection;
-import java.util.List;
 
 /**
  *
