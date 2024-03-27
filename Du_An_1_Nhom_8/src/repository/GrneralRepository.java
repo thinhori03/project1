@@ -44,7 +44,7 @@ public class GrneralRepository<TTable, TId> {
         return this.queryGenerator.executeFindById(connection, id);
     }
 
-    public Long pageCount(int items) (
+    public Long pageCount(int items) {
         return this.count() / items;
-    )
+    }
 }
