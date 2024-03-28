@@ -3,6 +3,10 @@ package org.project1.nhom8.repository;
 import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.VoucherModel;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
@@ -11,26 +15,51 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
         super(GiaModel.class);
     }
 
-    public GiaModel getgiaMoiNhat(int maspct) {
-        return this.getQueryGenerator().executeCustomSelectAll(
-                this.getConnection()
-                , """
-                                WHERE
-                                    MASPCT = ?
-                                    ORDER BY NGAYUPDATE DESC
+    public GiaModel getgiaMoiNhat(Integer maspct) {
+        try {
+            PreparedStatement preparedStatement = getConnection()
+                    .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
                             """
-                , maspct
-        ).get(0);
+                                WHERE MASPCT = ?
+                                ORDER BY NGAYUPDATE DESC
+                            """);
+            preparedStatement.setInt(1, maspct);
+            ResultSet resultSet = preparedStatement.executeQuery();;
+
+            if (resultSet.next()) {
+                return getQueryGenerator().map(resultSet);
+            }
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
-    public List<GiaModel> getLichSugia(int maspct) {
-        return this.getQueryGenerator().executeCustomSelectAll(
-                this.getConnection()
-                , """
-                                WHERE
-                                    MASPCT = ?
+    public List<GiaModel> getLichSugia(Integer maspct) {
+
+        List<GiaModel> gias = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = getConnection()
+                    .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
                             """
-                , maspct
-        );
+                                WHERE MASPCT = ?
+                            """);
+            preparedStatement.setInt(1, maspct);
+            ResultSet resultSet = preparedStatement.executeQuery();;
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                gias.add(getQueryGenerator().map(resultSet));
+                }
+            }
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 }

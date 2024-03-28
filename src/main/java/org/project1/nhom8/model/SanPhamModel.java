@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.project1.nhom8.util.data.DataField;
+import org.project1.nhom8.util.data.DataGenerated;
+import org.project1.nhom8.util.data.DataId;
+import org.project1.nhom8.util.data.DataTable;
 
 /**
  *
@@ -25,8 +29,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
+@DataTable(name = "SAN_PHAM")
 public class SanPhamModel {
+    
+    @DataId
+    @DataGenerated
+    @DataField(name = "MASP")
     private int masp;
+    
+    @DataField(name = "TENSP")
     private String tensp;
 //   private  String trangthai;
 }

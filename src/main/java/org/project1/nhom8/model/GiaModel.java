@@ -38,7 +38,7 @@ public class GiaModel {
     private int maSPCT;
 
     @DataField(name = "GIA")
-    private float gia;
+    private double gia;
 
     @DataField(name = "NGAYUPDATE")
     private Date ngayCapNhat;

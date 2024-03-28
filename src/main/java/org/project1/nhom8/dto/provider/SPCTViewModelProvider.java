@@ -11,9 +11,15 @@ import org.project1.nhom8.repository.MauSacRepository;
 import org.project1.nhom8.repository.SanPhamChiTietRespository;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
+import org.project1.nhom8.util.data.visual.DataHeader;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -53,16 +59,55 @@ public class SPCTViewModelProvider {
         List<SanPhamChiTietModel> spctModels = spctRespository
                 .findAll();
 
-        for (SanPhamChiTietModel spctModel: spctModels) {
-            spctViewModel = new SPCTViewModel().builder()
+        for (SanPhamChiTietModel spctModel : spctModels) {
+            new SPCTViewModel();
+            result.add(SPCTViewModel.builder()
                     .maSPCT(spctModel.getMaSPCT())
+                    .tenSP(sanPhamRepository.findById(spctModel.getMaSP()).getTensp())
                     .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSP()).getGia())
                     .size(sizeRepository.findById(spctModel.getMasize()).getTensize())
                     .mauSac(mauSacRepository.findById(spctModel.getMaMauSac()).getTenmau())
-                    .build();
+                    .trangThai(spctModel.getTrangThai())
+                    .soLuong(spctModel.getSoluong())
+                    .build());
+        }
+        return result;
+    }
 
+    public TableModel toTableModel() {
+
+        DefaultTableModel defaultTableModel =new DefaultTableModel();
+
+        List<Field> fields = Arrays.asList(SPCTViewModel.class.getDeclaredFields())
+                .stream()
+                .filter(o -> o.isAnnotationPresent(DataHeader.class))
+                .collect(Collectors.toList());
+
+
+        defaultTableModel.setColumnCount(0);
+        for (Field f : fields) {
+            defaultTableModel.addColumn(f.getAnnotation(DataHeader.class).name());
         }
 
-        return result;
+        defaultTableModel.setRowCount(0);
+
+        List<String> rowData = new ArrayList<>();
+
+        for (SPCTViewModel spctViewModel : this.getSanPhamViewModel()) {
+            rowData = new ArrayList<>();
+            try {
+                for (Field j : fields) {
+                    j.setAccessible(true);
+                    rowData.add(j.get(spctViewModel).toString());
+                    System.out.println(j.get(spctViewModel).toString());
+                }
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+
+            defaultTableModel.addRow(rowData.toArray());
+        }
+
+        return defaultTableModel;
     }
 }
