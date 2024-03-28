@@ -8,9 +8,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.model.SanPhamChiTietModel;
+import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.MauSacRepository;
+import org.project1.nhom8.repository.SPCTModel;
+import org.project1.nhom8.repository.SanPhamRepository;
+import org.project1.nhom8.repository.SizeRepository;
 import org.project1.nhom8.service.SanPham_Service;
 import org.project1.nhom8.service.Mau_Service;
 import org.project1.nhom8.service.SIZE_Service;
@@ -29,10 +35,31 @@ public class QL_SanPham1 extends javax.swing.JPanel {
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
 
+    private SanPhamRepository sanPhamRepository;
+
+    private SPCTModel spctRespository;
+
+    private GiaRepository giaRepository;
+
+    private SizeRepository sizeRepository;
+
+    private MauSacRepository mauSacRepository;
+
     private SPCTViewModelProvider spctViewModelProvider;
 
     public QL_SanPham1() {
         initComponents();
+
+        this.sanPhamRepository = new SanPhamRepository();
+
+        this.spctRespository = new SPCTModel();
+
+        this.giaRepository = new GiaRepository();
+
+        this.sizeRepository = new SizeRepository();
+
+        this.mauSacRepository = new MauSacRepository();
+
         spctViewModelProvider = new SPCTViewModelProvider();
 
         loadTable();
@@ -53,19 +80,28 @@ public class QL_SanPham1 extends javax.swing.JPanel {
     public void ShowFrom() {
         String trangthai;
         index = Tbl_SanPham.getSelectedRow();
-        txt_Ten.setText(Tbl_SanPham.getValueAt(index, 1).toString());
-        txt_Soluong.setText(Tbl_SanPham.getValueAt(index, 2).toString());
-        txt_Size.setText(Tbl_SanPham.getValueAt(index, 3).toString());
-        txt_MauSac.setText(Tbl_SanPham.getValueAt(index, 4).toString());
-        txt_MaKM.setText(Tbl_SanPham.getValueAt(index, 5).toString());
-        trangthai = (String) Tbl_SanPham.getValueAt(index, 6).toString();
+        Integer maSPCT = Integer.parseInt(Tbl_SanPham.getValueAt(index, 0).toString());
+
+        SPCTViewModel spct = this.spctViewModelProvider.SPCTViewModel()
+                        .get(index);
+
+        txt_Ten.setText(spct.getTenSP());
+
+        txt_Soluong.setText(spct.getSoLuong() + "");
+
+        txt_Size.setText(spct.getSize());
+
+        txt_MauSac.setText(spct.getMauSac());
+
+        trangthai = spct.getTrangThai();
+
         if (trangthai.equalsIgnoreCase("Đang bán")) {
             rd_Dangban.setSelected(true);
         } else if (trangthai.equalsIgnoreCase("Dừng bán")) {
             rd_Dungban.setSelected(true);
         }
 
-        txt_LichSuGia.setText(Tbl_SanPham.getValueAt(index, 7).toString());
+        txt_LichSuGia.setText(spct.getGia() + "");
     }
 
     SanPhamChiTietModel readFrom() {

@@ -8,7 +8,7 @@ import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.model.SanPhamChiTietModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.MauSacRepository;
-import org.project1.nhom8.repository.SanPhamChiTietRespository;
+import org.project1.nhom8.repository.SPCTModel;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
 import org.project1.nhom8.util.data.visual.DataHeader;
@@ -30,7 +30,7 @@ public class SPCTViewModelProvider {
 
     private SanPhamRepository sanPhamRepository;
 
-    private SanPhamChiTietRespository spctRespository;
+    private SPCTModel spctRespository;
 
     private GiaRepository giaRepository;
 
@@ -42,7 +42,7 @@ public class SPCTViewModelProvider {
 
         this.sanPhamRepository = new SanPhamRepository();
 
-        this.spctRespository = new SanPhamChiTietRespository();
+        this.spctRespository = new SPCTModel();
 
         this.giaRepository = new GiaRepository();
 
@@ -51,7 +51,7 @@ public class SPCTViewModelProvider {
         this.mauSacRepository = new MauSacRepository();
     }
 
-    public List<SPCTViewModel> getSanPhamViewModel() {
+    public List<SPCTViewModel> SPCTViewModel() {
         List<SPCTViewModel> result = new ArrayList<>();
 
         SPCTViewModel spctViewModel = null;
@@ -93,7 +93,7 @@ public class SPCTViewModelProvider {
 
         List<String> rowData = new ArrayList<>();
 
-        for (SPCTViewModel spctViewModel : this.getSanPhamViewModel()) {
+        for (SPCTViewModel spctViewModel : this.SPCTViewModel()) {
             rowData = new ArrayList<>();
             try {
                 for (Field j : fields) {
