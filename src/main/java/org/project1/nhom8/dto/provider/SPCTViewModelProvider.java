@@ -5,10 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.project1.nhom8.dto.SPCTViewModel;
-import org.project1.nhom8.model.SanPhamChiTietModel;
+import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.MauSacRepository;
-import org.project1.nhom8.repository.SPCTModel;
+import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
 import org.project1.nhom8.util.data.visual.DataHeader;
@@ -30,7 +30,7 @@ public class SPCTViewModelProvider {
 
     private SanPhamRepository sanPhamRepository;
 
-    private SPCTModel spctRespository;
+    private SPCTRepository spctRespository;
 
     private GiaRepository giaRepository;
 
@@ -42,7 +42,7 @@ public class SPCTViewModelProvider {
 
         this.sanPhamRepository = new SanPhamRepository();
 
-        this.spctRespository = new SPCTModel();
+        this.spctRespository = new SPCTRepository();
 
         this.giaRepository = new GiaRepository();
 
@@ -56,10 +56,10 @@ public class SPCTViewModelProvider {
 
         SPCTViewModel spctViewModel = null;
 
-        List<SanPhamChiTietModel> spctModels = spctRespository
+        List<SPCTModel> spctModels = spctRespository
                 .findAll();
 
-        for (SanPhamChiTietModel spctModel : spctModels) {
+        for (SPCTModel spctModel : spctModels) {
             new SPCTViewModel();
             result.add(SPCTViewModel.builder()
                     .maSPCT(spctModel.getMaSPCT())

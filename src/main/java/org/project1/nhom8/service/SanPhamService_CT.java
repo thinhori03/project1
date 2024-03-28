@@ -7,7 +7,7 @@ package org.project1.nhom8.service;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.project1.nhom8.model.SanPhamChiTietModel;
+import org.project1.nhom8.model.SPCTModel;
 
 /**
  *
@@ -15,13 +15,13 @@ import org.project1.nhom8.model.SanPhamChiTietModel;
  */
 public class SanPhamService_CT {
 
-    private List<SanPhamChiTietModel> listsp;
+    private List<SPCTModel> listsp;
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
 
-    public List<SanPhamChiTietModel> getAll() {
+    public List<SPCTModel> getAll() {
         listsp = new ArrayList<>();
         sql = "select sp.MASP,Sp.TENSP,SOLUONG,MASIZE,MAMAU,TRANGTHAI,lg.GIA from SAN_PHAM_CHI_TIET spct\n"
                 + "		join SAN_PHAM sp on spct.MASP = sp.MASP\n"
@@ -86,8 +86,8 @@ public class SanPhamService_CT {
 //        return kq;
 //    }
     
-    public List<SanPhamChiTietModel> TimSanPham(String ten) {
-        List<SanPhamChiTietModel> listsp = new ArrayList<>();
+    public List<SPCTModel> TimSanPham(String ten) {
+        List<SPCTModel> listsp = new ArrayList<>();
         sql = "select sp.MASP,Sp.TENSP,SOLUONG,MASIZE,MAMAU,TRANGTHAI,lg.GIA from SAN_PHAM_CHI_TIET spct\n"
                 + "		join SAN_PHAM sp on spct.MASP = sp.MASP\n"
                 + "		join LICH_SU_GIA lg on spct.MASPCT = lg.MASPCT where sp.TENSP like ?";
@@ -110,8 +110,8 @@ public class SanPhamService_CT {
         return listsp;
     }
 
-    public List<SanPhamChiTietModel> TimSanPham(int ma) {
-        List<SanPhamChiTietModel> listkm = new ArrayList<>();
+    public List<SPCTModel> TimSanPham(int ma) {
+        List<SPCTModel> listkm = new ArrayList<>();
         sql = "select sp.MASP,Sp.TENSP,SOLUONG,MASIZE,MAMAU,TRANGTHAI,lg.GIA from SAN_PHAM_CHI_TIET spct\n"
                 + "		join SAN_PHAM sp on spct.MASP = sp.MASP\n"
                 + "		join LICH_SU_GIA lg on spct.MASPCT = lg.MASPCT where spct.MASP = ?";

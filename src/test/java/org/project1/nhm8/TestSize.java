@@ -18,7 +18,7 @@ public class TestSize {
     public void insert() {
         SizeModel size= sizeRepository.add(
                 SizeModel.builder()
-                        .tensize("67")
+                        .tensize("78")
                         .build()
         );
 

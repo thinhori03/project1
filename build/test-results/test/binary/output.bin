@@ -1,21 +1,11 @@
 
 
 
- INSERT INTO SIZE ( TENSIZE ) 
-	VALUES ( ?  ) 
+	 SELECT 
+	SAN_PHAM.MASP,
+	SAN_PHAM.TENSP
+ FROM SAN_PHAM
 
 
 
-
-0
-
-
-
-	 SELECT 
-	SIZE.MASIZE,
-	SIZE.TENSIZE
- FROM SIZE
-
-
-
-3
+3
