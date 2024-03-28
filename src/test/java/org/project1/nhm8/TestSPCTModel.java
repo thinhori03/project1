@@ -1,22 +1,19 @@
 package org.project1.nhm8;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
-import org.project1.nhom8.model.SanPhamChiTietModel;
-import org.project1.nhom8.repository.SanPhamChiTietRespository;
+import org.project1.nhom8.repository.SPCTModel;
 
 public class TestSPCTModel {
 
     private SPCTViewModelProvider spctViewModelProvider;
 
-    private SanPhamChiTietRespository spctRepository;
+    private SPCTModel spctRepository;
 
     public TestSPCTModel() {
         this.spctViewModelProvider = new SPCTViewModelProvider();
-        this.spctRepository = new SanPhamChiTietRespository();
+        this.spctRepository = new SPCTModel();
     }
 
     public void getrAll() {
