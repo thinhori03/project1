@@ -7,6 +7,8 @@ package org.project1.nhom8.View;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.model.SanPhamChiTietModel;
 import org.project1.nhom8.service.SanPham_Service;
@@ -27,10 +29,17 @@ public class QL_SanPham1 extends javax.swing.JPanel {
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
 
+    private SPCTViewModelProvider spctViewModelProvider;
+
     public QL_SanPham1() {
         initComponents();
-        this.fillTable(sanpham.getAll());
+        spctViewModelProvider = new SPCTViewModelProvider();
 
+        loadTable();
+    }
+
+    public void loadTable() {
+        Tbl_SanPham.setModel(spctViewModelProvider.toTableModel());
     }
 
     public void fillTable(List<SanPhamChiTietModel> list) {

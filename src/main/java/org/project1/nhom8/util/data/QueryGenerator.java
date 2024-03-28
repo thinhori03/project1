@@ -68,9 +68,9 @@ public class QueryGenerator<TTable, TId> {
             e.printStackTrace();
         }
 
-        if (!resultSet.isBeforeFirst()) {
-            return null;
-        }
+//        if (!resultSet.isBeforeFirst()) {
+//            return null;
+//        }
 
         for (Field i : this.fieldRef) {
             i.setAccessible(true);
@@ -308,7 +308,9 @@ public class QueryGenerator<TTable, TId> {
 
             ResultSet resultSet = preStat.executeQuery();
 
-            return this.map(resultSet);
+            if (resultSet.next()) {
+                return this.map(resultSet);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -324,11 +326,17 @@ public class QueryGenerator<TTable, TId> {
 
         ResultSet resultSet = null;
 
+        PreparedStatement preStat = null;
+
         try {
 
-            resultSet = connection.prepareStatement(
-                    query
-            ).executeQuery();
+            preStat = connection.prepareStatement(query);
+
+            for (int i = 0; i < args.length; ++i) {
+                preStat.setObject(i + 1, args);
+            }
+
+            resultSet = preStat.executeQuery();
 
             if (resultSet.isBeforeFirst()) {
                 while (resultSet.next()) {

@@ -33,5 +33,5 @@ public class SPCTViewModel {
     private String trangThai;
 
     @DataHeader(name = "giá")
-    private Float gia;
+    private double gia;
 }

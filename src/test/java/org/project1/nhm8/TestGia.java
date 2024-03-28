@@ -6,6 +6,7 @@ import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.repository.GiaRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class TestGia {
@@ -31,5 +32,14 @@ public class TestGia {
 
         Assertions.assertTrue(Optional
                 .ofNullable(gia.getMaLSG()).isPresent());
+    }
+
+    @Test
+    public void getAll() {
+        List<GiaModel> gias = this.giaRepository.findAll();
+
+        for (var gia : gias) {
+            System.out.println(gia.getMaLSG());
+        }
     }
 }
