@@ -7,8 +7,16 @@ package org.project1.nhom8.View;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
+import org.project1.nhom8.dto.provider.SanPhamViewModelProvider;
 import org.project1.nhom8.model.SanPhamModel;
-import org.project1.nhom8.model.SanPhamChiTietModel;
+import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.MauSacRepository;
+import org.project1.nhom8.repository.SPCTRepository;
+import org.project1.nhom8.repository.SanPhamRepository;
+import org.project1.nhom8.repository.SizeRepository;
 import org.project1.nhom8.service.SanPham_Service;
 import org.project1.nhom8.service.Mau_Service;
 import org.project1.nhom8.service.SIZE_Service;
@@ -27,15 +35,53 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
 
+    private SanPhamViewModelProvider sanPhamViewModelProvider;
+
+    private SanPhamRepository sanPhamRepository;
+
+    private SPCTRepository spctRespository;
+
+    private GiaRepository giaRepository;
+
+    private SizeRepository sizeRepository;
+
+    private MauSacRepository mauSacRepository;
+
+    private SPCTViewModelProvider spctViewModelProvider;
+
     public Quan_Ly_San_Pham() {
         initComponents();
+
+        this.sanPhamViewModelProvider = new SanPhamViewModelProvider();
+
+        this.sanPhamRepository = new SanPhamRepository();
+
+        this.spctRespository = new SPCTRepository();
+
+        this.giaRepository = new GiaRepository();
+
+        this.sizeRepository = new SizeRepository();
+
+        this.mauSacRepository = new MauSacRepository();
+
+        spctViewModelProvider = new SPCTViewModelProvider();
+
         cbo_Size.setSelectedIndex(-1);
         cbo_Mau_Sac.setSelectedIndex(-1);
-        this.FillTableSanPham_CT(sps.getAll());
-        this.fillTbaleSanPham(sp.getAll());
+//        this.FillTableSanPham_CT(sps.getAll());
+//        this.fillTbaleSanPham(sp.getAll());
 
+        loadTableSP();
+        loadTableSPCT();
     }
 
+    public void loadTableSPCT() {
+        tbl_SanPham_CT.setModel(spctViewModelProvider.toTableModel());
+    }
+
+    public void loadTableSP() {
+        Tbl_SanPham.setModel(sanPhamViewModelProvider.toTableModel());
+    }
     void fillTbaleSanPham(List<SanPhamModel> list) {
 //        model = (DefaultTableModel) Tbl_SanPham.getModel();
 //        model.setRowCount(0);
@@ -44,13 +90,15 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 //        }
     }
 
-    void FillTableSanPham_CT(List<SanPhamChiTietModel> list) {
+    void FillTableSanPham_CT(List<SPCTModel> list) {
 //        model = (DefaultTableModel) tbl_SanPham_CT.getModel();
 //        model.setRowCount(0);
 //        for (SanPhamChiTietModel sanPham : list) {
 //            model.addRow(sanPham.toDataRow());
 //        }
     }
+
+
 
     public void ClearFrom_SP() {
         txt_Ma.setText("");
@@ -75,8 +123,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         txt_SoLuong.setText(tbl_SanPham_CT.getValueAt(index, 2).toString());
         cbo_Size.setSelectedItem(tbl_SanPham_CT.getValueAt(index, 3).toString());
         cbo_Mau_Sac.setSelectedItem(tbl_SanPham_CT.getValueAt(index, 4).toString());
-        
-        
+
         txt_Gia.setText(tbl_SanPham_CT.getValueAt(index, 6).toString());
     }
 
@@ -93,8 +140,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         }
     }
 
-    SanPhamChiTietModel readFrom() {
-        SanPhamChiTietModel sp = new SanPhamChiTietModel();
+    SPCTModel readFrom() {
+        SPCTModel sp = new SPCTModel();
         sp.setMaSP(Integer.parseInt(txt_MaSP.getText()));
 //        sp.setTen(txt_TenSP.getText());
         sp.setSoluong(Integer.parseInt(txt_SoLuong.getText()));
@@ -256,7 +303,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -478,7 +525,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txt_Gia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -506,7 +553,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel7)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -592,7 +639,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -611,9 +658,9 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(19, 19, 19)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -730,7 +777,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         if (ten.isEmpty()) {
             this.FillTableSanPham_CT(sps.getAll());
         } else {
-            List<SanPhamChiTietModel> list1 = sps.TimSanPham(ten);
+            List<SPCTModel> list1 = sps.TimSanPham(ten);
             this.FillTableSanPham_CT(list1);
         }
     }//GEN-LAST:event_id_Ten_TKKeyReleased
@@ -743,7 +790,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         } else {
             try {
                 int ma = Integer.parseInt(id_Ma_Tk.getText());
-                List<SanPhamChiTietModel> list1 = sps.TimSanPham(ma);
+                List<SPCTModel> list1 = sps.TimSanPham(ma);
                 this.FillTableSanPham_CT(list1);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Cần phải nhập số nguyên");

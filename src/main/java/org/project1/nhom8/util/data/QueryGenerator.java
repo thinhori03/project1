@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,10 +86,10 @@ public class QueryGenerator<TTable, TId> {
 
     public TTable mapGeneratedFields(ResultSet resultSet, TTable object) throws SQLException {
 
-        for (Field i: generatedFields) {
-            i.setAccessible(true);
+        for (int i = 0; i < generatedFields.size(); ++i) {
+            generatedFields.get(i).setAccessible(true);
             try {
-                i.set(object, resultSet.getObject(idField.getAnnotation(DataField.class).name()));
+                generatedFields.get(i).set(object, resultSet.getObject(i+1));
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             } catch (SQLException ex) {
@@ -238,11 +239,7 @@ public class QueryGenerator<TTable, TId> {
 
         try {
             PreparedStatement preStat = connection.prepareStatement(
-                    this.generateInsertQuery()
-                    , generatedFields.stream()
-                                    .map(o -> o.getAnnotation(DataField.class).name())
-                            .toArray(String[]::new)
-            );
+                    this.generateInsertQuery());
 
             for (int i = 0; i < insertedFields.size(); ++i) {
 
@@ -258,12 +255,6 @@ public class QueryGenerator<TTable, TId> {
             if (preStat.executeUpdate() == 0) {
                 return null;
             }
-
-            ResultSet resultSet = preStat.getGeneratedKeys();
-
-//            if (resultSet.next()) {
-//                return mapGeneratedFields(resultSet, obj);
-//            }
 
             return obj;
 

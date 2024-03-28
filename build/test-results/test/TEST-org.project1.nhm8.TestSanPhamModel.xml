@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.project1.nhm8.TestSanPhamModel" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-28T21:24:06" hostname="fedora" time="0.115">
+  <properties/>
+  <testcase name="fina all SanPham Model" classname="org.project1.nhm8.TestSanPhamModel" time="0.115"/>
+  <system-out><![CDATA[
+
+
+ SELECT 
+	SAN_PHAM.MASP,
+	SAN_PHAM.TENSP
+ FROM SAN_PHAM
+
+
+
+3
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

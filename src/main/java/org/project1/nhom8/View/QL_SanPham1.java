@@ -10,11 +10,13 @@ import javax.swing.table.DefaultTableModel;
 
 import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
+import org.project1.nhom8.model.MauSacModel;
 import org.project1.nhom8.model.SanPhamModel;
-import org.project1.nhom8.model.SanPhamChiTietModel;
+import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.model.SizeModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.MauSacRepository;
-import org.project1.nhom8.repository.SPCTModel;
+import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
 import org.project1.nhom8.service.SanPham_Service;
@@ -37,7 +39,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
     private SanPhamRepository sanPhamRepository;
 
-    private SPCTModel spctRespository;
+    private SPCTRepository spctRespository;
 
     private GiaRepository giaRepository;
 
@@ -52,7 +54,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
         this.sanPhamRepository = new SanPhamRepository();
 
-        this.spctRespository = new SPCTModel();
+        this.spctRespository = new SPCTRepository();
 
         this.giaRepository = new GiaRepository();
 
@@ -69,10 +71,10 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         Tbl_SanPham.setModel(spctViewModelProvider.toTableModel());
     }
 
-    public void fillTable(List<SanPhamChiTietModel> list) {
+    public void fillTable(List<SPCTModel> list) {
         model = (DefaultTableModel) Tbl_SanPham.getModel();
         model.setRowCount(0);
-        for (SanPhamChiTietModel sp : list) {
+        for (SPCTModel sp : list) {
 //            model.addRow(sp.toDataRow());
         }
     }
@@ -104,16 +106,24 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         txt_LichSuGia.setText(spct.getGia() + "");
     }
 
-    SanPhamChiTietModel readFrom() {
-        SanPhamChiTietModel sp = new SanPhamChiTietModel();
-        SanPhamModel g = new SanPhamModel();
+    SPCTModel readFrom(SPCTModel spct) {
+
+        SizeModel size = sizeRepository.findByTen(txt_Size.getText().trim());
+
+        MauSacModel mauSac = mauSacRepository.findByTen(txt_MauSac.getText().trim());
+
+        spct.setSoluong(Integer.parseInt(txt_Soluong.getText().trim()));
+        spct.setMasize(size.getId_Masize());
+        spct.setTrangThai(rd_Dangban.isSelected() ? "Đang bán" : "Dừng bán");
+        spct.setMaMauSac(mauSac.getId_Mamau());
+
 //        sp.setTen(txt_Ten.getText());
 //        sp.setSoluong(Integer.parseInt(txt_Soluong.getText()));
 //        sp.setSize(ss.getSize(txt_Size.getText().trim()));
 //        sp.setMasac(ms.getMaMau(txt_MauSac.getText().trim()));
 //        sp.setMakm(txt_MaKM.getText());
 //        if (rd_Dangban.isSelected()) {
-//            sp.setTrangthai("Đang bán");
+//            sp.setTrangthai();
 //        } else if (rd_Dungban.isSelected()) {
 //            sp.setTrangthai("Dừng bán");
 //        }
@@ -124,7 +134,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 //        g.setNgayketthuc(new Date());
 //        gs.ADDGia(g);
 //        sp.setId_gia(g.getId_gia());
-        return sp;
+        return spct;
     }
 
     public void clear() {
@@ -495,15 +505,15 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
     private void btn_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDActionPerformed
         // TODO add your handling code here:
-//        if (check()) {
-//            if (sanpham.ADDSanPham(this.readFrom()) > 0) {
-//                JOptionPane.showMessageDialog(this, "Thêm thành công");
-//                this.fillTable(sanpham.getAll());
-//                clear();
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Thêm thất bại");
-//            }
-//        }
+        if (check()) {
+            if (spctRespository.add(readFrom(SPCTModel.builder().build())) != null) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                this.fillTable(sanpham.getAll());
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+        }
     }//GEN-LAST:event_btn_ADDActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
@@ -531,7 +541,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         if (ten.isEmpty()) {
             this.fillTable(sanpham.getAll());
         } else {
-            List<SanPhamChiTietModel> list1 = sanpham.TimSanPham(ten);
+            List<SPCTModel> list1 = sanpham.TimSanPham(ten);
             this.fillTable(list1);
         }
 
@@ -572,7 +582,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         } else {
             try {
                 int ma = Integer.parseInt(id_MaSP.getText());
-                List<SanPhamChiTietModel> list1 = sanpham.TimSanPham(ma);
+                List<SPCTModel> list1 = sanpham.TimSanPham(ma);
                 this.fillTable(list1);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Cần phải nhập số nguyên");
