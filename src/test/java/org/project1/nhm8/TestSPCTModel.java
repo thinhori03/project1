@@ -23,7 +23,7 @@ public class TestSPCTModel {
 
     @Test
     public void  viewModel() {
-        for (SPCTViewModel spctViewModel : this.spctViewModelProvider.getSanPhamViewModel()) {
+        for (SPCTViewModel spctViewModel : this.spctViewModelProvider.SPCTViewModel()) {
             System.out.println(spctViewModel.getMaSPCT());
         }
     }
