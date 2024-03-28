@@ -11,6 +11,9 @@ repositories {
 
 dependencies {
 
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+
     implementation("com.toedter:jcalendar:1.4")
 
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.3.jre17")
@@ -31,4 +34,8 @@ java {
 
 application {
     mainClass = "org.project1.nhom8.Main"
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }

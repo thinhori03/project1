@@ -4,6 +4,14 @@
  */
 package org.project1.nhom8.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.project1.nhom8.util.data.DataField;
+import org.project1.nhom8.util.data.DataTable;
+
 /**
  *
  * @author Admin
@@ -13,7 +21,17 @@ package org.project1.nhom8.model;
  *     TENMAU NVARCHAR(100) unique
  * )
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@DataTable(name = "MAU_SAC")
 public class MauSacModel {
+
+    @DataField(name = "MAMAU")
     private int id_Mamau;
+
+    @DataField(name = "TENMAU")
     private String tenmau;
 }

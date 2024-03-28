@@ -30,12 +30,12 @@ public class SanPhamService_CT {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPhamChiTietModel sp = new SanPhamChiTietModel(
-                        rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getFloat(7)
-               );
-                listsp.add(sp);
-            }
+//            while (rs.next()) {
+//                SanPhamChiTietModel sp = new SanPhamChiTietModel(
+//                        rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getFloat(7)
+//               );
+//                listsp.add(sp);
+//            }
             return listsp;
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,12 +96,12 @@ public class SanPhamService_CT {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + ten + "%");
             rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPhamChiTietModel sp = new SanPhamChiTietModel(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
-                );
-                listsp.add(sp);
-            }
+//            while (rs.next()) {
+//                SanPhamChiTietModel sp = new SanPhamChiTietModel(
+//                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
+//                );
+//                listsp.add(sp);
+//            }
             rs.close();
             ps.close();
         } catch (Exception e) {
@@ -120,12 +120,12 @@ public class SanPhamService_CT {
             ps = con.prepareStatement(sql);
             ps.setInt(1, ma);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPhamChiTietModel sp = new SanPhamChiTietModel(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
-                );
-                listkm.add(sp);
-            }
+//            while (rs.next()) {
+//                SanPhamChiTietModel sp = new SanPhamChiTietModel(
+//                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getString(6), rs.getFloat(7)
+//                );
+//                listkm.add(sp);
+//            }
             rs.close();
             ps.close();
         } catch (Exception e) {

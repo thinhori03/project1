@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.project1.nhm8.TestGia" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-28T08:11:57" hostname="fedora" time="0.14">
+  <properties/>
+  <testcase name="addGia()" classname="org.project1.nhm8.TestGia" time="0.14"/>
+  <system-out><![CDATA[
+
+
+ UPDATE LICH_SU_GIA  SET MALSG = ? , MASPCT = ? , GIA = ? , NGAYUPDATE = ? WHERE MALSG = ?
+
+
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

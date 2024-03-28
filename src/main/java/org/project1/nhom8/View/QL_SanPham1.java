@@ -37,7 +37,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         model = (DefaultTableModel) Tbl_SanPham.getModel();
         model.setRowCount(0);
         for (SanPhamChiTietModel sp : list) {
-            model.addRow(sp.toDataRow());
+//            model.addRow(sp.toDataRow());
         }
     }
 

@@ -30,7 +30,7 @@ public class Mau_Service {
                 return null;
             }
             rs.next();
-            MauSacModel ms = new MauSacModel(rs.getInt(1),rs.getString(2));
+            MauSacModel ms = null; // new MauSacModel(rs.getInt(1),rs.getString(2));
             return ms;
         } catch (Exception e) {
             e.printStackTrace();

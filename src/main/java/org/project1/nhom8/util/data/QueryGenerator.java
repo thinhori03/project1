@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 public class QueryGenerator<TTable, TId> {
 
     private final String table_namw;
-    
+
     private final List<String> fields;
 
     private final List<Field> fieldRef;
-    
+
     private final Class<TTable> table;
 
     private final Field idField;
@@ -121,10 +121,9 @@ public class QueryGenerator<TTable, TId> {
         sb.append(" ( ");
 
         for (int i = 0; i < this.fields.size() - 1; ++i) {
-            if (this.fieldRef.get(i).isAnnotationPresent(DataGenerated.class)) {
-                continue;
+            if (!this.fieldRef.get(i).isAnnotationPresent(DataGenerated.class)) {
+                sb.append(this.fields.get(i) + ", ");
             }
-            sb.append(this.fields.get(i) + ", ");
         }
 
         sb.append(this.fields.get(this.fields.size() - 1));
@@ -165,7 +164,7 @@ public class QueryGenerator<TTable, TId> {
 
         sb.append(" WHERE " + idName.name() + " = ?");
 
-        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
+        System.out.println("\n\n\n" + sb + "\n\n\n");
         return sb.toString();
     }
 
@@ -184,7 +183,7 @@ public class QueryGenerator<TTable, TId> {
 
         }
 
-        System.out.println("\n\n\n" + sb.toString() + "\n\n\n");
+        System.out.println("\n\n\n" + sb + "\n\n\n");
 
         return sb.toString();
     }
@@ -232,16 +231,25 @@ public class QueryGenerator<TTable, TId> {
 
     public TTable executeInsert(Connection connection, TTable obj) {
 
+        // take fields that not have @DataGenerated
+        List<Field> insertedFields = this.fieldRef
+                .stream().filter(o -> !o.isAnnotationPresent(DataGenerated.class))
+                .toList();
+
         try {
             PreparedStatement preStat = connection.prepareStatement(
                     this.generateInsertQuery()
             );
 
-            for (int i = 0; i < this.fieldRef.size(); ++i) {
-                this.fieldRef.get(i).setAccessible(true);
+            for (int i = 0; i < insertedFields.size(); ++i) {
 
-                preStat.setObject(i + 1,
-                        this.fieldRef.get(i).get(obj));
+                if (!insertedFields.get(i).isAnnotationPresent(DataGenerated.class)) {
+
+                    insertedFields.get(i).setAccessible(true);
+
+                    preStat.setObject(i + 1,
+                            insertedFields.get(i).get(obj));
+                }
             }
 
             if (preStat.executeUpdate() > 0) {
@@ -309,12 +317,39 @@ public class QueryGenerator<TTable, TId> {
         return null;
     }
 
-    public Long executeCountAll(Connection connection) {
+    public List<TTable> executeCustomSelectAll(Connection connection, String afterSelect, Object... args) {
+        String query = this.generateSelectAllQuery() + "\n" + afterSelect;
 
-        String query = new StringBuilder("SELECT")
-                .append("\tcoount(*) AS countAll").append("FROM ")
-                .append(this.table.getAnnotation(DataTable.class).name())
-                .toString();
+        List<TTable> ret = new ArrayList<>();
+
+        ResultSet resultSet = null;
+
+        try {
+
+            resultSet = connection.prepareStatement(
+                    query
+            ).executeQuery();
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    ret.add(this.map(resultSet));
+                }
+            }
+
+            return ret;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    public Integer executeCountAll(Connection connection) {
+
+        String query = "SELECT" +
+                "\t count(*) AS countAll" + "\nFROM " +
+                this.table.getAnnotation(DataTable.class).name();
 
         ResultSet resultSet = null;
 
@@ -322,14 +357,14 @@ public class QueryGenerator<TTable, TId> {
             resultSet = connection.prepareStatement(query)
                     .executeQuery();
 
-            if (resultSet.isBeforeFirst()) {
-                return resultSet.getLong("countAll");
+            if (resultSet.next()) {
+                return resultSet.getInt("countAll");
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return -1L;
+        return -1;
     }
 }

@@ -37,19 +37,19 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     }
 
     void fillTbaleSanPham(List<SanPhamModel> list) {
-        model = (DefaultTableModel) Tbl_SanPham.getModel();
-        model.setRowCount(0);
-        for (SanPhamModel gia : list) {
-            model.addRow(gia.toDataRow());
-        }
+//        model = (DefaultTableModel) Tbl_SanPham.getModel();
+//        model.setRowCount(0);
+//        for (SanPhamModel gia : list) {
+//            model.addRow(gia.toDataRow());
+//        }
     }
 
     void FillTableSanPham_CT(List<SanPhamChiTietModel> list) {
-        model = (DefaultTableModel) tbl_SanPham_CT.getModel();
-        model.setRowCount(0);
-        for (SanPhamChiTietModel sanPham : list) {
-            model.addRow(sanPham.toDataRow());
-        }
+//        model = (DefaultTableModel) tbl_SanPham_CT.getModel();
+//        model.setRowCount(0);
+//        for (SanPhamChiTietModel sanPham : list) {
+//            model.addRow(sanPham.toDataRow());
+//        }
     }
 
     public void ClearFrom_SP() {
@@ -98,9 +98,9 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         sp.setMaSP(Integer.parseInt(txt_MaSP.getText()));
 //        sp.setTen(txt_TenSP.getText());
         sp.setSoluong(Integer.parseInt(txt_SoLuong.getText()));
-        sp.setSize(ss.getSize(cbo_Size.getSelectedItem().toString()));
-        sp.setMasac(ms.getMaMau(cbo_Mau_Sac.getSelectedItem().toString()));
-        
+//        sp.setSize(ss.getSize(cbo_Size.getSelectedItem().toString()));
+//        sp.setMasac(ms.getMaMau(cbo_Mau_Sac.getSelectedItem().toString()));
+//
 //        sp.setGia(Float.parseFloat(txt_Gia.getText()));
         return sp;
     }
@@ -108,11 +108,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     SanPhamModel readFrom_SP() {
         SanPhamModel sp = new SanPhamModel();
         sp.setTensp(txt_Ten.getText());
-        if (rd_Dangban.isSelected()) {
-            sp.setTrangthai("Đang bán");
-        } else if (rd_Dungban.isSelected()) {
-            sp.setTrangthai("Dừng bán");
-        }
+//        if (rd_Dangban.isSelected()) {
+//            sp.setTrangthai("Đang bán");
+//        } else if (rd_Dungban.isSelected()) {
+//            sp.setTrangthai("Dừng bán");
+//        }
         return sp;
     }
 

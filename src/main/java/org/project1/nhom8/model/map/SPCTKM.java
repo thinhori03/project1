@@ -7,17 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * SPCT : SẢN PHẨM CHI TIẾT
- * LSG: lịch sử giá
+ * SPCT: sản phẩm chi tiết
+ * KM: khuyến mại
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @Builder
-public class SanPhamChiTietLichSuGia {
+public class SPCTKM {
 
     private int maSPCT;
 
-    private int maLSG;
+
+    private String maKM;
 }
