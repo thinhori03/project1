@@ -24,7 +24,7 @@ public class SPCTViewModel {
     private Integer soLuong;
 
     @DataHeader(name = "size")
-    private Integer size;
+    private String size;
 
     @DataHeader(name = "màu sắc")
     private String mauSac;
