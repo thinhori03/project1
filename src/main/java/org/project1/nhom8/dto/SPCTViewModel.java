@@ -14,7 +14,7 @@ import org.project1.nhom8.util.data.visual.DataHeader;
 @Builder
 public class SPCTViewModel {
 
-    @DataHeader(name = "mã sản phẩm chi tiết")
+    @DataHeader(name = "mã sản phẩm")
     private Integer maSPCT;
 
     @DataHeader(name = "tên sản phẩm")

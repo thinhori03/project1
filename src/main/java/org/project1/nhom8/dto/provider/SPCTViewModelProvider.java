@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.MauSacRepository;
 import org.project1.nhom8.repository.SPCTRepository;
@@ -59,15 +60,20 @@ public class SPCTViewModelProvider {
         List<SPCTModel> spctModels = spctRespository
                 .findAll();
 
+        SanPhamModel sp = new SanPhamModel();
+
         for (SPCTModel spctModel : spctModels) {
             new SPCTViewModel();
+
+            sp = sanPhamRepository.findById(spctModel.getMaSPCT());
+
             result.add(SPCTViewModel.builder()
                     .maSPCT(spctModel.getMaSPCT())
-                    .tenSP(sanPhamRepository.findById(spctModel.getMaSP()).getTensp())
-                    .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSP()).getGia())
+                    .tenSP(sp.getTensp())
+                    .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSPCT()).getGia())
                     .size(sizeRepository.findById(spctModel.getMasize()).getTensize())
                     .mauSac(mauSacRepository.findById(spctModel.getMaMauSac()).getTenmau())
-                    .trangThai(spctModel.getTrangThai())
+                    .trangThai(sp.getTrangThai())
                     .soLuong(spctModel.getSoluong())
                     .build());
         }

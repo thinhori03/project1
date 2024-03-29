@@ -48,7 +48,7 @@ public class SanPham_Service {
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-//            ps.setString(1, sp.getTensp());
+ps.setString(1, sp.getTensp());
 //            ps.setString(2, sp.getTrangthai());
             kq = ps.executeUpdate();
         } catch (Exception e) {

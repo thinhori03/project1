@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 @AllArgsConstructor
@@ -20,4 +19,7 @@ public class SanPhamViewModel {
 
     @DataHeader(name = "mã sản phẩm")
     private String tenSanPham;
+    
+    @DataHeader(name = "trạng thái")
+    private String trangThai;
 }

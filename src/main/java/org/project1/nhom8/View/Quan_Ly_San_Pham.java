@@ -5,9 +5,12 @@
 package org.project1.nhom8.View;
 
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.Optional;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import org.project1.nhom8.dto.SPCTViewModel;
+import org.project1.nhom8.dto.SanPhamViewModel;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.dto.provider.SanPhamViewModelProvider;
 import org.project1.nhom8.model.SanPhamModel;
@@ -77,6 +80,17 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     public void loadTableSPCT() {
         tbl_SanPham_CT.setModel(spctViewModelProvider.toTableModel());
+
+        cbo_Size.setModel(new DefaultComboBoxModel<>(
+                sizeRepository.findAll().stream()
+                        .map(o -> o.getTensize())
+                        .toArray(String[]::new)
+        ));
+        cbo_Mau_Sac.setModel(new DefaultComboBoxModel<>(
+                mauSacRepository.findAll().stream()
+                        .map(o -> o.getTenmau())
+                        .toArray(String[]::new)
+        ));
     }
 
     public void loadTableSP() {
@@ -118,24 +132,30 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     public void ShowFrom_SPCT() {
         
         index = tbl_SanPham_CT.getSelectedRow();
-        txt_MaSP.setText(tbl_SanPham_CT.getValueAt(index, 0).toString());
-        txt_TenSP.setText(tbl_SanPham_CT.getValueAt(index, 1).toString());
-        txt_SoLuong.setText(tbl_SanPham_CT.getValueAt(index, 2).toString());
-        cbo_Size.setSelectedItem(tbl_SanPham_CT.getValueAt(index, 3).toString());
-        cbo_Mau_Sac.setSelectedItem(tbl_SanPham_CT.getValueAt(index, 4).toString());
 
-        txt_Gia.setText(tbl_SanPham_CT.getValueAt(index, 6).toString());
+        SPCTViewModel spctViewModel = spctViewModelProvider.SPCTViewModel()
+                        .get(index);
+
+        txt_MaSP.setText(spctViewModel.getMaSPCT() + "");
+        txt_TenSP.setText(spctViewModel.getTenSP());
+        txt_SoLuong.setText(spctViewModel.getSoLuong() + "");
+        cbo_Size.setSelectedItem(spctViewModel.getSize());
+        cbo_Mau_Sac.setSelectedItem(spctViewModel.getMauSac());
+        txt_Gia.setText(spctViewModel.getGia() + "");
     }
 
     public void ShowFrom_SP() {
-        String trangthai;
         index = Tbl_SanPham.getSelectedRow();
-        txt_Ma.setText(Tbl_SanPham.getValueAt(index, 0).toString());
-        txt_Ten.setText(Tbl_SanPham.getValueAt(index, 1).toString());
-        trangthai = (String) Tbl_SanPham.getValueAt(index, 2).toString();
-        if (trangthai.equalsIgnoreCase("Đang bán")) {
+
+        SanPhamViewModel spvm = sanPhamViewModelProvider.getSanPhamViewModel()
+                .get(index);
+
+        txt_Ma.setText(spvm.getMaSanPham() + "");
+        txt_Ten.setText(spvm.getTenSanPham());
+
+        if ((spvm.getTrangThai().compareTo("Đang bán") == 0)) {
             rd_Dangban.setSelected(true);
-        } else if (trangthai.equalsIgnoreCase("Dừng bán")) {
+        } else {
             rd_Dungban.setSelected(true);
         }
     }
@@ -154,12 +174,9 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     SanPhamModel readFrom_SP() {
         SanPhamModel sp = new SanPhamModel();
-        sp.setTensp(txt_Ten.getText());
-//        if (rd_Dangban.isSelected()) {
-//            sp.setTrangthai("Đang bán");
-//        } else if (rd_Dungban.isSelected()) {
-//            sp.setTrangthai("Dừng bán");
-//        }
+        sp.setTensp(txt_Ten.getText().trim());
+        sp.setTrangThai(rd_Dangban.isSelected() ? "Đang bán"
+                : "Dừng bán");
         return sp;
     }
 
@@ -440,6 +457,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         jButton2.setText("Sửa SP");
 
         jLabel12.setText("Mã sản phẩm:");
+
+        txt_MaSP.setEditable(false);
 
         jButton3.setText("Làm mới");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -726,9 +745,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        if (sp.ADD_SP(this.readFrom_SP()) > 0) {
+        if (Optional.ofNullable(sanPhamRepository.add(this.readFrom_SP()))
+                .isPresent()) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
-            this.fillTbaleSanPham(sp.getAll());
+            // this.fillTbaleSanPham(sp.getAll());
+            loadTableSP();
             ClearFrom_SP();
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -765,6 +786,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         clearFrom();
+        loadTableSPCT();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cbo_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_SizeActionPerformed

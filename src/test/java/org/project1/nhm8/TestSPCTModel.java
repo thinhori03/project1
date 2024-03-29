@@ -16,6 +16,7 @@ public class TestSPCTModel {
         this.spctRepository = new SPCTRepository();
     }
 
+    @Test
     public void getrAll() {
 
         System.out.println(this.spctRepository.findById(1).getMaSPCT());

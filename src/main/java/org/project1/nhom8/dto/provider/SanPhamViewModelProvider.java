@@ -1,6 +1,5 @@
 package org.project1.nhom8.dto.provider;
 
-import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.SanPhamViewModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.repository.SanPhamRepository;
@@ -30,6 +29,7 @@ public class SanPhamViewModelProvider {
             sanPhamViewModels.add(SanPhamViewModel.builder()
                     .maSanPham(spm.getMasp())
                     .tenSanPham(spm.getTensp())
+                            .trangThai(spm.getTrangThai())
                     .build());
         }
         return sanPhamViewModels;

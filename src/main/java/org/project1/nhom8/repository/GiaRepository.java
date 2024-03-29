@@ -18,12 +18,14 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
     public GiaModel getgiaMoiNhat(Integer maspct) {
         try {
             PreparedStatement preparedStatement = getConnection()
-                    .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
+                    .prepareStatement(getQueryGenerator()
+                            .generateSelectAllQuery() +
                             """
                                 WHERE MASPCT = ?
                                 ORDER BY NGAYUPDATE DESC
                             """);
             preparedStatement.setInt(1, maspct);
+
             ResultSet resultSet = preparedStatement.executeQuery();;
 
             if (resultSet.next()) {
@@ -52,9 +54,11 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
 
             if (resultSet.isBeforeFirst()) {
                 while (resultSet.next()) {
-                gias.add(getQueryGenerator().map(resultSet));
+                    gias.add(getQueryGenerator().map(resultSet));
                 }
             }
+
+            return gias;
 
         } catch(SQLException ex) {
             ex.printStackTrace();

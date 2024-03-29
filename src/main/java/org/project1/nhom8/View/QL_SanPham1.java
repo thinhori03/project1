@@ -114,7 +114,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
         spct.setSoluong(Integer.parseInt(txt_Soluong.getText().trim()));
         spct.setMasize(size.getId_Masize());
-        spct.setTrangThai(rd_Dangban.isSelected() ? "Đang bán" : "Dừng bán");
+        // spct.setTrangThai(rd_Dangban.isSelected() ? "Đang bán" : "Dừng bán");
         spct.setMaMauSac(mauSac.getId_Mamau());
 
 //        sp.setTen(txt_Ten.getText());

@@ -39,5 +39,7 @@ public class SanPhamModel {
     
     @DataField(name = "TENSP")
     private String tensp;
-//   private  String trangthai;
+
+    @DataField(name = "TRANGTHAI")
+    private String trangThai;
 }

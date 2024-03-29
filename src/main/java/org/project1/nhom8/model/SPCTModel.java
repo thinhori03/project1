@@ -52,6 +52,4 @@ public class SPCTModel {
     @DataField(name = "MASP")
     private int maSP;
 
-    @DataField(name = "TRANGTHAI")
-    private String trangThai;
 }
