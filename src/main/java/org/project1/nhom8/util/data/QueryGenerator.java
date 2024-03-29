@@ -4,13 +4,11 @@
  */
 package org.project1.nhom8.util.data;
 
-import java.lang.reflect.Executable;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -162,13 +160,13 @@ public class QueryGenerator<TTable, TId> {
             sb.append(updatedFields.get(i) + " = ?");
 
             if (i < updatedFields.size() - 1) {
-                sb.append(" , ");
+                sb.append(" ,  \n\t");
             }
         }
 
         DataField idName = this.idField.getAnnotation(DataField.class);
 
-        sb.append(" WHERE " + idName.name() + " = ?");
+        sb.append(" \nWHERE " + idName.name() + " = ?");
 
         System.out.println("\n\n\n" + sb + "\n\n\n");
         return sb.toString();

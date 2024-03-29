@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.project1.nhm8.TestSPCTModel" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-29T10:46:38" hostname="fedora" time="0.014">
+  <properties/>
+  <testcase name="test update SPCT" classname="org.project1.nhm8.TestSPCTModel" time="0.014"/>
+  <system-out><![CDATA[
+
+
+ UPDATE SAN_PHAM_CHI_TIET  SET SOLUONG = ? ,  
+	MASIZE = ? ,  
+	MAMAU = ? ,  
+	MASP = ? 
+WHERE MASPCT = ?
+
+
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.project1.nhm8.TestVoucherModel" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-29T10:46:38" hostname="fedora" time="0.046">
+  <properties/>
+  <testcase name="insert" classname="org.project1.nhm8.TestVoucherModel" time="0.008"/>
+  <testcase name="insertVoucher()" classname="org.project1.nhm8.TestVoucherModel" time="0.003"/>
+  <system-out><![CDATA[
+
+
+ INSERT INTO VOUCHER ( MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, ngay_tao, TRANG_THAI ) 
+	VALUES ( ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ,  ?  ) 
+
+
+
+
+6
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.project1.nhm8.GiaModel" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-29T09:13:06" hostname="fedora" time="0.077">
+<testsuite name="org.project1.nhm8.GiaModel" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-03-29T10:46:37" hostname="fedora" time="0.383">
   <properties/>
-  <testcase name="addGia()" classname="org.project1.nhm8.GiaModel" time="0.077"/>
+  <testcase name="addGia()" classname="org.project1.nhm8.GiaModel" time="0.132"/>
+  <testcase name="getAll()" classname="org.project1.nhm8.GiaModel" time="0.007"/>
+  <testcase name="lich su gia" classname="org.project1.nhm8.GiaModel" time="0.008"/>
+  <testcase name="gia latest price" classname="org.project1.nhm8.GiaModel" time="0.006"/>
   <system-out><![CDATA[
 
 
- UPDATE LICH_SU_GIA  SET MASPCT = ? , GIA = ? , NGAYUPDATE = ? WHERE MALSG = ?
+ UPDATE LICH_SU_GIA  SET MASPCT = ? ,  
+	GIA = ? ,  
+	NGAYUPDATE = ? 
+WHERE MALSG = ?
 
 
 
+
+
+
+ SELECT 
+	LICH_SU_GIA.MALSG,
+	LICH_SU_GIA.MASPCT,
+	LICH_SU_GIA.GIA,
+	LICH_SU_GIA.NGAYUPDATE
+ FROM LICH_SU_GIA
+
+
+
+1
+2
+3
+4
+5
+6
+
+
+
+ SELECT 
+	LICH_SU_GIA.MALSG,
+	LICH_SU_GIA.MASPCT,
+	LICH_SU_GIA.GIA,
+	LICH_SU_GIA.NGAYUPDATE
+ FROM LICH_SU_GIA
+
+
+
+150000.0
+
+
+
+ SELECT 
+	LICH_SU_GIA.MALSG,
+	LICH_SU_GIA.MASPCT,
+	LICH_SU_GIA.GIA,
+	LICH_SU_GIA.NGAYUPDATE
+ FROM LICH_SU_GIA
+
+
+
+150000.0
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.project1.nhm8.TestHDModel" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-29T10:46:38" hostname="fedora" time="0.015">
+  <properties/>
+  <testcase name="getAllHDCT()" classname="org.project1.nhm8.TestHDModel" time="0.015"/>
+  <system-out><![CDATA[
+
+
+ SELECT 
+	HOA_DON_CHI_TIET.MAHDCT,
+	HOA_DON_CHI_TIET.MAHD,
+	HOA_DON_CHI_TIET.MASPCT,
+	HOA_DON_CHI_TIET.SOLUONG,
+	HOA_DON_CHI_TIET.MALSG
+ FROM HOA_DON_CHI_TIET
+
+
+
+1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
