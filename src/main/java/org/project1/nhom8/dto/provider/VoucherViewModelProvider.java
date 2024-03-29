@@ -1,57 +1,52 @@
 package org.project1.nhom8.dto.provider;
 
-import org.project1.nhom8.dto.LSGViewModel;
-import org.project1.nhom8.model.GiaModel;
-import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.dto.VoucherViewModel;
+import org.project1.nhom8.model.VoucherModel;
+import org.project1.nhom8.repository.VoucherRepository;
+import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class LSGViewModelProvider {
+public class VoucherViewModelProvider {
 
-    private final GiaRepository giaRepository;
+    private final VoucherRepository voucherRepository;
 
-    public LSGViewModelProvider() {
-        this.giaRepository = new GiaRepository();
+    public VoucherViewModelProvider() {
+        this.voucherRepository = new VoucherRepository();
     }
 
-    public List<LSGViewModel> getLSGViewModels(Integer maSPCT) {
-        List<LSGViewModel> result = new ArrayList<>();
+    public List<VoucherViewModel> getVoucherViewModel() {
+        List<VoucherViewModel> result = new ArrayList<>();
 
-        List<GiaModel> giaModels = giaRepository.getLichSugia(maSPCT);
+        List<VoucherModel> voucherModels = voucherRepository.findAll();
 
-        /**
-         * return empty list if cannot find LSG
-         */
-        if (Optional.ofNullable(giaModels).isEmpty()) {
-            return result;
-        }
-
-        for (GiaModel gia : giaModels) {
-            result.add(LSGViewModel.builder()
-                    .gia(gia.getGia())
-                    .ngayCapNhat(gia.getNgayCapNhat())
+        for (VoucherModel vvd : voucherModels) {
+            result.add(VoucherViewModel.builder()
+                    .maVoucher(vvd.getMaVoucher())
+                    .gia(vvd.getGiaTri())
+                    .dieuKien(vvd.getDiauKien())
+                    .ngayTao(vvd.getNgayTao())
+                    .ngayBatDau(vvd.getNgayBatDau())
+                    .ngayKetThuc(vvd.getNgayKetThuc())
+                    .trangThai(vvd.getTrangThai())
                     .build());
         }
 
         return result;
     }
 
-    public TableModel toTableModel(Integer maSPCT) {
+    public DefaultTableModel toTableMode() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-
-        DefaultTableModel defaultTableModel =new DefaultTableModel();
-
-        List<Field> fields = Arrays.asList(LSGViewModel.class.getDeclaredFields())
+        List<Field> fields = Arrays.asList(VoucherViewModel.class.getDeclaredFields())
                 .stream()
                 .filter(o -> o.isAnnotationPresent(DataHeader.class))
                 .collect(Collectors.toList());
@@ -66,17 +61,17 @@ public class LSGViewModelProvider {
 
         List<String> rowData = new ArrayList<>();
 
-        for (LSGViewModel gia : this.getLSGViewModels(maSPCT)) {
+        for (VoucherViewModel gia : this.getVoucherViewModel()) {
             rowData = new ArrayList<>();
             try {
                 for (Field j : fields) {
                     j.setAccessible(true);
-                    if (j.getType().equals(Date.class)) {
+                    if (j.getType().equals(Date.class)
+                            && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(gia)));
                     } else {
                         rowData.add(j.get(gia).toString());
                     }
-
                 }
             } catch (IllegalAccessException ex) {
                 ex.printStackTrace();

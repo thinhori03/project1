@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.project1.nhm8.util.TestDefaultConverter" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-29T00:05:27" hostname="fedora" time="0.001">
-  <properties/>
-  <testcase name="test default converter" classname="org.project1.nhm8.util.TestDefaultConverter" time="0.001"/>
-  <system-out><![CDATA[29-03-2024 07:05
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -15,33 +15,9 @@ import java.util.List;
  *
  * @author ngtnthori03
  */
-public class HoaDonRepository {
-    
-    private Connection connection;
-
-    private QueryGenerator<HoaDonModel, Integer> queryGenerator;
-
+public class HoaDonRepository extends GeneralRepository<HoaDonModel, String> {
 
     public HoaDonRepository() {
-
-        this.connection = DBConnect.getConnection();
-
-        this.queryGenerator = new QueryGenerator<>(HoaDonModel.class);
-    }
-
-    public List<HoaDonModel> getAll() {
-        return this.queryGenerator.executeFindAll(connection);
-    }
-
-    public boolean add(HoaDonModel hdctm) {
-        return this.queryGenerator.executeInsert(connection, hdctm) != null;
-    }
-
-    public boolean update(HoaDonModel hdctm) {
-        return this.queryGenerator.executeUpdate(connection, hdctm);
-    }
-
-    public HoaDonModel findById( int id) {
-        return this.queryGenerator.executeFindById(connection, id);
+        super(HoaDonModel.class);
     }
 }

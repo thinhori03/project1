@@ -42,7 +42,7 @@ public class HoaDonModel {
 
     @DataId
     @DataField(name = "MAHD")
-    private int maHoaDon;
+    private String maHoaDon;
 
     @DataField(name = "MAKH")
     private int maKH;
@@ -58,7 +58,6 @@ public class HoaDonModel {
 
     @DataField(name = "MAV")
     private String maVoucher;
-
 
     @DataField(name = "NGAYTAO")
     private Date ngayTao;

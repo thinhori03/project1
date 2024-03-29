@@ -61,6 +61,6 @@ public class GiaModel {
     @Test
     @DisplayName("gia latest price")
     public void latestPrice() {
-        System.out.println(giaRepository.getgiaMoiNhat(1).getGia());
+        System.out.println(giaRepository.getgiaMoiNhat(2).getGia());
     }
 }

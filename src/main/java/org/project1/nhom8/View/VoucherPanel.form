@@ -149,10 +149,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="add voucher"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="tai lai"/>
+        <Property name="text" type="java.lang.String" value="reset"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="startDate">

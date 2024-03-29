@@ -1,12 +1,16 @@
 package org.project1.nhom8.View;
 
+import org.project1.nhom8.dto.provider.VoucherViewModelProvider;
 import org.project1.nhom8.model.VoucherModel;
+import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.util.TrangThaiVoucher;
 import org.project1.nhom8.util.swing.ErrLabel;
 import org.project1.nhom8.util.swing.PopupNotification;
 import org.project1.nhom8.util.swing.ValidatedTextField;
 
 import java.util.Date;
+import java.util.Optional;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,13 +23,18 @@ public class VoucherPanel extends javax.swing.JPanel {
     private PopupNotification condPricePopup;
     
     private VoucherModel voucherModel;
-    
+
+    private VoucherViewModelProvider voucherViewModelProvider;
+
+    private VoucherRepository voucherRepository;
     
     /**
      * Creates new form VoucherPanel
      */
     public VoucherPanel() {
         initComponents();
+
+        this.voucherViewModelProvider = new VoucherViewModelProvider();
         
         validateCondPrice  = new ValidatedTextField(
                 condPrice, "^[0-9]?[.]?\\d+$"
@@ -40,6 +49,22 @@ public class VoucherPanel extends javax.swing.JPanel {
         
         condPricePopup = new PopupNotification(price, priceErr
                 , new ErrLabel("gia tri phai la so lon hon 0"));
+
+        this.voucherRepository = new VoucherRepository();
+
+        loadTable();
+        clearForm();
+    }
+
+    public void loadTable() {
+        this.Voucherview.setModel(voucherViewModelProvider.toTableMode());
+    }
+
+    public void clearForm() {
+        price.setText("");;
+        condPrice.setText("");
+        startDate.setDate(new Date());
+        endDate.setDate(new Date());
     }
     
     /**
@@ -47,7 +72,9 @@ public class VoucherPanel extends javax.swing.JPanel {
      */
     public void map() {
         this.voucherModel = new VoucherModel();
-        
+
+        voucherModel.setMaVoucher("V" + voucherRepository.count()+1);
+
         voucherModel.setDiauKien(Float.parseFloat(condPrice.getText().trim()));
 
         voucherModel.setGiaTri(Float.parseFloat(price.getText().trim()));
@@ -105,8 +132,13 @@ public class VoucherPanel extends javax.swing.JPanel {
         jLabel5.setText("dieu kien");
 
         jButton5.setText("add voucher");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("tai lai");
+        jButton6.setText("reset");
 
         jLabel2.setText("thời gian kết thúc");
 
@@ -190,6 +222,22 @@ public class VoucherPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        map();
+        
+        if (Optional.ofNullable(voucherRepository
+                .add(voucherModel)).isPresent()) {
+            JOptionPane.showMessageDialog(this, "tham thanh cong");
+            clearForm();
+            loadTable();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "tham that bai");
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

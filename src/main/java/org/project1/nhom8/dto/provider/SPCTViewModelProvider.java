@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.project1.nhom8.dto.SPCTViewModel;
+import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.repository.GiaRepository;
@@ -20,6 +21,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -61,14 +63,18 @@ public class SPCTViewModelProvider {
                 .findAll();
 
         SanPhamModel sp = new SanPhamModel();
+        GiaModel gia = new GiaModel();
 
         for (SPCTModel spctModel : spctModels) {
             new SPCTViewModel();
 
             sp = sanPhamRepository.findById(spctModel.getMaSPCT());
+            gia = giaRepository.getgiaMoiNhat(spctModel.getMaSPCT());
+
 
             result.add(SPCTViewModel.builder()
                     .maSPCT(spctModel.getMaSPCT())
+                    .maSP(spctModel.getMaSP())
                     .tenSP(sp.getTensp())
                     .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSPCT()).getGia())
                     .size(sizeRepository.findById(spctModel.getMasize()).getTensize())

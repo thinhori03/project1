@@ -11,10 +11,13 @@ import javax.swing.table.DefaultTableModel;
 
 import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.SanPhamViewModel;
+import org.project1.nhom8.dto.provider.LSGViewModelProvider;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.dto.provider.SanPhamViewModelProvider;
+import org.project1.nhom8.model.MauSacModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.model.SizeModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.MauSacRepository;
 import org.project1.nhom8.repository.SPCTRepository;
@@ -52,6 +55,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     private SPCTViewModelProvider spctViewModelProvider;
 
+    private LSGViewModelProvider lsgViewModelProvider;
+
     public Quan_Ly_San_Pham() {
         initComponents();
 
@@ -67,7 +72,9 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
         this.mauSacRepository = new MauSacRepository();
 
-        spctViewModelProvider = new SPCTViewModelProvider();
+        this.spctViewModelProvider = new SPCTViewModelProvider();
+
+        this.lsgViewModelProvider = new LSGViewModelProvider();
 
         cbo_Size.setSelectedIndex(-1);
         cbo_Mau_Sac.setSelectedIndex(-1);
@@ -91,6 +98,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                         .map(o -> o.getTenmau())
                         .toArray(String[]::new)
         ));
+
+        tbl_LSG.setModel(lsgViewModelProvider.toTableModel(-1));
     }
 
     public void loadTableSP() {
@@ -142,6 +151,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         cbo_Size.setSelectedItem(spctViewModel.getSize());
         cbo_Mau_Sac.setSelectedItem(spctViewModel.getMauSac());
         txt_Gia.setText(spctViewModel.getGia() + "");
+
+        tbl_LSG.setModel(lsgViewModelProvider.toTableModel(spctViewModel.getMaSPCT()));
     }
 
     public void ShowFrom_SP() {
@@ -161,15 +172,25 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     }
 
     SPCTModel readFrom() {
-        SPCTModel sp = new SPCTModel();
-        sp.setMaSP(Integer.parseInt(txt_MaSP.getText()));
-//        sp.setTen(txt_TenSP.getText());
-        sp.setSoluong(Integer.parseInt(txt_SoLuong.getText()));
-//        sp.setSize(ss.getSize(cbo_Size.getSelectedItem().toString()));
-//        sp.setMasac(ms.getMaMau(cbo_Mau_Sac.getSelectedItem().toString()));
-//
+
+        SPCTViewModel spctvm = spctViewModelProvider.SPCTViewModel().get(index);
+
+        SizeModel size = sizeRepository.findByTen(cbo_Size.getSelectedItem()
+                .toString());
+
+        MauSacModel mauSac =  mauSacRepository.findByTen(cbo_Size.getSelectedItem()
+                .toString());
+
+        SPCTModel spct = new SPCTModel();
+
+        spct.setMaSP(Integer.parseInt(txt_MaSP.getText().trim()));
+        spct.setSoluong(Integer.parseInt(txt_SoLuong.getText().trim()));
+        spct.setMasize(size.getId_Masize());
+        spct.setMaMauSac(mauSac.getId_Mamau());
+        spct.setSoluong(Integer.parseInt(txt_SoLuong.getText().trim()));
+//        spct.setMaSP();
 //        sp.setGia(Float.parseFloat(txt_Gia.getText()));
-        return sp;
+        return spct;
     }
 
     SanPhamModel readFrom_SP() {
@@ -235,6 +256,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         id_Ma_Tk = new javax.swing.JTextField();
         id_Ten_TK = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_LSG = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -688,15 +711,33 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sản phẩm chi tiết", jPanel1);
 
+        tbl_LSG.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tbl_LSG);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 702, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 901, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(412, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lịch sử thay đổi giá sản phẩm", jPanel3);
@@ -905,9 +946,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rd_Dangban;
     private javax.swing.JRadioButton rd_Dungban;
+    private javax.swing.JTable tbl_LSG;
     private javax.swing.JTable tbl_SanPham_CT;
     private javax.swing.JTextField txt_Gia;
     private javax.swing.JTextField txt_Ma;

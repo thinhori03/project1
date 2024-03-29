@@ -1,23 +1,10 @@
 package org.project1.nhom8.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-public class SPCTViewModel {
-
-    private Integer maSPCT;
-
+public class HDCTViewModel {
     @DataHeader(name = "mã sản phẩm")
-    private Integer maSP;
+    private Integer maSPCT;
 
     @DataHeader(name = "tên sản phẩm")
     private String tenSP;
@@ -30,9 +17,6 @@ public class SPCTViewModel {
 
     @DataHeader(name = "màu sắc")
     private String mauSac;
-
-    @DataHeader(name = "trạng thái")
-    private String trangThai;
 
     @DataHeader(name = "giá")
     private double gia;

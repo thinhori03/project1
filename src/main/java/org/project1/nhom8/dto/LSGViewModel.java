@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.project1.nhom8.util.data.convert.CurrntCyFormat;
+import org.project1.nhom8.util.data.convert.ConcurrencyFormat;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 import java.util.Date;
@@ -18,7 +18,7 @@ import java.util.Date;
 public class LSGViewModel {
 
     @DataHeader(name = "giá")
-    @CurrntCyFormat
+    @ConcurrencyFormat
     private double gia;
 
     @DataHeader(name = "ngày cập nhật")
