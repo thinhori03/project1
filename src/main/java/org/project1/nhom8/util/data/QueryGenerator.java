@@ -150,13 +150,18 @@ public class QueryGenerator<TTable, TId> {
 
     public String generateUpdateQuery() {
 
+        List<String> updatedFields = this.fieldRef.stream()
+                .filter(o -> !o.isAnnotationPresent(DataId.class))
+                .map(o -> o.getAnnotation(DataField.class).name())
+                .collect(Collectors.toList());
+
         StringBuilder sb = new StringBuilder(" UPDATE " + table_namw + " ");
         sb.append(" SET ");
 
-        for (int i = 0; i < this.fields.size(); ++i) {
-            sb.append(this.fields.get(i) + " = ?");
+        for (int i = 0; i < updatedFields.size(); ++i) {
+            sb.append(updatedFields.get(i) + " = ?");
 
-            if (i < this.fields.size() - 1) {
+            if (i < updatedFields.size() - 1) {
                 sb.append(" , ");
             }
         }
@@ -267,6 +272,10 @@ public class QueryGenerator<TTable, TId> {
 
     public boolean executeUpdate(Connection connection, TTable object) {
 
+        List<Field> updatedFields = this.fieldRef.stream()
+                .filter(o -> !o.isAnnotationPresent(DataId.class))
+                .collect(Collectors.toList());
+
         try {
 
             PreparedStatement preStat = connection.prepareStatement(
@@ -274,14 +283,14 @@ public class QueryGenerator<TTable, TId> {
             );
 
             try {
-                for (int i = 0; i < this.fieldRef.size(); ++i) {
-                    this.fieldRef.get(i).setAccessible(true);
+                for (int i = 0; i < updatedFields.size(); ++i) {
+                    updatedFields.get(i).setAccessible(true);
 
-                    preStat.setObject(i + 1, this.fieldRef.get(i).get(object));
+                    preStat.setObject(i + 1, updatedFields.get(i).get(object));
                 }
 
                 this.idField.setAccessible(true);
-                preStat.setObject(this.fieldRef.size() + 1,
+                preStat.setObject(updatedFields.size() + 1,
                         this.idField.get(object));
             } catch (Exception e) {
                 e.printStackTrace();

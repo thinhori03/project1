@@ -63,14 +63,11 @@ public class SPCTViewModelProvider {
                 .findAll();
 
         SanPhamModel sp = new SanPhamModel();
-        GiaModel gia = new GiaModel();
 
         for (SPCTModel spctModel : spctModels) {
             new SPCTViewModel();
 
-            sp = sanPhamRepository.findById(spctModel.getMaSPCT());
-            gia = giaRepository.getgiaMoiNhat(spctModel.getMaSPCT());
-
+            sp = sanPhamRepository.findById(spctModel.getMaSP());
 
             result.add(SPCTViewModel.builder()
                     .maSPCT(spctModel.getMaSPCT())

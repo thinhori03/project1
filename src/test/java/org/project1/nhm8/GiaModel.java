@@ -30,8 +30,8 @@ public class GiaModel {
                 .builder()
                 .maLSG(giaRepository.count())
                 .ngayCapNhat(new Date())
-                .maSPCT(1)
-                .gia(1)
+                .maSPCT(5)
+                .gia(1000000000)
                 .build();
 
         Assertions.assertTrue(this.giaRepository.update(gia));
@@ -61,6 +61,6 @@ public class GiaModel {
     @Test
     @DisplayName("gia latest price")
     public void latestPrice() {
-        System.out.println(giaRepository.getgiaMoiNhat(2).getGia());
+        System.out.println(giaRepository.getgiaMoiNhat(4).getGia());
     }
 }

@@ -27,7 +27,7 @@ import org.project1.nhom8.util.data.DataTable;
 @Builder
 
 @DataTable(name = "HOA_DON_CHI_TIET")
-public class HoaDonChiTietModel {
+public class HDCTModel {
 
     @DataId
     @DataGenerated
@@ -35,16 +35,13 @@ public class HoaDonChiTietModel {
     private int maHDCT;
 
     @DataField(name = "MAHD")
-    private int maHoaDon;
+    private String maHoaDon;
 
     @DataField(name = "MASPCT")
-    private int SPCT;
+    private int maSPCT;
 
     @DataField(name = "SOLUONG")
     private int soLuong;
-
-    @DataField(name = "MAKM")
-    private int maKM;
 
     @DataField(name = "MALSG")
     private int maLSG;

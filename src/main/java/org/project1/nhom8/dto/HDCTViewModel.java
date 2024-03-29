@@ -1,7 +1,17 @@
 package org.project1.nhom8.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
 public class HDCTViewModel {
     @DataHeader(name = "mã sản phẩm")
     private Integer maSPCT;

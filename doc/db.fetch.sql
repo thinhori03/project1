@@ -1,4 +1,8 @@
-DROP DATABASE Du_An_Nhom_8
+
+use master
+go
+
+drop database Du_An_Nhom_8
 
 CREATE DATABASE Du_An_Nhom_8
 GO
@@ -72,7 +76,7 @@ CREATE TABLE KHACH_HANG
 
 CREATE TABLE SAN_PHAM_CHI_TIET
 (
-    MASPCT  INT PRIMARY KEY identity (1,1),
+    MASPCT  INT PRIMARY KEY,
     SOLUONG INT,
     MASIZE  int references SIZE (MASIZE),
     MAMAU   int references MAU_SAC (MAMAU),
@@ -160,10 +164,10 @@ values (N'Nguyễn Văn Tuấn', '0856790234', N'Nam', 'Tuannv23@gmail.com', '19
        (N' Minh', '0702202307', N'Nam', 'Minhdz@gmail.com', '2003-08-13', 'Minhdz2004', N'Hà Nội')
 
 
-insert into SAN_PHAM_CHI_TIET(SOLUONG, MASIZE, MAMAU, MASP)
-values (10, '1', '1', 1),
-       (20, '2', '2', 2),
-       (10, '3', '3', 3)
+insert into SAN_PHAM_CHI_TIET(MASPCT, SOLUONG, MASIZE, MAMAU, MASP)
+values ('1', 10, '1', '1', 1),
+       ('2', 20, '2', '2', 2),
+       ('3', 10, '3', '3', 3)
 
 insert into KHUYEN_MAI_COUPON_CT(MAKM, MASPCT)
 values ('KM1', 1),

@@ -64,7 +64,7 @@ public class HDViewModelProvider {
 
         List<String> rowData = new ArrayList<>();
 
-        for (VoucherViewModel gia : this.getVoucherViewModel()) {
+        for (HoaDonViewModel gia : this.getHoaDonViewModel()) {
             rowData = new ArrayList<>();
             try {
                 for (Field j : fields) {

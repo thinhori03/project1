@@ -36,7 +36,6 @@ import org.project1.nhom8.util.data.DataTable;
 public class SPCTModel {
 
     @DataId
-    @DataGenerated
     @DataField(name = "MASPCT")
     private int maSPCT;
 

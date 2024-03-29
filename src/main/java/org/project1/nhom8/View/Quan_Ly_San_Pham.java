@@ -4,6 +4,7 @@
  */
 package org.project1.nhom8.View;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.swing.*;
@@ -14,6 +15,7 @@ import org.project1.nhom8.dto.SanPhamViewModel;
 import org.project1.nhom8.dto.provider.LSGViewModelProvider;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.dto.provider.SanPhamViewModelProvider;
+import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.MauSacModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.model.SPCTModel;
@@ -40,6 +42,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     private SanPhamService_CT sps = new SanPhamService_CT();
     private DefaultTableModel model = new DefaultTableModel();
     private int index = -1;
+
+    /**
+     * mã của sản phẩm chi tiêt đang được chọn trên JTable
+     */
+    private int maSPCT;
 
     private SanPhamViewModelProvider sanPhamViewModelProvider;
 
@@ -93,6 +100,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                         .map(o -> o.getTensize())
                         .toArray(String[]::new)
         ));
+
         cbo_Mau_Sac.setModel(new DefaultComboBoxModel<>(
                 mauSacRepository.findAll().stream()
                         .map(o -> o.getTenmau())
@@ -139,13 +147,14 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     }
 
     public void ShowFrom_SPCT() {
-        
+
         index = tbl_SanPham_CT.getSelectedRow();
 
         SPCTViewModel spctViewModel = spctViewModelProvider.SPCTViewModel()
                         .get(index);
 
-        txt_MaSP.setText(spctViewModel.getMaSPCT() + "");
+        this.maSPCT = spctViewModel.getMaSPCT();
+        txt_MaSP.setText(spctViewModel.getMaSP() + "");
         txt_TenSP.setText(spctViewModel.getTenSP());
         txt_SoLuong.setText(spctViewModel.getSoLuong() + "");
         cbo_Size.setSelectedItem(spctViewModel.getSize());
@@ -171,26 +180,37 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         }
     }
 
-    SPCTModel readFrom() {
+    public SPCTModel readFromSPCT() {
 
         SPCTViewModel spctvm = spctViewModelProvider.SPCTViewModel().get(index);
 
         SizeModel size = sizeRepository.findByTen(cbo_Size.getSelectedItem()
-                .toString());
+                .toString().trim());
 
-        MauSacModel mauSac =  mauSacRepository.findByTen(cbo_Size.getSelectedItem()
-                .toString());
+        MauSacModel mauSac =  mauSacRepository.findByTen(cbo_Mau_Sac.getSelectedItem()
+                .toString().trim());
 
         SPCTModel spct = new SPCTModel();
-
-        spct.setMaSP(Integer.parseInt(txt_MaSP.getText().trim()));
+        spct.setMaSPCT(spctRespository.count() + 1);
         spct.setSoluong(Integer.parseInt(txt_SoLuong.getText().trim()));
         spct.setMasize(size.getId_Masize());
         spct.setMaMauSac(mauSac.getId_Mamau());
         spct.setSoluong(Integer.parseInt(txt_SoLuong.getText().trim()));
-//        spct.setMaSP();
-//        sp.setGia(Float.parseFloat(txt_Gia.getText()));
+        spct.setMaSP(Integer.parseInt(txt_MaSP.getText().trim()));
+
         return spct;
+    }
+
+    /**
+     * prepare to insert gia model
+     */
+    public GiaModel readGia() {
+        return GiaModel.builder()
+                .maLSG(giaRepository.count() + 1)
+                .gia(Double.parseDouble(txt_Gia.getText().trim()))
+                .maSPCT(this.maSPCT)
+                .ngayCapNhat(new Date())
+                .build();
     }
 
     SanPhamModel readFrom_SP() {
@@ -220,7 +240,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         id_Ten_CanTim = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_update_sp = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         rd_Dangban = new javax.swing.JRadioButton();
         rd_Dungban = new javax.swing.JRadioButton();
@@ -239,7 +259,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_Gia = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_update_spct = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txt_MaSP = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
@@ -301,7 +321,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Sửa ");
+        btn_update_sp.setText("Sửa ");
 
         jLabel14.setText("Trạng thái:");
 
@@ -332,7 +352,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                                     .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btn_update_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -386,7 +406,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton6)
-                    .addComponent(jButton4)))
+                    .addComponent(btn_update_sp)))
         );
 
         Tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
@@ -477,7 +497,12 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sửa SP");
+        btn_update_spct.setText("Sửa SP");
+        btn_update_spct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_update_spctActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Mã sản phẩm:");
 
@@ -525,7 +550,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_update_spct, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(96, 96, 96))
@@ -570,7 +595,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btn_update_spct)
                     .addComponent(jButton3))
                 .addContainerGap())
         );
@@ -762,13 +787,20 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        if (sps.ADDSanPham(this.readFrom()) > 0) {
-//            JOptionPane.showMessageDialog(this, "Thêm thành công");
-//            this.FillTableSanPham_CT(sps.getAll());
-//            clearFrom();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-//        }
+        if (Optional.ofNullable(spctRespository.add(readFromSPCT()))
+                .isPresent()) {
+            GiaModel gia = readGia();
+            gia.setMaSPCT(spctRespository.count());
+
+            giaRepository.add(gia);
+
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            // this.FillTableSanPham_CT(sps.getAll());
+            clearFrom();
+            loadTableSPCT();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Tbl_SanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_SanPhamMouseClicked
@@ -869,6 +901,31 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbl_SanPham_CTMouseClicked
 
+    private void btn_update_spctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_spctActionPerformed
+        // TODO add your handling code here:
+        SPCTModel spctModel = readFromSPCT();
+
+        spctModel.setMaSPCT(this.maSPCT);
+
+        System.out.println("ma spct: " + this.maSPCT);
+
+        if (spctRespository.update(this.readFromSPCT())) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            // this.fillTbaleSanPham(sp.getAll());
+
+            GiaModel gia = readGia();
+            gia.setMaSPCT(this.maSPCT);
+
+            giaRepository.add(gia);
+
+            loadTableSP();
+            ClearFrom_SP();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+
+    }//GEN-LAST:event_btn_update_spctActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -896,6 +953,17 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        try {
+            UIManager.setLookAndFeel(
+                    "com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme"
+            );
+        } catch (ClassNotFoundException
+                 | InstantiationException
+                 | IllegalAccessException
+                 | UnsupportedLookAndFeelException e) {
+            System.out.println("cannot aply look and feel");
+        }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -906,6 +974,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tbl_SanPham;
+    private javax.swing.JButton btn_update_sp;
+    private javax.swing.JButton btn_update_spct;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbo_Mau_Sac;
     private javax.swing.JComboBox<String> cbo_Size;
@@ -914,9 +984,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
     private javax.swing.JTextField id_Ten_CanTim;
     private javax.swing.JTextField id_Ten_TK;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

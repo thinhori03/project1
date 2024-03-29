@@ -3,6 +3,7 @@ package org.project1.nhom8;
 
 import javax.swing.*;
 
+import org.project1.nhom8.View.HoaDonPanel;
 import org.project1.nhom8.View.QL_SanPham1;
 import org.project1.nhom8.View.VoucherPanel;
 
@@ -26,7 +27,7 @@ public class Main {
 
         JFrame f = new JFrame();
         
-        f.add(new VoucherPanel());
+        f.add(new HoaDonPanel());
         
         f.setSize(1000, 500);
         

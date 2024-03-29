@@ -21,12 +21,13 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
                     .prepareStatement(getQueryGenerator()
                             .generateSelectAllQuery() +
                             """
+                                
                                 WHERE MASPCT = ?
                                 ORDER BY NGAYUPDATE DESC
                             """);
             preparedStatement.setInt(1, maspct);
 
-            ResultSet resultSet = preparedStatement.executeQuery();;
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 return getQueryGenerator().map(resultSet);
@@ -64,6 +65,6 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
             ex.printStackTrace();
         }
 
-        return null;
+        return new ArrayList<>();
     }
 }
