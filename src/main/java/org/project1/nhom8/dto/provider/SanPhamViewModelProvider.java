@@ -29,7 +29,7 @@ public class SanPhamViewModelProvider {
             sanPhamViewModels.add(SanPhamViewModel.builder()
                     .maSanPham(spm.getMasp())
                     .tenSanPham(spm.getTensp())
-                            .trangThai(spm.getTrangThai())
+                            .trangThai(spm.getTrangthai())
                     .build());
         }
         return sanPhamViewModels;

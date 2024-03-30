@@ -22,10 +22,7 @@ import java.util.Date;
  *     NGAYUPDATE datetime,
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+
 @Builder
 @DataTable(name = "LICH_SU_GIA")
 public class GiaModel {
@@ -42,4 +39,47 @@ public class GiaModel {
 
     @DataField(name = "NGAYUPDATE")
     private Date ngayCapNhat;
+
+    public GiaModel() {
+    }
+
+    public GiaModel(int maLSG, int maSPCT, double gia, Date ngayCapNhat) {
+        this.maLSG = maLSG;
+        this.maSPCT = maSPCT;
+        this.gia = gia;
+        this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public int getMaLSG() {
+        return maLSG;
+    }
+
+    public void setMaLSG(int maLSG) {
+        this.maLSG = maLSG;
+    }
+
+    public int getMaSPCT() {
+        return maSPCT;
+    }
+
+    public void setMaSPCT(int maSPCT) {
+        this.maSPCT = maSPCT;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public void setGia(double gia) {
+        this.gia = gia;
+    }
+
+    public Date getNgayCapNhat() {
+        return ngayCapNhat;
+    }
+
+    public void setNgayCapNhat(Date ngayCapNhat) {
+        this.ngayCapNhat = ngayCapNhat;
+    }
+    
 }

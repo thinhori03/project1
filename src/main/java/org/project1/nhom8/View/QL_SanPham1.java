@@ -97,7 +97,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
         trangthai = spct.getTrangThai();
 
-        if (trangthai.equalsIgnoreCase("Đang bán")) {
+        if (trangthai.equalsIgnoreCase("�?ang bán")) {
             rd_Dangban.setSelected(true);
         } else if (trangthai.equalsIgnoreCase("Dừng bán")) {
             rd_Dungban.setSelected(true);
@@ -113,9 +113,9 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         MauSacModel mauSac = mauSacRepository.findByTen(txt_MauSac.getText().trim());
 
         spct.setSoluong(Integer.parseInt(txt_Soluong.getText().trim()));
-        spct.setMasize(size.getId_Masize());
-        // spct.setTrangThai(rd_Dangban.isSelected() ? "Đang bán" : "Dừng bán");
-        spct.setMaMauSac(mauSac.getId_Mamau());
+        spct.setMasize(size.getMasize());
+        // spct.setTrangThai(rd_Dangban.isSelected() ? "�?ang bán" : "Dừng bán");
+        spct.setMaMauSac(mauSac.getMamau());
 
 //        sp.setTen(txt_Ten.getText());
 //        sp.setSoluong(Integer.parseInt(txt_Soluong.getText()));
@@ -400,7 +400,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rd_Dangban);
-        rd_Dangban.setText("Đang bán");
+        rd_Dangban.setText("�?ang bán");
 
         buttonGroup1.add(rd_Dungban);
         rd_Dungban.setText("Dừng bán");

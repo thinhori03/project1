@@ -27,14 +27,12 @@ import org.project1.nhom8.util.data.DataTable;
  *     TRANGTHAI NVARCHAR(100)
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+
 @Builder
 @DataTable(name = "SAN_PHAM_CHI_TIET")
-public class SPCTModel {
 
+public class SPCTModel {
+    
     @DataId
     @DataField(name = "MASPCT")
     private int maSPCT;
@@ -51,4 +49,55 @@ public class SPCTModel {
     @DataField(name = "MASP")
     private int maSP;
 
+    public SPCTModel() {
+    }
+
+    public SPCTModel(int maSPCT, int soluong, int masize, int maMauSac, int maSP) {
+        this.maSPCT = maSPCT;
+        this.soluong = soluong;
+        this.masize = masize;
+        this.maMauSac = maMauSac;
+        this.maSP = maSP;
+    }
+
+    public int getMaSPCT() {
+        return maSPCT;
+    }
+
+    public void setMaSPCT(int maSPCT) {
+        this.maSPCT = maSPCT;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public int getMasize() {
+        return masize;
+    }
+
+    public void setMasize(int masize) {
+        this.masize = masize;
+    }
+
+    public int getMaMauSac() {
+        return maMauSac;
+    }
+
+    public void setMaMauSac(int maMauSac) {
+        this.maMauSac = maMauSac;
+    }
+
+    public int getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(int maSP) {
+        this.maSP = maSP;
+    }
+    
 }

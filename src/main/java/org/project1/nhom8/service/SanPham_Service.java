@@ -31,11 +31,11 @@ public class SanPham_Service {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-//            while (rs.next()) {
-//                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
-//                );
-//                listsp.add(sp);
-//            }
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
+                listsp.add(sp);
+            }
             return listsp;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,14 +48,30 @@ public class SanPham_Service {
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-ps.setString(1, sp.getTensp());
-//            ps.setString(2, sp.getTrangthai());
+            ps.setString(1, sp.getTensp());
+            ps.setString(2, sp.getTrangthai());
             kq = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return kq;
     }
+     public int Update_SP(SanPhamModel sp, int ma){
+        sql = "UpDate SAN_PHAM set TENSP = ?, TRANGTHAI = ? where MASP like ?";
+        int kq = 0;
+        try {
+            con = DBConnect.getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setString(1, sp.getTensp());
+            ps.setString(2, sp.getTrangthai());
+            ps.setInt(3, ma);
+            kq = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
+    }
+
     public int Delete_SP(int ma){
         sql = "DELETE From SAN_PHAM where MASP like ?";
         int kq = 0;
@@ -78,11 +94,11 @@ ps.setString(1, sp.getTensp());
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + ten + "%");
             rs = ps.executeQuery();
-//            while (rs.next()) {
-//                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
-//                );
-//                listspT.add(sp);
-//            }
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
+                listspT.add(sp);
+            }
             rs.close();
             ps.close();
         } catch (Exception e) {
@@ -99,12 +115,12 @@ ps.setString(1, sp.getTensp());
             ps = con.prepareStatement(sql);
             ps.setInt(1, ma);
             rs = ps.executeQuery();
-//            while (rs.next()) {
-//                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
-//                );
-//                listspM.add(sp);
-//
-//            }
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getInt(1),rs.getString(2),rs.getString(3)
+                );
+                listspM.add(sp);
+
+            }
             rs.close();
             ps.close();
         } catch (Exception e) {

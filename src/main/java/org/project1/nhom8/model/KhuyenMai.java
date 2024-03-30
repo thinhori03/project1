@@ -15,48 +15,67 @@ import org.project1.nhom8.util.data.DataTable;
 
 import javax.xml.namespace.QName;
 
-/**
- * @author Admin
- * <p>
- * CREATE TABLE KHUYEN_MAI_COUPON
- * (
- * MAKM        VARCHAR(14) PRIMARY KEY,
- * NGAYBATDAU  DATE,
- * NGAYKETTHUC DATE,
- * SOLUONG     INT,
- * GIA         FLOAT,
- * )
- */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
-@Builder
-@DataTable(name = "KHUYEN_MAI_COUPON")
+
 public class KhuyenMai {
-    @DataField(name = "MAKM")
     String makm;
-
-    @DataField(name = "NGAYBATDAU")
-    String ngayBd;
-
-    @DataField(name = "NGAYKETTHUC")
-    String ngayKt;
-
-    @DataField(name = "SOLUONG")
+    String ngaybd; 
+    String ngaykt;
     int soluong;
-
-    @DataField(name = "GIA")
     float gia;
 
-    public Object[] toDataRow() {
-        return new Object[]{
-                this.getMakm(), this.getNgayBd(), this.getNgayKt(), this.getSoluong(), this.getGia()
-        };
+    public KhuyenMai() {
     }
 
-    @Override
-    public String toString() {
-        return "KhuyenMai{" + "makm=" + makm + ", ngayBd=" + ngayBd + ", ngayKt=" + ngayKt + ", soluong=" + soluong + ", gia=" + gia + '}';
+    public KhuyenMai(String makm, String ngaybd, String ngaykt, int soluong, float gia) {
+        this.makm = makm;
+        this.ngaybd = ngaybd;
+        this.ngaykt = ngaykt;
+        this.soluong = soluong;
+        this.gia = gia;
+    }
+
+    public String getMakm() {
+        return makm;
+    }
+
+    public void setMakm(String makm) {
+        this.makm = makm;
+    }
+
+    public String getNgaybd() {
+        return ngaybd;
+    }
+
+    public void setNgaybd(String ngaybd) {
+        this.ngaybd = ngaybd;
+    }
+
+    public String getNgaykt() {
+        return ngaykt;
+    }
+
+    public void setNgaykt(String ngaykt) {
+        this.ngaykt = ngaykt;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public float getGia() {
+        return gia;
+    }
+
+    public void setGia(float gia) {
+        this.gia = gia;
+    }
+    public Object[] toDataRow(){
+        return new Object[]{
+          this.getMakm(),this.getNgaybd(),this.getNgaykt(),this.getSoluong(),this.getGia()
+        };
     }
 }

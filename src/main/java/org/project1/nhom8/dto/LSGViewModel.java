@@ -10,17 +10,39 @@ import org.project1.nhom8.util.data.visual.DataHeader;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+
 @Builder
 public class LSGViewModel {
 
-    @DataHeader(name = "giá")
+    @DataHeader(name = "Giá")
     @ConcurrencyFormat
     private double gia;
 
-    @DataHeader(name = "ngày cập nhật")
+    @DataHeader(name = "Ngày cập nhật")
     private Date ngayCapNhat;
+
+    public LSGViewModel() {
+    }
+
+    public LSGViewModel(double gia, Date ngayCapNhat) {
+        this.gia = gia;
+        this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public void setGia(double gia) {
+        this.gia = gia;
+    }
+
+    public Date getNgayCapNhat() {
+        return ngayCapNhat;
+    }
+
+    public void setNgayCapNhat(Date ngayCapNhat) {
+        this.ngayCapNhat = ngayCapNhat;
+    }
+    
 }

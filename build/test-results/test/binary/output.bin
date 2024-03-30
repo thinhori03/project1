@@ -1,7 +1,0 @@
-
-
-
-O UPDATE LICH_SU_GIA  SET MASPCT = ? , GIA = ? , NGAYUPDATE = ? WHERE MALSG = ?
-
-
-

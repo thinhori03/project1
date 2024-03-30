@@ -50,8 +50,8 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
     KhuyenMai readFrom() {
         KhuyenMai km = new KhuyenMai();
         km.setMakm(txt_Ma.getText());
-        km.setNgayBd(txt_ngayBD.getText());
-        km.setNgayKt(txt_ngayKT.getText());
+        km.setNgaybd(txt_ngayBD.getText());
+        km.setNgaykt(txt_ngayKT.getText());
         km.setSoluong(Integer.parseInt(txt_Soluong.getText()));
         km.setGia(Float.parseFloat(txt_Gia.getText()));
         return km;
@@ -160,15 +160,15 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel2.setText("Mã KM:");
+        jLabel2.setText("M� KM:");
 
-        jLabel3.setText("Ngày bắt đầu:");
+        jLabel3.setText("Ng�y b?t ??u:");
 
-        jLabel4.setText("Số lượng:");
+        jLabel4.setText("S? l??ng:");
 
-        jLabel5.setText("Giá:");
+        jLabel5.setText("Gi�:");
 
-        jLabel6.setText("Ngày kết thúc:");
+        jLabel6.setText("Ng�y k?t th�c:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,21 +219,21 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btn_ADD.setText("Thêm KM");
+        btn_ADD.setText("Th�m KM");
         btn_ADD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ADDActionPerformed(evt);
             }
         });
 
-        btn_Update.setText("Sửa KM");
+        btn_Update.setText("S?a KM");
         btn_Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_UpdateActionPerformed(evt);
             }
         });
 
-        btn_Delete.setText("Xóa KM");
+        btn_Delete.setText("X�a KM");
         btn_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DeleteActionPerformed(evt);
@@ -248,7 +248,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã KM", "Ngày bắt đầu", "Ngày kết thúc", "Số lượng", "Giá"
+                "M� KM", "Ng�y b?t ??u", "Ng�y k?t th�c", "S? l??ng", "Gi�"
             }
         ));
         Tbl_KhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -258,7 +258,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Tbl_KhuyenMai);
 
-        jLabel7.setText("Tìm kiếm:");
+        jLabel7.setText("T�m ki?m:");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         id_Timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -275,22 +275,22 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(btn_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(btn_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(id_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(id_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(0, 36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(btn_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187)
+                .addComponent(btn_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +312,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setText("Quản Lý Khuyến Mại");
+        jLabel1.setText("Qu?n L� Khuy?n M?i");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -76,7 +76,7 @@ public class SPCTViewModelProvider {
                     .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSPCT()).getGia())
                     .size(sizeRepository.findById(spctModel.getMasize()).getTensize())
                     .mauSac(mauSacRepository.findById(spctModel.getMaMauSac()).getTenmau())
-                    .trangThai(sp.getTrangThai())
+                    .trangThai(sp.getTrangthai())
                     .soLuong(spctModel.getSoluong())
                     .build());
         }

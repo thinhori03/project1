@@ -30,10 +30,7 @@ import org.project1.nhom8.util.data.DataTable;
  *     TRANG_THAI  VARCHAR(20) -- đang hoạt động đã hủy
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+
 @Builder
 
 @DataTable(name = "VOUCHER")
@@ -55,9 +52,79 @@ public class VoucherModel {
     @DataField(name = "DIEUKIEN")
     private double diauKien;
 
-    @DataField(name = "ngay_tao")
+    @DataField(name = "Ngay_tao")
     private Date ngayTao;
 
     @DataField(name = "TRANG_THAI")
     private String trangThai;
+
+    public VoucherModel() {
+    }
+
+    public VoucherModel(String maVoucher, double giaTri, Date ngayBatDau, Date ngayKetThuc, double diauKien, Date ngayTao, String trangThai) {
+        this.maVoucher = maVoucher;
+        this.giaTri = giaTri;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.diauKien = diauKien;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
+
+    public String getMaVoucher() {
+        return maVoucher;
+    }
+
+    public void setMaVoucher(String maVoucher) {
+        this.maVoucher = maVoucher;
+    }
+
+    public double getGiaTri() {
+        return giaTri;
+    }
+
+    public void setGiaTri(double giaTri) {
+        this.giaTri = giaTri;
+    }
+
+    public Date getNgayBatDau() {
+        return ngayBatDau;
+    }
+
+    public void setNgayBatDau(Date ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
+    }
+
+    public Date getNgayKetThuc() {
+        return ngayKetThuc;
+    }
+
+    public void setNgayKetThuc(Date ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
+    }
+
+    public double getDiauKien() {
+        return diauKien;
+    }
+
+    public void setDiauKien(double diauKien) {
+        this.diauKien = diauKien;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+    
 }

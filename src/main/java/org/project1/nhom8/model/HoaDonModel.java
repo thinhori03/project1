@@ -32,10 +32,6 @@ import java.util.Date;
  *     MAV           VARCHAR(10) references VOUCHER (MAV)
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 
 @DataTable(name = "HOA_DON")
 public class HoaDonModel {
@@ -64,4 +60,83 @@ public class HoaDonModel {
 
     @DataField(name = "NGAYTHANHTOAN")
     private Date ngayThanhToan;
+
+    public HoaDonModel() {
+    }
+
+    public HoaDonModel(String maHoaDon, int maKH, int maNV, String trangThai, String phuongThuc, String maVoucher, Date ngayTao, Date ngayThanhToan) {
+        this.maHoaDon = maHoaDon;
+        this.maKH = maKH;
+        this.maNV = maNV;
+        this.trangThai = trangThai;
+        this.phuongThuc = phuongThuc;
+        this.maVoucher = maVoucher;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+    }
+
+    public String getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+
+    public int getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
+    }
+
+    public int getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public String getPhuongThuc() {
+        return phuongThuc;
+    }
+
+    public void setPhuongThuc(String phuongThuc) {
+        this.phuongThuc = phuongThuc;
+    }
+
+    public String getMaVoucher() {
+        return maVoucher;
+    }
+
+    public void setMaVoucher(String maVoucher) {
+        this.maVoucher = maVoucher;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public Date getNgayThanhToan() {
+        return ngayThanhToan;
+    }
+
+    public void setNgayThanhToan(Date ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
+    }
+    
 }
