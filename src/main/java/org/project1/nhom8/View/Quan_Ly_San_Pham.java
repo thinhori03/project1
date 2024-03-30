@@ -927,7 +927,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
         System.out.println("ma spct: " + this.maSPCT);
 
-        if (spctRespository.update(this.readFromSPCT())) {
+        if (spctRespository.update((spctModel))) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             // this.fillTbaleSanPham(sp.getAll());
 
