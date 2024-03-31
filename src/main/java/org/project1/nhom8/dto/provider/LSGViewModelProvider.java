@@ -3,6 +3,8 @@ package org.project1.nhom8.dto.provider;
 import org.project1.nhom8.dto.LSGViewModel;
 import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.SPCTRepository;
+import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
@@ -19,9 +21,16 @@ import java.util.stream.Collectors;
 public class LSGViewModelProvider {
 
     private final GiaRepository giaRepository;
+    private final SanPhamRepository sanPhamRepository;
+
+    private final SPCTRepository spctRepository;
 
     public LSGViewModelProvider() {
-        this.giaRepository = new GiaRepository();
+        giaRepository = new GiaRepository();
+
+        sanPhamRepository = new SanPhamRepository();
+
+        spctRepository = new SPCTRepository();
     }
 
     public List<LSGViewModel> getLSGViewModels(Integer maSPCT) {
@@ -41,6 +50,11 @@ public class LSGViewModelProvider {
         for (GiaModel gia : giaModels) {
 
             giavm = new LSGViewModel();
+
+            giavm.setMaSPCT(gia.getMaSPCT());
+
+            giavm.setTenSPCT(sanPhamRepository.findById(spctRepository
+                    .findById(gia.getMaSPCT()).getMaSP()).getTensp());
 
             giavm.setGia(gia.getGia());
             giavm.setNgayCapNhat(gia.getNgayCapNhat());
