@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 /**
  *
  * @author PC
@@ -75,7 +76,7 @@ public class main extends javax.swing.JFrame {
         lblBanHang.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblBanHang.setForeground(new java.awt.Color(255, 255, 255));
         lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cart-36-xl.png"))); // NOI18N
-        lblBanHang.setText("Bán hàng");
+        lblBanHang.setText("B�n h�ng");
 
         javax.swing.GroupLayout pnBanHangLayout = new javax.swing.GroupLayout(pnBanHang);
         pnBanHang.setLayout(pnBanHangLayout);
@@ -107,7 +108,7 @@ public class main extends javax.swing.JFrame {
         lblSanPham.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product-xl.png"))); // NOI18N
-        lblSanPham.setText("Sản phẩm");
+        lblSanPham.setText("S?n ph?m");
 
         javax.swing.GroupLayout pnSanPhamLayout = new javax.swing.GroupLayout(pnSanPham);
         pnSanPham.setLayout(pnSanPhamLayout);
@@ -139,7 +140,7 @@ public class main extends javax.swing.JFrame {
         lblHoaDon.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill-xl.png"))); // NOI18N
-        lblHoaDon.setText("Hóa đơn");
+        lblHoaDon.setText("H�a ??n");
 
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
@@ -171,7 +172,7 @@ public class main extends javax.swing.JFrame {
         lblNhanVien.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/6.png"))); // NOI18N
-        lblNhanVien.setText("Nhân Viên");
+        lblNhanVien.setText("Nh�n Vi�n");
 
         javax.swing.GroupLayout pnNhanVienLayout = new javax.swing.GroupLayout(pnNhanVien);
         pnNhanVien.setLayout(pnNhanVienLayout);
@@ -203,7 +204,7 @@ public class main extends javax.swing.JFrame {
         lblKhachHang.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/7.png"))); // NOI18N
-        lblKhachHang.setText("Khách hàng");
+        lblKhachHang.setText("Kh�ch h�ng");
 
         javax.swing.GroupLayout pnKhachHangLayout = new javax.swing.GroupLayout(pnKhachHang);
         pnKhachHang.setLayout(pnKhachHangLayout);
@@ -234,7 +235,7 @@ public class main extends javax.swing.JFrame {
         lblThongke.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblThongke.setForeground(new java.awt.Color(255, 255, 255));
         lblThongke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/5.png"))); // NOI18N
-        lblThongke.setText("Thống kê");
+        lblThongke.setText("Th?ng k�");
 
         javax.swing.GroupLayout pnThongkeLayout = new javax.swing.GroupLayout(pnThongke);
         pnThongke.setLayout(pnThongkeLayout);
@@ -266,7 +267,7 @@ public class main extends javax.swing.JFrame {
         lblGiamGia.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblGiamGia.setForeground(new java.awt.Color(255, 255, 255));
         lblGiamGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/4.png"))); // NOI18N
-        lblGiamGia.setText("Khuyến mãi");
+        lblGiamGia.setText("Khuy?n m�i");
 
         javax.swing.GroupLayout pnGiagiaLayout = new javax.swing.GroupLayout(pnGiagia);
         pnGiagia.setLayout(pnGiagiaLayout);
@@ -298,7 +299,7 @@ public class main extends javax.swing.JFrame {
         lblDangXuat.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
         lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/8.png"))); // NOI18N
-        lblDangXuat.setText("Đăng xuất");
+        lblDangXuat.setText("??ng xu?t");
 
         javax.swing.GroupLayout pnDangXuatLayout = new javax.swing.GroupLayout(pnDangXuat);
         pnDangXuat.setLayout(pnDangXuatLayout);
@@ -319,9 +320,9 @@ public class main extends javax.swing.JFrame {
 
         jPanel1.add(pnDangXuat);
 
-        lblNameNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNameNV.setFont(new java.awt.Font("Segoe UI Variable", 1, 40)); // NOI18N
         lblNameNV.setForeground(new java.awt.Color(255, 255, 255));
-        lblNameNV.setText("Wellcome Here!");
+        lblNameNV.setText("LV STORE");
 
         jPanel2.setBackground(new java.awt.Color(41, 93, 157));
 
@@ -349,15 +350,16 @@ public class main extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,10 +367,10 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144)
+                .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pnscrene.setBackground(new java.awt.Color(255, 255, 255));
@@ -431,7 +433,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblThongke);
         resetColor(lblDangXuat);
         resetColorJpane(pnDangXuat);
-        //        showPanel(new QuanLySanPhamJPanel());
+//        showPanel(new HoaDonPanel());
     }//GEN-LAST:event_pnHoaDonMouseClicked
 
     private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked

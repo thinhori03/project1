@@ -41,12 +41,12 @@ public class LoginDialog extends javax.swing.JDialog {
                 if (password.equals(checkPassword)) {
                     LoginService.lg = login;
                     this.dispose();
-                    if (login.getVaiTro().equals("Quản Lý")) {
-                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
-
-                    } else if (login.getVaiTro().equals("Nhân viên")) {
-                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
-                    }
+//                    if (login.getVaiTro().equals("Quản Lý")) {
+//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n quản lý.");
+//
+//                    } else if (login.getVaiTro().equals("Nhân viên")) {
+//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n nhân viên.");
+//                    }
                     main mi = new main();
                     mi.setVisible(true);
                     this.dispose();
@@ -57,7 +57,7 @@ public class LoginDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập không đúng");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên người dùng và mật khẩu");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên ngư�?i dùng và mật khẩu");
         }
     }
 
@@ -93,7 +93,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel10.setText("ĐĂNG NHẬP");
+        jLabel10.setText("�?ĂNG NHẬP");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Email:");
@@ -102,7 +102,7 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel12.setText("Mật khẩu:");
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login-20.png"))); // NOI18N
-        btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.setText("�?ăng nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
