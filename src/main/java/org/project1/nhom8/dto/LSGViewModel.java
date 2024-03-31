@@ -8,6 +8,12 @@ import java.util.Date;
 
 public class LSGViewModel {
 
+    @DataHeader(name = "mã sản phẩm")
+    private Integer maSPCT;
+
+    @DataHeader(name = "tên sản phẩm")
+    private String tenSPCT;
+
     @DataHeader(name = "Giá")
     @ConcurrencyFormat
     private double gia;
@@ -15,12 +21,31 @@ public class LSGViewModel {
     @DataHeader(name = "Ngày cập nhật")
     private Date ngayCapNhat;
 
+
     public LSGViewModel() {
     }
 
-    public LSGViewModel(double gia, Date ngayCapNhat) {
+    public LSGViewModel(Integer maSPCT, String tenSPCT, double gia, Date ngayCapNhat) {
+        this.maSPCT = maSPCT;
+        this.tenSPCT = tenSPCT;
         this.gia = gia;
         this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public Integer getMaSPCT() {
+        return maSPCT;
+    }
+
+    public void setMaSPCT(Integer maSPCT) {
+        this.maSPCT = maSPCT;
+    }
+
+    public String getTenSPCT() {
+        return tenSPCT;
+    }
+
+    public void setTenSPCT(String tenSPCT) {
+        this.tenSPCT = tenSPCT;
     }
 
     public double getGia() {
@@ -38,5 +63,4 @@ public class LSGViewModel {
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
     }
-    
 }
