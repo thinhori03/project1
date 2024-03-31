@@ -39,7 +39,7 @@ public class VoucherViewModelProvider {
             vvm.setDieuKien(vm.getDiauKien());
             vvm.setNgayTao(vm.getNgayTao());
             vvm.setNgayBatDau(vm.getNgayBatDau());
-            vm.setNgayKetThuc(vm.getNgayKetThuc());
+            vvm.setNgayKetThuc(vm.getNgayKetThuc());
             vvm.setTrangThai(vm.getTrangThai());
 
             result.add(vvm);

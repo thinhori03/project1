@@ -76,7 +76,7 @@ public class main extends javax.swing.JFrame {
         lblBanHang.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblBanHang.setForeground(new java.awt.Color(255, 255, 255));
         lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cart-36-xl.png"))); // NOI18N
-        lblBanHang.setText("Bán hàng");
+        lblBanHang.setText("Bï¿½n hï¿½ng");
 
         javax.swing.GroupLayout pnBanHangLayout = new javax.swing.GroupLayout(pnBanHang);
         pnBanHang.setLayout(pnBanHangLayout);
@@ -140,7 +140,7 @@ public class main extends javax.swing.JFrame {
         lblHoaDon.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill-xl.png"))); // NOI18N
-        lblHoaDon.setText("Hóa ??n");
+        lblHoaDon.setText("Hï¿½a ??n");
 
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
@@ -172,7 +172,7 @@ public class main extends javax.swing.JFrame {
         lblNhanVien.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/6.png"))); // NOI18N
-        lblNhanVien.setText("Nhân Viên");
+        lblNhanVien.setText("Nhï¿½n Viï¿½n");
 
         javax.swing.GroupLayout pnNhanVienLayout = new javax.swing.GroupLayout(pnNhanVien);
         pnNhanVien.setLayout(pnNhanVienLayout);
@@ -204,7 +204,7 @@ public class main extends javax.swing.JFrame {
         lblKhachHang.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/7.png"))); // NOI18N
-        lblKhachHang.setText("Khách hàng");
+        lblKhachHang.setText("Khï¿½ch hï¿½ng");
 
         javax.swing.GroupLayout pnKhachHangLayout = new javax.swing.GroupLayout(pnKhachHang);
         pnKhachHang.setLayout(pnKhachHangLayout);
@@ -235,7 +235,7 @@ public class main extends javax.swing.JFrame {
         lblThongke.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblThongke.setForeground(new java.awt.Color(255, 255, 255));
         lblThongke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/5.png"))); // NOI18N
-        lblThongke.setText("Th?ng kê");
+        lblThongke.setText("Th?ng kï¿½");
 
         javax.swing.GroupLayout pnThongkeLayout = new javax.swing.GroupLayout(pnThongke);
         pnThongke.setLayout(pnThongkeLayout);
@@ -267,7 +267,7 @@ public class main extends javax.swing.JFrame {
         lblGiamGia.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblGiamGia.setForeground(new java.awt.Color(255, 255, 255));
         lblGiamGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/4.png"))); // NOI18N
-        lblGiamGia.setText("Khuy?n mãi");
+        lblGiamGia.setText("Khuy?n mï¿½i");
 
         javax.swing.GroupLayout pnGiagiaLayout = new javax.swing.GroupLayout(pnGiagia);
         pnGiagia.setLayout(pnGiagiaLayout);
@@ -433,7 +433,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblThongke);
         resetColor(lblDangXuat);
         resetColorJpane(pnDangXuat);
-//        showPanel(new HoaDonPanel());
+        showPanel(new HoaDonPanel());
     }//GEN-LAST:event_pnHoaDonMouseClicked
 
     private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked
