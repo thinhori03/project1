@@ -14,13 +14,18 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.project1.nhom8.repository.KhachHangConnection;
 
 public class HDViewModelProvider {
 
     private final HoaDonRepository hoaDonRepository;
+    
+    private final KhachHangConnection khachHangConnection;
 
     public HDViewModelProvider() {
         this.hoaDonRepository = new HoaDonRepository();
+
+        this.khachHangConnection = new KhachHangConnection();
     }
 
     public List<HoaDonViewModel> getHoaDonViewModel() {
@@ -35,8 +40,9 @@ public class HDViewModelProvider {
 
             hdvm = new HoaDonViewModel();
 
+            hdvm.setMaHoaDon(hdm.getMaHoaDon());
             hdvm.setNgayTao(hdm.getNgayTao());
-            hdvm.setMaKH(hdm.getMaKH());
+            hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
             hdvm.setMaNV(hdm.getMaNV());
             hdvm.setTrangThai(hdm.getTrangThai());
             hdvm.setTongTien(Double.valueOf(1000));

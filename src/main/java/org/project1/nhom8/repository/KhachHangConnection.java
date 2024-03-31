@@ -30,7 +30,7 @@ public class KhachHangConnection {
                 String email = rs.getString("EMAIL");
                 String ngay = rs.getString("NGAYSINH");
                 String diaChi = rs.getString("DIACHI");
-                KhachHangModel kh = new KhachHangModel(ma,ten,sdt, gioiTinh, email, ngay, diaChi);
+                KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
 
                 list.add(kh);
 
@@ -100,8 +100,8 @@ public class KhachHangConnection {
     public ArrayList<KhachHangModel> timKiem(String ten1) {
         String sql = "select * from KHACH_HANG Where TENKH like '%" + ten1 + "%'";
         ArrayList<KhachHangModel> list = new ArrayList<>();
-        try (Connection con = dBConnect.getConnection(); PreparedStatement pst = con.prepareStatement(sql)){
-        ResultSet rs = pst.executeQuery();
+        try (Connection con = dBConnect.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Integer ma = rs.getInt("MAKH");
                 String ten = rs.getString("TENKH");
@@ -113,9 +113,40 @@ public class KhachHangConnection {
                 KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
                 list.add(kh);
             }
-        } catch(Exception e){
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
-        }
     }
+
+    /**
+     * @param maKH customer id
+     * @return null if cannot find
+     */
+    public String getTenByMa(Integer maKH) {
+
+        String query = "SELECT\n" +
+                "    KHACH_HANG.TENKH\n" +
+                "FROM KHACH_HANG\n" +
+                "WHERE KHACH_HANG.MAKH = ?";
+
+        try {
+
+            Connection connection = DBConnect.getConnection();
+
+            PreparedStatement preStat = connection.prepareStatement(query);
+
+            preStat.setInt(1, maKH);
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getNString("TENKH");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+}

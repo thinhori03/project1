@@ -13,11 +13,11 @@ public class HoaDonViewModel {
     @DataHeader(name = "ngày tạo")
     private Date ngayTao;
 
-    @DataHeader(name = "mã nhân viên")
+    @DataHeader(name = "ma nhân viên")
     private Integer maNV;
 
-    @DataHeader(name = "mã khách hàng")
-    private Integer maKH;
+    @DataHeader(name = "tên khách hàng")
+    private String tenKH;
 
     @DataHeader(name = "tổng tiền")
     private Double tongTien;
@@ -28,11 +28,11 @@ public class HoaDonViewModel {
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String maHoaDon, Date ngayTao, Integer maNV, Integer maKH, Double tongTien, String TrangThai) {
+    public HoaDonViewModel(String maHoaDon, Date ngayTao, Integer maNV, String tenKH, Double tongTien, String TrangThai) {
         this.maHoaDon = maHoaDon;
         this.ngayTao = ngayTao;
         this.maNV = maNV;
-        this.maKH = maKH;
+        this.tenKH = tenKH;
         this.tongTien = tongTien;
         this.TrangThai = TrangThai;
     }
@@ -61,12 +61,12 @@ public class HoaDonViewModel {
         this.maNV = maNV;
     }
 
-    public Integer getMaKH() {
-        return maKH;
+    public String getTenKH() {
+        return tenKH;
     }
 
-    public void setMaKH(Integer maKH) {
-        this.maKH = maKH;
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
     }
 
     public Double getTongTien() {
@@ -84,5 +84,6 @@ public class HoaDonViewModel {
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
     }
+
     
 }
