@@ -1,34 +1,28 @@
 package org.project1.nhom8.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 import java.util.Date;
 
 
-@Builder
 public class HoaDonViewModel {
 
-    @DataHeader(name = "Mã Hóa ??n")
+    @DataHeader(name = "Mï¿½ Hï¿½a ??n")
     private String maHoaDon;
 
-    @DataHeader(name = "Ngày t?o")
+    @DataHeader(name = "Ngï¿½y t?o")
     private Date ngayTao;
 
-    @DataHeader(name = "Mã nhân viên")
+    @DataHeader(name = "Mï¿½ nhï¿½n viï¿½n")
     private Integer maNV;
 
-    @DataHeader(name = "Mã khách hàng")
+    @DataHeader(name = "Mï¿½ khï¿½ch hï¿½ng")
     private Integer maKH;
 
     @DataHeader(name = "T?ng ti?n")
     private Double tongTien;
 
-    @DataHeader(name = "Tr?ng thái")
+    @DataHeader(name = "Tr?ng thï¿½i")
     private String TrangThai;
 
     public HoaDonViewModel() {

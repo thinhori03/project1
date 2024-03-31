@@ -25,13 +25,19 @@ public class SanPhamViewModelProvider {
 
         List<SanPhamModel> sanPhamModels = sanPhamRepository.findAll();
 
+        SanPhamViewModel spvm = null;
+
         for (SanPhamModel spm : sanPhamModels) {
-            sanPhamViewModels.add(SanPhamViewModel.builder()
-                    .maSanPham(spm.getMasp())
-                    .tenSanPham(spm.getTensp())
-                            .trangThai(spm.getTrangthai())
-                    .build());
+
+            spvm = new SanPhamViewModel();
+
+            spvm.setMaSanPham(spm.getMasp());
+            spvm.setTenSanPham(spm.getTensp());
+            spvm.setTrangThai(spm.getTrangthai());
+
+            sanPhamViewModels.add(spvm);
         }
+
         return sanPhamViewModels;
     }
 

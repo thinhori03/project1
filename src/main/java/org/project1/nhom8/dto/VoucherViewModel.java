@@ -1,41 +1,34 @@
 package org.project1.nhom8.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 import java.util.Date;
 
-
-@Builder
 public class VoucherViewModel {
 
-    @DataHeader(name = "Mã voucher")
+    @DataHeader(name = "Mï¿½ voucher")
     private String maVoucher;
 
-    @DataHeader(name = "Giá")
+    @DataHeader(name = "Giï¿½")
     private Double gia;
 
     @DataHeader(name = "?i?u ki?n ")
     private Double dieuKien;
 
-    @DataHeader(name = "Ngày t?o")
+    @DataHeader(name = "Ngï¿½y t?o")
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayTao;
 
-    @DataHeader(name = "Ngày b?t ??u")
+    @DataHeader(name = "Ngï¿½y b?t ??u")
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayBatDau;
 
-    @DataHeader(name = "Ngày k?t thúc")
+    @DataHeader(name = "Ngï¿½y k?t thï¿½c")
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayKetThuc;
 
-    @DataHeader(name = "Tr?ng thái")
+    @DataHeader(name = "Tr?ng thï¿½i")
     private String trangThai;
 
     public VoucherViewModel() {

@@ -4,15 +4,7 @@
  */
 package org.project1.nhom8.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.DataField;
-import org.project1.nhom8.util.data.DataGenerated;
-import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
 
 /**

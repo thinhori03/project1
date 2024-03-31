@@ -1,22 +1,16 @@
 package org.project1.nhom8.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
-@Builder
 public class SanPhamViewModel {
 
-    @DataHeader(name = "Mã s?n ph?m")
+    @DataHeader(name = "Mï¿½ s?n ph?m")
     private  int maSanPham;
 
-    @DataHeader(name = "Tên s?n ph?m")
+    @DataHeader(name = "Tï¿½n s?n ph?m")
     private String tenSanPham;
     
-    @DataHeader(name = "Tr?ng thái")
+    @DataHeader(name = "Tr?ng thï¿½i")
     private String trangThai;
 
     public SanPhamViewModel() {
@@ -51,6 +45,4 @@ public class SanPhamViewModel {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
 }

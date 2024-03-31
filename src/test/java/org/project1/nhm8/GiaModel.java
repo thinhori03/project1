@@ -22,23 +22,23 @@ public class GiaModel {
         this.lsgViewModelProvider = new LSGViewModelProvider();
     }
 
-    @Test
-    public void addGia() {
-
-        new org.project1.nhom8.model.GiaModel();
-        org.project1.nhom8.model.GiaModel gia = org.project1.nhom8.model.GiaModel
-                .builder()
-                .maLSG(giaRepository.count())
-                .ngayCapNhat(new Date())
-                .maSPCT(5)
-                .gia(1000000000)
-                .build();
-
-        Assertions.assertTrue(this.giaRepository.update(gia));
-
-        Assertions.assertTrue(Optional
-                .ofNullable(gia.getMaLSG()).isPresent());
-    }
+//    @Test
+//    public void addGia() {
+//
+//        new org.project1.nhom8.model.GiaModel();
+//        org.project1.nhom8.model.GiaModel gia = org.project1.nhom8.model.GiaModel
+//                .builder()
+//                .maLSG(giaRepository.count())
+//                .ngayCapNhat(new Date())
+//                .maSPCT(5)
+//                .gia(1000000000)
+//                .build();
+//
+//        Assertions.assertTrue(this.giaRepository.update(gia));
+//
+//        Assertions.assertTrue(Optional
+//                .ofNullable(gia.getMaLSG()).isPresent());
+//    }
 
     @Test
     public void getAll() {

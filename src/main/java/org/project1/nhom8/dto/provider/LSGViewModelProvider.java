@@ -36,11 +36,16 @@ public class LSGViewModelProvider {
             return result;
         }
 
+        LSGViewModel giavm = null;
+
         for (GiaModel gia : giaModels) {
-            result.add(LSGViewModel.builder()
-                    .gia(gia.getGia())
-                    .ngayCapNhat(gia.getNgayCapNhat())
-                    .build());
+
+            giavm = new LSGViewModel();
+
+            giavm.setGia(gia.getGia());
+            giavm.setNgayCapNhat(gia.getNgayCapNhat());
+
+            result.add(giavm);
         }
 
         return result;

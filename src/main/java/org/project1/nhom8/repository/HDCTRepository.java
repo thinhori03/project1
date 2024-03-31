@@ -22,9 +22,7 @@ public class HDCTRepository extends GeneralRepository<HDCTModel, String> {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator()
                             .generateSelectAllQuery() +
-                            """
-                                WHERE MAHD = ?
-                            """);
+                            " WHERE MAHD = ? ");
             preparedStatement.setString(1, maHD);
             ResultSet resultSet = preparedStatement.executeQuery();;
 

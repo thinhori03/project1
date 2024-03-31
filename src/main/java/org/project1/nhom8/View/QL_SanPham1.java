@@ -97,7 +97,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
 
         trangthai = spct.getTrangThai();
 
-        if (trangthai.equalsIgnoreCase("�?ang bán")) {
+        if (trangthai.equalsIgnoreCase("�?ang bán")) {
             rd_Dangban.setSelected(true);
         } else if (trangthai.equalsIgnoreCase("Dừng bán")) {
             rd_Dungban.setSelected(true);
@@ -106,15 +106,17 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         txt_LichSuGia.setText(spct.getGia() + "");
     }
 
-    SPCTModel readFrom(SPCTModel spct) {
+    SPCTModel readFrom() {
 
+        SPCTModel spct = new SPCTModel();
+        
         SizeModel size = sizeRepository.findByTen(txt_Size.getText().trim());
 
         MauSacModel mauSac = mauSacRepository.findByTen(txt_MauSac.getText().trim());
 
         spct.setSoluong(Integer.parseInt(txt_Soluong.getText().trim()));
         spct.setMasize(size.getMasize());
-        // spct.setTrangThai(rd_Dangban.isSelected() ? "�?ang bán" : "Dừng bán");
+        // spct.setTrangThai(rd_Dangban.isSelected() ? "�?ang bán" : "Dừng bán");
         spct.setMaMauSac(mauSac.getMamau());
 
 //        sp.setTen(txt_Ten.getText());
@@ -400,7 +402,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rd_Dangban);
-        rd_Dangban.setText("�?ang bán");
+        rd_Dangban.setText("�?ang bán");
 
         buttonGroup1.add(rd_Dungban);
         rd_Dungban.setText("Dừng bán");
@@ -506,7 +508,7 @@ public class QL_SanPham1 extends javax.swing.JPanel {
     private void btn_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDActionPerformed
         // TODO add your handling code here:
         if (check()) {
-            if (spctRespository.add(readFrom(SPCTModel.builder().build())) != null) {
+            if (spctRespository.add(readFrom()) != null) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 this.fillTable(sanpham.getAll());
                 clear();

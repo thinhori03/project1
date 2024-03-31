@@ -6,11 +6,6 @@ package org.project1.nhom8.model;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
@@ -30,8 +25,6 @@ import org.project1.nhom8.util.data.DataTable;
  *     TRANG_THAI  VARCHAR(20) -- đang hoạt động đã hủy
  * )
  */
-
-@Builder
 
 @DataTable(name = "VOUCHER")
 public class VoucherModel {

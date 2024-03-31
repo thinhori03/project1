@@ -1,7 +1,6 @@
 package org.project1.nhom8.repository;
 
 import org.project1.nhom8.model.GiaModel;
-import org.project1.nhom8.model.VoucherModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +19,7 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator()
                             .generateSelectAllQuery() +
-                            """
-                                
-                                WHERE MASPCT = ?
-                                ORDER BY NGAYUPDATE DESC
-                            """);
+                            " WHERE MASPCT = ? ORDER BY NGAYUPDATE DESC ");
             preparedStatement.setInt(1, maspct);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -47,9 +42,7 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
         try {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
-                            """
-                                WHERE MASPCT = ?
-                            """);
+                            " WHERE MASPCT = ? ");
             preparedStatement.setInt(1, maspct);
             ResultSet resultSet = preparedStatement.executeQuery();;
 

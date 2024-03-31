@@ -28,16 +28,21 @@ public class VoucherViewModelProvider {
 
         List<VoucherModel> voucherModels = voucherRepository.findAll();
 
-        for (VoucherModel vvd : voucherModels) {
-            result.add(VoucherViewModel.builder()
-                    .maVoucher(vvd.getMaVoucher())
-                    .gia(vvd.getGiaTri())
-                    .dieuKien(vvd.getDiauKien())
-                    .ngayTao(vvd.getNgayTao())
-                    .ngayBatDau(vvd.getNgayBatDau())
-                    .ngayKetThuc(vvd.getNgayKetThuc())
-                    .trangThai(vvd.getTrangThai())
-                    .build());
+        VoucherViewModel vvm = null;
+
+        for (VoucherModel vm : voucherModels) {
+
+            vvm = new VoucherViewModel();
+
+            vvm.setMaVoucher(vm.getMaVoucher());
+            vvm.setGia(vm.getGiaTri());
+            vvm.setDieuKien(vm.getDiauKien());
+            vvm.setNgayTao(vm.getNgayTao());
+            vvm.setNgayBatDau(vm.getNgayBatDau());
+            vm.setNgayKetThuc(vm.getNgayKetThuc());
+            vvm.setTrangThai(vm.getTrangThai());
+
+            result.add(vvm);
         }
 
         return result;

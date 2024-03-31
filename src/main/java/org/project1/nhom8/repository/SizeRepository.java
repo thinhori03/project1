@@ -18,9 +18,7 @@ public class SizeRepository extends GeneralRepository<SizeModel, Integer> {
         try {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
-                            """
-                                WHERE TENSIZE = ?
-                            """);
+                            " WHERE TENSIZE = ? ");
             preparedStatement.setString(1, ten);
             ResultSet resultSet = preparedStatement.executeQuery();;
 

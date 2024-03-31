@@ -192,12 +192,15 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
      * prepare to insert gia model
      */
     public GiaModel readGia() {
-        return GiaModel.builder()
-                .maLSG(giaRepository.count() + 1)
-                .gia(Double.parseDouble(txt_Gia.getText().trim()))
-                .maSPCT(this.maSPCT)
-                .ngayCapNhat(new Date())
-                .build();
+
+        GiaModel gia = new GiaModel();
+
+                        gia.setMaLSG(giaRepository.count() + 1);
+                gia.setGia(Double.parseDouble(txt_Gia.getText().trim()));
+                gia.setMaSPCT(this.maSPCT);
+                gia.setNgayCapNhat(new Date());
+
+        return gia;
     }
 
     SanPhamModel readFrom_SP() {

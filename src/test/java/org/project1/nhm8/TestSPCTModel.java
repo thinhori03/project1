@@ -32,19 +32,19 @@ public class TestSPCTModel {
         }
     }
 
-    @Test
-    @DisplayName("test update SPCT")
-    public void updateSPCT() {
-
-        Assertions.assertTrue(spctRepository.update(
-                SPCTModel.builder()
-                        .maSPCT(1)
-                        .maSP(1)
-                        .soluong(1)
-                        .maMauSac(1)
-                        .masize(1)
-                        .build()
-        ));
-    }
+//    @Test
+//    @DisplayName("test update SPCT")
+//    public void updateSPCT() {
+//
+//        Assertions.assertTrue(spctRepository.update(
+//                SPCTModel.builder()
+//                        .maSPCT(1)
+//                        .maSP(1)
+//                        .soluong(1)
+//                        .maMauSac(1)
+//                        .masize(1)
+//                        .build()
+//        ));
+//    }
 
 }

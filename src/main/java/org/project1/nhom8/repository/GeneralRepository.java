@@ -3,7 +3,6 @@ package org.project1.nhom8.repository;
 import java.sql.*;
 import java.util.List;
 
-import lombok.Getter;
 import org.project1.nhom8.service.DBConnect;
 import org.project1.nhom8.util.data.QueryGenerator;
 

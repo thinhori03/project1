@@ -1,6 +1,7 @@
 package org.project1.nhom8.dto.provider;
 
 import org.project1.nhom8.dto.HDCTViewModel;
+import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.VoucherViewModel;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.SPCTModel;
@@ -56,18 +57,22 @@ public class HDCTViewModelProvider {
 
         SPCTModel spct = null;
 
+        HDCTViewModel hdctvm = null;
+
         for(HDCTModel hdctm : hdctModels) {
 
             spct = spctRepository.findById(hdctm.getMaSPCT());
 
-            result.add(HDCTViewModel.builder()
-                            .maSPCT(hdctm.getMaSPCT())
-                            .mauSac(mauSacRepository.findById(spct.getMaMauSac()).getTenmau())
-                            .size(sizeRepository.findById(spct.getMaSPCT()).getTensize())
-                            .gia(giaRepository.getgiaMoiNhat(spct.getMaSPCT()).getGia())
-                            .tenSP(sanPhamRepository.findById(spct.getMaSP()).getTensp())
-                            .soLuong(hdctm.getSoLuong())
-                    .build());
+            hdctvm = new HDCTViewModel();
+
+            hdctvm.setMaSPCT(hdctm.getMaSPCT());
+            hdctvm.setMauSac(mauSacRepository.findById(spct.getMaMauSac()).getTenmau());
+            hdctvm.setSize(sizeRepository.findById(spct.getMaSPCT()).getTensize());
+            hdctvm.setGia(giaRepository.getgiaMoiNhat(spct.getMaSPCT()).getGia());
+            hdctvm.setTenSP(sanPhamRepository.findById(spct.getMaSP()).getTensp());
+            hdctvm.setSoLuong(hdctm.getSoLuong());
+
+            result.add(hdctvm);
         }
 
         return result;

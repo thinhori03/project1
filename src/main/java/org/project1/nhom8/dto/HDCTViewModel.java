@@ -1,19 +1,13 @@
 package org.project1.nhom8.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 
-@Builder
 public class HDCTViewModel {
-    @DataHeader(name = "Mã s?n ph?m chi ti?t")
+    @DataHeader(name = "Mï¿½ s?n ph?m chi ti?t")
     private Integer maSPCT;
 
-    @DataHeader(name = "Tên s?n ph?m")
+    @DataHeader(name = "Tï¿½n s?n ph?m")
     private String tenSP;
 
     @DataHeader(name = "S? l??ng")
@@ -22,10 +16,10 @@ public class HDCTViewModel {
     @DataHeader(name = "Size")
     private String size;
 
-    @DataHeader(name = "Màu s?c")
+    @DataHeader(name = "Mï¿½u s?c")
     private String mauSac;
 
-    @DataHeader(name = "Giá")
+    @DataHeader(name = "Giï¿½")
     private double gia;
 
     public HDCTViewModel() {

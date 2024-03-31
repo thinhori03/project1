@@ -1,11 +1,6 @@
 package org.project1.nhom8.dto.provider;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import org.project1.nhom8.dto.SPCTViewModel;
-import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.repository.GiaRepository;
@@ -21,25 +16,20 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-@AllArgsConstructor
-@Setter
-@Getter
-@Builder
 public class SPCTViewModelProvider {
 
-    private SanPhamRepository sanPhamRepository;
+    private final SanPhamRepository sanPhamRepository;
 
-    private SPCTRepository spctRespository;
+    private final SPCTRepository spctRespository;
 
-    private GiaRepository giaRepository;
+    private final GiaRepository giaRepository;
 
-    private SizeRepository sizeRepository;
+    private final SizeRepository sizeRepository;
 
-    private MauSacRepository mauSacRepository;
+    private final MauSacRepository mauSacRepository;
 
     public SPCTViewModelProvider() {
 
@@ -64,28 +54,32 @@ public class SPCTViewModelProvider {
 
         SanPhamModel sp = new SanPhamModel();
 
+        SPCTViewModel spctvm = null;
+
         for (SPCTModel spctModel : spctModels) {
             new SPCTViewModel();
 
             sp = sanPhamRepository.findById(spctModel.getMaSP());
 
-            result.add(SPCTViewModel.builder()
-                    .maSPCT(spctModel.getMaSPCT())
-                    .maSP(spctModel.getMaSP())
-                    .tenSP(sp.getTensp())
-                    .gia(giaRepository.getgiaMoiNhat(spctModel.getMaSPCT()).getGia())
-                    .size(sizeRepository.findById(spctModel.getMasize()).getTensize())
-                    .mauSac(mauSacRepository.findById(spctModel.getMaMauSac()).getTenmau())
-                    .trangThai(sp.getTrangthai())
-                    .soLuong(spctModel.getSoluong())
-                    .build());
+            spctvm = new SPCTViewModel();
+
+            spctvm.setMaSPCT(spctModel.getMaSPCT());
+            spctvm.setMaSP(spctModel.getMaSP());
+            spctvm.setTenSP(sp.getTensp());
+            spctvm.setGia(giaRepository.getgiaMoiNhat(spctModel.getMaSPCT()).getGia());
+            spctvm.setSize(sizeRepository.findById(spctModel.getMasize()).getTensize());
+            spctvm.setMauSac(mauSacRepository.findById(spctModel.getMaMauSac()).getTenmau());
+            spctvm.setTrangThai(sp.getTrangthai());
+            spctvm.setSoLuong(spctModel.getSoluong());
+
+            result.add(spctvm);
         }
         return result;
     }
 
     public TableModel toTableModel() {
 
-        DefaultTableModel defaultTableModel =new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
 
         List<Field> fields = Arrays.asList(SPCTViewModel.class.getDeclaredFields())
                 .stream()

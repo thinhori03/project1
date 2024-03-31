@@ -1,14 +1,11 @@
 package org.project1.nhom8.dto.provider;
 
-import org.project1.nhom8.dto.HDCTViewModel;
 import org.project1.nhom8.dto.HoaDonViewModel;
-import org.project1.nhom8.dto.VoucherViewModel;
 import org.project1.nhom8.model.HoaDonModel;
 import org.project1.nhom8.repository.HoaDonRepository;
 import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.data.visual.DataHeader;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.swing.table.DefaultTableModel;
 import java.lang.reflect.Field;
@@ -32,15 +29,19 @@ public class HDViewModelProvider {
 
         List<HoaDonModel> hoaDonModels = hoaDonRepository.findAll();
 
+        HoaDonViewModel hdvm = null;
+
         for (HoaDonModel hdm : hoaDonModels) {
-            result.add(HoaDonViewModel.builder()
-                    .maHoaDon(hdm.getMaHoaDon())
-                            .ngayTao(hdm.getNgayTao())
-                            .maKH(hdm.getMaKH())
-                            .maNV(hdm.getMaNV())
-                            .TrangThai(hdm.getTrangThai())
-                            .tongTien(Double.valueOf(1000))
-                    .build());
+
+            hdvm = new HoaDonViewModel();
+
+            hdvm.setNgayTao(hdm.getNgayTao());
+            hdvm.setMaKH(hdm.getMaKH());
+            hdvm.setMaNV(hdm.getMaNV());
+            hdvm.setTrangThai(hdm.getTrangThai());
+            hdvm.setTongTien(Double.valueOf(1000));
+
+            result.add(hdvm);
         }
 
         return result;
