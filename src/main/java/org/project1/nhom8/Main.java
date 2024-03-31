@@ -13,7 +13,7 @@ import org.project1.nhom8.View.VoucherPanel;
 public class Main {
 
     public static void main(String[] args) {
-
+        
         new org.project1.nhom8.View.main().setVisible(true);
     }
 }
