@@ -17,9 +17,7 @@ public class MauSacRepository extends GeneralRepository<MauSacModel, Integer> {
         try {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
-                            """
-                                WHERE TENMAU = ?
-                            """);
+                            " WHERE TENMAU = ? ");
             preparedStatement.setString(1, tenMau);
             ResultSet resultSet = preparedStatement.executeQuery();;
 

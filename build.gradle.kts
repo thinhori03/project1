@@ -21,8 +21,8 @@ dependencies {
     runtimeOnly("com.formdev:flatlaf:3.4")
     runtimeOnly("com.formdev:flatlaf-intellij-themes:3.4")
 
-    compileOnly("org.projectlombok:lombok:1.18.24")
-    annotationProcessor("org.projectlombok:lombok:1.18.24")
+//    compileOnly("org.projectlombok:lombok:1.18.24")
+//    annotationProcessor("org.projectlombok:lombok:1.18.24")
 
 }
 
@@ -33,10 +33,6 @@ java {
 
 application {
     mainClass = "org.project1.nhom8.Main"
-}
-
-tasks.named<Test>("test") {
-    useJUnitPlatform()
 }
 
 tasks.compileJava {

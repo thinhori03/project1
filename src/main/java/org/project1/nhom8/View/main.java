@@ -18,9 +18,9 @@ public class main extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setExtendedState(this.MAXIMIZED_BOTH);
-//        setColor(lblBanHang);
-//        setColorJpanel(pnBanHang);
-//        showPanel(new Form_BanHang());
+        setColor(lblBanHang);
+        setColorJpanel(pnBanHang);
+        showPanel(new Form_BanHang());
     }
 
     /**
@@ -298,7 +298,7 @@ public class main extends javax.swing.JFrame {
         lblDangXuat.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
         lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/8.png"))); // NOI18N
-        lblDangXuat.setText("Đăng xuất");
+        lblDangXuat.setText("�?ăng xuất");
 
         javax.swing.GroupLayout pnDangXuatLayout = new javax.swing.GroupLayout(pnDangXuat);
         pnDangXuat.setLayout(pnDangXuatLayout);
@@ -562,7 +562,7 @@ public class main extends javax.swing.JFrame {
         resetColorJpane(pnKhachHang);
         resetColorJpane(pnHoaDon);
         resetColorJpane(pnThongke);
-        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận Đăng Xuất", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận �?ăng Xuất", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
             main.this.dispose();

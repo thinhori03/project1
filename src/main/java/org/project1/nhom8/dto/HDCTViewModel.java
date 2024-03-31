@@ -3,42 +3,34 @@ package org.project1.nhom8.dto;
 import org.project1.nhom8.util.data.visual.DataHeader;
 
 
-public class SPCTViewModel {
-
+public class HDCTViewModel {
+    @DataHeader(name = "M� s?n ph?m chi ti?t")
     private Integer maSPCT;
 
-    @DataHeader(name = "mã sản phẩm")
-    private Integer maSP;
-
-    @DataHeader(name = "tên sản phẩm")
+    @DataHeader(name = "Tên sản phẩm")
     private String tenSP;
 
     @DataHeader(name = "số lượng")
     private Integer soLuong;
 
-    @DataHeader(name = "size")
+    @DataHeader(name = "Size")
     private String size;
 
     @DataHeader(name = "màu sắc")
     private String mauSac;
 
-    @DataHeader(name = "trạng thái")
-    private String trangThai;
-
-    @DataHeader(name = "giá")
+    @DataHeader(name = "gias")
     private double gia;
 
-    public SPCTViewModel() {
+    public HDCTViewModel() {
     }
 
-    public SPCTViewModel(Integer maSPCT, Integer maSP, String tenSP, Integer soLuong, String size, String mauSac, String trangThai, double gia) {
+    public HDCTViewModel(Integer maSPCT, String tenSP, Integer soLuong, String size, String mauSac, double gia) {
         this.maSPCT = maSPCT;
-        this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.size = size;
         this.mauSac = mauSac;
-        this.trangThai = trangThai;
         this.gia = gia;
     }
 
@@ -48,14 +40,6 @@ public class SPCTViewModel {
 
     public void setMaSPCT(Integer maSPCT) {
         this.maSPCT = maSPCT;
-    }
-
-    public Integer getMaSP() {
-        return maSP;
-    }
-
-    public void setMaSP(Integer maSP) {
-        this.maSP = maSP;
     }
 
     public String getTenSP() {
@@ -88,14 +72,6 @@ public class SPCTViewModel {
 
     public void setMauSac(String mauSac) {
         this.mauSac = mauSac;
-    }
-
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
     }
 
     public double getGia() {

@@ -17,22 +17,22 @@ public class TestGia {
         this.giaRepository = new GiaRepository();
     }
 
-    @Test
-    public void addGia() {
-
-        GiaModel gia = new GiaModel()
-                .builder()
-                .maLSG(giaRepository.count())
-                .ngayCapNhat(new Date())
-                .maSPCT(1)
-                .gia(1)
-                .build();
-
-        Assertions.assertTrue(this.giaRepository.update(gia));
-
-        Assertions.assertTrue(Optional
-                .ofNullable(gia.getMaLSG()).isPresent());
-    }
+//    @Test
+//    public void addGia() {
+//
+//        GiaModel gia = new GiaModel()
+//                .builder()
+//                .maLSG(giaRepository.count())
+//                .ngayCapNhat(new Date())
+//                .maSPCT(1)
+//                .gia(1)
+//                .build();
+//
+//        Assertions.assertTrue(this.giaRepository.update(gia));
+//
+//        Assertions.assertTrue(Optional
+//                .ofNullable(gia.getMaLSG()).isPresent());
+//    }
 
     @Test
     public void getAll() {

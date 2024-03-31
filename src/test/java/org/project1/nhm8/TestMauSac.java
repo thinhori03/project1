@@ -13,6 +13,6 @@ public class TestMauSac {
 
     @Test
     public void findByName() {
-        System.out.println(this.mauSacRepository.findByTen("Đỏ").getId_Mamau());
+        System.out.println(this.mauSacRepository.findByTen("Đỏ").getMamau());
     }
 }

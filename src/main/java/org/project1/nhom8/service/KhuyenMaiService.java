@@ -49,8 +49,8 @@ public class KhuyenMaiService {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, km.getMakm());
-            ps.setString(2, km.getNgayBd());
-            ps.setString(3, km.getNgayKt());
+            ps.setString(2, km.getNgaybd());
+            ps.setString(3, km.getNgaykt());
             ps.setInt(4, km.getSoluong());
             ps.setFloat(5, km.getGia());
             kq = ps.executeUpdate();
@@ -67,8 +67,8 @@ public class KhuyenMaiService {
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, km.getNgayBd());
-            ps.setString(2, km.getNgayKt());
+            ps.setString(1, km.getNgaybd());
+            ps.setString(2, km.getNgaykt());
             ps.setInt(3, km.getSoluong());
             ps.setFloat(4, km.getGia());
             ps.setString(5, ma);

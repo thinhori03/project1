@@ -3,7 +3,6 @@ package org.project1.nhom8.repository;
 import java.sql.*;
 import java.util.List;
 
-import lombok.Getter;
 import org.project1.nhom8.service.DBConnect;
 import org.project1.nhom8.util.data.QueryGenerator;
 
@@ -11,7 +10,7 @@ import org.project1.nhom8.util.data.QueryGenerator;
  *
  * @author ngtnthori03
  */
-@Getter
+
 public class GeneralRepository<TTable, TId> {
 
     private final Connection connection;
@@ -25,6 +24,16 @@ public class GeneralRepository<TTable, TId> {
         this.queryGenerator = new QueryGenerator<>(tableClass);
     }
 
+   
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public QueryGenerator<TTable, TId> getQueryGenerator() {
+        return queryGenerator;
+    }
+    
 
     public List<TTable> findAll() {
         return this.queryGenerator.executeFindAll(connection);

@@ -3,6 +3,7 @@ package org.project1.nhom8;
 
 import javax.swing.*;
 
+import org.project1.nhom8.View.HoaDonPanel;
 import org.project1.nhom8.View.QL_SanPham1;
 import org.project1.nhom8.View.VoucherPanel;
 
@@ -15,7 +16,7 @@ public class Main {
 
         try {
             UIManager.setLookAndFeel(
-                    "com.formdev.flatlaf.intellijthemes.FlatDarkFlatIJTheme"
+                    "com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme"
             );
         } catch (ClassNotFoundException
                  | InstantiationException
@@ -26,15 +27,14 @@ public class Main {
 
         JFrame f = new JFrame();
         
-        f.add(new QL_SanPham1());
+        f.add(new HoaDonPanel());
         
-        f.setSize(500, 500);
+        f.setSize(1000, 500);
         
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         f.setLocationRelativeTo(null);
         
         f.setVisible(true);
-        
     }
 }

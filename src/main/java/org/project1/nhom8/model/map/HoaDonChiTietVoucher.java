@@ -1,10 +1,5 @@
 package org.project1.nhom8.model.map;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.DataTable;
 
@@ -17,12 +12,6 @@ import org.project1.nhom8.util.data.DataTable;
  *     maKM   VARCHAR(14) references KHUYEN_MAI_COUPON (maKM)
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
-@Builder
-
 @DataTable(name = "hoa_don_chi_tiet__khuyen_mai")
 public class HoaDonChiTietVoucher {
 
@@ -31,4 +20,28 @@ public class HoaDonChiTietVoucher {
 
     @DataField(name = "maKM")
     private String mavoucher;
+
+    public HoaDonChiTietVoucher() {
+
+    }
+    public HoaDonChiTietVoucher(int maHoaDonChiTiet, String mavoucher) {
+        this.maHoaDonChiTiet = maHoaDonChiTiet;
+        this.mavoucher = mavoucher;
+    }
+
+    public int getMaHoaDonChiTiet() {
+        return maHoaDonChiTiet;
+    }
+
+    public void setMaHoaDonChiTiet(int maHoaDonChiTiet) {
+        this.maHoaDonChiTiet = maHoaDonChiTiet;
+    }
+
+    public String getMavoucher() {
+        return mavoucher;
+    }
+
+    public void setMavoucher(String mavoucher) {
+        this.mavoucher = mavoucher;
+    }
 }

@@ -15,7 +15,6 @@ public class QL_HoaDon extends javax.swing.JFrame {
      */
     public QL_HoaDon() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**

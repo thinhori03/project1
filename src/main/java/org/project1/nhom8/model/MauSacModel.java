@@ -4,11 +4,6 @@
  */
 package org.project1.nhom8.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.DataTable;
 
@@ -21,17 +16,38 @@ import org.project1.nhom8.util.data.DataTable;
  *     TENMAU NVARCHAR(100) unique
  * )
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@DataTable(name = "MAU_SAC")
+@DataTable (name="MAU_SAC")
 public class MauSacModel {
+    @DataField(name ="MAMAU")
+    int mamau;
+    @DataField(name="TENMAU")
+    String tenmau;
 
-    @DataField(name = "MAMAU")
-    private int id_Mamau;
+    public MauSacModel() {
+    }
 
-    @DataField(name = "TENMAU")
-    private String tenmau;
+    public MauSacModel(int mamau, String tenmau) {
+        this.mamau = mamau;
+        this.tenmau = tenmau;
+    }
+
+    public int getMamau() {
+        return mamau;
+    }
+
+    public void setMamau(int mamau) {
+        this.mamau = mamau;
+    }
+
+    public String getTenmau() {
+        return tenmau;
+    }
+
+    public void setTenmau(String tenmau) {
+        this.tenmau = tenmau;
+    }
+
+    
+    
+   
 }
