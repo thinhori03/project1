@@ -35,6 +35,10 @@ application {
     mainClass = "org.project1.nhom8.Main"
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
 tasks.compileJava {
     options.encoding = "UTF-8"
 }

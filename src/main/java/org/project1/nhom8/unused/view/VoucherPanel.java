@@ -89,7 +89,7 @@ public class VoucherPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(Voucherview);
 
-        jLabel1.setText("th�?i gian bắt đầu");
+        jLabel1.setText("thời gian bắt đàu");
 
         jLabel4.setText("giá trị");
 
@@ -99,7 +99,7 @@ public class VoucherPanel extends javax.swing.JPanel {
 
         jButton6.setText("tai lai");
 
-        jLabel2.setText("th�?i gian kết thúc");
+        jLabel2.setText("thời gian kết thúc");
 
         condPriceErr.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         condPriceErr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
