@@ -37,7 +37,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
 
     public void showData(int index) {
         NhanVien nv = service.getAll().get(index);
-        txtMa.setText(nv.getMaNV() + "");
+        lblMaNV.setText(nv.getMaNV() + "");
         txtHoTen.setText(nv.getHoTen());
         txtEmail.setText(nv.getEmail());
         txtSdt.setText(nv.getSdt());
@@ -58,7 +58,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
     }
 
     NhanVien readForm() {
-        int ma = Integer.parseInt(txtMa.getText());
+       
         String ten = txtHoTen.getText();
         String email = txtEmail.getText();
         String sdt = txtSdt.getText();
@@ -78,15 +78,15 @@ public class Form_NhanVien extends javax.swing.JPanel {
         }
         String trangThai = cboTrangThai.getSelectedItem().toString();
 
-        return new NhanVien(ma, ten, sdt, email, gioiTinh, cccd, password, vaiTro, trangThai);
+        return new NhanVien( ten, sdt, email, gioiTinh, cccd, password, vaiTro, trangThai);
     }
 
     private boolean checkNull() {
-        String ma = txtMa.getText();
-        if (ma.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã không được để trống");
-            return false;
-        }
+//        String ma = lblMaNV.getText();
+//        if (ma.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Mã không được để trống");
+//            return false;
+//        }
         String ten = txtHoTen.getText();
         if (ten.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên không được để trống");
@@ -192,7 +192,6 @@ public class Form_NhanVien extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtHoTen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -214,15 +213,16 @@ public class Form_NhanVien extends javax.swing.JPanel {
         btnSua = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         cboTrangThai = new javax.swing.JComboBox<>();
+        lblMaNV = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1159, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
+        jLabel1.setText("QU?N L� NH�N VI�N");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin nhân viên"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Th�ng tin nh�n vi�n"));
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +232,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Họ và tên", "SĐT", "Email", "Giới tính", "Mật khẩu", "CCCD", "Vai trò", "Trạng thái"
+                "M� NV", "H? v� t�n", "S?T", "Email", "Gi?i t�nh", "M?t kh?u", "CCCD", "Vai tr�", "Tr?ng th�i"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -284,9 +284,9 @@ public class Form_NhanVien extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(0, 0, 0)));
 
-        jLabel11.setText("Trạng thái:");
+        jLabel11.setText("Tr?ng th�i:");
 
-        cboTt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm việc", "Nghỉ việc" }));
+        cboTt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "?ang l�m vi?c", "Ngh? vi?c" }));
         cboTt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTtActionPerformed(evt);
@@ -314,7 +314,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
 
-        jLabel14.setText("Tìm kiếm:");
+        jLabel14.setText("T�m ki?m:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -364,36 +364,34 @@ public class Form_NhanVien extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thiết lập thông tin nhân viên"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thi?t l?p th�ng tin nh�n vi�n"));
 
-        jLabel2.setText("Mã NV:");
+        jLabel2.setText("M� NV:");
 
-        txtMa.setEditable(false);
+        jLabel3.setText("H? v� t�n:");
 
-        jLabel3.setText("Họ và tên:");
-
-        jLabel4.setText("Giới tính:");
+        jLabel4.setText("Gi?i t�nh:");
 
         buttonGroup1.add(rdNam);
         rdNam.setText("Nam");
 
         buttonGroup1.add(rdNu);
-        rdNu.setText("Nữ");
+        rdNu.setText("N?");
 
-        jLabel5.setText("Số điện thoại:");
+        jLabel5.setText("S? ?i?n tho?i:");
 
-        jLabel6.setText("Số CCCD:");
+        jLabel6.setText("S? CCCD:");
 
         jLabel7.setText("Email:");
 
-        jLabel9.setText("Mật khẩu:");
+        jLabel9.setText("M?t kh?u:");
 
-        jLabel8.setText("Vai trò:");
+        jLabel8.setText("Vai tr�:");
 
-        jLabel10.setText("Trạng thái:");
+        jLabel10.setText("Tr?ng th�i:");
 
         buttonGroup2.add(rdNhanVien);
-        rdNhanVien.setText("Nhân Viên");
+        rdNhanVien.setText("Nh�n Vi�n");
         rdNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdNhanVienActionPerformed(evt);
@@ -401,35 +399,37 @@ public class Form_NhanVien extends javax.swing.JPanel {
         });
 
         buttonGroup2.add(rdQuanLy);
-        rdQuanLy.setText("Quản Lý");
+        rdQuanLy.setText("Qu?n L�");
         rdQuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdQuanLyActionPerformed(evt);
             }
         });
 
-        btnThem.setText("Thêm");
+        btnThem.setText("Th�m");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setText("Sửa");
+        btnSua.setText("S?a");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnReset.setText("Làm mới");
+        btnReset.setText("L�m m?i");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
             }
         });
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm việc", "Nghỉ việc" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "?ang l�m vi?c", "Ngh? vi?c" }));
+
+        lblMaNV.setText("-");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -441,8 +441,8 @@ public class Form_NhanVien extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(152, 152, 152)
+                        .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -492,12 +492,15 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel6)
+                                .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -637,8 +640,8 @@ public class Form_NhanVien extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        int newEmployeeID = service.layMa();
-        txtMa.setText(String.valueOf(newEmployeeID));
+       
+        lblMaNV.setText("");
         txtHoTen.setText("");
         txtEmail.setText("");
         txtCCCD.setText("");
@@ -676,7 +679,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
             }
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi");
+            JOptionPane.showMessageDialog(this, "�?ã xảy ra lỗi");
             ex.printStackTrace();
         }
 
@@ -721,6 +724,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMaNV;
     private javax.swing.JRadioButton rdNam;
     private javax.swing.JRadioButton rdNhanVien;
     private javax.swing.JRadioButton rdNu;
@@ -729,7 +733,6 @@ public class Form_NhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMa;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtSdt;
     private javax.swing.JTextField txtTimKiem;
