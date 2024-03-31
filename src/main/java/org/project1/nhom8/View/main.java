@@ -298,7 +298,7 @@ public class main extends javax.swing.JFrame {
         lblDangXuat.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
         lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/8.png"))); // NOI18N
-        lblDangXuat.setText("�?ăng xuất");
+        lblDangXuat.setText("Đăng xuất");
 
         javax.swing.GroupLayout pnDangXuatLayout = new javax.swing.GroupLayout(pnDangXuat);
         pnDangXuat.setLayout(pnDangXuatLayout);
@@ -306,8 +306,8 @@ public class main extends javax.swing.JFrame {
             pnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDangXuatLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(lblDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addComponent(lblDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         pnDangXuatLayout.setVerticalGroup(
             pnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +562,7 @@ public class main extends javax.swing.JFrame {
         resetColorJpane(pnKhachHang);
         resetColorJpane(pnHoaDon);
         resetColorJpane(pnThongke);
-        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận �?ăng Xuất", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận �?ăng Xuất", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
             main.this.dispose();

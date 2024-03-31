@@ -14,27 +14,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        try {
-            UIManager.setLookAndFeel(
-                    "com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme"
-            );
-        } catch (ClassNotFoundException
-                 | InstantiationException
-                 | IllegalAccessException
-                 | UnsupportedLookAndFeelException e) {
-            System.out.println("cannot aply look and feel");
-        }
-
-        JFrame f = new JFrame();
-        
-        f.add(new HoaDonPanel());
-        
-        f.setSize(1000, 500);
-        
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
-        f.setLocationRelativeTo(null);
-        
-        f.setVisible(true);
+        new org.project1.nhom8.View.main().setVisible(true);
     }
 }

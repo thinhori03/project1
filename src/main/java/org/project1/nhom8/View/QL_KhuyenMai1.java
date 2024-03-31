@@ -160,15 +160,15 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel2.setText("M� KM:");
+        jLabel2.setText("Mã KM:");
 
-        jLabel3.setText("Ng�y b?t ??u:");
+        jLabel3.setText("Ngày bắt đầu:");
 
-        jLabel4.setText("S? l??ng:");
+        jLabel4.setText("Số lượng:");
 
-        jLabel5.setText("Gi�:");
+        jLabel5.setText("Giá:");
 
-        jLabel6.setText("Ng�y k?t th�c:");
+        jLabel6.setText("Ngày kết thúc:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,21 +219,21 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btn_ADD.setText("Th�m KM");
+        btn_ADD.setText("Thêm KM");
         btn_ADD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ADDActionPerformed(evt);
             }
         });
 
-        btn_Update.setText("S?a KM");
+        btn_Update.setText("Sửa KM");
         btn_Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_UpdateActionPerformed(evt);
             }
         });
 
-        btn_Delete.setText("X�a KM");
+        btn_Delete.setText("Xóa KM");
         btn_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DeleteActionPerformed(evt);
@@ -248,7 +248,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "M� KM", "Ng�y b?t ??u", "Ng�y k?t th�c", "S? l??ng", "Gi�"
+                "Mã KM", "Ngày bắt đầu", "Ngày kết thúc", "Số lượng", "Giá"
             }
         ));
         Tbl_KhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -258,7 +258,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Tbl_KhuyenMai);
 
-        jLabel7.setText("T�m ki?m:");
+        jLabel7.setText("Tìm kiếm:");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         id_Timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -312,7 +312,7 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setText("Qu?n L� Khuy?n M?i");
+        jLabel1.setText("Quản Lý Khuyến Mại");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -320,8 +320,8 @@ public class QL_KhuyenMai1 extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

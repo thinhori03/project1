@@ -29,18 +29,18 @@ public class TestVoucherModel {
 //                .build()) != null);
 //    }
 
-    @Test
-    @DisplayName("insert")
-    public void insert() {
-        Assertions.assertTrue(voucherRepository.add(VoucherModel.builder()
-                .maVoucher("V" + voucherRepository.count() + 1)
-                .diauKien(100000F)
-                .ngayTao(new Date())
-                .ngayBatDau(new Date())
-                .ngayKetThuc(new Date())
-                .giaTri(20000F)
-                .build()) != null);
-    }
+//    @Test
+//    @DisplayName("insert")
+//    public void insert() {
+//        Assertions.assertTrue(voucherRepository.add(VoucherModel.builder()
+//                .maVoucher("V" + voucherRepository.count() + 1)
+//                .diauKien(100000F)
+//                .ngayTao(new Date())
+//                .ngayBatDau(new Date())
+//                .ngayKetThuc(new Date())
+//                .giaTri(20000F)
+//                .build()) != null);
+//    }
 
     @Test
     public void insertVoucher() {
