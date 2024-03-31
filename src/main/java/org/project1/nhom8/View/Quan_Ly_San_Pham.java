@@ -34,7 +34,7 @@ import org.project1.nhom8.service.SanPhamService_CT;
  *
  * @author Admin
  */
-public class Quan_Ly_San_Pham extends javax.swing.JFrame {
+public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     private SanPham_Service sp = new SanPham_Service();
     private SIZE_Service ss = new SIZE_Service();
@@ -288,7 +288,6 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -810,8 +809,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Lịch sử thay đổi giá sản phẩm", jPanel3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        // getContentPane().setLayout(layout);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -823,7 +825,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
-        pack();
+        // pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
