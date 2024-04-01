@@ -1,11 +1,8 @@
 
 package org.project1.nhom8;
 
-import javax.swing.*;
+import javax.swing.UIManager;
 
-import org.project1.nhom8.View.HoaDonPanel;
-import org.project1.nhom8.View.QL_SanPham1;
-import org.project1.nhom8.View.VoucherPanel;
 
 /*
  * @author ngtnthori03
@@ -13,6 +10,15 @@ import org.project1.nhom8.View.VoucherPanel;
 public class Main {
 
     public static void main(String[] args) {
+        
+//        try {
+//
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacDarkLaf");
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+        
         
         new org.project1.nhom8.View.main().setVisible(true);
     }
