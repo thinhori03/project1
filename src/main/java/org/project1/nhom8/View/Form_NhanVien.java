@@ -219,10 +219,10 @@ public class Form_NhanVien extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1159, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("QU?N L� NH�N VI�N");
+        jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Th�ng tin nh�n vi�n"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin nhân viên"));
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +232,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "M� NV", "H? v� t�n", "S?T", "Email", "Gi?i t�nh", "M?t kh?u", "CCCD", "Vai tr�", "Tr?ng th�i"
+                "Mã NV", "Họ và tên", "SĐT", "Email", "Giới tính", "Mật khẩu", "CCCD", "Vai trò", "Trạng thái"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -284,9 +284,9 @@ public class Form_NhanVien extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(0, 0, 0)));
 
-        jLabel11.setText("Tr?ng th�i:");
+        jLabel11.setText("Trạng thái:");
 
-        cboTt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "?ang l�m vi?c", "Ngh? vi?c" }));
+        cboTt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm việc", "Nghỉ việc" }));
         cboTt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTtActionPerformed(evt);
@@ -314,7 +314,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
 
-        jLabel14.setText("T�m ki?m:");
+        jLabel14.setText("Tìm kiếm:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -364,34 +364,34 @@ public class Form_NhanVien extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thi?t l?p th�ng tin nh�n vi�n"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thiết lập thông tin nhân viên"));
 
-        jLabel2.setText("M� NV:");
+        jLabel2.setText("Mã NV:");
 
-        jLabel3.setText("H? v� t�n:");
+        jLabel3.setText("Họ và tên:");
 
-        jLabel4.setText("Gi?i t�nh:");
+        jLabel4.setText("Giới tính:");
 
         buttonGroup1.add(rdNam);
         rdNam.setText("Nam");
 
         buttonGroup1.add(rdNu);
-        rdNu.setText("N?");
+        rdNu.setText("Nữ");
 
-        jLabel5.setText("S? ?i?n tho?i:");
+        jLabel5.setText("Số điện thoại:");
 
-        jLabel6.setText("S? CCCD:");
+        jLabel6.setText("Số CCCD:");
 
         jLabel7.setText("Email:");
 
-        jLabel9.setText("M?t kh?u:");
+        jLabel9.setText("Mật khẩu:");
 
-        jLabel8.setText("Vai tr�:");
+        jLabel8.setText("Vai trò:");
 
-        jLabel10.setText("Tr?ng th�i:");
+        jLabel10.setText("Trạng thái:");
 
         buttonGroup2.add(rdNhanVien);
-        rdNhanVien.setText("Nh�n Vi�n");
+        rdNhanVien.setText("Nhân Viên");
         rdNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdNhanVienActionPerformed(evt);
@@ -399,35 +399,35 @@ public class Form_NhanVien extends javax.swing.JPanel {
         });
 
         buttonGroup2.add(rdQuanLy);
-        rdQuanLy.setText("Qu?n L�");
+        rdQuanLy.setText("Quản Lý");
         rdQuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdQuanLyActionPerformed(evt);
             }
         });
 
-        btnThem.setText("Th�m");
+        btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setText("S?a");
+        btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnReset.setText("L�m m?i");
+        btnReset.setText("Làm mới");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
             }
         });
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "?ang l�m vi?c", "Ngh? vi?c" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm việc", "Nghỉ việc" }));
 
         lblMaNV.setText("-");
 
@@ -679,7 +679,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
             }
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(this, "�?ã xảy ra lỗi");
+            JOptionPane.showMessageDialog(this, "�?ã xảy ra lỗi");
             ex.printStackTrace();
         }
 

@@ -98,7 +98,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(rdNam);
-        rdNam.setText("Nam ");
+        rdNam.setText("Nam");
 
         buttonGroup1.add(rdNu);
         rdNu.setText("Nữ");
@@ -130,7 +130,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setToolTipText("");
 
-        btnThem.setText("Thêm ");
+        btnThem.setText("Thêm");
         btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnThemMouseClicked(evt);
@@ -281,7 +281,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng ", "Tên ", "Số Điện Thoại", "Giới Tính ", "Email", "Địa Chỉ", "Ngày Sinh"
+                "Mã Khách Hàng", "Tên", "Số Điện Thoại", "Giới Tính", "Email", "Địa Chỉ", "Ngày Sinh"
             }
         ));
         tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {

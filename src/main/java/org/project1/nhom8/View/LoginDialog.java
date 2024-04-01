@@ -42,10 +42,10 @@ public class LoginDialog extends javax.swing.JDialog {
                     LoginService.lg = login;
                     this.dispose();
 //                    if (login.getVaiTro().equals("Quản Lý")) {
-//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n quản lý.");
+//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n quản lý.");
 //
 //                    } else if (login.getVaiTro().equals("Nhân viên")) {
-//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n nhân viên.");
+//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quy�?n nhân viên.");
 //                    }
                     main mi = new main();
                     mi.setVisible(true);
@@ -57,7 +57,7 @@ public class LoginDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập không đúng");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên ngư�?i dùng và mật khẩu");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên ngư�?i dùng và mật khẩu");
         }
     }
 
@@ -93,7 +93,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel10.setText("�?ĂNG NHẬP");
+        jLabel10.setText("ĐĂNG NHẬP");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Email:");
@@ -102,7 +102,7 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel12.setText("Mật khẩu:");
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login-20.png"))); // NOI18N
-        btnDangNhap.setText("�?ăng nhập");
+        btnDangNhap.setText("Đăng nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -134,22 +134,22 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addComponent(btnThoat)
                 .addGap(48, 48, 48))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(119, 119, 119))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(76, 76, 76))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDangNhap, btnThoat});
@@ -159,14 +159,14 @@ public class LoginDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel10)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel11)
-                .addGap(4, 4, 4)
-                .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jLabel12)
-                .addGap(13, 13, 13)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap)
