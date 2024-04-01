@@ -1,8 +1,6 @@
 package org.project1.nhom8.dto.provider;
 
 import org.project1.nhom8.dto.HDCTViewModel;
-import org.project1.nhom8.dto.SPCTViewModel;
-import org.project1.nhom8.dto.VoucherViewModel;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
@@ -53,13 +51,13 @@ public class HDCTViewModelProvider {
     public List<HDCTViewModel> getHDCTViewModel(String maHD) {
         List<HDCTViewModel> result = new ArrayList<>();
 
-        List<HDCTModel> hdctModels = hdctRepository.findBymaHD(maHD);
+        List<HDCTModel> hdctModels = hdctRepository.findByMaHD(maHD);
 
         SPCTModel spct = null;
 
         HDCTViewModel hdctvm = null;
 
-        for(HDCTModel hdctm : hdctModels) {
+        for (HDCTModel hdctm : hdctModels) {
 
             spct = spctRepository.findById(hdctm.getMaSPCT());
 

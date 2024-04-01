@@ -1,8 +1,12 @@
 package org.project1.nhom8.dto.provider;
 
 import org.project1.nhom8.dto.HoaDonViewModel;
+import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
+import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
+import org.project1.nhom8.repository.KhachHangConnection;
 import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.data.visual.DataHeader;
@@ -14,18 +18,25 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.project1.nhom8.repository.KhachHangConnection;
 
 public class HDViewModelProvider {
 
     private final HoaDonRepository hoaDonRepository;
-    
+
     private final KhachHangConnection khachHangConnection;
+
+    private final GiaRepository giaRepository;
+
+    private final HDCTRepository hdctRepository;
 
     public HDViewModelProvider() {
         this.hoaDonRepository = new HoaDonRepository();
 
         this.khachHangConnection = new KhachHangConnection();
+
+        this.hdctRepository = new HDCTRepository();
+
+        this.giaRepository = new GiaRepository();
     }
 
     public List<HoaDonViewModel> getHoaDonViewModel() {
@@ -36,16 +47,22 @@ public class HDViewModelProvider {
 
         HoaDonViewModel hdvm = null;
 
+        List<HDCTModel> hdctms = null;
+
         for (HoaDonModel hdm : hoaDonModels) {
 
             hdvm = new HoaDonViewModel();
+
+            hdctms = hdctRepository.findByMaHD(hdm.getMaHoaDon());
 
             hdvm.setMaHoaDon(hdm.getMaHoaDon());
             hdvm.setNgayTao(hdm.getNgayTao());
             hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
             hdvm.setMaNV(hdm.getMaNV());
             hdvm.setTrangThai(hdm.getTrangThai());
-            hdvm.setTongTien(Double.valueOf(1000));
+            hdvm.setMaVoucher(hdm.getMaVoucher());
+            hdvm.setTongTien(hdctms.stream().mapToDouble(o -> giaRepository
+                    .findById(o.getMaLSG()).getGia()).sum());
 
             result.add(hdvm);
         }

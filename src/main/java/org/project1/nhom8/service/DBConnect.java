@@ -10,17 +10,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
  * @author ADMIN
  */
 public class DBConnect {
 
 
-    public static final String HOSTNAME = "NauTi\\SQLEXPRESS";
+    public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
     public static final String DBNAME = "DU_AN_NHOM_8";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "123";
+    public static final String PASSWORD = "r00t:R00T";
 
 
     /**
