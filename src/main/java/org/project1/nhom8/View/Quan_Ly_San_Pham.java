@@ -197,7 +197,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         txt_Ma.setText(spvm.getMaSanPham() + "");
         txt_Ten.setText(spvm.getTenSanPham());
 
-        if ((spvm.getTrangThai().compareTo("�?ang bán") == 0)) {
+        if ((spvm.getTrangThai().compareTo("Đang bán") == 0)) {
             rd_Dangban.setSelected(true);
         } else {
             rd_Dungban.setSelected(true);
@@ -241,8 +241,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     SanPhamModel readFrom_SP() {
         SanPhamModel sp = new SanPhamModel();
         sp.setTensp(txt_Ten.getText().trim());
-        sp.setTrangthai(rd_Dangban.isSelected() ? "?ang b�n"
-                : "D?ng b�n");
+        sp.setTrangthai(rd_Dangban.isSelected() ? "?ang bán"
+                : "Dừng Bán");
         return sp;
     }
 
@@ -495,7 +495,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
