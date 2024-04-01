@@ -126,9 +126,9 @@ public class VoucherPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(Voucherview);
 
-        jLabel1.setText("th?i gian b?t ??u");
+        jLabel1.setText("thời gian bắt đầu");
 
-        jLabel4.setText("gi� tr?");
+        jLabel4.setText("giá trị");
 
         jLabel5.setText("dieu kien");
 
@@ -141,7 +141,7 @@ public class VoucherPanel extends javax.swing.JPanel {
 
         jButton6.setText("reset");
 
-        jLabel2.setText("th?i gian k?t th�c");
+        jLabel2.setText("thời gian kết thúc");
 
         condPriceErr.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         condPriceErr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -219,7 +219,7 @@ public class VoucherPanel extends javax.swing.JPanel {
                             .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(dateErr, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton5)

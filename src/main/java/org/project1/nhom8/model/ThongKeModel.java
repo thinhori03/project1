@@ -4,6 +4,8 @@
  */
 package org.project1.nhom8.model;
 
+import java.util.Date;
+
 /**
  *
  * @author acer
@@ -12,10 +14,10 @@ public class ThongKeModel {
     private int ma;
     private String ten;
     private int sl;
-    private String ngay;
+    private Date ngay;
     private Float gia;
 
-    public ThongKeModel(int ma, String ten, int sl, String ngay, Float gia) {
+    public ThongKeModel(int ma, String ten, int sl, Date ngay, Float gia) {
         this.ma = ma;
         this.ten = ten;
         this.sl = sl;
@@ -45,11 +47,11 @@ public class ThongKeModel {
         return ten;
     }
 
-    public String getNgay() {
+    public Date getNgay() {
         return ngay;
     }
 
-    public void setNgay(String ngay) {
+    public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
 
