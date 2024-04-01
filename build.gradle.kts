@@ -21,6 +21,9 @@ dependencies {
     runtimeOnly("com.formdev:flatlaf:3.4")
     runtimeOnly("com.formdev:flatlaf-intellij-themes:3.4")
 
+    implementation("org.apache.poi:poi:5.2.5")
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
+
 //    compileOnly("org.projectlombok:lombok:1.18.24")
 //    annotationProcessor("org.projectlombok:lombok:1.18.24")
 
