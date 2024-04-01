@@ -19,7 +19,7 @@ public class NhanVienService {
     
     public List<NhanVien> getAll() {
         listNV = new ArrayList<>();
-        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'?ang l�m vi?c' ";
+        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'Đang làm việc' ";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -197,7 +197,7 @@ public class NhanVienService {
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, ma);
-            return ps.executeUpdate(); // th�m, s?a, x�a : executeUpdate
+            return ps.executeUpdate(); // Thêm, sửa, xóa: executeUpdate
             
         }catch(Exception e){
             e.printStackTrace();
