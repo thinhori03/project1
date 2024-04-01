@@ -114,24 +114,22 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtCCCD" pref="164" max="32767" attributes="0"/>
+                                          <Component id="txtEmail" pref="164" max="32767" attributes="0"/>
+                                          <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="rdNhanVien" min="-2" pref="98" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="rdQuanLy" min="-2" pref="86" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtCCCD" pref="164" max="32767" attributes="0"/>
-                                              <Component id="txtEmail" pref="164" max="32767" attributes="0"/>
-                                              <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="btnSua" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnThem" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnReset" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnSua" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnThem" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnReset" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -232,12 +230,11 @@
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cboTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="31" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnTimKiem" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="txtTimKiem" alignment="0" min="-2" max="-2" attributes="0"/>

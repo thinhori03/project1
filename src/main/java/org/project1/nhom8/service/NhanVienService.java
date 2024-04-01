@@ -10,16 +10,16 @@ import java.util.List;
 import org.project1.nhom8.model.NhanVien;
 
 public class NhanVienService {
-
+    
     private List<NhanVien> listNV;
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-
+    
     public List<NhanVien> getAll() {
         listNV = new ArrayList<>();
-        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN ";
+        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'?ang làm vi?c' ";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class NhanVienService {
             return null;
         }
     }
-
+    
     public int add(NhanVien nv) {
         sql = "INSERT INTO NHAN_VIEN(TENNV,SDT,EMAIL,GIOTINH,MATKHAU,CCCD,VAITRO,TRANGTHAI) VALUES(?,?,?,?,?,?,?,?)";
         try {
@@ -53,9 +53,9 @@ public class NhanVienService {
             e.printStackTrace();
             return 0;
         }
-
+        
     }
-
+    
     public int update(int ma, NhanVien nv) {
         sql = "UPDATE NHAN_VIEN SET TENNV = ?, SDT = ?,EMAIL = ?,GIOTINH = ?,MATKHAU = ?, CCCD = ? ,VAITRO = ?,TRANGTHAI = ? WHERE MANV = ?";
         try {
@@ -76,7 +76,7 @@ public class NhanVienService {
             return 0;
         }
     }
-
+    
     public List<NhanVien> timKiem(int ma) {
         listNV = new ArrayList<>();
         sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE MANV like ?";
@@ -95,7 +95,7 @@ public class NhanVienService {
             return null;
         }
     }
-
+    
     public List<NhanVien> locGT(String gioiTinh) {
         listNV = new ArrayList<>();
         con = DBConnect.getConnection();
@@ -105,12 +105,12 @@ public class NhanVienService {
             ps.setString(1, gioiTinh);
             rs = ps.executeQuery();
             while (rs.next()) {
-
+                
                 NhanVien nv = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-
+                
                 listNV.add(nv);
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -122,7 +122,7 @@ public class NhanVienService {
         }
         return listNV;
     }
-
+    
     public List<NhanVien> locTT(String trangThai) {
         listNV = new ArrayList<>();
         con = DBConnect.getConnection();
@@ -132,12 +132,12 @@ public class NhanVienService {
             ps.setString(1, trangThai);
             rs = ps.executeQuery();
             while (rs.next()) {
-
+                
                 NhanVien nv = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-
+                
                 listNV.add(nv);
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -149,7 +149,7 @@ public class NhanVienService {
         }
         return listNV;
     }
-
+    
     public List<NhanVien> locVT(String vaiTro) {
         listNV = new ArrayList<>();
         con = DBConnect.getConnection();
@@ -159,12 +159,12 @@ public class NhanVienService {
             ps.setString(1, vaiTro);
             rs = ps.executeQuery();
             while (rs.next()) {
-
+                
                 NhanVien nv = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-
+                
                 listNV.add(nv);
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -176,7 +176,7 @@ public class NhanVienService {
         }
         return listNV;
     }
-
+    
     public int layMa() {
         sql = "SELECT MANV FROM NHAN_VIEN";
         int maMoi = 0;
@@ -191,5 +191,19 @@ public class NhanVienService {
         }
         return maMoi;
     }
+    public int deleteKM(int ma){
+        String sql= "Update NHAN_VIEN set TrangThai = N'Ngh? vi?c' where MANV = ?";
+        try{
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, ma);
+            return ps.executeUpdate(); // thêm, s?a, xóa : executeUpdate
+            
+        }catch(Exception e){
+            e.printStackTrace();
+                    return 0;
+        }
 
+    }
+    
 }

@@ -126,9 +126,9 @@ public class VoucherPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(Voucherview);
 
-        jLabel1.setText("thời gian bắt đầu");
+        jLabel1.setText("th?i gian b?t ??u");
 
-        jLabel4.setText("giá trị");
+        jLabel4.setText("gi� tr?");
 
         jLabel5.setText("dieu kien");
 
@@ -141,7 +141,7 @@ public class VoucherPanel extends javax.swing.JPanel {
 
         jButton6.setText("reset");
 
-        jLabel2.setText("thời gian kết thúc");
+        jLabel2.setText("th?i gian k?t th�c");
 
         condPriceErr.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         condPriceErr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -224,9 +224,9 @@ public class VoucherPanel extends javax.swing.JPanel {
                     .addComponent(jButton6)
                     .addComponent(jButton5)
                     .addComponent(jButton1))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
