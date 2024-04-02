@@ -45,12 +45,51 @@ public class SPCTViewModelProvider {
     }
 
     public List<SPCTViewModel> SPCTViewModel() {
+        return getViewModels(spctRespository.findAll());
+    }
+
+    public TableModel toTableModel(List<SPCTViewModel> models) {
+
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+        List<Field> fields = Arrays.asList(SPCTViewModel.class.getDeclaredFields())
+                .stream()
+                .filter(o -> o.isAnnotationPresent(DataHeader.class))
+                .collect(Collectors.toList());
+
+
+        defaultTableModel.setColumnCount(0);
+        for (Field f : fields) {
+            defaultTableModel.addColumn(f.getAnnotation(DataHeader.class).name());
+        }
+
+        defaultTableModel.setRowCount(0);
+
+        List<String> rowData = new ArrayList<>();
+
+        for (SPCTViewModel spctViewModel : models) {
+            rowData = new ArrayList<>();
+            try {
+                for (Field j : fields) {
+                    j.setAccessible(true);
+                    rowData.add(j.get(spctViewModel).toString());
+                    System.out.println(j.get(spctViewModel).toString());
+                }
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+
+            defaultTableModel.addRow(rowData.toArray());
+        }
+
+        return defaultTableModel;
+    }
+
+
+    public List<SPCTViewModel> getViewModels(List<SPCTModel> spctModels) {
         List<SPCTViewModel> result = new ArrayList<>();
 
         SPCTViewModel spctViewModel = null;
-
-        List<SPCTModel> spctModels = spctRespository
-                .findAll();
 
         SanPhamModel sp = new SanPhamModel();
 
@@ -75,42 +114,5 @@ public class SPCTViewModelProvider {
             result.add(spctvm);
         }
         return result;
-    }
-
-    public TableModel toTableModel() {
-
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
-
-        List<Field> fields = Arrays.asList(SPCTViewModel.class.getDeclaredFields())
-                .stream()
-                .filter(o -> o.isAnnotationPresent(DataHeader.class))
-                .collect(Collectors.toList());
-
-
-        defaultTableModel.setColumnCount(0);
-        for (Field f : fields) {
-            defaultTableModel.addColumn(f.getAnnotation(DataHeader.class).name());
-        }
-
-        defaultTableModel.setRowCount(0);
-
-        List<String> rowData = new ArrayList<>();
-
-        for (SPCTViewModel spctViewModel : this.SPCTViewModel()) {
-            rowData = new ArrayList<>();
-            try {
-                for (Field j : fields) {
-                    j.setAccessible(true);
-                    rowData.add(j.get(spctViewModel).toString());
-                    System.out.println(j.get(spctViewModel).toString());
-                }
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            }
-
-            defaultTableModel.addRow(rowData.toArray());
-        }
-
-        return defaultTableModel;
     }
 }

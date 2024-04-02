@@ -46,6 +46,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     private int maSPCT;
 
+    private SPCTRepository sPCTRepository;
+
     private SanPhamViewModelProvider sanPhamViewModelProvider;
 
     private SanPhamRepository sanPhamRepository;
@@ -66,6 +68,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     public Quan_Ly_San_Pham() {
         initComponents();
+
+        this.sPCTRepository = new SPCTRepository();
 
         this.sanPhamViewModelProvider = new SanPhamViewModelProvider();
 
@@ -99,38 +103,49 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
         this.lsgViewModelProvider = new LSGViewModelProvider();
 
-        
+
         /**
          * txt_MaSP changed event
          */
-        this.txt_MaSP.getDocument().addDocumentListener(
-                new GeneralDocumentListener() {
+        this.txt_MaSP.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
 
                 try {
                     osp = Optional.ofNullable(sanPhamRepository
-                        .findById(Integer.parseInt(txt_MaSP
-                                .getText().trim())));
+                            .findById(Integer.parseInt(txt_MaSP
+                                    .getText().trim())));
                 } catch (Exception e) {
                     osp = Optional.empty();
                 }
-                
+
                 osp.ifPresentOrElse(o -> txt_TenSP.setText(o.getTensp()),
-                         () -> txt_TenSP.setText(""));
+                        () -> txt_TenSP.setText(""));
 
             }
         }
         );
 
+        id_Ten_TK.getDocument().addDocumentListener(new GeneralDocumentListener() {
+            @Override
+            public void onChange() {
+
+                loadTableSPCT(spctViewModelProvider.getViewModels
+                        (spctRespository.findByTen(id_Ten_TK.getText().trim())));
+
+            }
+        });
+
 //        this.FillTableSanPham_CT(sps.getAll());
 //        this.fillTbaleSanPham(sp.getAll());
         this.loadTableSP(sp.getAll());
-        loadTableSPCT();
+        loadTableSPCT(spctViewModelProvider.SPCTViewModel());
     }
 
-    public void loadTableSPCT() {
-        tbl_SanPham_CT.setModel(spctViewModelProvider.toTableModel());
+    public void loadTableSPCT(List<SPCTViewModel> viewModels) {
+
+
+        tbl_SanPham_CT.setModel(spctViewModelProvider.toTableModel(viewModels));
 
         cbo_Size.setModel(new DefaultComboBoxModel<>(
                 sizeRepository.findAll().stream()
@@ -397,7 +412,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(id_Ten_CanTim, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                             .addComponent(id_Ma_SP_CanTim))
-                        .addGap(0, 130, Short.MAX_VALUE))
+                        .addGap(0, 217, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,7 +501,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -555,14 +570,14 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(id_Ma_Tk, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(id_Ma_Tk, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(id_Ten_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,7 +816,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         clearFrom();
-        loadTableSPCT();
+        loadTableSPCT(spctViewModelProvider.SPCTViewModel());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_update_spctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_spctActionPerformed
@@ -821,7 +836,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
             giaRepository.add(gia);
 
-            loadTableSPCT();
+            loadTableSPCT(spctViewModelProvider.SPCTViewModel());
             clearFrom();
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -840,7 +855,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             // this.FillTableSanPham_CT(sps.getAll());
             clearFrom();
-            loadTableSPCT();
+            loadTableSPCT(spctViewModelProvider.SPCTViewModel());
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
@@ -855,14 +870,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_SanPham_CTMouseClicked
 
     private void id_Ten_TKKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_Ten_TKKeyReleased
-        //        // TODO add your handling code here:
-        //        String ten = id_Ten_TK.getText();
-        //        if (ten.isEmpty()) {
-        //            this.loadTableSPCT(sps.getAll());
-        //        } else {
-        //            List<SPCTModel> list1 = sps.TimSanPham(ten);
-        //            this.loadTableSPCT(list1);
-        //        }
+        
     }//GEN-LAST:event_id_Ten_TKKeyReleased
 
     private void id_Ma_TkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_Ma_TkKeyReleased
@@ -950,7 +958,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

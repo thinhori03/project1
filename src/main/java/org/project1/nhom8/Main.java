@@ -10,13 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        try {
-//
-//            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacDarkLaf");
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+
+            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacDarkLaf");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 
         new org.project1.nhom8.View.main().setVisible(true);

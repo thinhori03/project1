@@ -1,17 +1,13 @@
 package org.project1.nhm8;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
-import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.SPCTRepository;
 
 public class TestSPCTModel {
 
     private SPCTViewModelProvider spctViewModelProvider;
-
     private SPCTRepository spctRepository;
 
     public TestSPCTModel() {
@@ -46,5 +42,11 @@ public class TestSPCTModel {
 //                        .build()
 //        ));
 //    }
+
+    @Test
+    public void findByName() {
+        spctViewModelProvider.getViewModels(spctRepository.findByTen("G"))
+                .stream().forEach(o -> System.out.println(o.getTenSP()));
+    }
 
 }

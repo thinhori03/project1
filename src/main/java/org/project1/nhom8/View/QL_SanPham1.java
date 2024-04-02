@@ -68,7 +68,8 @@ public class QL_SanPham1 extends javax.swing.JPanel {
     }
 
     public void loadTable() {
-        Tbl_SanPham.setModel(spctViewModelProvider.toTableModel());
+        Tbl_SanPham.setModel(spctViewModelProvider.toTableModel(spctViewModelProvider
+                .SPCTViewModel()));
     }
 
     public void fillTable(List<SPCTModel> list) {
