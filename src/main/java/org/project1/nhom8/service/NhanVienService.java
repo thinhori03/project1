@@ -19,7 +19,7 @@ public class NhanVienService {
     
     public List<NhanVien> getAll() {
         listNV = new ArrayList<>();
-        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'?ang l‡m vi?c' ";
+        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'ƒêang l√†m vi·ªác'";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -96,32 +96,7 @@ public class NhanVienService {
         }
     }
     
-    public List<NhanVien> locGT(String gioiTinh) {
-        listNV = new ArrayList<>();
-        con = DBConnect.getConnection();
-        sql = "select * from  NHAN_VIEN where GIOTINH like ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, gioiTinh);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                
-                NhanVien nv = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                
-                listNV.add(nv);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return listNV;
-    }
+    
     
     public List<NhanVien> locTT(String trangThai) {
         listNV = new ArrayList<>();
@@ -177,33 +152,48 @@ public class NhanVienService {
         return listNV;
     }
     
-    public int layMa() {
-        sql = "SELECT MANV FROM NHAN_VIEN";
-        int maMoi = 0;
+//    public int layMa() {
+//        sql = "SELECT MANV FROM NHAN_VIEN";
+//        int maMoi = 0;
+//        try {
+//            con = DBConnect.getConnection();
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                maMoi = rs.getInt(1) + 1;
+//            }
+//        } catch (Exception e) {
+//        }
+//        return maMoi;
+//    }
+//    public int deleteKM(int ma){
+//        String sql= "Update NHAN_VIEN set TrangThai = N'Ngh? vi?c' where MANV = ?";
+//        try{
+//            Connection con = DBConnect.getConnection();
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, ma);
+//            return ps.executeUpdate(); // thÔøΩm, s?a, xÔøΩa : executeUpdate
+//            
+//        }catch(Exception e){
+//            e.printStackTrace();
+//                    return 0;
+//        }
+//
+//    }
+    public boolean isSDT(String sdt) {
+        con = DBConnect.getConnection();
+        sql = " select count(*) from NHAN_VIEN where SDT = ?";
         try {
-            con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setString(1, sdt);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                maMoi = rs.getInt(1) + 1;
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
             }
         } catch (Exception e) {
-        }
-        return maMoi;
-    }
-    public int deleteKM(int ma){
-        String sql= "Update NHAN_VIEN set TrangThai = N'Ngh? vi?c' where MANV = ?";
-        try{
-            Connection con = DBConnect.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, ma);
-            return ps.executeUpdate(); // thÍm, s?a, xÛa : executeUpdate
-            
-        }catch(Exception e){
             e.printStackTrace();
-                    return 0;
         }
-
+        return false;
     }
-    
 }

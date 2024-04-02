@@ -397,22 +397,16 @@
                           <Component id="rdQuanLy" min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="122" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnThem" linkSize="3" max="32767" attributes="0"/>
-                              <Component id="btnReset" linkSize="3" min="-2" pref="107" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="btnSua" linkSize="3" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                          <Component id="btnThem" linkSize="3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnReset" linkSize="3" min="-2" pref="107" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnSua" linkSize="3" min="-2" pref="104" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnAn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAn" alignment="1" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="137" pref="137" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -420,6 +414,33 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdQuanLy" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btnThem" linkSize="2" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="btnSua" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnReset" linkSize="2" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnAn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -452,31 +473,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtSdt" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdQuanLy" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="btnThem" linkSize="2" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="btnSua" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnAn" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="btnReset" linkSize="2" min="-2" pref="45" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cboTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -623,7 +619,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x1ea8;N"/>
+            <Property name="text" type="java.lang.String" value="V&#xf4; hi&#x1ec7;u"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnActionPerformed"/>

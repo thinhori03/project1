@@ -126,9 +126,9 @@ public class VoucherPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(Voucherview);
 
-        jLabel1.setText("th?i gian b?t ??u");
+        jLabel1.setText("thời gian bắt đầu");
 
-        jLabel4.setText("gi� tr?");
+        jLabel4.setText("giá trị");
 
         jLabel5.setText("dieu kien");
 
@@ -141,7 +141,7 @@ public class VoucherPanel extends javax.swing.JPanel {
 
         jButton6.setText("reset");
 
-        jLabel2.setText("th?i gian k?t th�c");
+        jLabel2.setText("thời gian kết thúc");
 
         condPriceErr.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         condPriceErr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -154,6 +154,11 @@ public class VoucherPanel extends javax.swing.JPanel {
         dateErr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/validate-war.png"))); // NOI18N
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -245,6 +250,10 @@ public class VoucherPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
