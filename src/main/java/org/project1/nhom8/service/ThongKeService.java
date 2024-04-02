@@ -8,6 +8,7 @@ import org.project1.nhom8.model.ThongKeModel;
 import org.project1.nhom8.repository.ThongKeConnection;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -19,8 +20,8 @@ public class ThongKeService {
     public ArrayList<ThongKeModel> getlist(){
     return tkc.getAll();
     }
-   public ArrayList<ThongKeModel> timKiem(String ngay){
-   ArrayList<ThongKeModel> kq = tkc.timkiem(ngay);
+   public ArrayList<ThongKeModel> timKiem(Date ngaybd,Date ngaykt){
+   ArrayList<ThongKeModel> kq = tkc.timkiem(ngaybd,ngaykt);
    return kq;
    }
 }

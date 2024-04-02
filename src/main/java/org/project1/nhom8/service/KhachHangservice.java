@@ -36,9 +36,9 @@ public class KhachHangservice {
         return "Xoa That Bai";
     }
     }
-    public String Update(KhachHangModel kh){
+    public String Update(Integer makh,KhachHangModel kh){
    
-        if (khc.Update(kh)== true) {
+        if (khc.Update(makh, kh)== true) {
             return "Sua Thanh Cong"; 
         }else {
         return "Sua That Bai";

@@ -20,6 +20,12 @@ public class VoucherViewModel {
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayTao;
 
+    @DataHeader(name = "ngày cập nhật")
+    private Date ngayCapNhat;
+
+    @DataHeader(name = "số luợng")
+    private Integer soLuong;
+
     @DataHeader(name = "ngày bắt đầu")
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayBatDau;
@@ -34,11 +40,14 @@ public class VoucherViewModel {
     public VoucherViewModel() {
     }
 
-    public VoucherViewModel(String maVoucher, Double gia, Double dieuKien, Date ngayTao, Date ngayBatDau, Date ngayKetThuc, String trangThai) {
+
+    public VoucherViewModel(String maVoucher, Double gia, Double dieuKien, Date ngayTao, Date ngayCapNhat, Integer soLuong, Date ngayBatDau, Date ngayKetThuc, String trangThai) {
         this.maVoucher = maVoucher;
         this.gia = gia;
         this.dieuKien = dieuKien;
         this.ngayTao = ngayTao;
+        this.ngayCapNhat = ngayCapNhat;
+        this.soLuong = soLuong;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.trangThai = trangThai;
@@ -76,6 +85,22 @@ public class VoucherViewModel {
         this.ngayTao = ngayTao;
     }
 
+    public Date getNgayCapNhat() {
+        return ngayCapNhat;
+    }
+
+    public void setNgayCapNhat(Date ngayCapNhat) {
+        this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public Integer getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(Integer soLuong) {
+        this.soLuong = soLuong;
+    }
+
     public Date getNgayBatDau() {
         return ngayBatDau;
     }
@@ -99,5 +124,4 @@ public class VoucherViewModel {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    
 }

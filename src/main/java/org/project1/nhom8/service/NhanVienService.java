@@ -19,7 +19,11 @@ public class NhanVienService {
     
     public List<NhanVien> getAll() {
         listNV = new ArrayList<>();
+<<<<<<< HEAD
         sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'Đang làm việc'";
+=======
+        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE TRANGTHAI = N'Đang làm việc' ";
+>>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -192,6 +196,21 @@ public class NhanVienService {
                 return count > 0;
             }
         } catch (Exception e) {
+<<<<<<< HEAD
+=======
+        }
+        return maMoi;
+    }
+    public int deleteKM(int ma){
+        String sql= "Update NHAN_VIEN set TrangThai = N'Ngh? vi?c' where MANV = ?";
+        try{
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, ma);
+            return ps.executeUpdate(); // Thêm, sửa, xóa: executeUpdate
+            
+        }catch(Exception e){
+>>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
             e.printStackTrace();
         }
         return false;

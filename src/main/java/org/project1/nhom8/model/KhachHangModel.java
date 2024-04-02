@@ -4,6 +4,8 @@
  */
 package org.project1.nhom8.model;
 
+import java.util.Date;
+
 /**
  *
  * @author acer
@@ -14,13 +16,13 @@ public class KhachHangModel {
     private int  sdt;
     private String gioiTinh;
     private String email;
-    private String ngay;
+    private Date ngay;
     private String diaChi;
     
     public KhachHangModel() {
     }
 
-    public KhachHangModel(String ten, int sdt, String gioiTinh, String email, String ngay, String diaChi) {
+    public KhachHangModel(String ten, int sdt, String gioiTinh, String email, Date ngay, String diaChi) {
         this.ten = ten;
         this.sdt = sdt;
         this.gioiTinh = gioiTinh;
@@ -29,7 +31,7 @@ public class KhachHangModel {
         this.diaChi = diaChi;
     }
 
-    public KhachHangModel(int maKH, String ten, int sdt, String gioiTinh, String email, String ngay,String diaChi) {
+    public KhachHangModel(int maKH, String ten, int sdt, String gioiTinh, String email, Date ngay,String diaChi) {
         this.maKH = maKH;
         this.ten = ten;
         this.sdt = sdt;
@@ -79,11 +81,11 @@ public class KhachHangModel {
         this.email = email;
     }
 
-    public String getNgay() {
+    public Date getNgay() {
         return ngay;
     }
 
-    public void setNgay(String ngay) {
+    public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
 

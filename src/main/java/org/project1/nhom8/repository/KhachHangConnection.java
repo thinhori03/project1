@@ -28,7 +28,7 @@ public class KhachHangConnection {
                 Integer sdt = rs.getInt("SDT");
                 String gioiTinh = rs.getString("GIOITINH");
                 String email = rs.getString("EMAIL");
-                String ngay = rs.getString("NGAYSINH");
+                Date ngay = rs.getDate("NGAYSINH");
                 String diaChi = rs.getString("DIACHI");
                 KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
 
@@ -59,7 +59,7 @@ public class KhachHangConnection {
     }
 
     public Boolean remove(int ma) {
-        String sql = "delete KHACH_HANG where TENKH = ?";
+        String sql = "delete KHACH_HANG where MAKH = ?";
         try (Connection con = dBConnect.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setObject(1, ma);
 
@@ -71,7 +71,7 @@ public class KhachHangConnection {
 
     }
 
-    public Boolean Update(KhachHangModel khachHang) {
+    public Boolean Update(Integer mak,KhachHangModel khachHang) {
         String sql = "	update KHACH_HANG\n"
                 + "set TENKH = ?,\n"
                 + "	SDT = ?,\n"
@@ -88,7 +88,7 @@ public class KhachHangConnection {
             pst.setObject(4, khachHang.getEmail());
             pst.setObject(5, khachHang.getNgay());
             pst.setObject(6, khachHang.getDiaChi());
-            pst.setObject(7, khachHang.getMaKH());
+            pst.setObject(7, mak);
 
             int kq = pst.executeUpdate();
             return kq > 0;
@@ -108,7 +108,7 @@ public class KhachHangConnection {
                 Integer sdt = rs.getInt("SDT");
                 String gioiTinh = rs.getString("GIOITINH");
                 String email = rs.getString("EMAIL");
-                String ngay = rs.getString("NGAYSINH");
+                Date ngay = rs.getDate("NGAYSINH");
                 String diaChi = rs.getString("DIACHI");
                 KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
                 list.add(kh);
