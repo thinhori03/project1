@@ -22,23 +22,19 @@ public class HoaDonViewModel {
     @DataHeader(name = "tổng tiền")
     private Double tongTien;
 
-    @DataHeader(name = "mã voucher")
-    private String maVoucher;
-
     @DataHeader(name = "trạng thái")
     private String TrangThai;
 
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String maHoaDon, Date ngayTao, Integer maNV, String tenKH, Double tongTien, String maVoucher, String trangThai) {
+    public HoaDonViewModel(String maHoaDon, Date ngayTao, Integer maNV, String tenKH, Double tongTien, String TrangThai) {
         this.maHoaDon = maHoaDon;
         this.ngayTao = ngayTao;
         this.maNV = maNV;
         this.tenKH = tenKH;
         this.tongTien = tongTien;
-        this.maVoucher = maVoucher;
-        TrangThai = trangThai;
+        this.TrangThai = TrangThai;
     }
 
     public String getMaHoaDon() {
@@ -81,19 +77,13 @@ public class HoaDonViewModel {
         this.tongTien = tongTien;
     }
 
-    public String getMaVoucher() {
-        return maVoucher;
-    }
-
-    public void setMaVoucher(String maVoucher) {
-        this.maVoucher = maVoucher;
-    }
-
     public String getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(String trangThai) {
-        TrangThai = trangThai;
+    public void setTrangThai(String TrangThai) {
+        this.TrangThai = TrangThai;
     }
+
+    
 }

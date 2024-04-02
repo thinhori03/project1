@@ -15,7 +15,7 @@ public class HDCTRepository extends GeneralRepository<HDCTModel, String> {
     }
 
 
-    public List<HDCTModel> findByMaHD(String maHD) {
+    public List<HDCTModel> findBymaHD(String maHD) {
         List<HDCTModel> hdcts = new ArrayList<>();
 
         try {
@@ -24,8 +24,7 @@ public class HDCTRepository extends GeneralRepository<HDCTModel, String> {
                             .generateSelectAllQuery() +
                             " WHERE MAHD = ? ");
             preparedStatement.setString(1, maHD);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ;
+            ResultSet resultSet = preparedStatement.executeQuery();;
 
             if (resultSet.isBeforeFirst()) {
                 while (resultSet.next()) {
@@ -35,7 +34,7 @@ public class HDCTRepository extends GeneralRepository<HDCTModel, String> {
 
             return hdcts;
 
-        } catch (SQLException ex) {
+        } catch(SQLException ex) {
             ex.printStackTrace();
         }
 
