@@ -73,13 +73,8 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="lblNameNV" min="-2" max="-2" attributes="0"/>
-=======
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Component id="lblNameNV" min="-2" pref="197" max="-2" attributes="0"/>
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -91,25 +86,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblNameNV" min="-2" pref="140" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-=======
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblNameNV" min="-2" pref="78" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnVoucher" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnDangXuat" min="-2" pref="51" max="-2" attributes="0"/>
-<<<<<<< HEAD
-                  <EmptySpace pref="111" max="32767" attributes="0"/>
-=======
                   <EmptySpace pref="130" max="32767" attributes="0"/>
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
               </Group>
           </Group>
         </DimensionLayout>
@@ -475,11 +460,7 @@
         <Component class="javax.swing.JLabel" name="lblNameNV">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-<<<<<<< HEAD
-              <Font name="Segoe UI Variable" size="42" style="1"/>
-=======
               <Font name="Segoe UI Variable" size="24" style="1"/>
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>

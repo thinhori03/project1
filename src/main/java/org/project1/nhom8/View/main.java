@@ -290,11 +290,7 @@ public class main extends javax.swing.JFrame {
 
         jPanel1.add(pnGiagia);
 
-<<<<<<< HEAD
-        lblNameNV.setFont(new java.awt.Font("Segoe UI Variable", 1, 42)); // NOI18N
-=======
         lblNameNV.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
         lblNameNV.setForeground(new java.awt.Color(255, 255, 255));
         lblNameNV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNameNV.setText("LV STORE");
@@ -395,13 +391,8 @@ public class main extends javax.swing.JFrame {
                         .addGap(80, 80, 80)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(27, 27, 27)
-                        .addComponent(lblNameNV)))
-=======
                         .addGap(22, 22, 22)
                         .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -409,25 +400,15 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-=======
                 .addGap(18, 18, 18)
                 .addComponent(lblNameNV, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                .addContainerGap(111, Short.MAX_VALUE))
-=======
                 .addContainerGap(130, Short.MAX_VALUE))
->>>>>>> c97263ab47476237bdfcfeba9305fa94d5dc71f2
         );
 
         pnscrene.setBackground(new java.awt.Color(255, 255, 255));
