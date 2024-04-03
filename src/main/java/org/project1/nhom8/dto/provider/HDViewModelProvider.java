@@ -30,30 +30,10 @@ public class HDViewModelProvider {
 
     public List<HoaDonViewModel> getHoaDonViewModel() {
 
-        List<HoaDonViewModel> result = new ArrayList<>();
-
-        List<HoaDonModel> hoaDonModels = hoaDonRepository.findAll();
-
-        HoaDonViewModel hdvm = null;
-
-        for (HoaDonModel hdm : hoaDonModels) {
-
-            hdvm = new HoaDonViewModel();
-
-            hdvm.setMaHoaDon(hdm.getMaHoaDon());
-            hdvm.setNgayTao(hdm.getNgayTao());
-            hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
-            hdvm.setMaNV(hdm.getMaNV());
-            hdvm.setTrangThai(hdm.getTrangThai());
-            hdvm.setTongTien(Double.valueOf(1000));
-
-            result.add(hdvm);
-        }
-
-        return result;
+        return this.getModels(hoaDonRepository.findAll());
     }
 
-    public DefaultTableModel toTableMode() {
+    public DefaultTableModel toTableMode(List<HoaDonViewModel> viewModels) {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
 
         List<Field> fields = Arrays.asList(HoaDonViewModel.class.getDeclaredFields())
@@ -71,7 +51,7 @@ public class HDViewModelProvider {
 
         List<String> rowData = new ArrayList<>();
 
-        for (HoaDonViewModel gia : this.getHoaDonViewModel()) {
+        for (HoaDonViewModel gia : viewModels) {
             rowData = new ArrayList<>();
             try {
                 for (Field j : fields) {
@@ -91,5 +71,27 @@ public class HDViewModelProvider {
         }
 
         return defaultTableModel;
+    }
+    
+    public List<HoaDonViewModel> getModels(List<HoaDonModel> models) {
+        List<HoaDonViewModel> result = new ArrayList<>();
+
+        HoaDonViewModel hdvm = null;
+
+        for (HoaDonModel hdm : models) {
+
+            hdvm = new HoaDonViewModel();
+
+            hdvm.setMaHoaDon(hdm.getMaHoaDon());
+            hdvm.setNgayTao(hdm.getNgayTao());
+            hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
+            hdvm.setMaNV(hdm.getMaNV());
+            hdvm.setTrangThai(hdm.getTrangThai());
+            hdvm.setTongTien(Double.valueOf(1000));
+
+            result.add(hdvm);
+        }
+
+        return result;
     }
 }
