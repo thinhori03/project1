@@ -103,7 +103,6 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
         this.lsgViewModelProvider = new LSGViewModelProvider();
 
-
         /**
          * txt_MaSP changed event
          */
@@ -119,19 +118,24 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                     osp = Optional.empty();
                 }
 
-                osp.ifPresentOrElse(o -> txt_TenSP.setText(o.getTensp()),
-                        () -> txt_TenSP.setText(""));
+                osp.ifPresentOrElse(o -> txt_TenSPCT.setText(o.getTensp()),
+                        () -> txt_TenSPCT.setText(""));
 
             }
         }
         );
+        id_Ma_Tk.getDocument().addDocumentListener(new GeneralDocumentListener() {
+            @Override
+            public void onChange() {
+                loadTableSPCT(spctViewModelProvider.getViewModels(spctRespository.findByMa(Integer.parseInt(id_Ma_Tk.getText().trim()))));
 
+            }
+        });
         id_Ten_TK.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
 
-                loadTableSPCT(spctViewModelProvider.getViewModels
-                        (spctRespository.findByTen(id_Ten_TK.getText().trim())));
+                loadTableSPCT(spctViewModelProvider.getViewModels(spctRespository.findByTen(id_Ten_TK.getText().trim())));
 
             }
         });
@@ -143,7 +147,6 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     }
 
     public void loadTableSPCT(List<SPCTViewModel> viewModels) {
-
 
         tbl_SanPham_CT.setModel(spctViewModelProvider.toTableModel(viewModels));
 
@@ -172,13 +175,13 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     public void ClearFrom_SP() {
         txt_Ma.setText("");
-        txt_Ten.setText("");
+        txt_TenSP.setText("");
         buttonGroup1.clearSelection();
     }
 
     public void clearFrom() {
         txt_MaSP.setText("");
-        txt_TenSP.setText("");
+        txt_TenSPCT.setText("");
         txt_SoLuong.setText("");
         cbo_Size.setSelectedIndex(-1);
         cbo_Mau_Sac.setSelectedIndex(-1);
@@ -194,7 +197,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
         this.maSPCT = spctViewModel.getMaSPCT();
         txt_MaSP.setText(spctViewModel.getMaSP() + "");
-        txt_TenSP.setText(spctViewModel.getTenSP());
+        txt_TenSPCT.setText(spctViewModel.getTenSP());
         txt_SoLuong.setText(spctViewModel.getSoLuong() + "");
         cbo_Size.setSelectedItem(spctViewModel.getSize());
         cbo_Mau_Sac.setSelectedItem(spctViewModel.getMauSac());
@@ -210,7 +213,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                 .get(index);
 
         txt_Ma.setText(spvm.getMaSanPham() + "");
-        txt_Ten.setText(spvm.getTenSanPham());
+        txt_TenSP.setText(spvm.getTenSanPham());
 
         if ((spvm.getTrangThai().compareTo("Đang bán") == 0)) {
             rd_Dangban.setSelected(true);
@@ -255,10 +258,59 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     SanPhamModel readFrom_SP() {
         SanPhamModel sp = new SanPhamModel();
-        sp.setTensp(txt_Ten.getText().trim());
+        sp.setTensp(txt_TenSP.getText().trim());
         sp.setTrangthai(rd_Dangban.isSelected() ? "?ang bán"
                 : "Dừng Bán");
         return sp;
+    }
+
+    public boolean check_SPCT() {
+        String maSP = txt_MaSP.getText();
+        try {
+            if (maSP.equals("")) {
+                JOptionPane.showMessageDialog(this, "Mã không được chống");
+                return false;
+            }
+            Integer.parseInt(maSP);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Bạn cần phải nhập số nguyên");
+            return false;
+        }
+        String soluong = txt_SoLuong.getText();
+        try {
+            if (soluong.equals("")) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được chống");
+                return false;
+            }
+            Integer.parseInt(soluong);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Bạn cần phải nhập số nguyên");
+            return false;
+        }
+        String Gia = txt_Gia.getText();
+        try {
+            if (Gia.equals("")) {
+                JOptionPane.showMessageDialog(this, "Giá không được chống");
+                return false;
+            }
+            Float.parseFloat(Gia);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Bạn cần phải nhập số nguyên");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean Check_SP() {
+        if (txt_TenSP.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Tên không được để chống");
+            return false;
+        }
+        if (!rd_Dangban.isSelected() && !rd_Dungban.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn trạng thái");
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -270,7 +322,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txt_Ten = new javax.swing.JTextField();
+        txt_TenSP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_Ma = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -307,11 +359,11 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_TenSP = new javax.swing.JTextField();
+        txt_TenSPCT = new javax.swing.JTextField();
         txt_SoLuong = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_Gia = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Btn_ThemSPCT = new javax.swing.JButton();
         btn_update_spct = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txt_MaSP = new javax.swing.JTextField();
@@ -391,7 +443,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
@@ -436,7 +488,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(id_Ten_CanTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
@@ -624,7 +676,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         ));
         jScrollPane4.setViewportView(tbl_LSG);
 
-        jTabbedPane2.addTab("lịch lịc sử giá", jScrollPane4);
+        jTabbedPane2.addTab("Lịch sử thay đổi giá của sản phẩm", jScrollPane4);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -656,14 +708,14 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
         jLabel5.setText("Màu sắc: ");
 
-        txt_TenSP.setEditable(false);
+        txt_TenSPCT.setEditable(false);
 
         jLabel8.setText("Giá:");
 
-        jButton1.setText("Thêm SP");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_ThemSPCT.setText("Thêm SP");
+        Btn_ThemSPCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btn_ThemSPCTActionPerformed(evt);
             }
         });
 
@@ -706,20 +758,20 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_TenSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Btn_ThemSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_SoLuong))))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btn_update_spct, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_update_spct, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(158, 158, 158)
                         .addComponent(jButton3)
                         .addGap(96, 96, 96))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -743,7 +795,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_TenSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel5)
                         .addComponent(cbo_Mau_Sac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -762,7 +814,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Btn_ThemSPCT)
                     .addComponent(btn_update_spct)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -843,23 +895,24 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_update_spctActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Btn_ThemSPCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ThemSPCTActionPerformed
         // TODO add your handling code here:
-        if (Optional.ofNullable(spctRespository.add(readFromSPCT()))
-                .isPresent()) {
-            GiaModel gia = readGia();
-            gia.setMaSPCT(spctRespository.count());
+        if (check_SPCT()) {
+            if (Optional.ofNullable(spctRespository.add(readFromSPCT()))
+                    .isPresent()) {
+                GiaModel gia = readGia();
+                gia.setMaSPCT(spctRespository.count());
 
-            giaRepository.add(gia);
+                giaRepository.add(gia);
 
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
-            // this.FillTableSanPham_CT(sps.getAll());
-            clearFrom();
-            loadTableSPCT(spctViewModelProvider.SPCTViewModel());
-        } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                clearFrom();
+                loadTableSPCT(spctViewModelProvider.SPCTViewModel());
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Btn_ThemSPCTActionPerformed
 
     private void tbl_SanPham_CTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_SanPham_CTMouseClicked
         // TODO add your handling code here:
@@ -870,7 +923,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_SanPham_CTMouseClicked
 
     private void id_Ten_TKKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_Ten_TKKeyReleased
-        
+
     }//GEN-LAST:event_id_Ten_TKKeyReleased
 
     private void id_Ma_TkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_Ma_TkKeyReleased
@@ -899,28 +952,32 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
 
     private void btn_update_spActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_spActionPerformed
         // TODO add your handling code here:
-        index = Tbl_SanPham.getSelectedRow();
-        int ma = (int) Tbl_SanPham.getValueAt(index, 0);
-        if (sp.Update_SP(this.readFrom_SP(), ma) > 0) {
-            JOptionPane.showMessageDialog(this, "S?a th�nh c�ng");
-            this.loadTableSP(sp.getAll());
-        } else {
-            JOptionPane.showMessageDialog(this, "S?a th?t b?i");
+        if (Check_SP()) {
+            index = Tbl_SanPham.getSelectedRow();
+            int ma = (int) Tbl_SanPham.getValueAt(index, 0);
+            if (sp.Update_SP(this.readFrom_SP(), ma) > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                this.loadTableSP(sp.getAll());
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            }
         }
     }//GEN-LAST:event_btn_update_spActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        if (sp.ADD_SP(this.readFrom_SP()) > 0) {
-            JOptionPane.showMessageDialog(this, "Th�m th�nh c�ng");
-            this.loadTableSP(sp.getAll());
-        } else {
-            JOptionPane.showMessageDialog(this, "Th�m th?t b?i");
+        if (Check_SP()) {
+            if (sp.ADD_SP(this.readFrom_SP()) > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                this.loadTableSP(sp.getAll());
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+
         clearFrom();
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -998,6 +1055,7 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_ThemSPCT;
     private javax.swing.JTable Tbl_SanPham;
     private javax.swing.JButton btn_update_sp;
     private javax.swing.JButton btn_update_spct;
@@ -1008,7 +1066,6 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     private javax.swing.JTextField id_Ma_Tk;
     private javax.swing.JTextField id_Ten_CanTim;
     private javax.swing.JTextField id_Ten_TK;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1049,8 +1106,8 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
     private javax.swing.JTextField txt_Ma;
     private javax.swing.JTextField txt_MaSP;
     private javax.swing.JTextField txt_SoLuong;
-    private javax.swing.JTextField txt_Ten;
     private javax.swing.JTextField txt_TenSP;
+    private javax.swing.JTextField txt_TenSPCT;
     // End of variables declaration//GEN-END:variables
 
 }
