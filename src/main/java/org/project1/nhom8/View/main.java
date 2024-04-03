@@ -618,7 +618,7 @@ public class main extends javax.swing.JFrame {
         resetColorJpane(pnThongke);
         resetColor(lblVoucher);
         resetColorJpane(pnVoucher);
-        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận �?ăng Xuất", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "Xác nhận Đăng Xuất", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
             main.this.dispose();
