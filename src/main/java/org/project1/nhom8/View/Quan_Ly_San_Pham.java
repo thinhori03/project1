@@ -127,10 +127,18 @@ public class Quan_Ly_San_Pham extends javax.swing.JPanel {
         id_Ma_Tk.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                loadTableSPCT(spctViewModelProvider.getViewModels(spctRespository.findByMa(Integer.parseInt(id_Ma_Tk.getText().trim()))));
+
+                try {
+                    loadTableSPCT(spctViewModelProvider.getViewModels(spctRespository
+                            .findByMa(Integer.parseInt(id_Ma_Tk.getText().trim()))));
+
+                } catch (Exception e) {
+                    loadTableSPCT(spctViewModelProvider.SPCTViewModel());
+                }
 
             }
         });
+
         id_Ten_TK.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
