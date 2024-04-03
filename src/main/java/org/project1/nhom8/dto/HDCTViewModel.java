@@ -4,7 +4,7 @@ import org.project1.nhom8.util.data.visual.DataHeader;
 
 
 public class HDCTViewModel {
-    @DataHeader(name = "M� s?n ph?m chi ti?t")
+    @DataHeader(name = "mã sản phẩm")
     private Integer maSPCT;
 
     @DataHeader(name = "Tên sản phẩm")
@@ -19,7 +19,7 @@ public class HDCTViewModel {
     @DataHeader(name = "màu sắc")
     private String mauSac;
 
-    @DataHeader(name = "gias")
+    @DataHeader(name = "giá")
     private double gia;
 
     public HDCTViewModel() {
@@ -81,5 +81,5 @@ public class HDCTViewModel {
     public void setGia(double gia) {
         this.gia = gia;
     }
-    
+
 }
