@@ -381,29 +381,31 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimkiemActionPerformed
 
     public void Clear() {
+        txtMaKhachHang.setText("");
         txtTen.setText("");
         txtSDT.setText("");
         txtEmail.setText("");
-        txtNgaySinh.setDate(new Date());
+        txtNgaySinh.setDate(null);
         buttonGroup1.clearSelection();
-
         txtDiaChi.setText("");
 
     }
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
         String ten = txtTen.getText();
-        Integer sdt = Integer.parseInt(txtSDT.getText());
+        String sdt = txtSDT.getText().trim();
         String gt = "";
         if (rdNam.isSelected()) {
             gt = "Nam";
-        } else {
+        } else if(rdNu.isSelected()){
             gt = "Nữ";
         }
         String email = txtEmail.getText();
         String dc = txtDiaChi.getText();
-        Date ngay = txtNgaySinh.getDate();
-
+        Date ngay = null;
+        if(txtNgaySinh.getDate() != null){
+        ngay = txtNgaySinh.getDate();
+        }
         KhachHangModel kh = new KhachHangModel(ten, sdt, gt, email, ngay, dc);
         String kq = ql.Add(kh);
         JOptionPane.showMessageDialog(this, kq);
@@ -427,7 +429,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
 
         Date ngay = txtNgaySinh.getDate();
         String dc = txtDiaChi.getText();
-        KhachHangModel kh = new KhachHangModel(ten, sdt, gt, mail, ngay, dc);
+        KhachHangModel kh = new KhachHangModel(ten, dc, gt, mail, ngay, dc);
         String kq = ql.Update(ma, kh);
         JOptionPane.showMessageDialog(this, kq);
         LoadData(ql.getlist());

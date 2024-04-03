@@ -48,10 +48,10 @@ public class VoucherModel {
     @DataField(name = "Ngay_tao")
     private Date ngayTao;
 
-    @DataField(name = "so_luong")
+    @DataField(name = "SOLUONG")
     private Integer soLuong;
 
-    @DataField(name = "ngay_cap_nhat")
+    @DataField(name = "NGAYCAPNHAT")
     private Date ngayCapNhat;
 
     @DataField(name = "TRANG_THAI")

@@ -25,7 +25,7 @@ public class KhachHangConnection {
             while (rs.next()) {
                 Integer ma = rs.getInt("MAKH");
                 String ten = rs.getString("TENKH");
-                Integer sdt = rs.getInt("SDT");
+                String sdt = rs.getString("SDT");
                 String gioiTinh = rs.getString("GIOITINH");
                 String email = rs.getString("EMAIL");
                 Date ngay = rs.getDate("NGAYSINH");
@@ -46,7 +46,7 @@ public class KhachHangConnection {
 
         try (Connection con = dBConnect.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setObject(1, kh.getTen());
-            pst.setObject(2, kh.getSdt());
+            pst.setString(2, kh.getSdt());
             pst.setObject(3, kh.getGioiTinh());
             pst.setObject(4, kh.getEmail());
             pst.setObject(5, kh.getNgay());
@@ -105,7 +105,7 @@ public class KhachHangConnection {
             while (rs.next()) {
                 Integer ma = rs.getInt("MAKH");
                 String ten = rs.getString("TENKH");
-                Integer sdt = rs.getInt("SDT");
+                String sdt = rs.getString("SDT");
                 String gioiTinh = rs.getString("GIOITINH");
                 String email = rs.getString("EMAIL");
                 Date ngay = rs.getDate("NGAYSINH");

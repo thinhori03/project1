@@ -55,4 +55,17 @@ public class Mau_Service {
         }
         return 0;
     }
+     public int ADD_MAU(MauSacModel m) {
+        sql = "insert into MAU_SAC(TENMAU)values(?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, m.getTenmau());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+             return 0;
+        }
+       
+    }
 }

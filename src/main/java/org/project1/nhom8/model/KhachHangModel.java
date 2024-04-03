@@ -13,7 +13,7 @@ import java.util.Date;
 public class KhachHangModel {
     private int maKH;    
     private String ten;
-    private int  sdt;
+    private String  sdt;
     private String gioiTinh;
     private String email;
     private Date ngay;
@@ -22,7 +22,7 @@ public class KhachHangModel {
     public KhachHangModel() {
     }
 
-    public KhachHangModel(String ten, int sdt, String gioiTinh, String email, Date ngay, String diaChi) {
+    public KhachHangModel(String ten, String sdt, String gioiTinh, String email, Date ngay, String diaChi) {
         this.ten = ten;
         this.sdt = sdt;
         this.gioiTinh = gioiTinh;
@@ -31,7 +31,7 @@ public class KhachHangModel {
         this.diaChi = diaChi;
     }
 
-    public KhachHangModel(int maKH, String ten, int sdt, String gioiTinh, String email, Date ngay,String diaChi) {
+    public KhachHangModel(int maKH, String ten, String sdt, String gioiTinh, String email, Date ngay,String diaChi) {
         this.maKH = maKH;
         this.ten = ten;
         this.sdt = sdt;
@@ -57,11 +57,11 @@ public class KhachHangModel {
         this.ten = ten;
     }
 
-    public int getSdt() {
+    public String getSdt() {
         return sdt;
     }
 
-    public void setSdt(int sdt) {
+    public void setSdt(String sdt) {
         this.sdt = sdt;
     }
 
@@ -96,6 +96,8 @@ public class KhachHangModel {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
+
+    
 
     @Override
     public String toString() {

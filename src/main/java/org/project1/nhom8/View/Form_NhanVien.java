@@ -634,15 +634,13 @@ public class Form_NhanVien extends javax.swing.JPanel {
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
         String maStr = txtTimKiem.getText();
-        if (!maStr.isEmpty()) {
+        if (maStr.isEmpty()) {
+            this.fillTable(service.getAll());
+        }else{
             try {
                 int ma = Integer.parseInt(maStr);
-                List<NhanVien> list1;
-                model.setRowCount(0);
-                list1 = service.timKiem(ma);
-                for (NhanVien nhanVien : list1) {
-                    model.addRow(nhanVien.toDataRow());
-                }
+                List<NhanVien> list1 = service.timKiem(ma);
+                this.fillTable(list1);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Mã phải là số nguyên");
             }

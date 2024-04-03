@@ -16,32 +16,33 @@ import java.util.Optional;
  * @author Admin
  */
 public class SIZE_Service {
-    
+
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-    
+
     public SizeModel getBYID_Size(int masize) {
-        
+
         sql = "Select*from SIZE where MASIZE = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, masize);
             rs = ps.executeQuery();
-            if(!rs.isBeforeFirst()){
+            if (!rs.isBeforeFirst()) {
                 return null;
             }
             rs.next();
-            SizeModel zs = new SizeModel(rs.getInt(1),rs.getString(2));
+            SizeModel zs = new SizeModel(rs.getInt(1), rs.getString(2));
             return zs;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    public  int getSize(String tensize) {
+
+    public int getSize(String tensize) {
         sql = "Select MASIZE from SIZE where TENSIZE = ?";
         try {
             con = DBConnect.getConnection();
@@ -58,5 +59,19 @@ public class SIZE_Service {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public int ADD_SIZE(SizeModel s) {
+        sql = "insert into SIZE(TENSIZE)values(?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, s.getTensize());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+             return 0;
+        }
+       
     }
 }
