@@ -381,6 +381,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimkiemActionPerformed
 
     public void Clear() {
+        txtMaKhachHang.setText("");
         txtTen.setText("");
         txtSDT.setText("");
         txtEmail.setText("");
@@ -393,6 +394,9 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
         String ten = txtTen.getText();
+        if(ten.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Không được trống tên");
+        }else{
         Integer sdt = Integer.parseInt(txtSDT.getText());
         String gt = "";
         if (rdNam.isSelected()) {
@@ -409,12 +413,16 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, kq);
         LoadData(ql.getlist());
         Clear();
+        }
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
         Integer ma = Integer.parseInt(txtMaKhachHang.getText());
         String ten = txtTen.getText();
+         if(ten.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Không được trống tên");
+        }else{
         Integer sdt = Integer.parseInt(txtSDT.getText());
         String gt = "";
         if (rdNam.isSelected()) {
@@ -432,6 +440,7 @@ public class QL_Khach_Hang extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, kq);
         LoadData(ql.getlist());
         Clear();
+         }
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked

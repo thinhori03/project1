@@ -293,11 +293,11 @@ public class VoucherPanel extends javax.swing.JPanel {
 
         if (Optional.ofNullable(voucherRepository
                 .add(voucherModel)).isPresent()) {
-            JOptionPane.showMessageDialog(this, "tham thanh cong");
+            JOptionPane.showMessageDialog(this, "them thanh cong");
             clearForm();
             loadTable();
         } else {
-            JOptionPane.showMessageDialog(this, "tham that bai");
+            JOptionPane.showMessageDialog(this, "them that bai");
         }
 
     }//GEN-LAST:event_addVoucherActionPerformed
