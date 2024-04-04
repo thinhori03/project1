@@ -10,26 +10,29 @@ import org.project1.nhom8.util.swing.GeneralDocumentListener;
 
 import java.awt.*;
 import java.util.Optional;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import org.project1.nhom8.service.MailService;
+import org.project1.nhom8.model.NhanVien;
+import org.project1.nhom8.service.NhanVienService;
 
 /**
  * @author ngtnthori03
  */
 public class ForgotPasswordDialog extends javax.swing.JDialog {
 
-    private ScheduledExecutorService executorService;
+    private NhanVien nhanVien;
 
     private final HTMLResolver htmlResolver;
 
     private final ForgotPasswordService forgotPasswordService;
-    
+
     private final LoadingPanel loadingPanel;
+
+    private final NhanVienService nhanVienService;
 
     /**
      * Creates new form ForgotPasswordDFdialog
@@ -37,26 +40,28 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
     public ForgotPasswordDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
+        nhanVienService = new NhanVienService();
+
         this.htmlResolver = new HTMLResolver();
-        
+
         this.forgotPasswordService = new ForgotPasswordService();
 
         this.loadingPanel = new LoadingPanel() {
             @Override
             public Boolean onLoading() {
-                
+
                 MailService mailService = forgotPasswordService.getMailService();
-                
+
                 mailService.autoAuth();
-                
-                mailService.send(email.getText().trim()
-                        , "xác thực đổi mạt khẩu"
-                        , htmlResolver.revolve("forgot-password"
-                                , forgotPasswordService.getMailContext()
+
+                mailService.send(email.getText().trim(),
+                        "xác thực đổi mạt khẩu",
+                        htmlResolver.revolve("forgot-password",
+                                forgotPasswordService.getMailContext()
                         )
                 );
-                
+
                 return mailService.isResult();
             }
 
@@ -68,12 +73,12 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
 
             @Override
             public void onSuccess() {
-            
+
                 String code = JOptionPane.showInputDialog("nhập mã xác thực");
-                
+
                 if (Optional.ofNullable(code).isPresent()) {
                     if (code.equals(forgotPasswordService.getCode().toString())) {
-                        enables(true, new JComponent[] {ok, password, confirmPassword});
+                        enables(true, new JComponent[]{ok, password, confirmPassword});
                     } else {
                         JOptionPane.showMessageDialog(this, "mã không đúng");
                     }
@@ -81,9 +86,9 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
             }
         };
         loadingPanel.setSize(this.getSize());
-        
+
         enables(false, new JComponent[]{
-                getCode, password, confirmPassword, ok
+            getCode, password, confirmPassword, ok
         });
 
         setLocationRelativeTo(null);
@@ -258,15 +263,39 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
 
     private void getCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCodeActionPerformed
 
-        try {
-            loadingPanel.start();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPasswordDialog.class.getName()).log(Level.SEVERE, null, ex);
+        nhanVien = nhanVienService.findByEma(email.getText().trim());
+
+        if (Optional.ofNullable(nhanVien).isPresent()) {
+            try {
+                loadingPanel.start();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPasswordDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "không tìm thấy nhân vien code email " + email.getText().trim());
         }
+
     }//GEN-LAST:event_getCodeActionPerformed
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        // update mk cho nhan vien
+
+        String pwd = new String(this.password.getPassword());
+        String cpwd = new String(this.confirmPassword.getPassword());
+
+        if (pwd.isBlank() || pwd.isEmpty()
+                || cpwd.isBlank() || cpwd.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "không được để trống mật khẩu hoặc xác nhận mật khẩu");
+        } else if (!pwd.equals(cpwd)) {
+            JOptionPane.showMessageDialog(this, "mật khẩu và xác nhận mật khẩu phải giống nhau");
+        }
+
+        this.nhanVien.setMatKhau(pwd);
+
+        if (this.nhanVienService.update(nhanVien.getMaNV(), nhanVien) > 0) {
+            JOptionPane.showMessageDialog(this, "đỏi mật khẩu thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "đỏi mật khẩu thất bại");
+        }
     }//GEN-LAST:event_okActionPerformed
 
     public void enables(Boolean value, JComponent[] components) {
