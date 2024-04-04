@@ -4,6 +4,8 @@
  */
 package org.project1.nhom8.model;
 
+import java.util.Arrays;
+
 /**
  *
  * @author PC
@@ -118,11 +120,17 @@ public class NhanVien {
     }
     
 
-   
-    public Object[]toDataRow(){
-        return new Object[]{
-           this.getMaNV(),this.getHoTen(),this.getSdt(),this.getEmail(),this.getGioiTinh(),this.getMatKhau(),this.getCCCD(),this.getVaiTro(),this.getTrangThai()
-        };
+    public Object[] toDataRow() {
+       
+        Object[] dataRow = Arrays.copyOf(new Object[]{this.maNV, this.hoTen, this.sdt, this.email, this.gioiTinh, this.matKhau, this.CCCD, this.vaiTro, this.trangThai}, 9);
+        
+        dataRow[5] = encryptMatKhau(this.matKhau);
+        return dataRow;
+    }
+
+    private String encryptMatKhau(String matKhau) {
+       
+        return "********";
     }
 
     
