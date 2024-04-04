@@ -4,23 +4,33 @@
  */
 package org.project1.nhom8.View;
 
-import java.awt.Component;
-import javax.swing.JLayer;
-import javax.swing.JLayeredPane;
 import org.project1.nhom8.service.ForgotPasswordService;
-import org.project1.nhom8.service.MailService;
+import org.project1.nhom8.util.HTMLResolver;
 import org.project1.nhom8.util.swing.GeneralDocumentListener;
 
+import java.awt.*;
+import java.util.Optional;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import org.project1.nhom8.service.MailService;
+
 /**
- *
  * @author ngtnthori03
  */
 public class ForgotPasswordDialog extends javax.swing.JDialog {
 
-    private Thread getCodehread;
-    
+    private ScheduledExecutorService executorService;
+
+    private final HTMLResolver htmlResolver;
+
     private final ForgotPasswordService forgotPasswordService;
     
+    private final LoadingPanel loadingPanel;
+
     /**
      * Creates new form ForgotPasswordDFdialog
      */
@@ -28,10 +38,52 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        this.htmlResolver = new HTMLResolver();
+        
         this.forgotPasswordService = new ForgotPasswordService();
 
-        enables(false, new Component[]{
-            getCode, password, confirmPassword, ok
+        this.loadingPanel = new LoadingPanel() {
+            @Override
+            public Boolean onLoading() {
+                
+                MailService mailService = forgotPasswordService.getMailService();
+                
+                mailService.autoAuth();
+                
+                mailService.send(email.getText().trim()
+                        , "xác thực đổi mạt khẩu"
+                        , htmlResolver.revolve("forgot-password"
+                                , forgotPasswordService.getMailContext()
+                        )
+                );
+                
+                return mailService.isResult();
+            }
+
+            @Override
+            public void onFailed() {
+                JOptionPane.showMessageDialog(this, "không thể gửi mail đến: "
+                        + email.getText().trim());
+            }
+
+            @Override
+            public void onSuccess() {
+            
+                String code = JOptionPane.showInputDialog("nhập mã xác thực");
+                
+                if (Optional.ofNullable(code).isPresent()) {
+                    if (code.equals(forgotPasswordService.getCode().toString())) {
+                        enables(true, new JComponent[] {ok, password, confirmPassword});
+                    } else {
+                        JOptionPane.showMessageDialog(this, "mã không đúng");
+                    }
+                }
+            }
+        };
+        loadingPanel.setSize(this.getSize());
+        
+        enables(false, new JComponent[]{
+                getCode, password, confirmPassword, ok
         });
 
         setLocationRelativeTo(null);
@@ -41,23 +93,14 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
             @Override
             public void onChange() {
                 if (email.getText().trim().matches("^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+")) {
-                    enables(true, new Component[]{getCode});
+                    enables(true, new JComponent[]{getCode});
                 } else {
-                    enables(false, new Component[]{getCode});
+                    enables(false, new JComponent[]{getCode});
                 }
             }
         });
-        
-        // get code thread
-        getCodehread = new Thread() {
-            public void run () {
-                
-                
-                
-            }
-        };
 
-        layer.setLayer(new LoadingPanel(), JLayeredPane.POPUP_LAYER, 0);
+        layer.add(loadingPanel, JLayeredPane.POPUP_LAYER);
     }
 
     /**
@@ -101,7 +144,12 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
             }
         });
 
-        ok.setText("jButton1");
+        ok.setText("đổi mạt khẩu");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("jLabel3");
 
@@ -210,13 +258,25 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
 
     private void getCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCodeActionPerformed
 
-
+        try {
+            loadingPanel.start();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ForgotPasswordDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_getCodeActionPerformed
 
-    public void enables(Boolean value, Component[] components) {
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        // update mk cho nhan vien
+    }//GEN-LAST:event_okActionPerformed
+
+    public void enables(Boolean value, JComponent[] components) {
         for (Component c : components) {
             c.setEnabled(value);
         }
+    }
+
+    public Boolean verificationCode(Integer inputCode) {
+        return inputCode.equals(this.forgotPasswordService.getCode());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

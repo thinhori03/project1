@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class MailService {
 
+    private Boolean authenticated;
     private String sender;
     private final Properties pro;
     private Session session;
@@ -37,6 +38,7 @@ public class MailService {
     }
 
     public MailService() {
+        this.authenticated = false;
         this.pro = new Properties();
         this.result = false;
         this.pro.putAll(new HashMap<String, String>() {
@@ -57,10 +59,13 @@ public class MailService {
                     return new PasswordAuthentication(_sender, _password);
                 }
             });
-            return true;
+
+            this.authenticated = true;
         } catch (Exception e) {
-            return false;
+            this.authenticated = false;
         }
+
+        return authenticated;
     }
 
     public Boolean autoAuth() {
@@ -98,5 +103,9 @@ public class MailService {
             result = false;
             Logger.getLogger(MailService.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Boolean getAuthenticated() {
+        return authenticated;
     }
 }
