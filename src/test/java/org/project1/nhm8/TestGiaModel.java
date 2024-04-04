@@ -1,22 +1,19 @@
 package org.project1.nhm8;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.project1.nhom8.dto.provider.LSGViewModelProvider;
 import org.project1.nhom8.repository.GiaRepository;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-public class GiaModel {
+public class TestGiaModel {
 
     private final GiaRepository giaRepository;
 
     private final LSGViewModelProvider lsgViewModelProvider;
 
-    public GiaModel() {
+    public TestGiaModel() {
         this.giaRepository = new GiaRepository();
 
         this.lsgViewModelProvider = new LSGViewModelProvider();

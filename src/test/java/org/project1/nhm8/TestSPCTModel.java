@@ -15,14 +15,14 @@ public class TestSPCTModel {
         this.spctRepository = new SPCTRepository();
     }
 
-//    @Test
+    @Test
     public void getrAll() {
 
         System.out.println(this.spctRepository.findById(1).getMaSPCT());
     }
 
-//    @Test
-    public void  viewModel() {
+    @Test
+    public void viewModel() {
         for (SPCTViewModel spctViewModel : this.spctViewModelProvider.SPCTViewModel()) {
             System.out.println(spctViewModel.getMaSPCT());
         }

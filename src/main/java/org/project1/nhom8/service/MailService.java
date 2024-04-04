@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 
 /**
  * @author ngtnthori03
+ * authentiation email: thinhntph24396@fpt.edu.vn
+ * authemtication password: zego gtfb pazk dtwv
  */
 public class MailService {
 
@@ -25,7 +27,6 @@ public class MailService {
     private Properties pro;
     private Session session;
     private boolean result;
-    private Thread th;
 
     public boolean isResult() {
         return this.result;
@@ -34,7 +35,6 @@ public class MailService {
     public MailService() {
         this.pro = new Properties();
         this.result = false;
-        this.th = new Thread();
         this.pro.putAll(new HashMap<String, String>() {
             {
                 put("mail.smtp.host", "smtp.gmail.com"); // SMTP Host

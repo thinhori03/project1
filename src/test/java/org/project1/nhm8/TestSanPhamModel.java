@@ -13,7 +13,7 @@ public class TestSanPhamModel {
     }
 
     @Test
-    @DisplayName("fina all SanPham Model")
+    @DisplayName("find all SanPham Model")
     public void findAll() {
         System.out.println(sanPhamRepository.findById(2).getMasp());
     }
