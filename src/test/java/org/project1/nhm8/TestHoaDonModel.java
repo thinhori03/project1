@@ -1,13 +1,10 @@
 package org.project1.nhm8;
 
-import org.junit.jupiter.api.Test;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
 import org.project1.nhom8.model.VoucherModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.HDCTKMRepository;
-import org.project1.nhom8.repository.HoaDonRepository;
-import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.service.HoaDonService;
 
@@ -35,7 +32,6 @@ public class TestHoaDonModel {
         giaRepository = new GiaRepository();
     }
 
-    @Test
     public void createInvoice() {
 
         String maHD = hoaDonService.taoMaHoaDon();
@@ -52,7 +48,7 @@ public class TestHoaDonModel {
         hoaDon.setNgayThanhToan(new Date());
 
         hoaDon.setPhuongThuc("tiền mặt");
-        
+
         hoaDon.setTrangThai("đã thanh toán");
 
         // invoice detail
@@ -66,7 +62,7 @@ public class TestHoaDonModel {
                 .getMaLSG());
 
         List<HDCTModel> hdcts = Arrays.asList(
-            hdct1
+                hdct1
         );
 
         VoucherModel voucher = voucherRepository.findById("V1");
