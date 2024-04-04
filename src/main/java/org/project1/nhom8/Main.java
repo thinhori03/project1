@@ -1,6 +1,6 @@
 package org.project1.nhom8;
 
-import javax.swing.UIManager;
+import javax.swing.*;
 
 
 /*
@@ -12,7 +12,7 @@ public class Main {
 
         try {
 
-            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacDarkLaf");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
 
         } catch (Exception ex) {
             ex.printStackTrace();

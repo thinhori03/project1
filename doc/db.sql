@@ -1,6 +1,3 @@
-use master
-go
-
 CREATE DATABASE Du_An_Nhom_8
 GO
 
@@ -49,15 +46,15 @@ CREATE TABLE KHUYEN_MAI_COUPON
 
 CREATE TABLE VOUCHER
 (
-    MAV           VARCHAR(10) PRIMARY KEY,
-    GIATRI        FLOAT,
-    NGAYBATDAU    DATE,
-    NGAYKETTHUC   DATE,
-    DIEUKIEN      FLOAT,
-    ngay_tao      DATETIME,
-    so_luong      INT,
-    ngay_cap_nhat DATETIME,
-    TRANG_THAI    NVARCHAR(20) -- đang hoạt động, đã hủy
+    MAV         VARCHAR(10) PRIMARY KEY,
+    GIATRI      FLOAT,
+    NGAYBATDAU  DATE,
+    NGAYKETTHUC DATE,
+    DIEUKIEN    FLOAT,
+    SOLUONG     int,
+    ngay_tao    DATETIME,
+    NGAYCAPNHAT DATETIME,
+    TRANG_THAI  NVARCHAR(20) -- đang hoạt động đã hủy
 )
 
 CREATE TABLE KHACH_HANG
@@ -68,7 +65,6 @@ CREATE TABLE KHACH_HANG
     GIOITINH NVARCHAR(10),
     EMAIL    NVARCHAR(100),
     NGAYSINH DATE,
-    MATKHAU  varchar(20),
     DIACHI   NVARCHAR(100)
 )
 
@@ -103,13 +99,13 @@ CREATE TABLE HOA_DON
     MANV          INT references NHAN_VIEN (MANV),
     NGAYTAO       DATETIME,
     NGAYTHANHTOAN DATETIME,
-    TRANGTHAI     VARCHAR(100),
-    PHUONGTHUC    VARCHAR(100),
+    TRANGTHAI     NVARCHAR(100),
+    PHUONGTHUC    NVARCHAR(100),
     MAV           VARCHAR(10) references VOUCHER (MAV)
 )
 CREATE TABLE HOA_DON_CHI_TIET
 (
-    MAHDCT  INT PRIMARY KEY,
+    MAHDCT  INT PRIMARY KEY identity (1,1),
     MAHD    varchar(20) references HOA_DON (MAHD),
     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
     SOLUONG INT,
@@ -125,11 +121,11 @@ CREATE TABLE hoa_don_chi_tiet__khuyen_mai
 GO
 
 insert into NHAN_VIEN
-values (N'Trịnh Tiến Tuấn', '0827890913', 'tuantt23@gmail.com', N'Nam', 'tuan2004', 03734002912, N'Quản lý',
+values (N'Trịnh Tiến Tuấn', '0827890913', 'tuantt23@gmail.com', N'Nam', 'tuan2004', '03734002912', N'Quản lý',
         N'Đang làm việc'),
-       (N'Hoàng Đức Ích', '0866690914', 'ichhoang872gmail.com', N'Nam', 'Hoangich2004', 02700757824, N'Nhân viên',
+       (N'Hoàng Đức Ích', '0866690914', 'ichhoang872gmail.com', N'Nam', 'Hoangich2004', '02700757824', N'Nhân viên',
         N'Đang làm việc'),
-       (N'Mai Thị Thư', '0395561663', 'thumt21@gmail.com', N'Nam', 'Hoangich2004', 02700757824, N'Nhân viên',
+       (N'Mai Thị Thư', '0395561663', 'thumt21@gmail.com', N'Nam', 'Hoangich2004', '02700757824', N'Nhân viên',
         N'Nghỉ việc')
 
 insert into SAN_PHAM(TENSP, TRANGTHAI)
@@ -140,27 +136,28 @@ values (N'Dép LV', N'Đang bán'),
 insert into MAU_SAC(TENMAU)
 values (N'Đỏ'),
        (N'Đen'),
-       (N'Đỏ vàng')
+       (N'Xám')
 insert into SIZE(TENSIZE)
 values (39),
-       (38),
-       (40)
+       (40),
+       (41),
+       (42)
 insert into KHUYEN_MAI_COUPON(MAKM, NGAYBATDAU, NGAYKETTHUC, SOLUONG, GIA)
 values ('KM1', '2024-02-14', '2024-02-20', 4, 40000),
        ('KM2', '2024-02-20', '2024-02-26', 3, 50000),
        ('KM3', '2024-02-26', '2024-02-28', 6, 60000)
 
 
-insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, ngay_tao, ngay_cap_nhat, so_luong, TRANG_THAI)
-values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, GETDATE(), GETDATE(), 1, N'đang hoạt động'),
-       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, GETDATE(), GETDATE(), 1, N'đang hoạt động'),
-       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, GETDATE(), GETDATE(), 1, N'đang hoạt động')
+insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, SOLUONG, ngay_tao, NGAYCAPNHAT, TRANG_THAI)
+values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, 5, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, 8, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, 3, GETDATE(), GETDATE(), N'đang hoạt động')
 
-insert into KHACH_HANG(TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, MATKHAU, DIACHI)
-values (N'Nguyễn Văn Tuấn', '0856790234', N'Nam', 'Tuannv23@gmail.com', '1999-07-23', 'Tuan1999', N'Hà Nội'),
-       (N'Ngyễn Thị Thu Giang', '086678902', N'Nữ', 'Giangxinh@gamil.com', '2004-04-25', 'Giang2004', N'Hà Nội'),
-       (N'Vi Công Minh', '0702202307', N'Nam', 'Minhdz@gmail.com', '2003-08-13', 'Minhdz2004', N'Hà Nội'),
-       (N' Minh', '0702202307', N'Nam', 'Minhdz@gmail.com', '2003-08-13', 'Minhdz2004', N'Hà Nội')
+insert into KHACH_HANG(TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)
+values (N'Nguyễn Văn Tuấn', '0856790234', N'Nam', 'Tuannv23@gmail.com', '1999-07-23', N'Hà Nội'),
+       (N'Ngyễn Thị Thu Giang', '086678902', N'Nữ', 'Giangxinh@gamil.com', '2004-04-25', N'Hà Nội'),
+       (N'Vi Công Minh', '0702202307', N'Nam', 'Minhdz@gmail.com', '2003-08-13', N'Hà Nội'),
+       (N' Minh', '0702202307', N'Nam', 'Minhdz@gmail.com', '2003-08-13', N'Hà Nội')
 
 
 insert into SAN_PHAM_CHI_TIET(MASPCT, SOLUONG, MASIZE, MAMAU, MASP)
@@ -183,10 +180,10 @@ values ('HD1', '1', '1', '2024-02-10 00:00:00', '2024-03-10 00:00:00', N'Đã th
        ('HD2', '2', '2', '2024-01-24 00:00:00', '2024-02-25 00:00:00', N'Chưa thanh toán', N'Tiền mặt', 'V2'),
        ('HD3', '3', '3', '2024-03-10 00:00:00', '2024-03-17 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V1')
 
-insert into HOA_DON_CHI_TIET(MAHDCT, MAHD, MASPCT, SOLUONG, MALSG)
-values ('1', 'HD1', '1', 6, '1'),
-       ('2', 'HD2', '2', 4, '3'),
-       ('3', 'HD3', '3', 5, '2')
+insert into HOA_DON_CHI_TIET(MAHD, MASPCT, SOLUONG, MALSG)
+values ('HD1', '1', 6, '1'),
+       ('HD2', '2', 4, '3'),
+       ('HD3', '3', 5, '2')
 
 INSERT INTO hoa_don_chi_tiet__khuyen_mai(maHDCT, maKM)
 VALUES ('1', 'KM1'),
@@ -227,57 +224,55 @@ Select*
 from SAN_PHAM_CHI_TIET
 Select*
 from HOA_DON_CHI_TIET
---
---     insert into KHACH_HANG (  TENKH, SDT,GIOITINH,EMAIL,NGAYSINH,DIACHI)
--- values ( 'Nguyen Van A' ,'0123456789','Nam', 'nguyenvana@gmail.com','02/02/2004','Kieu Mai , Ha Noi')
---
--- update KHACH_HANG
--- set TENKH = 'Nguyen Van A',
---     SDT = '0123456798',
---     GIOITINH=N'Nữ',
---     EMAIl = 'nguyenvana@gmail.com',
---     NGAYSINH = '02/02/2004',
---     NGAYSINH = '02/02/2004',
---     DIACHI = 'Kieu Mai , Ha Noi'
--- where MAKH = 2
---
---
---
---
---
--- select HOA_DON_CHI_TIET.MASPCT, TENSP ,COUNT(HOA_DON_CHI_TIET.SOLUONG),GIA
--- from HOA_DON_CHI_TIET
---          join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT
---          join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG
--- group by TENSP
---
--- select HOA_DON_CHI_TIET.MASPCT, TENSP ,HOA_DON_CHI_TIET.SOLUONG,GIA,NGAYTHANHTOAN
--- from HOA_DON_CHI_TIET
---          join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT
---          join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG
---          join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD
---          join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP
--- where NGAYTHANHTOAN ='2024-03-10 00:00:00.000'
---
---
---
--- select * from HOA_DON
---
--- select * from HOA_DON_CHI_TIET
---
--- select * from SAN_PHAM_CHI_TIET
--- select * from LICH_SU_GIA
---
--- select HOA_DON_CHI_TIET.MASPCT, TENSP ,HOA_DON_CHI_TIET.SOLUONG,GIA,NGAYTHANHTOAN
--- from HOA_DON_CHI_TIET
---          join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT= HOA_DON_CHI_TIET.MASPCT
---          join LICH_SU_GIA on LICH_SU_GIA.MALSG= HOA_DON_CHI_TIET.MALSG
---          join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD
---          join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP
+
+insert into KHACH_HANG (TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)
+values ('Nguyen Van A', '0123456789', 'Nam', 'nguyenvana@gmail.com', '02/02/2004', 'Kieu Mai , Ha Noi')
+
+update KHACH_HANG
+set TENKH    = N'Nguyễn Văn B',
+    SDT      = '0123456798',
+    GIOITINH=N'Nam',
+    EMAIl    = 'nguyenvana@gmail.com',
+    NGAYSINH = '02/02/2004',
+    DIACHI   = 'Kieu Mai , Ha Noi'
+where MAKH = 2
 
 
--- SELECT
---     SAN_PHAM_CHI_TIET.MASPCT as ma,
---     LICH_SU_GIA.GIA as gia
--- from SAN_PHAM_CHI_TIET
--- JOIN LICH_SU_GIA on LICH_SU_GIA.MASPCT = SAN_PHAM_CHI_TIET.MASPCT
+select *
+from KHACH_HANG
+
+
+select HOA_DON_CHI_TIET.MASPCT, TENSP, HOA_DON_CHI_TIET.SOLUONG, GIA, NGAYTHANHTOAN
+from HOA_DON_CHI_TIET
+         join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT = HOA_DON_CHI_TIET.MASPCT
+         join LICH_SU_GIA on LICH_SU_GIA.MALSG = HOA_DON_CHI_TIET.MALSG
+         join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD
+         join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP
+where NGAYTHANHTOAN = '2024-03-10 00:00:00.000'
+
+
+select *
+from HOA_DON
+
+select *
+from HOA_DON_CHI_TIET
+
+select *
+from SAN_PHAM_CHI_TIET
+select *
+from LICH_SU_GIA
+
+select HOA_DON_CHI_TIET.MASPCT, TENSP, HOA_DON_CHI_TIET.SOLUONG, GIA, NGAYTHANHTOAN
+from HOA_DON_CHI_TIET
+         join SAN_PHAM_CHI_TIET on SAN_PHAM_CHI_TIET.MASPCT = HOA_DON_CHI_TIET.MASPCT
+         join LICH_SU_GIA on LICH_SU_GIA.MALSG = HOA_DON_CHI_TIET.MALSG
+         join HOA_DON on HOA_DON.MAHD = HOA_DON_CHI_TIET.MAHD
+         join SAN_PHAM on SAN_PHAM.MASP = SAN_PHAM_CHI_TIET.MASP
+
+select *
+from LICH_SU_GIA
+
+insert into SAN_PHAM_CHI_TIET(SOLUONG, MASIZE, MAMAU, MASP)
+values (10, 1, 3, 2)
+insert into LICH_SU_GIA(MALSG, GIA)
+values ('4', 150000)

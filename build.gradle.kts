@@ -20,12 +20,16 @@ dependencies {
     runtimeOnly("com.formdev:flatlaf:3.4")
     runtimeOnly("com.formdev:flatlaf-intellij-themes:3.4")
 
+    // export/import excel
     implementation("org.apache.poi:poi:5.2.5")
     implementation("org.apache.poi:poi-ooxml:5.2.5")
 
-//    compileOnly("org.projectlombok:lombok:1.18.24")
-//    annotationProcessor("org.projectlombok:lombok:1.18.24")
+    // mail sender
+    implementation("org.eclipse.angus:angus-mail:2.0.3")
+    implementation("jakarta.mail:jakarta.mail-api:2.1.3")
 
+    // mail content template
+    implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
 }
 
 java {
