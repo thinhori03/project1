@@ -263,7 +263,7 @@ public class LoginDialog extends javax.swing.JFrame {
 
     private void forgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordMouseClicked
 
-        this.forgotPasswordDialog.setVisible(true);
+        new ForgotPasswordDialog(this, true).setVisible(true);
 
     }//GEN-LAST:event_forgotPasswordMouseClicked
 

@@ -87,10 +87,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         };
         loadingPanel.setSize(this.getSize());
 
-        enables(false, new JComponent[]{
-            getCode, password, confirmPassword, ok
-        });
-
+        
         setLocationRelativeTo(null);
 
         // document listeneer
@@ -106,6 +103,18 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         });
 
         layer.add(loadingPanel, JLayeredPane.POPUP_LAYER);
+    
+        clear();
+    }
+    
+    public void clear() {
+        email.setText("");
+        password.setText("");
+        confirmPassword.setText("");
+        
+        enables(false, new JComponent[]{
+            getCode, password, confirmPassword, ok
+        });
     }
 
     /**
@@ -123,7 +132,6 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         getCode = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
         confirmPassword = new javax.swing.JPasswordField();
-        login = new javax.swing.JButton();
         ok = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -139,13 +147,6 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         getCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getCodeActionPerformed(evt);
-            }
-        });
-
-        login.setText("đăng nhập");
-        login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
             }
         });
 
@@ -167,7 +168,6 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         layer.setLayer(getCode, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(password, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(confirmPassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layer.setLayer(login, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(ok, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -189,8 +189,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layerLayout.createSequentialGroup()
                         .addGroup(layerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layerLayout.createSequentialGroup()
-                                .addComponent(login)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(ok))
                             .addComponent(confirmPassword, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(password)
@@ -226,9 +225,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ok)
-                    .addComponent(login))
+                .addComponent(ok)
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(layerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layerLayout.createSequentialGroup()
@@ -257,10 +254,6 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginActionPerformed
-
     private void getCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCodeActionPerformed
 
         nhanVien = nhanVienService.findByEma(email.getText().trim());
@@ -287,15 +280,18 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "không được để trống mật khẩu hoặc xác nhận mật khẩu");
         } else if (!pwd.equals(cpwd)) {
             JOptionPane.showMessageDialog(this, "mật khẩu và xác nhận mật khẩu phải giống nhau");
-        }
-
-        this.nhanVien.setMatKhau(pwd);
-
-        if (this.nhanVienService.update(nhanVien.getMaNV(), nhanVien) > 0) {
-            JOptionPane.showMessageDialog(this, "đỏi mật khẩu thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "đỏi mật khẩu thất bại");
+            this.nhanVien.setMatKhau(pwd);
+
+            if (this.nhanVienService.update(nhanVien.getMaNV(), nhanVien) > 0) {
+                JOptionPane.showMessageDialog(this, "đỏi mật khẩu thành công");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "đỏi mật khẩu thất bại");
+            }
         }
+
+
     }//GEN-LAST:event_okActionPerformed
 
     public void enables(Boolean value, JComponent[] components) {
@@ -317,7 +313,6 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLayeredPane layer;
-    private javax.swing.JButton login;
     private javax.swing.JButton ok;
     private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
