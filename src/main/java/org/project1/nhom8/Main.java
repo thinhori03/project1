@@ -18,7 +18,7 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
+        
 
         new org.project1.nhom8.View.main().setVisible(true);
     }

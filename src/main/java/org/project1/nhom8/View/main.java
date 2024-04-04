@@ -622,8 +622,7 @@ public class main extends javax.swing.JFrame {
 
         if (option == JOptionPane.YES_OPTION) {
             main.this.dispose();
-            new LoginDialog(this, rootPaneCheckingEnabled).setVisible(true);
-
+            new LoginDialog().setVisible(true);
         }
     }//GEN-LAST:event_pnDangXuatMouseClicked
 

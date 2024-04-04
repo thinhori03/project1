@@ -14,11 +14,13 @@ public class TestMailService {
 
     @Test
     public void sendMail() {
-        
-        mailService.auth("thinhntph24396@fpt.edu.vn"
-                , "zego gtfb pazk dtwv");
 
-        mailService.send("ngtnthori03@gmail.com", "forgot password code", "your code: 19762");
+        mailService.autoAuth();
+
+        mailService.send("ngtnthori03@gmail.com"
+                , "forgot password code"
+                , "your code: 19762"
+        );
 
         Assertions.assertTrue(mailService.isResult());
     }
