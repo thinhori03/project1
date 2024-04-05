@@ -4,6 +4,7 @@
  */
 package org.project1.nhom8.repository;
 
+import org.project1.nhom8.dto.HDSearchDTO;
 import org.project1.nhom8.model.HoaDonModel;
 
 import java.sql.PreparedStatement;
@@ -49,6 +50,54 @@ public class HoaDonRepository extends GeneralRepository<HoaDonModel, String> {
         }
 
         System.out.println(query);
+
+        return result;
+    }
+
+    public List<HoaDonModel> search(String maHD, HDSearchDTO options) {
+
+        List<HoaDonModel> result = new ArrayList<>();
+
+        StringBuilder query = new StringBuilder(getQueryGenerator().generateSelectAllQuery()
+                + "\n"
+                + "WHERE MAHD LIKE ?");
+
+        List<Object> args = new ArrayList<>();
+        args.add("%" + maHD + "%");
+
+        if (options.getBeginCreationDate() != null) {
+            query.append("\n\tAND ngayTao between ? AND ?");
+
+            args.add(options.getBeginCreationDate());
+            args.add(options.getEndCreationDate());
+        }
+
+        if (options.getBeginPaymenetDate() != null) {
+            query.append("\n\tAND ngyThanhToan between ? AND ?");
+
+            args.add(options.getBeginPaymenetDate());
+            args.add(options.getEndPaymentDate());
+        }
+
+        try {
+            PreparedStatement preStat = getConnection().prepareStatement(query.toString());
+
+
+            for (int i = 0; i < args.size(); ++i) {
+                preStat.setObject(i + 1, args.get(i));
+            }
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    result.add(getQueryGenerator().map(resultSet));
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
         return result;
     }
