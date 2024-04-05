@@ -13,6 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 import java.util.Optional;
+import org.apache.poi.ss.util.DateFormatConverter;
+import org.project1.nhom8.util.data.convert.DefaultConverter;
 
 /**
  * @author ngtnthori03
@@ -308,10 +310,11 @@ public class VoucherPanel extends javax.swing.JPanel {
 
     private void cencelVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cencelVoucherActionPerformed
         
-        String voucherId = voucherViewModelProvider.getVoucherViewModel()
-                .get(Voucherview.getSelectedRow()).getMaVoucher();
-        
-       voucherModel = voucherRepository.findById(voucherId);
+       
+       if (new Date().compareTo(voucherModel.getNgayBatDau()) >= 0) {
+           JOptionPane.showMessageDialog(this, "không thể hủy hóa đơn đã bắt đầu (" + DefaultConverter.VietnameseDateFormat(voucherModel.getNgayBatDau()) + ")");
+           return;
+       }
        
        voucherModel.setTrangThai(TrangThaiVoucher.DA_HUY.getValue());
        voucherModel.setNgayCapNhat(new Date());
@@ -325,7 +328,14 @@ public class VoucherPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cencelVoucherActionPerformed
 
     private void VoucherviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VoucherviewMouseClicked
-        if (Voucherview.getSelectedRow() >= 0) {
+        
+        String voucherId = voucherViewModelProvider.getVoucherViewModel()
+                .get(Voucherview.getSelectedRow()).getMaVoucher();
+        
+       voucherModel = voucherRepository.findById(voucherId);
+        
+        if (Voucherview.getSelectedRow() >= 0 
+                && voucherModel.getTrangThai().equals(TrangThaiVoucher.DANG_HOAT_DONG.getValue())) {
             cencelVoucher.setEnabled(true);
         } else {
             cencelVoucher.setEnabled(false);
