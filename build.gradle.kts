@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
 
+    implementation("com.itextpdf:itextpdf:5.5.13.3")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
 
@@ -41,9 +43,9 @@ application {
     mainClass = "org.project1.nhom8.Main"
 }
 
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
+//tasks.named<Test>("test") {
+//    useJUnitPlatform()
+//}
 
 tasks.compileJava {
     options.encoding = "UTF-8"
