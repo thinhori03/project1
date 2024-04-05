@@ -9,7 +9,7 @@ import org.project1.nhom8.service.LoginService;
 
 import javax.swing.*;
 import java.awt.*;
-
+import org.project1.nhom8.util.VaiTroNhanVien;
 
 /**
  * @author PC
@@ -40,27 +40,21 @@ public class LoginDialog extends javax.swing.JFrame {
         if (chekFrom()) {
             String email = txtTenDN.getText();
             String password = new String(txtPassword.getPassword());
-            Login login = service.selectByMail(email);
+            Login login = service.login(email, password);
             if (login != null) {
-                String role = login.getVaiTro();
-                String checkPassword = login.getMatKhau();
-                if (password.equals(checkPassword)) {
-                    LoginService.lg = login;
-                    this.dispose();
-//                    if (login.getVaiTro().equals("Quản Lý")) {
-//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
-//
-//                    } else if (login.getVaiTro().equals("Nhân viên")) {
-//                        JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
-//                    }
-                    main mi = new main();
-                    mi.setVisible(true);
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Mật khẩu không đúng");
+                LoginService.lg = login;
+                this.dispose();
+                if (login.getVaiTro().equals(VaiTroNhanVien.QUANR_LY.getValue())) {
+                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
+
+                } else if (login.getVaiTro().equals("Nhân viên")) {
+                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
                 }
+                main mi = new main();
+                mi.setVisible(true);
+                this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Tên đăng nhập không đúng");
+                JOptionPane.showMessageDialog(this, "email hoặc mật khẩu");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên người dùng và mật khẩu");

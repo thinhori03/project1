@@ -5,9 +5,13 @@
 package org.project1.nhom8.View;
 
 import java.awt.Color;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.project1.nhom8.model.Login;
+import org.project1.nhom8.service.LoginService;
+import org.project1.nhom8.util.VaiTroNhanVien;
 
 /**
  *
@@ -15,6 +19,8 @@ import javax.swing.JPanel;
  */
 public class main extends javax.swing.JFrame {
 
+    private Login logged = LoginService.lg;
+    
     public main() {
         initComponents();
         setLocationRelativeTo(null);
@@ -22,6 +28,27 @@ public class main extends javax.swing.JFrame {
         setColor(lblBanHang);
         setColorJpanel(pnBanHang);
         showPanel(new Form_BanHang());
+        
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            enables(false, new JComponent[] {
+                pnSanPham
+                    , pnHoaDon
+                    , pnGiagia
+                    , pnNhanVien
+                    , pnThongke
+                    , pnVoucher
+            });
+            pnBanHang.setEnabled(false);
+        }
+    }
+    
+    public void enables(Boolean value, JComponent[] comonents) {
+        
+        for (JComponent comp: comonents) {
+            comp.setEnabled(value);
+        }
+        
     }
 
     /**
@@ -84,10 +111,10 @@ public class main extends javax.swing.JFrame {
         pnBanHang.setLayout(pnBanHangLayout);
         pnBanHangLayout.setHorizontalGroup(
             pnBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBanHangLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(lblBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBanHangLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(lblBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         pnBanHangLayout.setVerticalGroup(
             pnBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,6 +462,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnSanPhamMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnSanPham);
         resetColorJpane(pnBanHang);
         resetColorJpane(pnGiagia);
@@ -458,6 +490,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnHoaDonMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnHoaDon);
         resetColorJpane(pnSanPham);
         resetColorJpane(pnGiagia);
@@ -480,6 +517,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnNhanVien);
         resetColorJpane(pnSanPham);
         resetColorJpane(pnGiagia);
@@ -503,6 +545,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKhachHangMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnKhachHang);
         resetColorJpane(pnSanPham);
         resetColorJpane(pnGiagia);
@@ -525,6 +572,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnThongkeMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnThongke);
         resetColorJpane(pnSanPham);
         resetColorJpane(pnGiagia);
@@ -548,6 +600,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnGiagiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnGiagiaMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColorJpanel(pnGiagia);
         resetColorJpane(pnSanPham);
         resetColorJpane(pnThongke);
@@ -628,6 +685,11 @@ public class main extends javax.swing.JFrame {
 
     private void pnVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnVoucherMouseClicked
         // TODO add your handling code here:
+        
+        if (logged.getVaiTro().equals(VaiTroNhanVien.nhan_vien.getValue())) {
+            return;
+        }
+        
         setColor(lblVoucher);
         setColorJpanel(pnVoucher);
         resetColor(lblNhanVien);
