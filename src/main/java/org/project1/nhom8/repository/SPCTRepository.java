@@ -133,9 +133,9 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return Double.valueOf(0);
         }
 
-        return null;
+        return Double.valueOf(0);
     }
 }
