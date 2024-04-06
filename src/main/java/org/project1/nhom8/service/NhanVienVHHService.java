@@ -5,14 +5,16 @@
 package org.project1.nhom8.service;
 
 /**
- *
  * @author PC
  */
-import org.project1.nhom8.model.*;
-import java.sql.*;
+
+import org.project1.nhom8.model.NhanVien;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import org.project1.nhom8.service.DBConnect;
 
 public class NhanVienVHHService {
 
