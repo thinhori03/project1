@@ -485,7 +485,7 @@ public class main extends javax.swing.JFrame {
         resetColorJpane(pnDangXuat);
         resetColor(lblVoucher);
         resetColorJpane(pnVoucher);
-        showPanel(new Quan_Ly_San_Pham());
+        showPanel(new QL_SanPham());
     }//GEN-LAST:event_pnSanPhamMouseClicked
 
     private void pnHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnHoaDonMouseClicked
