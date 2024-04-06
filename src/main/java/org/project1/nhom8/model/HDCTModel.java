@@ -1,7 +1,6 @@
 package org.project1.nhom8.model;
 
 import org.project1.nhom8.util.data.DataField;
-import org.project1.nhom8.util.data.DataGenerated;
 import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
 
@@ -13,6 +12,7 @@ import org.project1.nhom8.util.data.DataTable;
  *     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
  *     SOLUONG INT,
  *     MALSG   int -- giá hiện tại
+ *     MAKM VARCHAR(14)
  * )
  */
 
@@ -20,7 +20,6 @@ import org.project1.nhom8.util.data.DataTable;
 public class HDCTModel {
 
     @DataId
-    @DataGenerated
     @DataField(name = "MAHDCT")
     private int maHDCT;
 
@@ -35,17 +34,21 @@ public class HDCTModel {
 
     @DataField(name = "MALSG")
     private int maLSG;
+    
+    @DataField(name = "MAKM")
+    private String maKM;
 
     public HDCTModel() {
 
     }
 
-    public HDCTModel(int maHDCT, String maHoaDon, int maSPCT, int soLuong, int maLSG) {
+    public HDCTModel(int maHDCT, String maHoaDon, int maSPCT, int soLuong, int maLSG, String maKM) {
         this.maHDCT = maHDCT;
         this.maHoaDon = maHoaDon;
         this.maSPCT = maSPCT;
         this.soLuong = soLuong;
         this.maLSG = maLSG;
+        this.maKM = maKM;
     }
 
     public int getMaHDCT() {
@@ -87,4 +90,14 @@ public class HDCTModel {
     public void setMaLSG(int maLSG) {
         this.maLSG = maLSG;
     }
+
+    public String getMaKM() {
+        return maKM;
+    }
+
+    public void setMaKM(String maKM) {
+        this.maKM = maKM;
+    }
+
+    
 }
