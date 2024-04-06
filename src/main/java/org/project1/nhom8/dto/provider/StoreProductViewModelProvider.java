@@ -65,5 +65,9 @@ public class StoreProductViewModelProvider {
 
         return result;
     }
+    
+    public List<StoreProductViewModel> getAll() {
+        return this.getModel(this.spctRepository.findAll());
+    }
 
 }
