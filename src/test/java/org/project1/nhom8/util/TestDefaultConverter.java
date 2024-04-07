@@ -1,4 +1,4 @@
-package org.project1.nhm8.util;
+package org.project1.nhom8.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

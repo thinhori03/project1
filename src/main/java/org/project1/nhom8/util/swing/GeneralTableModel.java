@@ -47,6 +47,8 @@ public class GeneralTableModel<T> {
                     if (j.getType().equals(Date.class)
                             && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(model)));
+                    } else if (j.get(model) == null) {
+                        rowData.add("");
                     } else {
                         rowData.add(j.get(model).toString());
                     }

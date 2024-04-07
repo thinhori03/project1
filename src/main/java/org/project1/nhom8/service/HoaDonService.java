@@ -7,6 +7,8 @@ import org.project1.nhom8.repository.HDCTKMRepository;
 import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class HoaDonService {
@@ -17,6 +19,8 @@ public class HoaDonService {
 
     private final HDCTKMRepository hdctkmRepository;
 
+    private final SimpleDateFormat simpleDateFormat;
+
     public HoaDonService() {
 
         hoaDonRepository = new HoaDonRepository();
@@ -24,19 +28,21 @@ public class HoaDonService {
         hdctRepository = new HDCTRepository();
 
         hdctkmRepository = new HDCTKMRepository();
+
+        simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
     }
 
     public Boolean taoHoaDon(HoaDonModel hoaDon, List<HDCTModel> hdct, VoucherModel voucher) {
 
         // generated invoice id
-        String maHD =taoMaHoaDon();
+        String maHD = taoMaHoaDon();
 
         hoaDon.setMaHoaDon(maHD);
         hoaDon.setMaVoucher(voucher.getMaVoucher());
 
         hoaDonRepository.add(hoaDon);
 
-        for (HDCTModel hdctm: hdct) {
+        for (HDCTModel hdctm : hdct) {
             hdctm.setMaHoaDon(maHD);
 
             hdctRepository.add(hdctm);
@@ -46,12 +52,10 @@ public class HoaDonService {
     }
 
     /**
-     *
      * @return mã mã hoa đơn mới
      */
     public String taoMaHoaDon() {
-
-        return "HD" + (hoaDonRepository.count() + 1);
+        return "HD" + (this.simpleDateFormat.format(new Date()));
     }
 
 }
