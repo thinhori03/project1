@@ -10,10 +10,10 @@ import java.util.Date;
 /**
  * create table LICH_SU_GIA
  * (
- *     MALSG      int primary key,
- *     MASPCT     int references SAN_PHAM_CHI_TIET (MASPCT),
- *     GIA        float,
- *     NGAYUPDATE datetime,
+ * MALSG      int primary key,
+ * MASPCT     int references SAN_PHAM_CHI_TIET (MASPCT),
+ * GIA        float,
+ * NGAYUPDATE datetime,
  * )
  */
 
@@ -28,7 +28,7 @@ public class GiaModel {
     private int maSPCT;
 
     @DataField(name = "GIA")
-    private double gia;
+    private Double gia;
 
     @DataField(name = "NGAYUPDATE")
     private Date ngayCapNhat;
@@ -36,7 +36,7 @@ public class GiaModel {
     public GiaModel() {
     }
 
-    public GiaModel(int maLSG, int maSPCT, double gia, Date ngayCapNhat) {
+    public GiaModel(int maLSG, int maSPCT, Double gia, Date ngayCapNhat) {
         this.maLSG = maLSG;
         this.maSPCT = maSPCT;
         this.gia = gia;
@@ -59,11 +59,11 @@ public class GiaModel {
         this.maSPCT = maSPCT;
     }
 
-    public double getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(double gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 
@@ -74,5 +74,4 @@ public class GiaModel {
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
     }
-    
 }

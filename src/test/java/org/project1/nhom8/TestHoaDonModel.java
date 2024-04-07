@@ -1,4 +1,4 @@
-package org.project1.nhm8;
+package org.project1.nhom8;
 
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;

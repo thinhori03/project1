@@ -1,36 +1,36 @@
 package org.project1.nhom8.dto;
 
-import org.project1.nhom8.model.VoucherModel;
+import org.project1.nhom8.util.data.visual.DataHeader;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class Cart {
+public class CartViewModel {
 
+    @DataHeader(name = "mã hóa đơn")
     private String invoiceId;
 
+    @DataHeader(name = "tên khách hàng")
     private String customerName;
 
-    // id customer exists in DB
+    @DataHeader(name = "số diện thoại khách hàng")
     private String customerPhoneNumber;
 
+    @DataHeader(name = "ngày tạo")
     private Date creationDate;
 
-    private VoucherModel voucher;
+    @DataHeader(name = "voucher")
+    private Double voucherPrice;
 
-    private List<CartDetail> products;
 
-    public Cart() {
-        this.products = new ArrayList<>();
+    public CartViewModel() {
     }
 
-    public Cart(String customerName, String customerPhoneNumber) {
-
+    public CartViewModel(String invoiceId, String customerName, String customerPhoneNumber, Date creationDate, Double voucherPrice) {
+        this.invoiceId = invoiceId;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
-
-        this.products = new ArrayList<>();
+        this.creationDate = creationDate;
+        this.voucherPrice = voucherPrice;
     }
 
     public String getInvoiceId() {
@@ -65,19 +65,11 @@ public class Cart {
         this.creationDate = creationDate;
     }
 
-    public VoucherModel getVoucher() {
-        return voucher;
+    public Double getVoucherPrice() {
+        return voucherPrice;
     }
 
-    public void setVoucher(VoucherModel voucher) {
-        this.voucher = voucher;
-    }
-
-    public List<CartDetail> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<CartDetail> products) {
-        this.products = products;
+    public void setVoucherPrice(Double voucherPrice) {
+        this.voucherPrice = voucherPrice;
     }
 }

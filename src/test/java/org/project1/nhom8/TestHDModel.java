@@ -1,4 +1,4 @@
-package org.project1.nhm8;
+package org.project1.nhom8;
 
 import org.junit.jupiter.api.Test;
 import org.project1.nhom8.model.HDCTModel;
@@ -18,7 +18,7 @@ public class TestHDModel {
 
     @Test
     public void getAllHDCT() {
-        for (HDCTModel hdctm: hdctRepository.findBymaHD("HD1")) {
+        for (HDCTModel hdctm : hdctRepository.findBymaHD("HD1")) {
             System.out.println(hdctm.getMaHDCT());
         }
     }

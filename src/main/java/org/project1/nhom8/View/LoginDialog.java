@@ -44,12 +44,12 @@ public class LoginDialog extends javax.swing.JFrame {
             if (login != null) {
                 LoginService.lg = login;
                 this.dispose();
-                if (login.getVaiTro().equals(VaiTroNhanVien.QUANR_LY.getValue())) {
-                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
-
-                } else if (login.getVaiTro().equals("Nhân viên")) {
-                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
-                }
+//                if (login.getVaiTro().equals(VaiTroNhanVien.QUANR_LY.getValue())) {
+//                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
+//
+//                } else if (login.getVaiTro().equals("Nhân viên")) {
+//                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
+//                }
                 main mi = new main();
                 mi.setVisible(true);
                 this.dispose();
