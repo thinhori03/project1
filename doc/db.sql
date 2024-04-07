@@ -49,14 +49,15 @@ CREATE TABLE KHUYEN_MAI_COUPON
 
 CREATE TABLE VOUCHER
 (
-    MAV         VARCHAR(10) PRIMARY KEY,
-    GIATRI      FLOAT,
-    NGAYBATDAU  DATE,
-    NGAYKETTHUC DATE,
-    DIEUKIEN    FLOAT,
-    so_luong    INT,
-    ngay_tao    DATETIME,
-    TRANG_THAI  NVARCHAR(20) -- đang hoạt động đã hủy
+    MAV           VARCHAR(10) PRIMARY KEY,
+    GIATRI        FLOAT,
+    NGAYBATDAU    DATE,
+    NGAYKETTHUC   DATE,
+    DIEUKIEN      FLOAT,
+    so_luong      INT,
+    ngay_cap_nhat DATETIME,
+    ngay_tao      DATETIME,
+    TRANG_THAI    NVARCHAR(20) -- đang hoạt động đã hủy
 )
 
 CREATE TABLE KHACH_HANG
@@ -162,12 +163,12 @@ values ('KM1', '2024-02-14', '2024-02-20', 4, 40000),
        ('KM5', '2024-02-20', '2024-02-28', 7, 160000)
 
 
-insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, so_luong, ngay_tao, TRANG_THAI)
-values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, 2, GETDATE(), N'đang hoạt động'),
-       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, 3, GETDATE(), N'đang hoạt động'),
-       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, 1, GETDATE(), N'đang hoạt động'),
-       ('V4', 50000, '2024-01-30', '2024-02-10', 1000000, 2, GETDATE(), N'đang hoạt động'),
-       ('V5', 50000, '2024-01-10', '2024-01-29', 1000000, 1, GETDATE(), N'đang hoạt động')
+insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, so_luong, ngay_tao, ngay_cap_nhat, TRANG_THAI)
+values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, 2, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, 3, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, 1, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V4', 50000, '2024-01-30', '2024-02-10', 1000000, 2, GETDATE(), GETDATE(), N'đang hoạt động'),
+       ('V5', 50000, '2024-01-10', '2024-01-29', 1000000, 1, GETDATE(), GETDATE(), N'đang hoạt động')
 
 
 insert into KHACH_HANG(TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)

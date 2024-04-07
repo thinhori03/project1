@@ -4,14 +4,13 @@
  */
 package org.project1.nhom8.model;
 
-import java.util.Date;
-
 import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
 
+import java.util.Date;
+
 /**
- *
  * @author ngtnthori03
  * CREATE TABLE VOUCHER
  * (
@@ -48,10 +47,10 @@ public class VoucherModel {
     @DataField(name = "Ngay_tao")
     private Date ngayTao;
 
-    @DataField(name = "SOLUONG")
+    @DataField(name = "so_luong")
     private Integer soLuong;
 
-    @DataField(name = "NGAYCAPNHAT")
+    @DataField(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
     @DataField(name = "TRANG_THAI")
