@@ -93,10 +93,10 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        invoiceDetailView = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         invoiceView = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        invoiceDetailView = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         invoiceId = new javax.swing.JTextField();
         beginCreationDate = new com.toedter.calendar.JDateChooser();
@@ -115,21 +115,6 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         historySearch = new javax.swing.JButton();
-
-        invoiceDetailView.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(invoiceDetailView);
-
-        jTabbedPane1.addTab("hóa đơn chi tiết", jScrollPane2);
 
         invoiceView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,6 +135,21 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(invoiceView);
 
         jTabbedPane1.addTab("hóa đơn", jScrollPane1);
+
+        invoiceDetailView.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(invoiceDetailView);
+
+        jTabbedPane1.addTab("danh sách sản phẩm", jScrollPane2);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kíem hóa đơn"));
 

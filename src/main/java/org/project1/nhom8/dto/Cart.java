@@ -1,7 +1,5 @@
 package org.project1.nhom8.dto;
 
-import org.project1.nhom8.model.VoucherModel;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +15,7 @@ public class Cart {
 
     private Date creationDate;
 
-    private VoucherModel voucher;
+    private String voucherId;
 
     private List<CartDetail> products;
 
@@ -65,12 +63,12 @@ public class Cart {
         this.creationDate = creationDate;
     }
 
-    public VoucherModel getVoucher() {
-        return voucher;
+    public String getVoucherId() {
+        return voucherId;
     }
 
-    public void setVoucher(VoucherModel voucher) {
-        this.voucher = voucher;
+    public void setVoucherId(String voucherId) {
+        this.voucherId = voucherId;
     }
 
     public List<CartDetail> getProducts() {
