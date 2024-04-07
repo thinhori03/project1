@@ -269,6 +269,7 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Khong co thong ke");
         }else{
             LoadData(list);
+            Tong();
         }
     }//GEN-LAST:event_btnTKMouseClicked
 

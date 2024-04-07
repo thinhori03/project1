@@ -44,6 +44,7 @@ public class CartDetailViewModelProvider {
             cdvm.setQuantity(model.getQuantity());
             cdvm.setColorName(mauSacRepository.findById(model
                     .getProduct().getMaMauSac()).getTenmau());
+            
             cdvm.setSize(sizeRepository.findById(model.getProduct()
                     .getMasize()).getTensize());
 
@@ -52,6 +53,8 @@ public class CartDetailViewModelProvider {
             } else {
 
             }
+
+
         }
 
         return result;

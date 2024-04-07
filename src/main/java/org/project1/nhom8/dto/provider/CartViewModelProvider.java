@@ -29,11 +29,17 @@ public class CartViewModelProvider {
             cvm.setCustomerPhoneNumber(model.getCustomerPhoneNumber());
             cvm.setCreationDate(model.getCreationDate());
 
-            if (model.getVoucher() == null) {
-                cvm.setVoucherPrice(Double.valueOf(0));
+            if (model.getProducts().isEmpty()) {
+                cvm.setTotalPrice(Double.valueOf(0));
             } else {
-                cvm.setVoucherPrice(voucherRepository.findById(model
-                        .getVoucher().getMaVoucher()).getGiaTri());
+                
+            }
+
+            if (model.getVoucherId() != null) {
+                cvm.setVoucherPrice(voucherRepository.findById(model.getVoucherId())
+                        .getGiaTri());
+            } else {
+                cvm.setVoucherPrice(Double.valueOf(0));
             }
             result.add(cvm);
         }

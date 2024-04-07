@@ -1,7 +1,7 @@
 package org.project1.nhom8.exception;
 
 /**
- * throw when {@link Cart#getCustomerPhoneNumber()}
+ * throw when {@link org.project1.nhom8.dto.Cart#getCustomerPhoneNumber()}
  */
 public class CustomerPhoneNumberExistedException extends RuntimeException {
 
@@ -13,6 +13,6 @@ public class CustomerPhoneNumberExistedException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return this.message;
     }
 }

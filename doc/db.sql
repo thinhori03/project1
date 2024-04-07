@@ -1,3 +1,7 @@
+use master
+go
+drop database Du_An_Nhom_8
+
 CREATE DATABASE Du_An_Nhom_8
 GO
 USE Du_An_Nhom_8
@@ -50,6 +54,7 @@ CREATE TABLE VOUCHER
     NGAYBATDAU  DATE,
     NGAYKETTHUC DATE,
     DIEUKIEN    FLOAT,
+    so_luong    INT,
     ngay_tao    DATETIME,
     TRANG_THAI  NVARCHAR(20) -- đang hoạt động đã hủy
 )
@@ -106,7 +111,7 @@ CREATE TABLE HOA_DON_CHI_TIET
     MAHD    varchar(20) references HOA_DON (MAHD),
     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
     SOLUONG INT,
-    MALSG   int, -- giá hiện tại
+    MALSG   int FOREIGN KEY REFERENCES LICH_SU_GIA (MALSG), -- giá hiện tại
     MAKM    VARCHAR(14) FOREIGN KEY REFERENCES KHUYEN_MAI_COUPON (MAKM)
 )
 go
@@ -139,6 +144,7 @@ values (N'Đỏ'),
        (N'Xám'),
        (N'Trắng'),
        (N'Xanh lá')
+
 insert into SIZE(TENSIZE)
 values (37),
        (39),
@@ -147,6 +153,7 @@ values (37),
        (36),
        (35),
        (34)
+
 insert into KHUYEN_MAI_COUPON(MAKM, NGAYBATDAU, NGAYKETTHUC, SOLUONG, GIA)
 values ('KM1', '2024-02-14', '2024-02-20', 4, 40000),
        ('KM2', '2024-02-20', '2024-02-26', 3, 50000),
@@ -155,12 +162,12 @@ values ('KM1', '2024-02-14', '2024-02-20', 4, 40000),
        ('KM5', '2024-02-20', '2024-02-28', 7, 160000)
 
 
-insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, ngay_tao, TRANG_THAI)
-values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, GETDATE(), N'đang hoạt động'),
-       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, GETDATE(), N'đang hoạt động'),
-       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, GETDATE(), N'đang hoạt động'),
-       ('V4', 50000, '2024-01-30', '2024-02-10', 1000000, GETDATE(), N'đang hoạt động'),
-       ('V5', 50000, '2024-01-10', '2024-01-29', 1000000, GETDATE(), N'đang hoạt động')
+insert into VOUCHER(MAV, GIATRI, NGAYBATDAU, NGAYKETTHUC, DIEUKIEN, so_luong, ngay_tao, TRANG_THAI)
+values ('V1', 20000, '2024-02-14', '2024-02-18', 1000000, 2, GETDATE(), N'đang hoạt động'),
+       ('V2', 30000, '2024-02-15', '2024-02-22', 2000000, 3, GETDATE(), N'đang hoạt động'),
+       ('V3', 40000, '2024-02-20', '2024-02-26', 3000000, 1, GETDATE(), N'đang hoạt động'),
+       ('V4', 50000, '2024-01-30', '2024-02-10', 1000000, 2, GETDATE(), N'đang hoạt động'),
+       ('V5', 50000, '2024-01-10', '2024-01-29', 1000000, 1, GETDATE(), N'đang hoạt động')
 
 
 insert into KHACH_HANG(TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)
@@ -197,11 +204,11 @@ insert into HOA_DON(MAHD, MAKH, MANV, NGAYTAO, NGAYTHANHTOAN, TRANGTHAI, PHUONGT
 values ('HD1', '1', '1', '2024-02-10 00:00:00', '2024-03-10 00:00:00', N'Đã thanh toán', N'Tiền mặt', 'V3'),
        ('HD2', '2', '2', '2024-01-24 00:00:00', '2024-02-25 00:00:00', N'Chưa thanh toán', N'Tiền mặt', 'V2'),
        ('HD3', '3', '4', '2024-03-10 00:00:00', '2024-03-17 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V1'),
-       ('HD4', '5', '5', '2024-02-10 00:00:00', '2024-02-10 00:20:00', N'Đã thanh toán', N'Chuyển khoản', 'V4'),
+       ('HD4', '1', '2', '2024-02-10 00:00:00', '2024-02-10 00:20:00', N'Đã thanh toán', N'Chuyển khoản', 'V4'),
        ('HD5', '4', '3', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
        ('HD6', '3', '3', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
        ('HD7', '1', '3', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD8', '4', '5', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
+       ('HD8', '4', '1', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
        ('HD9', '1', '3', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
        ('HD10', '1', '3', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5')
 
@@ -211,21 +218,21 @@ values ('1', 'HD1', '1', 6, '1', 'KM1'),
        ('3', 'HD3', '3', 5, '2', 'KM3'),
        ('4', 'HD4', '4', 2, '4', 'KM4'),
        ('5', 'HD5', '5', 2, '4', 'KM5'),
-       ('6', 'HD1', '1', 1, '1', 'KM1'),
-       ('7', 'HD2', '2', 2, '3', 'KM2'),
-       ('8', 'HD3', '3', 3, '2', 'KM3'),
-       ('9', 'HD4', '4', 4, '4', 'KM4'),
-       ('10', 'HD5', '5', 5, '4', 'KM5'),
+       ('6', 'HD6', '1', 1, '1', 'KM1'),
+       ('7', 'HD7', '2', 2, '3', 'KM2'),
+       ('8', 'HD8', '3', 3, '2', 'KM3'),
+       ('9', 'HD9', '4', 4, '4', 'KM4'),
+       ('10', 'HD10', '5', 5, '4', 'KM5'),
        ('11', 'HD1', '1', 2, '1', 'KM1'),
        ('12', 'HD2', '2', 3, '3', 'KM2'),
        ('13', 'HD3', '3', 4, '2', 'KM3'),
        ('14', 'HD4', '4', 6, '4', 'KM4'),
        ('15', 'HD5', '5', 6, '4', 'KM5'),
-       ('16', 'HD1', '1', 2, '1', 'KM1'),
-       ('17', 'HD2', '2', 2, '3', 'KM2'),
-       ('18', 'HD3', '3', 3, '2', 'KM3'),
-       ('19', 'HD4', '4', 1, '4', 'KM4'),
-       ('20', 'HD5', '5', 4, '4', 'KM5')
+       ('16', 'HD6', '1', 2, '1', 'KM1'),
+       ('17', 'HD7', '2', 2, '3', 'KM2'),
+       ('18', 'HD8', '3', 3, '2', 'KM3'),
+       ('19', 'HD9', '4', 1, '4', 'KM4'),
+       ('20', 'HD10', '5', 4, '4', 'KM5')
 ----------------------------------------------------------------------------------------------------------------
 /*
 INSERT INTO SAN_PHAM_CHI_TIET (TENSP, SOLUONG, MASIZE, MAMAU, MAKM, MASP, TRANGTHAI, MALSG)

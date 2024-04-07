@@ -30,7 +30,7 @@ public class KhuyenMaiService {
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(
-                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getFloat(5)
+                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5)
                 );
                 listkm.add(km);
             }
@@ -100,13 +100,13 @@ public class KhuyenMaiService {
         return kq;
     }
 
-    public List<KhuyenMai> TimSanPham(String ma) {
+    public List<KhuyenMai> TimKM(String ma) {
         List<KhuyenMai> listkm = new ArrayList<>();
         sql = "Select *from KHUYEN_MAI_COUPON where MAKM like ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,"%" + ma + "%");
+            ps.setString(1, "%" + ma + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(
@@ -120,5 +120,79 @@ public class KhuyenMaiService {
             e.printStackTrace();
         }
         return listkm;
+    }
+    public List<KhuyenMai> TimKM_SPCT(String ma) {
+        List<KhuyenMai> listkm = new ArrayList<>();
+        sql = "Select *from KHUYEN_MAI_COUPON_CT where MAKM  like ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + ma + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai(
+                    rs.getInt(1), rs.getString(2), rs.getInt(3)
+                );
+                listkm.add(km);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listkm;
+    }
+
+    public List<KhuyenMai> getall() {
+        listkm = new ArrayList<>();
+        sql = "Select*from  KHUYEN_MAI_COUPON_CT";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai(
+                        rs.getInt(1), rs.getString(2), rs.getInt(3)
+                );
+                listkm.add(km);
+            }
+            return listkm;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int ADDKM_CHOSPCT(KhuyenMai km) {
+        listkm = new ArrayList<>();
+        sql = "insert into KHUYEN_MAI_COUPON_CT (MAKM,MASPCT)values(?,?)";
+        int kq = 0;
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, km.getMakm());
+            ps.setInt(2, km.getMaspct());
+            kq = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
+    }
+
+    public int Update_KMSPCT(KhuyenMai km, int ma) {
+        listkm = new ArrayList<>();
+        sql = "UPDATE KHUYEN_MAI_COUPON_CT set MAKM = ? ,MASPCT = ? WHERE  MAKM_CPCT = ?";
+        int kq = 0;
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, km.getMakm());
+            ps.setInt(2, km.getMaspct());
+            ps.setInt(3, ma);
+            kq = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
     }
 }

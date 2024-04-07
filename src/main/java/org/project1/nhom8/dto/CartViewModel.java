@@ -18,6 +18,9 @@ public class CartViewModel {
     @DataHeader(name = "ngày tạo")
     private Date creationDate;
 
+    @DataHeader(name = "tổng tiền")
+    private Double totalPrice;
+
     @DataHeader(name = "voucher")
     private Double voucherPrice;
 
@@ -25,11 +28,13 @@ public class CartViewModel {
     public CartViewModel() {
     }
 
-    public CartViewModel(String invoiceId, String customerName, String customerPhoneNumber, Date creationDate, Double voucherPrice) {
+
+    public CartViewModel(String invoiceId, String customerName, String customerPhoneNumber, Date creationDate, Double totalPrice, Double voucherPrice) {
         this.invoiceId = invoiceId;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.creationDate = creationDate;
+        this.totalPrice = totalPrice;
         this.voucherPrice = voucherPrice;
     }
 
@@ -63,6 +68,14 @@ public class CartViewModel {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Double getVoucherPrice() {

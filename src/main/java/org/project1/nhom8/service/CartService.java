@@ -3,6 +3,7 @@ package org.project1.nhom8.service;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ public class CartService {
     private final HoaDonService hoaDonService;
 
     public CartService() {
+
+        this.carts = new HashMap<>();
+
         this.hoaDonService = new HoaDonService();
     }
 
@@ -23,7 +27,7 @@ public class CartService {
      */
     public Cart add(Cart cart) throws CustomerPhoneNumberExistedException {
 
-        if (carts.get(cart.getCustomerPhoneNumber()) == null) {
+        if (carts.get(cart.getCustomerPhoneNumber()) != null) {
             throw new CustomerPhoneNumberExistedException(cart
                     .getCustomerPhoneNumber());
         }
@@ -44,7 +48,15 @@ public class CartService {
         return carts;
     }
 
+    public HoaDonService getHoaDonService() {
+        return this.hoaDonService;
+    }
+
     public List<Cart> toList() {
+        return carts.values().stream().toList();
+    }
+
+    public List<Cart> getCartsAsList() {
         return carts.values().stream().toList();
     }
 }

@@ -6,7 +6,9 @@ package org.project1.nhom8.model;
 
 
 public class KhuyenMai {
+    int makmCPCT;
     String makm;
+    int maspct;
     String ngaybd; 
     String ngaykt;
     int soluong;
@@ -15,6 +17,15 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
+    public KhuyenMai(int makmCPCT, String makm, int maspct) {
+        this.makmCPCT = makmCPCT;
+        this.makm = makm;
+        this.maspct = maspct;
+    }
+
+    
+
+    
     public KhuyenMai(String makm, String ngaybd, String ngaykt, int soluong, float gia) {
         this.makm = makm;
         this.ngaybd = ngaybd;
@@ -61,6 +72,28 @@ public class KhuyenMai {
 
     public void setGia(float gia) {
         this.gia = gia;
+    }
+
+    public int getMaspct() {
+        return maspct;
+    }
+
+    public void setMaspct(int maspct) {
+        this.maspct = maspct;
+    }
+
+    public int getMakmCPCT() {
+        return makmCPCT;
+    }
+
+    public void setMakmCPCT(int makmCPCT) {
+        this.makmCPCT = makmCPCT;
+    }
+    
+    public Object[] todataRow(){
+        return new Object[]{
+           this.getMakmCPCT(), this.getMakm(),this.getMaspct()
+        };
     }
     public Object[] toDataRow(){
         return new Object[]{
