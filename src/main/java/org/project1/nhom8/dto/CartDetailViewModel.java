@@ -1,19 +1,28 @@
 package org.project1.nhom8.dto;
 
+import org.project1.nhom8.util.data.visual.DataHeader;
+
 public class CartDetailViewModel {
 
+    @DataHeader(name = "mã sản phẩm")
     private Integer productId;
 
+    @DataHeader(name = "tên sản phẩm")
     private String productName;
 
+    @DataHeader(name = "màu sắc")
     private String colorName;
 
+    @DataHeader(name = "size")
     private String size;
 
+    @DataHeader(name = "số lượng")
     private Integer quantity;
 
+    @DataHeader(name = "giá")
     private Double price;
 
+    @DataHeader(name = "khuyến mại")
     private Double couponPrice;
 
     public CartDetailViewModel() {

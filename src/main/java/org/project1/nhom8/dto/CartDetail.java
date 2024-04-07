@@ -4,8 +4,10 @@ import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.KhuyenMai;
 import org.project1.nhom8.model.SPCTModel;
 
+import java.util.Objects;
+
 public class CartDetail {
-    
+
     private SPCTModel product;
 
     private GiaModel price;
@@ -15,6 +17,10 @@ public class CartDetail {
     private Integer quantity;
 
     public CartDetail() {
+    }
+
+    public CartDetail(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public SPCTModel getProduct() {
@@ -49,20 +55,16 @@ public class CartDetail {
         this.quantity = quantity;
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (!(o instanceof CartDetail)) {
-//            return false;
-//        }
-//
-//        CartDetail compareO = (CartDetail) o;
-//        return compareO.productId.equals(this.productId);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        CartDetail compareO = (CartDetail) o;
+        return compareO.product.getMaSPCT() == this.getProduct().getMaSPCT();
+    }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(productId);
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.product.getMaSPCT());
+    }
 }
 
 

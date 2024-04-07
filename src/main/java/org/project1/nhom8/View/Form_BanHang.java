@@ -5,17 +5,25 @@
 package org.project1.nhom8.View;
 
 import org.project1.nhom8.dto.Cart;
+import org.project1.nhom8.dto.CartDetail;
+import org.project1.nhom8.dto.CartDetailViewModel;
 import org.project1.nhom8.dto.CartViewModel;
 import org.project1.nhom8.dto.StoreProductViewModel;
 import org.project1.nhom8.dto.provider.CartDetailViewModelProvider;
 import org.project1.nhom8.dto.provider.CartViewModelProvider;
 import org.project1.nhom8.dto.provider.StoreProductViewModelProvider;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
+import org.project1.nhom8.model.GiaModel;
+import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.service.CartService;
+import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.swing.GeneralTableModel;
 
 import javax.swing.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author PC
@@ -26,13 +34,20 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     private final GeneralTableModel<StoreProductViewModel> tabletableModel;
 
-    private final CartDetailViewModelProvider cartDetailViewModelProvider;
+    private final GeneralTableModel<CartDetailViewModel> cartDetailGeneralTableModel;
 
+    private final CartDetailViewModelProvider cartDetailViewModelProvider;
     private final CartViewModelProvider cartViewModelProvider;
 
     private final GeneralTableModel<CartViewModel> cartTableModel;
 
+    private final GiaRepository giaRepository;
+
+    private final SPCTRepository spctRepository;
+
     private final CartService cartService;
+
+    private Cart cart;
 
     public Form_BanHang() {
         initComponents();
@@ -45,7 +60,13 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         this.cartTableModel = new GeneralTableModel<>(CartViewModel.class);
 
+        this.cartDetailGeneralTableModel = new GeneralTableModel<>(CartDetailViewModel.class);
+
         this.storeProductProvider = new StoreProductViewModelProvider();
+
+        this.giaRepository = new GiaRepository();
+
+        this.spctRepository = new SPCTRepository();
 
         cartService = new CartService();
 
@@ -60,6 +81,25 @@ public class Form_BanHang extends javax.swing.JPanel {
     public void loadInvoice() {
         this.invoiceView.setModel(cartTableModel.toTableModel(cartViewModelProvider
                 .getModel(cartService.getCartsAsList())));
+    }
+
+    public void loadCartDetail(Cart cart) {
+
+        List<CartDetailViewModel> cartDetailView = cartDetailViewModelProvider
+                .getModel(cart.getProducts().stream().toList());
+
+        cartView.setModel(cartDetailGeneralTableModel.toTableModel(cartDetailView));
+    }
+
+    public void fillCart() {
+
+        if (this.cart != null) {
+            invoiceId.setText(this.cart.getInvoiceId());
+            customerName.setText(this.cart.getCustomerName());
+            customerPhoneNumber.setText(this.cart.getCustomerPhoneNumber());
+            creationDate.setText(DefaultConverter.VietnameseDateFormat(this.cart.getCreationDate()));
+            totalPrice.setText(cartService.getTotalPrice(this.cart.getInvoiceId()).toString());
+        }
     }
 
     /**
@@ -93,22 +133,24 @@ public class Form_BanHang extends javax.swing.JPanel {
         customerName = new javax.swing.JTextField();
         invoiceId = new javax.swing.JTextField();
         creationDate = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        totalPrice = new javax.swing.JTextField();
         paymentMethod = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         note = new javax.swing.JTextArea();
         jTextField10 = new javax.swing.JTextField();
         createInvoice = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        payment = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
         voucherAvailable = new javax.swing.JLabel();
         customerPhoneNumber = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        cancelInvoice = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(3000, 3000));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Hóa đơn chờ"));
 
+        invoiceView.setAutoCreateRowSorter(true);
         invoiceView.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                         {null, null, null, null},
@@ -120,10 +162,16 @@ public class Form_BanHang extends javax.swing.JPanel {
                         "Title 1", "Title 2", "Title 3", "Title 4"
                 }
         ));
+        invoiceView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                invoiceViewMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(invoiceView);
 
         jTabbedPane1.addTab("hóa đơn", jScrollPane2);
 
+        cartView.setAutoCreateRowSorter(true);
         cartView.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                         {null, null, null, null},
@@ -135,6 +183,11 @@ public class Form_BanHang extends javax.swing.JPanel {
                         "Title 1", "Title 2", "Title 3", "Title 4"
                 }
         ));
+        cartView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cartViewMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(cartView);
 
         jTabbedPane1.addTab("giỏ hàng", jScrollPane5);
@@ -158,6 +211,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm"));
 
+        productView.setAutoCreateRowSorter(true);
         productView.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                         {null, null, null, null, null, null},
@@ -169,6 +223,11 @@ public class Form_BanHang extends javax.swing.JPanel {
                         "Mã SP", "Tên SP", "Size", "Màu sắc", "Số lượng", "Giá bán"
                 }
         ));
+        productView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productViewMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(productView);
 
         jLabel1.setText("Tìm kiếm sản phẩm:");
@@ -217,7 +276,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         creationDate.setEditable(false);
 
-        jTextField6.setEditable(false);
+        totalPrice.setEditable(false);
 
         paymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Tiền mặt", "Chuyển khoản"}));
 
@@ -234,7 +293,12 @@ public class Form_BanHang extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setText("thanh toán");
+        payment.setText("thanh toán");
+        payment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymentActionPerformed(evt);
+            }
+        });
 
         refresh.setText("Làm mới");
         refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +310,13 @@ public class Form_BanHang extends javax.swing.JPanel {
         voucherAvailable.setText("available-voucher");
 
         jLabel2.setText("SĐT");
+
+        cancelInvoice.setText("hủy hóa đơn");
+        cancelInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelInvoiceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -268,52 +339,45 @@ public class Form_BanHang extends javax.swing.JPanel {
                                                                                 .addComponent(paymentMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                         .addGroup(jPanel4Layout.createSequentialGroup()
                                                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jTextField10)
-                                                                        .addComponent(jTextField6)))))
+                                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                                .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(voucherAvailable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                                         .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addContainerGap()
                                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addGap(6, 6, 6)
-                                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)))
-                                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                                .addContainerGap()
+                                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                                .addGap(24, 24, 24)
-                                                                .addComponent(voucherAvailable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(creationDate))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(customerPhoneNumber))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(customerName))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(invoiceId))))
+                                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(3, 3, 3))
+                                                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(invoiceId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                                        .addComponent(customerName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(creationDate, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(customerPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)))
                                         .addGroup(jPanel4Layout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jScrollPane4)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(createInvoice))))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(refresh)
+                                                .addComponent(cancelInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton5)))
+                                                .addComponent(payment)))
                                 .addGap(0, 0, 0))
         );
         jPanel4Layout.setVerticalGroup(
@@ -338,15 +402,17 @@ public class Form_BanHang extends javax.swing.JPanel {
                                 .addGap(22, 22, 22)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
+                                        .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addComponent(voucherAvailable)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel7)
                                         .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(createInvoice)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(createInvoice)
+                                        .addComponent(refresh))
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel9)
@@ -357,8 +423,8 @@ public class Form_BanHang extends javax.swing.JPanel {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton5)
-                                        .addComponent(refresh))
+                                        .addComponent(payment)
+                                        .addComponent(cancelInvoice))
                                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
@@ -367,17 +433,17 @@ public class Form_BanHang extends javax.swing.JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(39, Short.MAX_VALUE)
+                                .addContainerGap(21, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 707, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
@@ -410,8 +476,82 @@ public class Form_BanHang extends javax.swing.JPanel {
         loadInvoice();
     }//GEN-LAST:event_createInvoiceActionPerformed
 
+    private void invoiceViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceViewMouseClicked
+
+        if (invoiceView.getSelectedRow() < 0) {
+            return;
+        }
+
+        Integer invoiceViewIndex = invoiceView.getSelectedRow();
+
+        this.cart = cartService.getCarts().get(invoiceView
+                .getValueAt(invoiceViewIndex, 0).toString());
+
+        fillCart();
+
+    }//GEN-LAST:event_invoiceViewMouseClicked
+
+    private void cartViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartViewMouseClicked
+
+        if (this.cart == null) {
+            return;
+        }
+
+        if (evt.getClickCount() == 2) {
+            int productIndex = productView.getSelectedRow();
+            Integer productId = Integer.parseInt(productView
+                    .getValueAt(productIndex, 0).toString());
+
+            CartDetail cartDetail = new CartDetail();
+
+            cartDetail.setProduct(spctRepository.findById(productId));
+
+            System.out.println(this.cart.getProducts().remove(cartDetail));
+
+            loadCartDetail(cart);
+        }
+
+    }//GEN-LAST:event_cartViewMouseClicked
+
+    private void productViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productViewMouseClicked
+
+
+        if (this.cart == null) {
+            return;
+        }
+
+        if (evt.getClickCount() == 2) {
+            int productIndex = productView.getSelectedRow();
+            Integer productId = Integer.parseInt(productView
+                    .getValueAt(productIndex, 0).toString());
+
+            SPCTModel product = spctRepository.findById(productId);
+            GiaModel price = giaRepository.getgiaMoiNhat(productId);
+
+            CartDetail cartDetail = new CartDetail(1);
+            cartDetail.setProduct(product);
+            cartDetail.setPrice(price);
+            cartDetail.setQuantity(1);
+
+            this.cart.getProducts().add(cartDetail);
+
+            loadCartDetail(cart);
+        }
+
+
+    }//GEN-LAST:event_productViewMouseClicked
+
+    private void cancelInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelInvoiceActionPerformed
+
+    private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_paymentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelInvoice;
     private javax.swing.JTable cartView;
     private javax.swing.JButton createInvoice;
     private javax.swing.JTextField creationDate;
@@ -420,7 +560,6 @@ public class Form_BanHang extends javax.swing.JPanel {
     private javax.swing.JTextField findByProductName;
     private javax.swing.JTextField invoiceId;
     private javax.swing.JTable invoiceView;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -439,11 +578,12 @@ public class Form_BanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextArea note;
+    private javax.swing.JButton payment;
     private javax.swing.JComboBox<String> paymentMethod;
     private javax.swing.JTable productView;
     private javax.swing.JButton refresh;
+    private javax.swing.JTextField totalPrice;
     private javax.swing.JLabel voucherAvailable;
     // End of variables declaration//GEN-END:variables
 
