@@ -1,6 +1,7 @@
 package org.project1.nhom8.service;
 
 import org.project1.nhom8.dto.Cart;
+import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
 
 import java.util.HashMap;
@@ -58,5 +59,27 @@ public class CartService {
 
     public List<Cart> getCartsAsList() {
         return carts.values().stream().toList();
+    }
+
+
+    public Double getTotalPrice(String cartId) {
+
+        Double result = Double.valueOf(0);
+
+        Cart cart = this.carts.get(cartId);
+
+        if (cart == null) {
+            return Double.valueOf(0);
+        }
+
+        for (CartDetail cartDetail : cart.getProducts()) {
+            result = result + cartDetail.getPrice().getGia();
+
+            if (cartDetail.getCoupon() != null) {
+                result -= cartDetail.getCoupon().getGia();
+            }
+        }
+
+        return result;
     }
 }

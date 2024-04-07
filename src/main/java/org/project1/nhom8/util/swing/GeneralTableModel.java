@@ -21,7 +21,7 @@ public class GeneralTableModel<T> {
     }
 
     public DefaultTableModel toTableModel(List<T> models) {
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new ReadableTableModel();
 
         List<Field> fields = Arrays.asList(modelClass.getDeclaredFields())
                 .stream()
@@ -45,7 +45,7 @@ public class GeneralTableModel<T> {
                 for (Field j : fields) {
                     j.setAccessible(true);
                     if (j.getType().equals(Date.class)
-                            && j.isAnnotationPresent(DateFormat.class)) {
+                        && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(model)));
                     } else if (j.get(model) == null) {
                         rowData.add("");

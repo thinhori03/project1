@@ -24,7 +24,7 @@ public class CartDetailViewModelProvider {
         sizeRepository = new SizeRepository();
     }
 
-    public List<CartDetailViewModel> gitModels(List<CartDetail> models) {
+    public List<CartDetailViewModel> getModel(List<CartDetail> models) {
 
         List<CartDetailViewModel> result = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class CartDetailViewModelProvider {
             cdvm.setQuantity(model.getQuantity());
             cdvm.setColorName(mauSacRepository.findById(model
                     .getProduct().getMaMauSac()).getTenmau());
-            
+
             cdvm.setSize(sizeRepository.findById(model.getProduct()
                     .getMasize()).getTensize());
 
@@ -54,7 +54,7 @@ public class CartDetailViewModelProvider {
 
             }
 
-
+            result.add(cdvm);
         }
 
         return result;
