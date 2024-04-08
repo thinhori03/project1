@@ -72,7 +72,7 @@ public class CartService {
             return Double.valueOf(0);
         }
 
-        for (CartDetail cartDetail : cart.getProducts()) {
+        for (CartDetail cartDetail : cart.getProducts().values().stream().toList()) {
             result = result + cartDetail.getPrice().getGia();
 
             if (cartDetail.getCoupon() != null) {
