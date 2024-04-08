@@ -1,8 +1,6 @@
 package org.project1.nhom8.dto.provider;
 
 import org.project1.nhom8.dto.HDCTViewModel;
-import org.project1.nhom8.dto.SPCTViewModel;
-import org.project1.nhom8.dto.VoucherViewModel;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
@@ -59,7 +57,7 @@ public class HDCTViewModelProvider {
 
         HDCTViewModel hdctvm = null;
 
-        for(HDCTModel hdctm : hdctModels) {
+        for (HDCTModel hdctm : hdctModels) {
 
             spct = spctRepository.findById(hdctm.getMaSPCT());
 
@@ -68,7 +66,7 @@ public class HDCTViewModelProvider {
             hdctvm.setMaSPCT(hdctm.getMaSPCT());
             hdctvm.setMauSac(mauSacRepository.findById(spct.getMaMauSac()).getTenmau());
             hdctvm.setSize(sizeRepository.findById(spct.getMaSPCT()).getTensize());
-            hdctvm.setGia(giaRepository.getgiaMoiNhat(spct.getMaSPCT()).getGia());
+            hdctvm.setGia(giaRepository.findById(hdctm.getMaLSG()).getGia());
             hdctvm.setTenSP(sanPhamRepository.findById(spct.getMaSP()).getTensp());
             hdctvm.setSoLuong(hdctm.getSoLuong());
 

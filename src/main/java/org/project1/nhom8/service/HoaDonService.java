@@ -1,15 +1,16 @@
 package org.project1.nhom8.service;
 
+import org.project1.nhom8.dto.Cart;
+import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
-import org.project1.nhom8.model.VoucherModel;
 import org.project1.nhom8.repository.HDCTKMRepository;
 import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
+import org.project1.nhom8.util.TrangThaiHoaDon;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class HoaDonService {
 
@@ -32,23 +33,35 @@ public class HoaDonService {
         simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
     }
 
-    public Boolean taoHoaDon(HoaDonModel hoaDon, List<HDCTModel> hdct, VoucherModel voucher) {
+    public String taoHoaDon(Cart cart, TrangThaiHoaDon trangThai) {
 
-        // generated invoice id
-        String maHD = taoMaHoaDon();
+        HoaDonModel hoaDonModel = new HoaDonModel();
+        hoaDonModel.setMaHoaDon(cart.getInvoiceId());
+        hoaDonModel.setNgayTao(cart.getCreationDate());
+        hoaDonModel.setNgayThanhToan(new Date());
+        hoaDonModel.setMaNV(LoginService.lg.getMa());
+        hoaDonModel.setMaKH(1);
+        hoaDonModel.setTrangThai(trangThai.getValue());
+        hoaDonModel.setMaVoucher(cart.getVoucherId());
 
-        hoaDon.setMaHoaDon(maHD);
-        hoaDon.setMaVoucher(voucher.getMaVoucher());
+        hoaDonRepository.add(hoaDonModel);
 
-        hoaDonRepository.add(hoaDon);
+        HDCTModel hdct = null;
 
-        for (HDCTModel hdctm : hdct) {
-            hdctm.setMaHoaDon(maHD);
+        for (CartDetail cd : cart.getProducts().values().stream().toList()) {
+            hdct = new HDCTModel();
 
-            hdctRepository.add(hdctm);
+            hdct.setMaHDCT(taoMaHDCT());
+            hdct.setMaSPCT(cd.getProduct().getMaSPCT());
+            hdct.setMaLSG(cd.getPrice().getMaLSG());
+            hdct.setSoLuong(cd.getQuantity());
+            hdct.setMaKM("KM1");
+            hdct.setMaHoaDon(cart.getInvoiceId());
+
+            hdctRepository.add(hdct);
         }
 
-        return true;
+        return cart.getInvoiceId();
     }
 
     /**
@@ -58,4 +71,11 @@ public class HoaDonService {
         return "HD" + (this.simpleDateFormat.format(new Date()));
     }
 
+    public Integer taoMaHDCT() {
+        return hdctRepository.count() + 1;
+    }
+
+    public void export(String invoiceId) {
+
+    }
 }

@@ -18,7 +18,9 @@ import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.service.CartService;
+import org.project1.nhom8.service.HoaDonService;
 import org.project1.nhom8.service.StoreProductService;
+import org.project1.nhom8.util.TrangThaiHoaDon;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.swing.GeneralTableModel;
 
@@ -49,6 +51,8 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     private final CartService cartService;
 
+    private final HoaDonService hoaDonService;
+
     private Cart cart;
 
     public Form_BanHang() {
@@ -71,6 +75,8 @@ public class Form_BanHang extends javax.swing.JPanel {
         this.giaRepository = new GiaRepository();
 
         this.spctRepository = new SPCTRepository();
+
+        this.hoaDonService = new HoaDonService();
 
         cartService = new CartService();
 
@@ -592,11 +598,12 @@ public class Form_BanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_productViewMouseClicked
 
     private void cancelInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelInvoiceActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_cancelInvoiceActionPerformed
 
     private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
-        // TODO add your handling code here:
+        hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
     }//GEN-LAST:event_paymentActionPerformed
 
 
