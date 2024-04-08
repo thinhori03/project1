@@ -616,16 +616,59 @@ public class Form_BanHang extends javax.swing.JPanel {
             loadProductView();
             loadInvoice();
         }
-
-
     }//GEN-LAST:event_productViewMouseClicked
 
     private void cancelInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelInvoiceActionPerformed
 
+        if (this.cart == null) {
+            JOptionPane.showMessageDialog(this, " hãy chọn hóa trước");
+            return;
+        }
+
+        if (this.cart.getProducts().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "đã xóa hóa đơn tróng");
+            return;
+        }
+
+        KhachHangModel customer = khachHangConnection.findByPhoneNumber(customerPhoneNumber.getText().trim());
+
+        if (customer == null) {
+            customer = new KhachHangModel();
+            customer.setSdt(customerPhoneNumber.getText().trim());
+            customer.setTen(customerName.getText().trim());
+            khachHangConnection.add(customer);
+
+            this.cart.setCustomerName(customer.getTen());
+            this.cart.setCustomerPhoneNumber(customer.getSdt());
+        } else {
+            this.cart.setCustomerName(customer.getTen());
+        }
+
+        String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_HUY);
+
+        if (invoiceId != null) {
+            this.cart = null;
+            this.cartService.remove(invoiceId);
+        }
+
+        loadInvoice();
+        loadProductView();
+        loadCartDetail(this.cart);
 
     }//GEN-LAST:event_cancelInvoiceActionPerformed
 
     private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
+
+        if (this.cart == null) {
+            JOptionPane.showMessageDialog(this, " hãy chọn hóa đơn trước");
+            return;
+        }
+
+        if (this.cart.getProducts().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "không thể thanh toán hóa đơn trống");
+            return;
+        }
+
         KhachHangModel customer = khachHangConnection.findByPhoneNumber(customerPhoneNumber.getText().trim());
 
         if (customer == null) {
