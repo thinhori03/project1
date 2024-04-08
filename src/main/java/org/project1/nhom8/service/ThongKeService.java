@@ -15,13 +15,19 @@ import java.util.Date;
  * @author acer
  */
 public class ThongKeService {
+
     ThongKeConnection tkc = new ThongKeConnection();
-    
-    public ArrayList<ThongKeModel> getlist(){
-    return tkc.getAll();
+
+    public ArrayList<ThongKeModel> getlist() {
+        return tkc.getAll();
     }
-   public ArrayList<ThongKeModel> timKiem(Date ngaybd,Date ngaykt){
-   ArrayList<ThongKeModel> kq = tkc.timkiem(ngaybd,ngaykt);
-   return kq;
-   }
+
+    public ArrayList<ThongKeModel> timKiem(Date ngaybd, Date ngaykt) {
+        ArrayList<ThongKeModel> kq = tkc.timkiem(ngaybd, ngaykt);
+        return kq;
+    }
+
+    public ArrayList<ThongKeModel> listSp() {
+        return tkc.listSp();
+    }
 }
