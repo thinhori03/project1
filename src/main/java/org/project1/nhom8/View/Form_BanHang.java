@@ -14,8 +14,10 @@ import org.project1.nhom8.dto.provider.CartViewModelProvider;
 import org.project1.nhom8.dto.provider.StoreProductViewModelProvider;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
 import org.project1.nhom8.model.GiaModel;
+import org.project1.nhom8.model.KhachHangModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
+import org.project1.nhom8.repository.KhachHangConnection;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.service.CartService;
 import org.project1.nhom8.service.HoaDonService;
@@ -25,6 +27,7 @@ import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.swing.GeneralTableModel;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +47,8 @@ public class Form_BanHang extends javax.swing.JPanel {
     private final CartViewModelProvider cartViewModelProvider;
 
     private final GeneralTableModel<CartViewModel> cartTableModel;
+
+    private final KhachHangConnection khachHangConnection;
 
     private final GiaRepository giaRepository;
 
@@ -78,6 +83,8 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         this.hoaDonService = new HoaDonService();
 
+        this.khachHangConnection = new KhachHangConnection();
+
         cartService = new CartService();
 
         loadProductView();
@@ -95,8 +102,14 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     public void loadCartDetail(Cart cart) {
 
-        List<CartDetailViewModel> cartDetailView = cartDetailViewModelProvider
-                .getModel(cart.getProducts().values().stream().toList());
+        List<CartDetailViewModel> cartDetailView = null;
+
+        if (cart == null) {
+            cartDetailView = new ArrayList<>();
+        } else {
+            cartDetailView = cartDetailViewModelProvider
+                    .getModel(cart.getProducts().values().stream().toList());
+        }
 
         cartView.setModel(cartDetailGeneralTableModel.toTableModel(cartDetailView));
     }
@@ -492,12 +505,17 @@ public class Form_BanHang extends javax.swing.JPanel {
             return;
         }
 
-        Integer invoiceViewIndex = invoiceView.getSelectedRow();
+        Integer invoiceIndex = invoiceView.getSelectedRow();
 
-        this.cart = cartService.getCarts().get(invoiceView
-                .getValueAt(invoiceViewIndex, 0).toString());
+        String invoiceId = invoiceView.getValueAt(invoiceIndex, 0)
+                .toString();
+
+        this.cart = cartService.getCarts().get(invoiceId);
 
         fillCart();
+        loadInvoice();
+        loadCartDetail(this.cart);
+        loadProductView();
 
     }//GEN-LAST:event_invoiceViewMouseClicked
 
@@ -510,7 +528,12 @@ public class Form_BanHang extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             int quantity = 0;
             int productIndex = cartView.getSelectedRow();
-            Integer productId = Integer.parseInt(productView
+
+            if (productIndex < 0) {
+                return;
+            }
+
+            Integer productId = Integer.parseInt(cartView
                     .getValueAt(productIndex, 0).toString());
 
             CartDetail cartDetail = this.cart.getProducts().get(productId);
@@ -576,7 +599,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
                 this.cart.getProducts().get(productId).setQuantity(currentQuantity + quantity);
             } else {
-                CartDetail cartDetail = new CartDetail(1);
+                CartDetail cartDetail = new CartDetail(quantity);
                 SPCTModel product = spctRepository.findById(productId);
                 GiaModel price = giaRepository.getgiaMoiNhat(productId);
 
@@ -603,7 +626,30 @@ public class Form_BanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelInvoiceActionPerformed
 
     private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
-        hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
+        KhachHangModel customer = khachHangConnection.findByPhoneNumber(customerPhoneNumber.getText().trim());
+
+        if (customer == null) {
+            customer = new KhachHangModel();
+            customer.setSdt(customerPhoneNumber.getText().trim());
+            customer.setTen(customerName.getText().trim());
+            khachHangConnection.add(customer);
+
+            this.cart.setCustomerName(customer.getTen());
+            this.cart.setCustomerPhoneNumber(customer.getSdt());
+        } else {
+            this.cart.setCustomerName(customer.getTen());
+        }
+
+        String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
+
+        if (invoiceId != null) {
+            this.cart = null;
+            this.cartService.remove(invoiceId);
+        }
+
+        loadInvoice();
+        loadProductView();
+        loadCartDetail(this.cart);
     }//GEN-LAST:event_paymentActionPerformed
 
 

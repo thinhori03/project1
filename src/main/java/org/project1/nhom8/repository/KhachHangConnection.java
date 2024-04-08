@@ -4,13 +4,17 @@
  */
 package org.project1.nhom8.repository;
 
-import java.sql.*;
-import java.util.ArrayList;
 import org.project1.nhom8.model.KhachHangModel;
 import org.project1.nhom8.service.DBConnect;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
- *
  * @author acer
  */
 public class KhachHangConnection {
@@ -71,7 +75,7 @@ public class KhachHangConnection {
 
     }
 
-    public Boolean Update(Integer mak,KhachHangModel khachHang) {
+    public Boolean Update(Integer mak, KhachHangModel khachHang) {
         String sql = "	update KHACH_HANG\n"
                 + "set TENKH = ?,\n"
                 + "	SDT = ?,\n"
@@ -138,10 +142,48 @@ public class KhachHangConnection {
 
             preStat.setInt(1, maKH);
 
-            ResultSet resultSet = preStat.executeQuery();
+            ResultSet rs = preStat.executeQuery();
 
-            if (resultSet.next()) {
-                return resultSet.getNString("TENKH");
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public KhachHangModel findByPhoneNumber(String phoneNumber) {
+
+        String query = """
+                    
+                SELECT
+                        *
+                    FROM KHACH_HANG
+                    WHERE KHACH_HANG.SDT LIKE ?
+                    """;
+
+        try {
+
+            Connection connection = DBConnect.getConnection();
+
+            PreparedStatement preStat = connection.prepareStatement(query);
+
+            preStat.setString(1, phoneNumber);
+
+            ResultSet rs = preStat.executeQuery();
+
+            if (rs.next()) {
+                Integer ma = rs.getInt("MAKH");
+                String ten = rs.getString("TENKH");
+                String sdt = rs.getString("SDT");
+                String gioiTinh = rs.getString("GIOITINH");
+                String email = rs.getString("EMAIL");
+                Date ngay = rs.getDate("NGAYSINH");
+                String diaChi = rs.getString("DIACHI");
+                KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
+
             }
 
         } catch (SQLException ex) {
