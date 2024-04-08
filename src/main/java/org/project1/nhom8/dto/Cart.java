@@ -1,8 +1,8 @@
 package org.project1.nhom8.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
 
@@ -17,10 +17,10 @@ public class Cart {
 
     private String voucherId;
 
-    private Set<CartDetail> products;
+    private Map<Integer, CartDetail> products;
 
     public Cart() {
-        this.products = new HashSet<>();
+        this.products = new HashMap<>();
     }
 
     public Cart(String customerName, String customerPhoneNumber) {
@@ -28,7 +28,7 @@ public class Cart {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
 
-        this.products = new HashSet<>();
+        this.products = new HashMap<>();
     }
 
     public String getInvoiceId() {
@@ -71,11 +71,11 @@ public class Cart {
         this.voucherId = voucherId;
     }
 
-    public Set<CartDetail> getProducts() {
+    public Map<Integer, CartDetail> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<CartDetail> products) {
+    public void setProducts(Map<Integer, CartDetail> products) {
         this.products = products;
     }
 }

@@ -18,6 +18,7 @@ import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.service.CartService;
+import org.project1.nhom8.service.StoreProductService;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.swing.GeneralTableModel;
 
@@ -29,6 +30,7 @@ import java.util.List;
  * @author PC
  */
 public class Form_BanHang extends javax.swing.JPanel {
+    private final StoreProductService storeProductService;
 
     private final StoreProductViewModelProvider storeProductProvider;
 
@@ -51,6 +53,8 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     public Form_BanHang() {
         initComponents();
+
+        this.storeProductService = new StoreProductService();
 
         this.tabletableModel = new GeneralTableModel<>(StoreProductViewModel.class);
 
@@ -75,7 +79,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     public void loadProductView() {
         this.productView.setModel(tabletableModel
-                .toTableModel(storeProductProvider.getAll()));
+                .toTableModel(storeProductProvider.getModel(storeProductService.getStoreProductAsList())));
     }
 
     public void loadInvoice() {
@@ -86,7 +90,7 @@ public class Form_BanHang extends javax.swing.JPanel {
     public void loadCartDetail(Cart cart) {
 
         List<CartDetailViewModel> cartDetailView = cartDetailViewModelProvider
-                .getModel(cart.getProducts().stream().toList());
+                .getModel(cart.getProducts().values().stream().toList());
 
         cartView.setModel(cartDetailGeneralTableModel.toTableModel(cartDetailView));
     }
@@ -498,44 +502,90 @@ public class Form_BanHang extends javax.swing.JPanel {
         }
 
         if (evt.getClickCount() == 2) {
-            int productIndex = productView.getSelectedRow();
+            int quantity = 0;
+            int productIndex = cartView.getSelectedRow();
             Integer productId = Integer.parseInt(productView
                     .getValueAt(productIndex, 0).toString());
 
-            CartDetail cartDetail = new CartDetail();
+            CartDetail cartDetail = this.cart.getProducts().get(productId);
 
-            cartDetail.setProduct(spctRepository.findById(productId));
+            try {
+                quantity = Integer.parseInt(JOptionPane.showInputDialog("nhập số lượng"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "giá trị không hợp lệ");
+                return;
+            }
 
-            System.out.println(this.cart.getProducts().remove(cartDetail));
+            if (quantity > cartDetail.getQuantity()) {
+                JOptionPane.showMessageDialog(this, "số lượng quá lớn");
+            }
+
+            storeProductService.refreshRemove(this.cart.getProducts().get(productId), quantity);
+
+            if (quantity == cartDetail.getQuantity()) {
+                this.cart.getProducts().remove(productId);
+            } else if (quantity < cartDetail.getQuantity()) {
+                cartDetail.setQuantity(cartDetail.getQuantity() - quantity);
+            }
 
             loadCartDetail(cart);
+            loadProductView();
+            loadInvoice();
         }
 
     }//GEN-LAST:event_cartViewMouseClicked
 
     private void productViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productViewMouseClicked
 
-
         if (this.cart == null) {
             return;
         }
 
         if (evt.getClickCount() == 2) {
+
+            int quantity = 0;
+
+            try {
+                quantity = Integer.parseInt(JOptionPane.showInputDialog("nhập số lượng"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "giá trị không hợp lệ");
+                return;
+            }
+
             int productIndex = productView.getSelectedRow();
             Integer productId = Integer.parseInt(productView
                     .getValueAt(productIndex, 0).toString());
 
-            SPCTModel product = spctRepository.findById(productId);
-            GiaModel price = giaRepository.getgiaMoiNhat(productId);
+            if (quantity > storeProductService.get(productId).getSoluong()) {
+                JOptionPane.showMessageDialog(this, "số lượng quá lớn");
+                return;
+            }
 
-            CartDetail cartDetail = new CartDetail(1);
-            cartDetail.setProduct(product);
-            cartDetail.setPrice(price);
-            cartDetail.setQuantity(1);
+            if (this.cart.getProducts().containsKey(productId)) {
+                CartDetail cartDetail = this.cart.getProducts().get(productId);
 
-            this.cart.getProducts().add(cartDetail);
+                Integer currentQuantity = this.cart.getProducts().get(productId).getQuantity();
+
+                storeProductService.refreshAdd(cartDetail, quantity);
+
+                this.cart.getProducts().get(productId).setQuantity(currentQuantity + quantity);
+            } else {
+                CartDetail cartDetail = new CartDetail(1);
+                SPCTModel product = spctRepository.findById(productId);
+                GiaModel price = giaRepository.getgiaMoiNhat(productId);
+
+                cartDetail.setProduct(product);
+                cartDetail.setPrice(price);
+                cartDetail.setQuantity(quantity);
+
+                storeProductService.refreshAdd(cartDetail, quantity);
+
+                this.cart.getProducts().put(productId, cartDetail);
+            }
 
             loadCartDetail(cart);
+            loadProductView();
+            loadInvoice();
         }
 
 

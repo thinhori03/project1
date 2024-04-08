@@ -89,7 +89,7 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
                 + "\n"
                 + "JOIN SAN_PHAM"
                 + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                + "\n\tWHERE SAN_PHAM.TRANG_THAI = n'Đang bán'"
+                + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
                 + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0";
 
         try {
@@ -103,6 +103,8 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println(query);
 
         return result;
     }
