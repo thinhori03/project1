@@ -141,27 +141,27 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("quên mật khẩu");
+        jLabel1.setText("Quên mật khẩu");
 
-        getCode.setText("lấy mã");
+        getCode.setText("Lấy mã");
         getCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getCodeActionPerformed(evt);
             }
         });
 
-        ok.setText("đổi mạt khẩu");
+        ok.setText("Đổi mật khẩu");
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Xác nhận mật khẩu");
 
-        jLabel2.setText("mật khẩu mới");
+        jLabel2.setText("Mật khẩu mới");
 
-        jLabel4.setText("email");
+        jLabel4.setText("Email");
 
         layer.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layer.setLayer(email, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -226,7 +226,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
                 .addComponent(confirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ok)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(layerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layerLayout.createSequentialGroup()
                     .addContainerGap()
