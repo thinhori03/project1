@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,7 +87,7 @@ public class QueryGenerator<TTable, TId> {
         for (int i = 0; i < generatedFields.size(); ++i) {
             generatedFields.get(i).setAccessible(true);
             try {
-                generatedFields.get(i).set(object, resultSet.getObject(i+1));
+                generatedFields.get(i).set(object, resultSet.getObject(i + 1));
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             } catch (SQLException ex) {
@@ -111,7 +110,7 @@ public class QueryGenerator<TTable, TId> {
         sb.append("\n FROM "
                 .concat(table_namw));
 
-        System.out.println("\n\n\n" + sb + "\n\n\n");
+        // System.out.println("\n\n\n" + sb + "\n\n\n");
 
         return sb.toString();
     }
@@ -143,7 +142,7 @@ public class QueryGenerator<TTable, TId> {
         }
         sb.append(" ) \n");
 
-        System.out.println("\n\n\n" + sb + "\n\n\n");
+        // System.out.println("\n\n\n" + sb + "\n\n\n");
         return sb.toString();
     }
 
@@ -169,7 +168,7 @@ public class QueryGenerator<TTable, TId> {
 
         sb.append(" \nWHERE " + idName.name() + " = ?");
 
-        System.out.println("\n\n\n" + sb + "\n\n\n");
+        // System.out.println("\n\n\n" + sb + "\n\n\n");
         return sb.toString();
     }
 
@@ -188,7 +187,7 @@ public class QueryGenerator<TTable, TId> {
 
         }
 
-        System.out.println("\n\n\n" + sb + "\n\n\n");
+        // System.out.println("\n\n\n" + sb + "\n\n\n");
 
         return sb.toString();
     }

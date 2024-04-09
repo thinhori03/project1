@@ -58,6 +58,7 @@ public class LSGViewModelProvider {
 
             giavm.setGia(gia.getGia());
             giavm.setNgayCapNhat(gia.getNgayCapNhat());
+            giavm.setNgayKetThuc(gia.getNgayKetThuc());
 
             result.add(giavm);
         }
@@ -68,7 +69,7 @@ public class LSGViewModelProvider {
     public TableModel toTableModel(Integer maSPCT) {
 
 
-        DefaultTableModel defaultTableModel =new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
 
         List<Field> fields = Arrays.asList(LSGViewModel.class.getDeclaredFields())
                 .stream()
@@ -90,6 +91,12 @@ public class LSGViewModelProvider {
             try {
                 for (Field j : fields) {
                     j.setAccessible(true);
+
+                    if (j.get(gia) == null) {
+                        rowData.add("");
+                        continue;
+                    }
+
                     if (j.getType().equals(Date.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(gia)));
                     } else {

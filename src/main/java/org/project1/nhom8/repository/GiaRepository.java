@@ -19,7 +19,7 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
             PreparedStatement preparedStatement = getConnection()
                     .prepareStatement(getQueryGenerator()
                             .generateSelectAllQuery() +
-                            " WHERE MASPCT = ? ORDER BY NGAYUPDATE DESC ");
+                            " WHERE MASPCT = ? AND NGAYKETTHUC IS NULL");
             preparedStatement.setInt(1, maspct);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -28,7 +28,7 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
                 return getQueryGenerator().map(resultSet);
             }
 
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
@@ -44,7 +44,8 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
                     .prepareStatement(getQueryGenerator().generateSelectAllQuery() +
                             " WHERE MASPCT = ? ");
             preparedStatement.setInt(1, maspct);
-            ResultSet resultSet = preparedStatement.executeQuery();;
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ;
 
             if (resultSet.isBeforeFirst()) {
                 while (resultSet.next()) {
@@ -54,7 +55,7 @@ public class GiaRepository extends GeneralRepository<GiaModel, Integer> {
 
             return gias;
 
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
 

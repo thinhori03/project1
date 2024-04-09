@@ -51,7 +51,7 @@ public class VoucherRepository extends GeneralRepository<VoucherModel, String> {
             return result;
         }
 
-        System.out.println(query);
+//        System.out.println(query);
 
         return result;
     }

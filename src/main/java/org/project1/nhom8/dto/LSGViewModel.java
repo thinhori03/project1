@@ -18,18 +18,21 @@ public class LSGViewModel {
     @ConcurrencyFormat
     private double gia;
 
-    @DataHeader(name = "Ngày cập nhật")
+    @DataHeader(name = "Ngày bắt đầu")
     private Date ngayCapNhat;
 
+    @DataHeader(name = "ngày kết thúc")
+    private Date ngayKetThuc;
 
     public LSGViewModel() {
     }
 
-    public LSGViewModel(Integer maSPCT, String tenSPCT, double gia, Date ngayCapNhat) {
+    public LSGViewModel(Integer maSPCT, String tenSPCT, double gia, Date ngayCapNhat, Date ngayKetThuc) {
         this.maSPCT = maSPCT;
         this.tenSPCT = tenSPCT;
         this.gia = gia;
         this.ngayCapNhat = ngayCapNhat;
+        this.ngayKetThuc = ngayKetThuc;
     }
 
     public Integer getMaSPCT() {
@@ -62,5 +65,13 @@ public class LSGViewModel {
 
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public Date getNgayKetThuc() {
+        return ngayKetThuc;
+    }
+
+    public void setNgayKetThuc(Date ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
     }
 }
