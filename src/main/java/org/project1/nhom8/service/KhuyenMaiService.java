@@ -4,13 +4,16 @@
  */
 package org.project1.nhom8.service;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import org.project1.nhom8.model.KhuyenMai;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Admin
  */
 public class KhuyenMaiService {
@@ -121,6 +124,7 @@ public class KhuyenMaiService {
         }
         return listkm;
     }
+
     public List<KhuyenMai> TimKM_SPCT(String ma) {
         List<KhuyenMai> listkm = new ArrayList<>();
         sql = "Select *from KHUYEN_MAI_COUPON_CT where MAKM  like ?";
@@ -131,7 +135,7 @@ public class KhuyenMaiService {
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(
-                    rs.getInt(1), rs.getString(2), rs.getInt(3)
+                        rs.getInt(1), rs.getString(2), rs.getInt(3)
                 );
                 listkm.add(km);
             }
@@ -194,5 +198,33 @@ public class KhuyenMaiService {
             e.printStackTrace();
         }
         return kq;
+    }
+
+    public KhuyenMai findById(String id) {
+        String query = """
+                Select
+                    *
+                from KHUYEN_MAI_COUPON 
+                where MAKM  like ?
+                """;
+
+        Connection conn = DBConnect.getConnection();
+
+        try {
+            assert conn != null;
+            PreparedStatement preStat = conn.prepareStatement(query);
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            if (resultSet.next()) {
+                return new KhuyenMai(
+                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -9,6 +9,7 @@ import org.project1.nhom8.repository.MauSacRepository;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
+import org.project1.nhom8.service.KhuyenMaiService;
 import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
 import org.project1.nhom8.util.data.visual.DataHeader;
@@ -34,6 +35,8 @@ public class HDCTViewModelProvider {
 
     private SanPhamRepository sanPhamRepository;
 
+    private final KhuyenMaiService khuyenMaiService;
+
     public HDCTViewModelProvider() {
         this.hdctRepository = new HDCTRepository();
 
@@ -46,6 +49,8 @@ public class HDCTViewModelProvider {
         this.mauSacRepository = new MauSacRepository();
 
         this.sanPhamRepository = new SanPhamRepository();
+
+        this.khuyenMaiService = new KhuyenMaiService();
     }
 
     public List<HDCTViewModel> getHDCTViewModel(String maHD) {
@@ -69,6 +74,12 @@ public class HDCTViewModelProvider {
             hdctvm.setGia(giaRepository.findById(hdctm.getMaLSG()).getGia());
             hdctvm.setTenSP(sanPhamRepository.findById(spct.getMaSP()).getTensp());
             hdctvm.setSoLuong(hdctm.getSoLuong());
+
+            if (hdctm.getMaKM() != null) {
+                hdctvm.setGiaKhuyenMai((double) khuyenMaiService.findById(hdctm.getMaKM()).getGia());
+            } else {
+                hdctvm.setGiaKhuyenMai((double) 0);
+            }
 
             result.add(hdctvm);
         }

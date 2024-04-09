@@ -751,6 +751,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
 
         if (invoiceId != null) {
+            JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thành công");
             this.cart = null;
             this.cartService.remove(invoiceId);
         }
