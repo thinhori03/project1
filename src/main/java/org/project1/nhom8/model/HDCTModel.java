@@ -1,18 +1,19 @@
 package org.project1.nhom8.model;
 
 import org.project1.nhom8.util.data.DataField;
+import org.project1.nhom8.util.data.DataGenerated;
 import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
 
 /**
  * CREATE TABLE HOA_DON_CHI_TIET
  * (
- *     MAHDCT  INT PRIMARY KEY identity (1,1),
- *     MAHD    varchar(20) references HOA_DON (MAHD),
- *     MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
- *     SOLUONG INT,
- *     MALSG   int -- giá hiện tại
- *     MAKM VARCHAR(14)
+ * MAHDCT  INT PRIMARY KEY identity (1,1),
+ * MAHD    varchar(20) references HOA_DON (MAHD),
+ * MASPCT  INT references SAN_PHAM_CHI_TIET (MASPCT),
+ * SOLUONG INT,
+ * MALSG   int -- giá hiện tại
+ * MAKM VARCHAR(14)
  * )
  */
 
@@ -20,6 +21,7 @@ import org.project1.nhom8.util.data.DataTable;
 public class HDCTModel {
 
     @DataId
+    @DataGenerated
     @DataField(name = "MAHDCT")
     private int maHDCT;
 
@@ -34,7 +36,7 @@ public class HDCTModel {
 
     @DataField(name = "MALSG")
     private int maLSG;
-    
+
     @DataField(name = "MAKM")
     private String maKM;
 
@@ -99,5 +101,5 @@ public class HDCTModel {
         this.maKM = maKM;
     }
 
-    
+
 }
