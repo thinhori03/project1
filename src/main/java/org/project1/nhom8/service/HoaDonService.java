@@ -55,7 +55,7 @@ public class HoaDonService {
             hdct.setMaSPCT(cd.getProduct().getMaSPCT());
             hdct.setMaLSG(cd.getPrice().getMaLSG());
             hdct.setSoLuong(cd.getQuantity());
-            hdct.setMaKM("KM1");
+            hdct.setMaKM(cd.getCoupon().getMakm());
             hdct.setMaHoaDon(cart.getInvoiceId());
 
             hdctRepository.add(hdct);

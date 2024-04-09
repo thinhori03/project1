@@ -478,7 +478,18 @@ public class Form_BanHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-        // TODO add your handling code here:
+
+        customerName.setText("");
+        customerPhoneNumber.setText("");
+        invoiceId.setText("");
+        creationDate.setText("");
+        voucherAvailable.setText("");
+        totalPrice.setText("");
+
+        this.cart = null;
+        loadInvoice();
+        loadCartDetail(this.cart);
+
     }//GEN-LAST:event_refreshActionPerformed
 
     private void createInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInvoiceActionPerformed
@@ -557,6 +568,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                 cartDetail.setQuantity(cartDetail.getQuantity() - quantity);
             }
 
+            totalPrice.setText(cartService.getTotalPrice(this.cart) + "");
             loadCartDetail(cart);
             loadProductView();
             loadInvoice();
@@ -612,6 +624,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                 this.cart.getProducts().put(productId, cartDetail);
             }
 
+            this.totalPrice.setText(cartService.getTotalPrice(this.cart) + "");
             loadCartDetail(cart);
             loadProductView();
             loadInvoice();
