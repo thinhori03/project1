@@ -1,5 +1,6 @@
 package org.project1.nhom8.service;
 
+import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.repository.SPCTRepository;
@@ -40,6 +41,15 @@ public class StoreProductService {
         int currentQuantity = this.storeProductModel.get(cartDetail.getProduct().getMaSPCT()).getSoluong();
 
         this.storeProductModel.get(cartDetail.getProduct().getMaSPCT()).setSoluong(currentQuantity + quantity);
+    }
+
+    public void refreshAll(List<Cart> carts) {
+        this.refresh();
+        for (Cart cart : carts) {
+            for (CartDetail cd : cart.getProducts().values().stream().toList()) {
+                this.refreshAdd(cd, cd.getQuantity());
+            }
+        }
     }
 
     public List<SPCTModel> getStoreProductAsList() {

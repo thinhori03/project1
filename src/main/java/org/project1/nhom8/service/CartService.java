@@ -62,26 +62,26 @@ public class CartService {
     }
 
 
-    public Double getTotalPrice(String cartId) {
-
-        Double result = Double.valueOf(0);
-
-        Cart cart = this.carts.get(cartId);
-
-        if (cart == null) {
-            return Double.valueOf(0);
-        }
-
-        for (CartDetail cartDetail : cart.getProducts().values().stream().toList()) {
-            result = result + cartDetail.getPrice().getGia();
-
-            if (cartDetail.getCoupon() != null) {
-                result -= cartDetail.getCoupon().getGia();
-            }
-        }
-
-        return result;
-    }
+//    public Double getTotalPrice(String cartId) {
+//
+//        Double result = Double.valueOf(0);
+//
+//        Cart cart = this.carts.get(cartId);
+//
+//        if (cart == null) {
+//            return Double.valueOf(0);
+//        }
+//
+//        for (CartDetail cartDetail : cart.getProducts().values().stream().toList()) {
+//            result = result + cartDetail.getPrice().getGia();
+//
+//            if (cartDetail.getCoupon() != null) {
+//                result -= cartDetail.getCoupon().getGia();
+//            }
+//        }
+//
+//        return result;
+//    }
 
     /**
      * @param cart current cart

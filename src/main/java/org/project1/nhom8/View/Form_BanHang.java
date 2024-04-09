@@ -94,6 +94,7 @@ public class Form_BanHang extends javax.swing.JPanel {
     }
 
     public void loadProductView() {
+        storeProductService.refreshAll(this.cartService.getCartsAsList());
         this.productView.setModel(tabletableModel
                 .toTableModel(storeProductProvider.getModel(storeProductService.getStoreProductAsList())));
     }
@@ -118,14 +119,29 @@ public class Form_BanHang extends javax.swing.JPanel {
     }
 
     public void fillCart() {
-
         if (this.cart != null) {
             invoiceId.setText(this.cart.getInvoiceId());
             customerName.setText(this.cart.getCustomerName());
             customerPhoneNumber.setText(this.cart.getCustomerPhoneNumber());
             creationDate.setText(DefaultConverter.VietnameseDateFormat(this.cart.getCreationDate()));
-            totalPrice.setText(cartService.getTotalPrice(this.cart.getInvoiceId()).toString());
+            totalPrice.setText(cartService.getTotalPrice(this.cart) + "");
+        } else {
+            clear();
         }
+    }
+
+    public void clear() {
+        customerName.setText("");
+        customerPhoneNumber.setText("");
+        invoiceId.setText("");
+        creationDate.setText("");
+        voucherAvailable.setText("");
+        totalPrice.setText("");
+
+        this.cart = null;
+        loadProductView();
+        loadInvoice();
+        loadCartDetail(this.cart);
     }
 
     /**
@@ -482,16 +498,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
 
-        customerName.setText("");
-        customerPhoneNumber.setText("");
-        invoiceId.setText("");
-        creationDate.setText("");
-        voucherAvailable.setText("");
-        totalPrice.setText("");
-
-        this.cart = null;
-        loadInvoice();
-        loadCartDetail(this.cart);
+        clear();
 
     }//GEN-LAST:event_refreshActionPerformed
 
