@@ -4,6 +4,7 @@
  */
 package org.project1.nhom8.View;
 
+import org.project1.nhom8.Store;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.dto.CartDetailViewModel;
@@ -85,9 +86,11 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         this.khachHangConnection = new KhachHangConnection();
 
-        cartService = new CartService();
+        cartService = Store.getCartService();
 
         loadProductView();
+        loadInvoice();
+        loadCartDetail(this.cart);
     }
 
     public void loadProductView() {
