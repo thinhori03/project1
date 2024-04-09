@@ -213,6 +213,7 @@ public class KhuyenMaiService {
         try {
             assert conn != null;
             PreparedStatement preStat = conn.prepareStatement(query);
+            preStat.setString(1, id);
 
             ResultSet resultSet = preStat.executeQuery();
 
