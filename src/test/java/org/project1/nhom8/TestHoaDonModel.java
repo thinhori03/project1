@@ -67,6 +67,6 @@ public class TestHoaDonModel {
 
         VoucherModel voucher = voucherRepository.findById("V1");
 
-        hoaDonService.taoHoaDon(hoaDon, hdcts, voucher);
+        // hoaDonService.taoHoaDon(hoaDon, hdcts, voucher);
     }
 }

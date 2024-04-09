@@ -3,6 +3,7 @@ package org.project1.nhom8.service;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
+import org.project1.nhom8.repository.VoucherRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,15 @@ public class CartService {
 
     private final HoaDonService hoaDonService;
 
+    private final VoucherRepository voucherRepository;
+
     public CartService() {
 
         this.carts = new HashMap<>();
 
         this.hoaDonService = new HoaDonService();
+
+        this.voucherRepository = new VoucherRepository();
     }
 
     /**
@@ -95,6 +100,10 @@ public class CartService {
             if (cd.getCoupon() != null) {
                 totalPrice -= (cd.getCoupon().getGia() * cd.getQuantity());
             }
+        }
+
+        if (cart.getVoucherId() != null) {
+            totalPrice -= voucherRepository.findById(cart.getVoucherId()).getGiaTri();
         }
 
         return totalPrice;

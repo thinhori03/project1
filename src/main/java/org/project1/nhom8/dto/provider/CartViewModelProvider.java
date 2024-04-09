@@ -1,9 +1,9 @@
 package org.project1.nhom8.dto.provider;
 
 import org.project1.nhom8.dto.Cart;
-import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.dto.CartViewModel;
 import org.project1.nhom8.repository.VoucherRepository;
+import org.project1.nhom8.util.CartUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +32,7 @@ public class CartViewModelProvider {
             cvm.setCustomerPhoneNumber(model.getCustomerPhoneNumber());
             cvm.setCreationDate(model.getCreationDate());
 
-            totalPrice = Double.valueOf(0);
-            for (CartDetail cd : model.getProducts().values()) {
-                totalPrice += (cd.getQuantity() * cd.getPrice().getGia());
-            }
-            cvm.setTotalPrice(totalPrice);
+            cvm.setTotalPrice(CartUtil.getTotalPrice(model));
 
             if (model.getVoucherId() != null) {
                 cvm.setVoucherPrice(voucherRepository.findById(model.getVoucherId())

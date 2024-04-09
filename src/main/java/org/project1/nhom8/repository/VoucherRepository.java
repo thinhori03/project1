@@ -27,12 +27,12 @@ public class VoucherRepository extends GeneralRepository<VoucherModel, String> {
         List<VoucherModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                       + "\n"
-                       + "\n\tWHERE VOUCHER.DIEUKIEN > ?"
-                       + "\n\tAND NGAYBATDAU BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC"
-                       + "\n\tAND so_luong > 0"
-                       + "\n\tAND VOUCHER.TRANG_THAI like N'đang hoạt động'"
-                       + "\n\tORDER by DIEUKIEN";
+                + "\n"
+                + "\n\tWHERE VOUCHER.DIEUKIEN > ?"
+                + "\n\tAND NGAYBATDAU BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC"
+                + "\n\tAND so_luong > 0"
+                + "\n\tAND VOUCHER.TRANG_THAI like N'đang hoạt động'"
+                + "\n\tORDER by DIEUKIEN";
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
             preStat.setDouble(1, totalPrice);
@@ -52,31 +52,32 @@ public class VoucherRepository extends GeneralRepository<VoucherModel, String> {
 
     public VoucherModel getVoucherToApply(Double totalPrice) {
         String query = """
-                 SELECT TOP 1
+                SELECT TOP 1
                     *
                 FROM VOUCHER
-                WHERE VOUCHER.DIEUKIEN = ?
+                WHERE VOUCHER.DIEUKIEN <= ?
                   AND VOUCHER.GIATRI = (
                       SELECT MAX(VOUCHER.GIATRI)
                       FROM VOUCHER
                       WHERE VOUCHER.DIEUKIEN <= ?
-                        AND NGAYBATDAU BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC
-                        AND so_luong > 0
+                        AND GETDATE() BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC
+                        AND VOUCHER.SOLUONG > 0
                         AND VOUCHER.TRANG_THAI like N'đang hoạt động'
                     )
-                  AND NGAYBATDAU BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC
-                  AND so_luong > 0
+                  AND GETDATE() BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC
+                  AND SOLUONG > 0
                   AND VOUCHER.TRANG_THAI like N'đang hoạt động'
                 """;
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
             preStat.setDouble(1, totalPrice);
+            preStat.setDouble(2, totalPrice);
 
             ResultSet resultSet = preStat.executeQuery();
 
             if (resultSet.next()) {
-                getQueryGenerator().map(resultSet);
+                return getQueryGenerator().map(resultSet);
             }
 
         } catch (SQLException e) {
