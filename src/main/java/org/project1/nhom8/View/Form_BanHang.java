@@ -5,11 +5,13 @@
 package org.project1.nhom8.View;
 
 import org.project1.nhom8.Store;
+import org.project1.nhom8.dto.AVViewModel;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.dto.CartDetailViewModel;
 import org.project1.nhom8.dto.CartViewModel;
 import org.project1.nhom8.dto.StoreProductViewModel;
+import org.project1.nhom8.dto.provider.AVViewModelProvider;
 import org.project1.nhom8.dto.provider.CartDetailViewModelProvider;
 import org.project1.nhom8.dto.provider.CartViewModelProvider;
 import org.project1.nhom8.dto.provider.StoreProductViewModelProvider;
@@ -28,6 +30,7 @@ import org.project1.nhom8.service.StoreProductService;
 import org.project1.nhom8.util.CartUtil;
 import org.project1.nhom8.util.TrangThaiHoaDon;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
+import org.project1.nhom8.util.swing.GeneralComboBoxModel;
 import org.project1.nhom8.util.swing.GeneralTableModel;
 
 import javax.swing.*;
@@ -64,6 +67,10 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     public final VoucherRepository voucherRepository;
 
+    private final GeneralComboBoxModel<AVViewModel> aVComboModel;
+
+    private final AVViewModelProvider avViewModelProvider;
+
     private Cart cart;
 
     public Form_BanHang() {
@@ -93,11 +100,13 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         this.voucherRepository = new VoucherRepository();
 
+        this.aVComboModel = new GeneralComboBoxModel<>(AVViewModel.class);
+
+        this.avViewModelProvider = new AVViewModelProvider();
+
         cartService = Store.getCartService();
 
-        loadProductView();
-        loadInvoice();
-        loadCartDetail(this.cart);
+        fillCart();
     }
 
     public void loadProductView() {
@@ -140,9 +149,23 @@ public class Form_BanHang extends javax.swing.JPanel {
             if (voucher != null) {
                 applyVoucher.setText(voucher.getGiaTri() + "");
             }
+
+            List<VoucherModel> availableVoucher = voucherRepository.getAvailableVoucher(CartUtil
+                    .getTotalPrice(this.cart));
+
+            // not empty
+            if (!availableVoucher.isEmpty()) {
+                try {
+                    this.availableVoucher.setModel(aVComboModel.toComboBoxModel(avViewModelProvider
+                            .getModel(availableVoucher), "-"));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         } else {
             clear();
         }
+
         loadProductView();
         loadCartDetail(this.cart);
         loadInvoice();
@@ -164,6 +187,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         creationDate.setText("");
         finalPrice.setText("");
         totalPrice.setText("");
+        applyVoucher.setText("");
 
         this.cart = null;
     }
@@ -210,7 +234,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         customerPhoneNumber = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cancelInvoice = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        availableVoucher = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         finalPrice = new javax.swing.JTextField();
 
@@ -416,7 +440,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                                                         .addGroup(jPanel4Layout.createSequentialGroup()
                                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                                 .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                        .addComponent(availableVoucher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,7 +502,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                                         .addComponent(jLabel6)
                                         .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(availableVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel7)
@@ -764,6 +788,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField applyVoucher;
+    private javax.swing.JComboBox<String> availableVoucher;
     private javax.swing.JButton cancelInvoice;
     private javax.swing.JTable cartView;
     private javax.swing.JButton createInvoice;
@@ -774,7 +799,6 @@ public class Form_BanHang extends javax.swing.JPanel {
     private javax.swing.JTextField findByProductName;
     private javax.swing.JTextField invoiceId;
     private javax.swing.JTable invoiceView;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

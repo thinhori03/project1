@@ -26,13 +26,16 @@ public class VoucherRepository extends GeneralRepository<VoucherModel, String> {
 
         List<VoucherModel> result = new ArrayList<>();
 
-        String query = getQueryGenerator().generateSelectAllQuery()
-                + "\n"
-                + "\n\tWHERE VOUCHER.DIEUKIEN > ?"
-                + "\n\tAND NGAYBATDAU BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC"
-                + "\n\tAND so_luong > 0"
-                + "\n\tAND VOUCHER.TRANG_THAI like N'đang hoạt động'"
-                + "\n\tORDER by DIEUKIEN";
+        String query = """
+                SELECT
+                    *
+                FROM VOUCHER
+                WHERE VOUCHER.DIEUKIEN > ?
+                    AND GETDATE() BETWEEN VOUCHER.NGAYBATDAU AND VOUCHER.NGAYKETTHUC
+                    AND VOUCHER.SOLUONG > 0
+                    AND VOUCHER.TRANG_THAI like N'đang hoạt động'
+                    ORDER BY DIEUKIEN
+                 """;
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
             preStat.setDouble(1, totalPrice);
@@ -45,9 +48,12 @@ public class VoucherRepository extends GeneralRepository<VoucherModel, String> {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return result;
         }
-        return null;
+
+        System.out.println(query);
+
+        return result;
     }
 
     public VoucherModel getVoucherToApply(Double totalPrice) {

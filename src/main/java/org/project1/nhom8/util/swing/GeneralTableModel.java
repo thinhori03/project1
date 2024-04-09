@@ -32,7 +32,7 @@ public class GeneralTableModel<T> {
         defaultTableModel.setColumnCount(0);
 
         for (Field f : fields) {
-            defaultTableModel.addColumn(f.getAnnotation(DataHeader.class).name());
+            defaultTableModel.addColumn(f.getAnnotation(DataHeader.class).name().trim());
         }
 
         defaultTableModel.setRowCount(0);
@@ -45,7 +45,7 @@ public class GeneralTableModel<T> {
                 for (Field j : fields) {
                     j.setAccessible(true);
                     if (j.getType().equals(Date.class)
-                        && j.isAnnotationPresent(DateFormat.class)) {
+                            && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(model)));
                     } else if (j.get(model) == null) {
                         rowData.add("");
