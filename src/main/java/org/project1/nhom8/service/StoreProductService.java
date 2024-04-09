@@ -59,4 +59,5 @@ public class StoreProductService {
     public SPCTModel get(Integer key) {
         return this.storeProductModel.get(key);
     }
+
 }

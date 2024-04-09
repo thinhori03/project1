@@ -3,6 +3,9 @@ package org.project1.nhom8.service;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
+import org.project1.nhom8.model.KhuyenMai;
+import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
 
 import java.util.HashMap;
@@ -17,6 +20,10 @@ public class CartService {
 
     private final VoucherRepository voucherRepository;
 
+    private final SPCTRepository spctRepository;
+
+    private final KhuyenMaiService khuyenMaiService;
+
     public CartService() {
 
         this.carts = new HashMap<>();
@@ -24,6 +31,10 @@ public class CartService {
         this.hoaDonService = new HoaDonService();
 
         this.voucherRepository = new VoucherRepository();
+
+        this.spctRepository = new SPCTRepository();
+
+        this.khuyenMaiService = new KhuyenMaiService();
     }
 
     /**
@@ -66,46 +77,20 @@ public class CartService {
         return carts.values().stream().toList();
     }
 
+    public void updateProductAfterPayment(Cart cart) {
 
-//    public Double getTotalPrice(String cartId) {
-//
-//        Double result = Double.valueOf(0);
-//
-//        Cart cart = this.carts.get(cartId);
-//
-//        if (cart == null) {
-//            return Double.valueOf(0);
-//        }
-//
-//        for (CartDetail cartDetail : cart.getProducts().values().stream().toList()) {
-//            result = result + cartDetail.getPrice().getGia();
-//
-//            if (cartDetail.getCoupon() != null) {
-//                result -= cartDetail.getCoupon().getGia();
-//            }
-//        }
-//
-//        return result;
-//    }
+        SPCTModel spct = null;
+        KhuyenMai coupon = null;
 
-    /**
-     * @param cart current cart
-     * @return total price
-     */
-    public Double getTotalPrice(Cart cart) {
-        Double totalPrice = Double.valueOf(0);
-        for (CartDetail cd : cart.getProducts().values()) {
-            totalPrice += (cd.getQuantity() * cd.getPrice().getGia());
+        for (CartDetail cd : cart.getProducts().values().stream().toList()) {
+            spct = cd.getProduct();
+            spct.setSoluong(spct.getSoluong() - cd.getQuantity());
+            spctRepository.update(spct);
 
             if (cd.getCoupon() != null) {
-                totalPrice -= (cd.getCoupon().getGia() * cd.getQuantity());
+                coupon = cd.getCoupon();
+                khuyenMaiService.UpdateKhuyenMai(coupon.getMakm(), coupon);
             }
         }
-
-        if (cart.getVoucherId() != null) {
-            totalPrice -= voucherRepository.findById(cart.getVoucherId()).getGiaTri();
-        }
-
-        return totalPrice;
     }
 }
