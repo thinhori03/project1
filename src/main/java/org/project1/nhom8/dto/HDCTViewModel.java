@@ -22,6 +22,9 @@ public class HDCTViewModel {
     @DataHeader(name = "giá")
     private double gia;
 
+    @DataHeader(name = "giá khuyến mại")
+    private Double giaKhuyenMai;
+
     public HDCTViewModel() {
     }
 
@@ -82,4 +85,11 @@ public class HDCTViewModel {
         this.gia = gia;
     }
 
+    public Double getGiaKhuyenMai() {
+        return giaKhuyenMai;
+    }
+
+    public void setGiaKhuyenMai(Double giaKhuyenMai) {
+        this.giaKhuyenMai = giaKhuyenMai;
+    }
 }
