@@ -359,8 +359,13 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
     private void invoiceViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceViewMouseClicked
 
-        this.maHD = hdViewModelProvider.getHoaDonViewModel().
-                get(invoiceView.getSelectedRow()).getMaHoaDon();
+        Integer invoiceIndex = invoiceView.getSelectedRow();
+
+        if (invoiceIndex < 0) {
+            return;
+        }
+
+        this.maHD = invoiceView.getValueAt(invoiceIndex, 0).toString();
 
         List<HDCTViewModel> hdctvm = hdctViewModelProvider.getHDCTViewModel(this.maHD);
 

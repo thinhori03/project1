@@ -7,6 +7,7 @@ import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
 import org.project1.nhom8.repository.KhachHangConnection;
+import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.service.NhanVienService;
 import org.project1.nhom8.util.data.convert.DateFormat;
 import org.project1.nhom8.util.data.convert.DefaultConverter;
@@ -32,6 +33,8 @@ public class HDViewModelProvider {
 
     private final GiaRepository giaRepository;
 
+    private final VoucherRepository voucherRepository;
+
     public HDViewModelProvider() {
         this.hoaDonRepository = new HoaDonRepository();
 
@@ -42,6 +45,8 @@ public class HDViewModelProvider {
         this.hdctRepository = new HDCTRepository();
 
         this.giaRepository = new GiaRepository();
+
+        this.voucherRepository = new VoucherRepository();
     }
 
     public List<HoaDonViewModel> getHoaDonViewModel() {
@@ -99,9 +104,17 @@ public class HDViewModelProvider {
 
             hdvm.setMaHoaDon(hdm.getMaHoaDon());
             hdvm.setNgayTao(hdm.getNgayTao());
+            hdvm.setNgayThanhToan(hdm.getNgayThanhToan());
             hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
             hdvm.setMaNV(hdm.getMaNV());
             hdvm.setTenNV(nhanVienService.timKiem(hdm.getMaNV()).get(0).getHoTen());
+
+            if (hdm.getMaVoucher() != null) {
+                hdvm.setVoucher(voucherRepository.findById(hdm.getMaVoucher()).getGiaTri());
+            } else {
+                hdvm.setVoucher((double) 0);
+            }
+
             hdvm.setTrangThai(hdm.getTrangThai());
 
             Double totalPrice = Double.valueOf(0);
