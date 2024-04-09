@@ -1,21 +1,11 @@
 package org.project1.nhom8.model;
 
-
 import org.project1.nhom8.util.data.DataField;
 import org.project1.nhom8.util.data.DataId;
 import org.project1.nhom8.util.data.DataTable;
 
 import java.util.Date;
 
-/**
- * create table LICH_SU_GIA
- * (
- * MALSG      int primary key,
- * MASPCT     int references SAN_PHAM_CHI_TIET (MASPCT),
- * GIA        float,
- * NGAYUPDATE datetime,
- * )
- */
 
 @DataTable(name = "LICH_SU_GIA")
 public class GiaModel {
@@ -30,17 +20,21 @@ public class GiaModel {
     @DataField(name = "GIA")
     private Double gia;
 
-    @DataField(name = "NGAYUPDATE")
+    @DataField(name = "NGAYBATDAU")
     private Date ngayCapNhat;
+
+    @DataField(name = "NGAYkETTHUC")
+    private Date ngayKetThuc;
 
     public GiaModel() {
     }
 
-    public GiaModel(int maLSG, int maSPCT, Double gia, Date ngayCapNhat) {
+    public GiaModel(int maLSG, int maSPCT, Double gia, Date ngayCapNhat, Date ngayKetThuc) {
         this.maLSG = maLSG;
         this.maSPCT = maSPCT;
         this.gia = gia;
         this.ngayCapNhat = ngayCapNhat;
+        this.ngayKetThuc = ngayKetThuc;
     }
 
     public int getMaLSG() {
@@ -73,5 +67,13 @@ public class GiaModel {
 
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public Date getNgayKetThuc() {
+        return ngayKetThuc;
+    }
+
+    public void setNgayKetThuc(Date ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
     }
 }

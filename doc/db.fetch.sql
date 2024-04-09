@@ -88,10 +88,11 @@ CREATE TABLE KHUYEN_MAI_COUPON_CT
 
 create table LICH_SU_GIA
 (
-    MALSG      int primary key,
-    MASPCT     int references SAN_PHAM_CHI_TIET (MASPCT),
-    GIA        float,
-    NGAYUPDATE datetime,
+    MALSG       int primary key,
+    MASPCT      int references SAN_PHAM_CHI_TIET (MASPCT),
+    GIA         float,
+    NGAYbATDAU  datetime,
+    NGAYkETtHUC DATETIME
 )
 
 CREATE TABLE HOA_DON
@@ -192,13 +193,13 @@ values ('KM1', 1),
        ('KM4', 4),
        ('KM5', 3)
 
-insert into LICH_SU_GIA(MALSG, MASPCT, GIA, NGAYUPDATE)
-values ('1', '1', 150000, '2024-02-10'),
-       ('2', '2', 150000, '2024-02-20'),
-       ('3', '3', 150000, '2024-02-23'),
-       ('4', '2', 250000, '2024-01-20'),
-       ('5', '4', 450000, '2024-02-25'),
-       ('6', '5', 450000, '2024-02-25')
+insert into LICH_SU_GIA(MALSG, MASPCT, GIA, NGAYbATDAU, NGAYkETtHUC)
+values ('1', '1', 150000, '2024-02-10', NULL),
+       ('2', '2', 150000, '2024-02-20', '2024-01-22'),
+       ('3', '3', 150000, '2024-02-23', NULL),
+       ('4', '2', 250000, '2024-01-22', NULL),
+       ('5', '4', 450000, '2024-02-25', NULL),
+       ('6', '5', 450000, '2024-02-25', NULL)
 
 
 insert into HOA_DON(MAHD, MAKH, MANV, NGAYTAO, NGAYTHANHTOAN, TRANGTHAI, PHUONGTHUC, MAV)
@@ -271,6 +272,8 @@ Select*
 from SAN_PHAM_CHI_TIET
 Select*
 from HOA_DON_CHI_TIET
+
+-- end ò execution
 
 insert into KHACH_HANG (TENKH, SDT, GIOITINH, EMAIL, NGAYSINH, DIACHI)
 values ('Nguyen Van A', '0123456789', 'Nam', 'nguyenvana@gmail.com', '02/02/2004', 'Kieu Mai , Ha Noi')

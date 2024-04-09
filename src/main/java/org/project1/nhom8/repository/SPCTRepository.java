@@ -45,7 +45,7 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
             ex.printStackTrace();
         }
 
-        System.out.println(query);
+//        System.out.println(query);
 
         return result;
     }
@@ -76,7 +76,7 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
             ex.printStackTrace();
         }
 
-        System.out.println(query);
+//        System.out.println(query);
 
         return result;
     }
@@ -104,7 +104,7 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
             e.printStackTrace();
         }
 
-        System.out.println(query);
+//        System.out.println(query);
 
         return result;
     }

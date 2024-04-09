@@ -49,7 +49,7 @@ public class HoaDonRepository extends GeneralRepository<HoaDonModel, String> {
             ex.printStackTrace();
         }
 
-        System.out.println(query);
+//        System.out.println(query);
 
         return result;
     }
