@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
 
+    implementation("org.jfree:jfreechart:1.5.4")
+
     implementation("com.itextpdf:itextpdf:5.5.13.3")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
