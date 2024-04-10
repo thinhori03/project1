@@ -64,12 +64,16 @@ public class HoaDonService {
         hoaDonModel.setMaKH(1);
         hoaDonModel.setTrangThai(trangThai.getValue());
 
+
         if (cart.getVoucherId() != null) {
             hoaDonModel.setMaVoucher(cart.getVoucherId());
-            voucherModel = voucherRepository.findById(cart.getVoucherId());
 
-            voucherModel.setSoLuong(voucherModel.getSoLuong() - 1);
-            voucherRepository.update(voucherModel);
+            if (trangThai == TrangThaiHoaDon.DA_THANH_TOAN) {
+                voucherModel = voucherRepository.findById(cart.getVoucherId());
+
+                voucherModel.setSoLuong(voucherModel.getSoLuong() - 1);
+                voucherRepository.update(voucherModel);
+            }
         }
 
         hoaDonRepository.add(hoaDonModel);
@@ -86,9 +90,12 @@ public class HoaDonService {
             hdct.setMaHDCT(taoMaHDCT());
 
             hdct.setMaSPCT(cd.getProduct().getMaSPCT());
-            spct = cd.getProduct();
-            spct.setSoluong(spct.getSoluong() - cd.getQuantity());
-            spctRepository.update(spct);
+
+            if (trangThai == TrangThaiHoaDon.DA_THANH_TOAN) {
+                spct = cd.getProduct();
+                spct.setSoluong(spct.getSoluong() - cd.getQuantity());
+                spctRepository.update(spct);
+            }
 
             hdct.setMaLSG(cd.getPrice().getMaLSG());
             hdct.setSoLuong(cd.getQuantity());
@@ -97,9 +104,11 @@ public class HoaDonService {
             if (cd.getCoupon() != null) {
                 hdct.setMaKM(cd.getCoupon().getMakm());
 
-                khuyenMai = cd.getCoupon();
-                khuyenMai.setSoluong(khuyenMai.getSoluong() - 1);
-                khuyenMaiService.UpdateKhuyenMai(khuyenMai.getMakm(), khuyenMai);
+                if (trangThai == TrangThaiHoaDon.DA_THANH_TOAN) {
+                    khuyenMai = cd.getCoupon();
+                    khuyenMai.setSoluong(khuyenMai.getSoluong() - 1);
+                    khuyenMaiService.UpdateKhuyenMai(khuyenMai.getMakm(), khuyenMai);
+                }
             }
 
             hdctRepository.add(hdct);
