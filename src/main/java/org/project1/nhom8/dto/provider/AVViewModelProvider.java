@@ -21,12 +21,8 @@ public class AVViewModelProvider {
     public List<AVViewModel> getModel(List<VoucherModel> models) {
         List<AVViewModel> result = new ArrayList<>();
 
-        AVViewModel av = null;
-
         for (VoucherModel model : models) {
-            av = new AVViewModel(model.getDiauKien(), model.getGiaTri());
-
-            result.add(av);
+            result.add(new AVViewModel(model.getDiauKien(), model.getGiaTri()));
         }
 
         return result;

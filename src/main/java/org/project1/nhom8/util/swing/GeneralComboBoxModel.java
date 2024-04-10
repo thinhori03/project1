@@ -19,9 +19,9 @@ public class GeneralComboBoxModel<T> {
         this.modelClass = modelClass;
     }
 
-    public DefaultComboBoxModel toComboBoxModel(List<T> models, String separator) throws IllegalAccessException {
+    public DefaultComboBoxModel<String> toComboBoxModel(List<T> models, String separator) throws IllegalAccessException {
 
-        DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
 
         List<Field> fields = Arrays.asList(modelClass.getDeclaredFields())
                 .stream()
@@ -55,6 +55,7 @@ public class GeneralComboBoxModel<T> {
 
                 itemBuilder.append(" ").append(separator).append(" ");
             }
+            comboBoxModel.addElement(itemBuilder.toString());
         }
 
         return comboBoxModel;
