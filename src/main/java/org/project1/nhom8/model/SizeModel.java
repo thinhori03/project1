@@ -47,5 +47,9 @@ public class SizeModel {
     public void setTensize(String tensize) {
         this.tensize = tensize;
     }
-    
+    public Object [] toDataRow(){
+        return new Object[]{
+            this.getMasize(),this.getTensize()
+        };
+    }
 }

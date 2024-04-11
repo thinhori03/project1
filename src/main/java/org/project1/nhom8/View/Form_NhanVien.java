@@ -645,11 +645,16 @@ public class Form_NhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
         index = tblNhanVien.getSelectedRow();
         int ma = (int) tblNhanVien.getValueAt(index, 0);
-        int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa không", "Thông báo", JOptionPane.YES_OPTION);
+        if (!checkNull()) {
+            return;
+        }else{
+            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa không", "Thông báo", JOptionPane.YES_OPTION);
         if (service.update(ma, readForm()) == 1) {
             JOptionPane.showMessageDialog(this, "Sửa thành công");
             fillTable(service.getAll());
         }
+        }
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed

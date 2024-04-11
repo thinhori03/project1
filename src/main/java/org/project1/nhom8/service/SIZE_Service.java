@@ -9,6 +9,8 @@ import org.project1.nhom8.model.SizeModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,6 +23,40 @@ public class SIZE_Service {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
+    List<SizeModel> listSize;
+
+    public List<SizeModel> getAll() {
+        listSize = new ArrayList<>();
+        sql = "Select*\n"
+                + "from SIZE";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SizeModel sz = new SizeModel(rs.getInt(1), rs.getString(2));
+                listSize.add(sz);
+
+            }
+            return listSize;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public int upadate(int ma , SizeModel s ){
+        sql = "UPDATE SIZE SET TENSIZE = ? WHERE MASIZE = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, s.getTensize());
+            ps.setInt(2, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
     public SizeModel getBYID_Size(int masize) {
 
@@ -70,8 +106,8 @@ public class SIZE_Service {
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-             return 0;
+            return 0;
         }
-       
+
     }
 }

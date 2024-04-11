@@ -47,6 +47,11 @@ public class MauSacModel {
         this.tenmau = tenmau;
     }
 
+     public Object [] toDataRow(){
+        return new Object[]{
+            this.getMamau(),this.getTenmau()
+        };
+    }
     
     
    
