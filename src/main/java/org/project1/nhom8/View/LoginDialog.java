@@ -9,6 +9,7 @@ import org.project1.nhom8.service.LoginService;
 
 import javax.swing.*;
 import java.awt.*;
+import org.project1.nhom8.util.MD5Util;
 import org.project1.nhom8.util.VaiTroNhanVien;
 
 /**
@@ -40,21 +41,23 @@ public class LoginDialog extends javax.swing.JFrame {
         if (chekFrom()) {
             String email = txtTenDN.getText();
             String password = new String(txtPassword.getPassword());
-            Login login = service.login(email, password);
+            String hashedPassword = MD5Util.hashPassword(password);
+            Login login = service.login(email, hashedPassword);
+
             if (login != null) {
                 LoginService.lg = login;
-                this.dispose();
 //                if (login.getVaiTro().equals(VaiTroNhanVien.QUANR_LY.getValue())) {
 //                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền quản lý.");
 //
 //                } else if (login.getVaiTro().equals("Nhân viên")) {
 //                    JOptionPane.showMessageDialog(this, "Bạn đã đăng nhập với quyền nhân viên.");
 //                }
+//                this.dispose();
                 main mi = new main();
                 mi.setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "email hoặc mật khẩu");
+                JOptionPane.showMessageDialog(this, "Email hoặc mật khẩu không chính xác");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ tên người dùng và mật khẩu");
