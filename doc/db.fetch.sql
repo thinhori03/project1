@@ -11,7 +11,7 @@ CREATE TABLE NHAN_VIEN
     SDT       VARCHAR(14),
     EMAIL     VARCHAR(50),
     GIOTINH   NVARCHAR(50),
-    MATKHAU   varchar(20),
+    MATKHAU   varchar(32),
     CCCD      VARCHAR(14),
     VAITRO    Nvarchar(50),
     TRANGTHAI NVARCHAR(50)
@@ -124,15 +124,16 @@ CREATE TABLE hoa_don_chi_tiet__khuyen_mai
 )
 GO
 
-insert into NHAN_VIEN
-values (N'Trịnh Tiến Tuấn', '0827890913', 'tuanttph45460@fpt.edu.vn', N'Nam', 'tuan2004', 03734002912, N'Quản lý',
-        N'Đang làm việc'),
-       (N'Hoàng Đức Ích', '0866690914', 'ichhdph45048@fpt.edu.vn', N'Nam', 'Hoangich2004', 02700757824, N'Nhân viên',
-        N'Đang làm việc'),
-       (N'Mai Thị Thư', '0395561663', 'thumtph45638@fpt.edu.vn', N'Nữ', 'Hoangich2004', 02700757824, N'Nhân viên',
-        N'Nghỉ việc'),
-       (N'Nguyễn Thịnh ', '0395561663', 'ngtnthori03@gmail.com', N'Nam', 'Hoangich2004', 02700757824, N'Nhân viên',
-        N'Nghỉ việc')
+INSERT INTO NHAN_VIEN (TENNV, SDT, EMAIL, GIOTINH, MATKHAU, CCCD, VAITRO, TRANGTHAI)
+VALUES 
+    (N'Trịnh Tiến Tuấn', '0827890913', 'tuanttph45460@fpt.edu.vn', N'Nam', 
+     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'tuan2004'), 2), '03734002912', N'Quản lý', N'Đang làm việc'),
+    (N'Hoàng Đức Ích', '0866690914', 'ichhdph45048@fpt.edu.vn', N'Nam', 
+     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'Hoangich2004'), 2), '02700757824', N'Nhân viên', N'Đang làm việc'),
+    (N'Mai Thị Thư', '0395561663', 'thumtph45638@fpt.edu.vn', N'Nữ', 
+     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'thu2004'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc'),
+    (N'Nguyễn Thịnh', '0395561663', 'ngtnthori03@gmail.com', N'Nam', 
+     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'password123'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc');
 
 insert into SAN_PHAM(TENSP, TRANGTHAI)
 values (N'Dép LV', N'Đang bán'),

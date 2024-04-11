@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.project1.nhom8.util.MD5Util;
 
 /**
  *
@@ -72,7 +73,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
         String email = txtEmail.getText();
         String sdt = txtSdt.getText();
         String cccd = txtCCCD.getText();
-        String password = txtPass.getText();
+        String password = MD5Util.hashPassword(txtPass.getText());
         String gioiTinh = "";
         if (rdNam.isSelected()) {
             gioiTinh = "Nam";
@@ -229,13 +230,11 @@ public class Form_NhanVien extends javax.swing.JPanel {
         lblMaNV = new javax.swing.JLabel();
         btnAn = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1159, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin nhân viên"));
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
@@ -350,7 +349,6 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thiết lập thông tin nhân viên"));
 
         jLabel2.setText("Mã NV:");
