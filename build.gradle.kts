@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
 
+    implementation("com.itextpdf:html2pdf:5.0.3")
+
     implementation("org.jfree:jfreechart:1.5.4")
 
     implementation("com.itextpdf:itextpdf:5.5.13.3")
