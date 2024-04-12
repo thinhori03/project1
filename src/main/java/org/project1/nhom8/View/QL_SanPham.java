@@ -231,6 +231,10 @@ public class QL_SanPham extends javax.swing.JPanel {
         } else {
             rd_Dungban.setSelected(true);
         }
+        cbo_Mau_Sac.setSelectedIndex(-1);
+        cbo_Size.setSelectedIndex(-1);
+        txt_Gia.setText("");
+        txt_SoLuong.setText("");
     }
 
     public SPCTModel readFromSPCT() {
@@ -860,6 +864,7 @@ public class QL_SanPham extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        clearFrom();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbo_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_SizeActionPerformed
@@ -869,15 +874,39 @@ public class QL_SanPham extends javax.swing.JPanel {
 
     private void btn_ADDSize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDSize1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
+        String tensize = JOptionPane.showInputDialog(this,"Nhập size:");
+        if(tensize != null){
+        if(ss.ADD_SIZE(this.readSIZE(tensize))>0){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadTableSPCT(spctViewModelProvider.SPCTViewModel());
+        }else{
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }
+=======
         new SizeDialog(null, true).setVisible(true);
         fillCombSize();
 
+>>>>>>> d15d282b2faf4b9993cb78f22a9fcdeccc1b5680
     }//GEN-LAST:event_btn_ADDSize1ActionPerformed
 
     private void btn_ADDMau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDMau1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
+        String tenmau = JOptionPane.showInputDialog(this,"Nhập màu:");
+        if(tenmau != null){
+            if(ms.ADD_MAU(this.readMAU(tenmau))>0){
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                 loadTableSPCT(spctViewModelProvider.SPCTViewModel());
+            }else{
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+        }
+=======
         new MauSacDialog(null, true).setVisible(true);
         fillCombMauSac();
+>>>>>>> d15d282b2faf4b9993cb78f22a9fcdeccc1b5680
     }//GEN-LAST:event_btn_ADDMau1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

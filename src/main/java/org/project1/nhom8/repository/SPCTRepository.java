@@ -140,4 +140,36 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
 
         return Double.valueOf(0);
     }
+
+//    public Double getGiaKM(Integer maSPCT) {
+//
+//        String query = """
+//                SELECT
+//                    MAX(GIA)
+//                FROM KHUYEN_MAI_COUPON
+//                JOIN KHUYEN_MAI_COUPON_CT
+//                    ON KHUYEN_MAI_COUPON.MAKM = KHUYEN_MAI_COUPON_CT.MAKM
+//                WHERE
+//                    KHUYEN_MAI_COUPON_CT.MASPCT = ?
+//                    AND GETDATE() BETWEEN  NGAYBATDAU AND NGAYKETTHUC
+//                """;
+//
+//        try {
+//            PreparedStatement preStat = getConnection().prepareStatement(query);
+//
+//            preStat.setInt(1, maSPCT);
+//
+//            ResultSet resultSet = preStat.executeQuery();
+//
+//            if (resultSet.next()) {
+//                return resultSet.getDouble(1);
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return Double.valueOf(0);
+//        }
+//
+//        return Double.valueOf(0);
+//    }
 }

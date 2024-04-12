@@ -8,8 +8,10 @@ repositories {
 }
 
 dependencies {
-
+    
     implementation("org.knowm.xchart:xchart:3.8.7")
+
+    implementation("com.itextpdf:html2pdf:5.0.3")
 
     implementation("org.jfree:jfreechart:1.5.4")
 

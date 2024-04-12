@@ -1,6 +1,5 @@
 package org.project1.nhom8.dto.provider;
 
-import org.project1.nhom8.dto.SPCTViewModel;
 import org.project1.nhom8.dto.StoreProductViewModel;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.model.SanPhamModel;
@@ -49,7 +48,6 @@ public class StoreProductViewModelProvider {
         Double coupon = Double.valueOf(0);
 
         for (SPCTModel model1 : models) {
-            new SPCTViewModel();
 
             sp = sanPhamRepository.findById(model1.getMaSP());
 

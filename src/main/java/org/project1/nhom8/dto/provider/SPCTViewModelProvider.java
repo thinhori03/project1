@@ -115,4 +115,23 @@ public class SPCTViewModelProvider {
         }
         return result;
     }
+
+    public SPCTViewModel getModelById(Integer id) {
+        SPCTModel spct = spctRespository.findById(id);
+
+        SanPhamModel sp = sanPhamRepository.findById(spct.getMaSP());
+
+        SPCTViewModel spctvm = new SPCTViewModel();
+
+        spctvm.setMaSPCT(spct.getMaSPCT());
+        spctvm.setMaSP(spct.getMaSP());
+        spctvm.setTenSP(sp.getTensp());
+        spctvm.setGia(giaRepository.getgiaMoiNhat(spct.getMaSPCT()).getGia());
+        spctvm.setSize(sizeRepository.findById(spct.getMasize()).getTensize());
+        spctvm.setMauSac(mauSacRepository.findById(spct.getMaMauSac()).getTenmau());
+        spctvm.setTrangThai(sp.getTrangthai());
+        spctvm.setSoLuong(spct.getSoluong());
+
+        return spctvm;
+    }
 }
