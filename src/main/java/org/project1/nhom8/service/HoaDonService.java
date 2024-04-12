@@ -1,7 +1,10 @@
 package org.project1.nhom8.service;
 
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
+import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
 import org.project1.nhom8.model.KhuyenMai;
@@ -12,8 +15,15 @@ import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
+import org.project1.nhom8.util.HTMLResolver;
 import org.project1.nhom8.util.TrangThaiHoaDon;
+import org.thymeleaf.context.Context;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -128,7 +138,31 @@ public class HoaDonService {
         return hdctRepository.count() + 1;
     }
 
-    public void export(String invoiceId) {
+    public void export(Cart cart, String targetDir) throws IOException {
+        HTMLResolver htmlResolver = new HTMLResolver();
 
+        Context invoiceContext = new Context();
+        invoiceContext.setVariable("invoice", cart);
+        invoiceContext.setVariable("user", LoginService.lg);
+        invoiceContext.setVariable("prodViewProv", new SPCTViewModelProvider());
+
+        String html = htmlResolver.revolve("invoice-export", invoiceContext);
+        System.out.println(html);
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(String.valueOf(this
+                    .getClass().getResourceAsStream("/_.html")))));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ConverterProperties convProp = new ConverterProperties();
+
+        HtmlConverter.convertToPdf(html
+                , new FileOutputStream(targetDir + "/" + cart.getInvoiceId() + ".pdf")
+                , convProp
+        );
     }
 }

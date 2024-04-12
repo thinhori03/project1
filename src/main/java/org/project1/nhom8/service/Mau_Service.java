@@ -5,6 +5,8 @@
 package org.project1.nhom8.service;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.project1.nhom8.model.MauSacModel;
 
@@ -17,7 +19,39 @@ public class Mau_Service {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-    
+    List<MauSacModel> listMS;
+
+    public List<MauSacModel> getAll() {
+        listMS = new ArrayList<>();
+        sql = "select*from MAU_SAC";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MauSacModel ms = new MauSacModel(rs.getInt(1), rs.getString(2));
+                listMS.add(ms);
+
+            }
+            return listMS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public int update(int ma , MauSacModel ms){
+        sql = "UPDATE MAU_SAC SET TENMAU = ? WHERE MAMAU = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ms.getTenmau());
+            ps.setInt(2, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
     public MauSacModel getBYID_Mau(int mamau) {
         
         sql = "Select*from MAU_SAC where MAMAU = ?";

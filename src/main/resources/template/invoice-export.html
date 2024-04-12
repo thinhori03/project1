@@ -1,11 +1,60 @@
-<!DOCTYPE html>
+<!--/*@thymesVar id="prodViewProv" type="org.project1.nhom8.dto.provider.SPCTViewModelProvider"*/-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!--/*@thymesVar id="invoice" type="org.project1.nhom8.dto.Cart"*/-->
-    <title th:text="'invoice: ' + ${invoice.invoiceId}"></title>
+
+    <style>
+        .text-right {
+            text-align: right;
+            float: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+    </style>
+    <link th:href="@{/css/bootstrap.css}" type="text/css">
 </head>
 <body>
-    
+
+<h2>LV Store</h2>
+<div>
+    <strong class="text-left">tên khách hàng: </strong>
+    <i th:text="${invoice.customerName}" class="text-right"></i>
+</div>
+<br>
+<div>
+    <strong class="text-left">số điện thoại: </strong>
+    <i th:text="${invoice.customerPhoneNumber}" class="text-right">-number</i>
+</div>
+<br>
+<table class="table-info">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>tên sản phẩm</th>
+        <th>màu sắc</th>
+        <th>size</th>
+        <th>số lượng</th>
+        <th>giá</th>
+        <th>giá gốc</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr th:each="prod, iter: ${invoice.products}" th:with="prodView=${prodViewProv.getModelById(prod.getKey())}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${prodView.tenSP}"></td>
+        <td th:text="${prodView.mauSac}"></td>
+        <td th:text="${prodView.size}"></td>
+        <td th:text="${prod.getValue().quantity}"></td>
+        <td th:text="${prod.value.price.gia}"></td>
+        <td th:if="${prod.value.coupon != null}" th:text="${prod.value.price.gia - prod.value.coupon.gia}"></td>
+        <td th:if="${prod.value.coupon == null}" th:text="${prod.value.price.gia}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

@@ -64,6 +64,8 @@ public class QL_SanPham extends javax.swing.JPanel {
     private LSGViewModelProvider lsgViewModelProvider;
 
     private Optional<SanPhamModel> osp = null;
+    List<SizeModel> listS;
+    List<MauSacModel> listMS;
 
     public QL_SanPham() {
         initComponents();
@@ -105,22 +107,22 @@ public class QL_SanPham extends javax.swing.JPanel {
          * txt_MaSP changed event
          */
         this.txt_MaSP.getDocument().addDocumentListener(new GeneralDocumentListener() {
-                                                            @Override
-                                                            public void onChange() {
+            @Override
+            public void onChange() {
 
-                                                                try {
-                                                                    osp = Optional.ofNullable(sanPhamRepository
-                                                                            .findById(Integer.parseInt(txt_MaSP
-                                                                                    .getText().trim())));
-                                                                } catch (Exception e) {
-                                                                    osp = Optional.empty();
-                                                                }
+                try {
+                    osp = Optional.ofNullable(sanPhamRepository
+                            .findById(Integer.parseInt(txt_MaSP
+                                    .getText().trim())));
+                } catch (Exception e) {
+                    osp = Optional.empty();
+                }
 
-                                                                osp.ifPresentOrElse(o -> txt_TenSPCT.setText(o.getTensp()),
-                                                                        () -> txt_TenSPCT.setText(""));
+                osp.ifPresentOrElse(o -> txt_TenSPCT.setText(o.getTensp()),
+                        () -> txt_TenSPCT.setText(""));
 
-                                                            }
-                                                        }
+            }
+        }
         );
         id_Ma_Tk.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
@@ -150,6 +152,8 @@ public class QL_SanPham extends javax.swing.JPanel {
 //        this.fillTbaleSanPham(sp.getAll());
         this.loadTableSP(sp.getAll());
         loadTableSPCT(spctViewModelProvider.SPCTViewModel());
+        fillCombMauSac();
+        fillCombSize();
     }
 
     public void loadTableSPCT(List<SPCTViewModel> viewModels) {
@@ -334,6 +338,24 @@ public class QL_SanPham extends javax.swing.JPanel {
         MauSacModel mau = new MauSacModel();
         mau.setTenmau(tenmau);
         return mau;
+    }
+
+    public void fillCombSize() {
+        DefaultComboBoxModel<String> modelS = new DefaultComboBoxModel<>();
+        cbo_Size.setModel(modelS);
+        listS = ss.getAll();
+        for (SizeModel sizeModel : listS) {
+            modelS.addElement(sizeModel.getTensize());
+        }
+    }
+
+    public void fillCombMauSac() {
+        DefaultComboBoxModel<String> modelMS = new DefaultComboBoxModel<>();
+        cbo_Mau_Sac.setModel(modelMS);
+        listMS = ms.getAll();
+        for (MauSacModel mauSacModelModel : listMS) {
+            modelMS.addElement(mauSacModelModel.getTenmau());
+        }
     }
 
     /**
@@ -847,10 +869,12 @@ public class QL_SanPham extends javax.swing.JPanel {
 
     private void cbo_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_SizeActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_cbo_SizeActionPerformed
 
     private void btn_ADDSize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDSize1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         String tensize = JOptionPane.showInputDialog(this,"Nhập size:");
         if(tensize != null){
         if(ss.ADD_SIZE(this.readSIZE(tensize))>0){
@@ -860,10 +884,16 @@ public class QL_SanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
     }
+=======
+        new SizeDialog(null, true).setVisible(true);
+        fillCombSize();
+
+>>>>>>> d15d282b2faf4b9993cb78f22a9fcdeccc1b5680
     }//GEN-LAST:event_btn_ADDSize1ActionPerformed
 
     private void btn_ADDMau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDMau1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         String tenmau = JOptionPane.showInputDialog(this,"Nhập màu:");
         if(tenmau != null){
             if(ms.ADD_MAU(this.readMAU(tenmau))>0){
@@ -873,6 +903,10 @@ public class QL_SanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
         }
+=======
+        new MauSacDialog(null, true).setVisible(true);
+        fillCombMauSac();
+>>>>>>> d15d282b2faf4b9993cb78f22a9fcdeccc1b5680
     }//GEN-LAST:event_btn_ADDMau1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

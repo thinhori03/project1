@@ -18,6 +18,7 @@ import org.project1.nhom8.dto.provider.StoreProductViewModelProvider;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
 import org.project1.nhom8.model.GiaModel;
 import org.project1.nhom8.model.KhachHangModel;
+import org.project1.nhom8.model.KhuyenMai;
 import org.project1.nhom8.model.SPCTModel;
 import org.project1.nhom8.model.VoucherModel;
 import org.project1.nhom8.repository.GiaRepository;
@@ -675,6 +676,8 @@ public class Form_BanHang extends javax.swing.JPanel {
                 SPCTModel product = spctRepository.findById(productId);
                 GiaModel price = giaRepository.getgiaMoiNhat(productId);
 
+                KhuyenMai coupon = new KhuyenMai();
+
                 cartDetail.setProduct(product);
                 cartDetail.setPrice(price);
                 cartDetail.setQuantity(quantity);
@@ -753,13 +756,29 @@ public class Form_BanHang extends javax.swing.JPanel {
             this.cart.setCustomerName(customer.getTen());
         }
 
+        // save invoice to DB
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
+
+        int exportInvoice = JOptionPane.showConfirmDialog(this, "bạn có muốn xuất hóa đơn không");
+
+        if (exportInvoice == JOptionPane.YES_OPTION) {
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.showOpenDialog(this);
+            try {
+                hoaDonService.export(this.cart, fileChooser.getSelectedFile().toString());
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (invoiceId != null) {
             JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thành công");
             this.cart = null;
             this.cartService.remove(invoiceId);
         }
+
 
         loadInvoice();
         loadProductView();
