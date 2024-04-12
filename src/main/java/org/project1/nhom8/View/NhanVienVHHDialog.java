@@ -21,7 +21,7 @@ public class NhanVienVHHDialog extends javax.swing.JDialog {
     public NhanVienVHHDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        fillTable(service.getDisabledEmployees());
+        this.fillTable(service.getDisabledEmployees());
     }
     public void fillTable(List<NhanVien>list){
         model = (DefaultTableModel) tblNhanVienVHH.getModel();

@@ -10,7 +10,7 @@ import org.project1.nhom8.util.MD5Util;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-<<<<<<< HEAD
+
 
 //        try {
 //
@@ -19,16 +19,7 @@ public class Main {
 //        } catch (Exception ex) {
 //            ex.printStackTrace();
 //        }
-=======
-       
-        try {
 
-            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
->>>>>>> d15d282b2faf4b9993cb78f22a9fcdeccc1b5680
         new org.project1.nhom8.View.LoginDialog().setVisible(true);
 
     }

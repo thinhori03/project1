@@ -57,7 +57,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
         } else {
             rdNu.setSelected(true);
         }
-        if (nv.getVaiTro().equals("Nhân Viên")) {
+        if (nv.getVaiTro().equals("Nhân viên")) {
             rdNhanVien.setSelected(true);
         } else {
             rdQuanLy.setSelected(true);
@@ -80,12 +80,8 @@ public class Form_NhanVien extends javax.swing.JPanel {
         } else {
             gioiTinh = "Nữ";
         }
-        String vaiTro = "";
-        if (rdNhanVien.isSelected()) {
-            vaiTro = "Nhân Viên";
-        } else {
-            vaiTro = "Quản Lý";
-        }
+        String vaiTro = "Nhân viên";
+       
         String trangThai = cboTrangThai.getSelectedItem().toString();
 
         return new NhanVien(ten, sdt, email, gioiTinh, cccd, password, vaiTro, trangThai);
@@ -376,7 +372,12 @@ public class Form_NhanVien extends javax.swing.JPanel {
         jLabel10.setText("Trạng thái:");
 
         buttonGroup2.add(rdNhanVien);
-        rdNhanVien.setText("Nhân Viên");
+        rdNhanVien.setText("Nhân viên");
+        rdNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdNhanVienMouseClicked(evt);
+            }
+        });
         rdNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdNhanVienActionPerformed(evt);
@@ -384,7 +385,8 @@ public class Form_NhanVien extends javax.swing.JPanel {
         });
 
         buttonGroup2.add(rdQuanLy);
-        rdQuanLy.setText("Quản Lý");
+        rdQuanLy.setText("Quản lý");
+        rdQuanLy.setEnabled(false);
         rdQuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdQuanLyActionPerformed(evt);
@@ -693,7 +695,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
     private void btnAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnActionPerformed
         // TODO add your handling code here:
         new NhanVienVHHDialog(null, true).setVisible(true);
-
+        this.fillTable(service.getAll());
     }//GEN-LAST:event_btnAnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -752,7 +754,7 @@ public class Form_NhanVien extends javax.swing.JPanel {
                 cell.setCellValue(service.getAll().get(i).getTrangThai());
 
             }
-            File f = new File("C:\\DA1\\project1\\doc\\export\\danhsach.xlsx");
+            File f = new File("C:\\Users\\Admin\\Desktop\\DUAN1\\project1\\doc\\export\\danhsach.xlsx");
             try {
                 FileOutputStream fis = new FileOutputStream(f);
                 workbook.write(fis);
@@ -768,6 +770,10 @@ public class Form_NhanVien extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rdNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdNhanVienMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdNhanVienMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

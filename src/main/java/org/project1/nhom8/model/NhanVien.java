@@ -122,10 +122,13 @@ public class NhanVien {
 
     public Object[] toDataRow() {
        
-        Object[] dataRow = Arrays.copyOf(new Object[]{this.maNV, this.hoTen, this.sdt, this.email, this.gioiTinh, this.matKhau, this.CCCD, this.vaiTro, this.trangThai}, 9);
-        
-        dataRow[5] = encryptMatKhau(this.matKhau);
-        return dataRow;
+//        Object[] dataRow = Arrays.copyOf(new Object[]{this.maNV, this.hoTen, this.sdt, this.email, this.gioiTinh, this.matKhau, this.CCCD, this.vaiTro, this.trangThai}, 9);
+//        
+//        dataRow[5] = encryptMatKhau(this.matKhau);
+//        return dataRow;
+           return new Object[]{
+               this.maNV,this.hoTen,this.sdt, this.email, this.gioiTinh, this.matKhau, this.CCCD, this.vaiTro, this.trangThai
+           };
     }
 
     private String encryptMatKhau(String matKhau) {

@@ -60,7 +60,7 @@ public class NhanVienService {
     }
 
     public int update(int ma, NhanVien nv) {
-        sql = "UPDATE NHAN_VIEN SET TENNV = ?, SDT = ?,EMAIL = ?,GIOTINH = ?,MATKHAU = ?, CCCD = ? ,VAITRO = ?,TRANGTHAI = ? WHERE MANV = ?";
+        sql = "UPDATE NHAN_VIEN SET TENNV = ?, SDT = ?,EMAIL = ?,GIOTINH = ?,MATKHAU = ?, CCCD = ?,TRANGTHAI = ? WHERE MANV = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -70,9 +70,8 @@ public class NhanVienService {
             ps.setString(4, nv.getGioiTinh());
             ps.setString(5, nv.getMatKhau());
             ps.setString(6, nv.getCCCD());
-            ps.setString(7, nv.getVaiTro());
-            ps.setString(8, nv.getTrangThai());
-            ps.setInt(9, ma);
+            ps.setString(7, nv.getTrangThai());
+            ps.setInt(8, ma);
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

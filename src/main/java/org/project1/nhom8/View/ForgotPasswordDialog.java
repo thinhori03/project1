@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import org.project1.nhom8.service.MailService;
 import org.project1.nhom8.model.NhanVien;
 import org.project1.nhom8.service.NhanVienService;
+import org.project1.nhom8.util.MD5Util;
 
 /**
  * @author ngtnthori03
@@ -281,7 +282,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
         } else if (!pwd.equals(cpwd)) {
             JOptionPane.showMessageDialog(this, "mật khẩu và xác nhận mật khẩu phải giống nhau");
         } else {
-            this.nhanVien.setMatKhau(pwd);
+            this.nhanVien.setMatKhau(MD5Util.hashPassword(pwd));
 
             if (this.nhanVienService.update(nhanVien.getMaNV(), nhanVien) > 0) {
                 JOptionPane.showMessageDialog(this, "đỏi mật khẩu thành công");
