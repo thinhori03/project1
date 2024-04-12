@@ -97,14 +97,16 @@ create table LICH_SU_GIA
 
 CREATE TABLE HOA_DON
 (
-    MAHD          varchar(20) PRIMARY KEY,
-    MAKH          INT references KHACH_HANG (MAKH),
-    MANV          INT references NHAN_VIEN (MANV),
-    NGAYTAO       DATETIME,
-    NGAYTHANHTOAN DATETIME,
-    TRANGTHAI     NVARCHAR(100),
-    PHUONGTHUC    NVARCHAR(100),
-    MAV           VARCHAR(10) references VOUCHER (MAV)
+    MAHD            varchar(20) PRIMARY KEY,
+    MAKH            INT references KHACH_HANG (MAKH),
+    MANV            INT references NHAN_VIEN (MANV),
+    MA_NV_XAC_NHAN  int REFERENCES NHAN_VIEN (MANV),
+    NGAYTAO         DATETIME,
+    NGAYTHANHTOAN   DATETIME,
+    TRANGTHAI       NVARCHAR(100),
+    PHUONGTHUC      NVARCHAR(100),
+    MAV             VARCHAR(10) references VOUCHER (MAV),
+    TIEN_THANH_TOAN FLOAT
 )
 CREATE TABLE HOA_DON_CHI_TIET
 (
@@ -125,15 +127,14 @@ CREATE TABLE hoa_don_chi_tiet__khuyen_mai
 GO
 
 INSERT INTO NHAN_VIEN (TENNV, SDT, EMAIL, GIOTINH, MATKHAU, CCCD, VAITRO, TRANGTHAI)
-VALUES 
-    (N'Trịnh Tiến Tuấn', '0827890913', 'tuanttph45460@fpt.edu.vn', N'Nam', 
-     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'tuan2004'), 2), '03734002912', N'Quản lý', N'Đang làm việc'),
-    (N'Hoàng Đức Ích', '0866690914', 'ichhdph45048@fpt.edu.vn', N'Nam', 
-     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'Hoangich2004'), 2), '02700757824', N'Nhân viên', N'Đang làm việc'),
-    (N'Mai Thị Thư', '0395561663', 'thumtph45638@fpt.edu.vn', N'Nữ', 
-     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'thu2004'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc'),
-    (N'Nguyễn Thịnh', '0395561663', 'ngtnthori03@gmail.com', N'Nam', 
-     CONVERT(VARCHAR(32), HASHBYTES('MD5', 'password123'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc');
+VALUES (N'Trịnh Tiến Tuấn', '0827890913', 'tuanttph45460@fpt.edu.vn', N'Nam',
+        CONVERT(VARCHAR(32), HASHBYTES('MD5', 'tuan2004'), 2), '03734002912', N'Quản lý', N'Đang làm việc'),
+       (N'Hoàng Đức Ích', '0866690914', 'ichhdph45048@fpt.edu.vn', N'Nam',
+        CONVERT(VARCHAR(32), HASHBYTES('MD5', 'Hoangich2004'), 2), '02700757824', N'Nhân viên', N'Đang làm việc'),
+       (N'Mai Thị Thư', '0395561663', 'thumtph45638@fpt.edu.vn', N'Nữ',
+        CONVERT(VARCHAR(32), HASHBYTES('MD5', 'thu2004'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc'),
+       (N'Nguyễn Thịnh', '0395561663', 'ngtnthori03@gmail.com', N'Nam',
+        CONVERT(VARCHAR(32), HASHBYTES('MD5', 'password123'), 2), '02700757824', N'Nhân viên', N'Nghỉ việc');
 
 insert into SAN_PHAM(TENSP, TRANGTHAI)
 values (N'Dép LV', N'Đang bán'),
@@ -203,17 +204,27 @@ values ('1', '1', 150000, '2024-02-10', NULL),
        ('6', '5', 450000, '2024-02-25', NULL)
 
 
-insert into HOA_DON(MAHD, MAKH, MANV, NGAYTAO, NGAYTHANHTOAN, TRANGTHAI, PHUONGTHUC, MAV)
-values ('HD1', '1', '1', '2024-02-10 00:00:00', '2024-03-10 00:00:00', N'Đã thanh toán', N'Tiền mặt', 'V3'),
-       ('HD2', '2', '2', '2024-01-24 00:00:00', '2024-02-25 00:00:00', N'Chưa thanh toán', N'Tiền mặt', 'V2'),
-       ('HD3', '3', '4', '2024-03-10 00:00:00', '2024-03-17 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V1'),
-       ('HD4', '1', '2', '2024-02-10 00:00:00', '2024-02-10 00:20:00', N'Đã thanh toán', N'Chuyển khoản', 'V4'),
-       ('HD5', '4', '3', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD6', '3', '3', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD7', '1', '3', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD8', '4', '1', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD9', '1', '3', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5'),
-       ('HD10', '1', '3', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5')
+insert into HOA_DON(MAHD, MAKH, MANV, MA_NV_XAC_NHAN, NGAYTAO, NGAYTHANHTOAN, TRANGTHAI, PHUONGTHUC, MAV,
+                    TIEN_THANH_TOAN)
+values ('HD1', '1', '1', '1', '2024-02-10 00:00:00', '2024-03-10 00:00:00', N'Đã thanh toán', N'Tiền mặt', 'V3',
+        5000000),
+       ('HD2', '2', '2', '1', '2024-01-24 00:00:00', '2024-02-25 00:00:00', N'đã hủy', N'Tiền mặt', 'V2', 5000000),
+       ('HD3', '3', '4', '1', '2024-03-10 00:00:00', '2024-03-17 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V1',
+        5000000),
+       ('HD4', '1', '2', '1', '2024-02-10 00:00:00', '2024-02-10 00:20:00', N'Đã thanh toán', N'Chuyển khoản', 'V4',
+        5000000),
+       ('HD5', '4', '3', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000),
+       ('HD6', '3', '3', '1', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000),
+       ('HD7', '1', '3', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000),
+       ('HD8', '4', '1', '1', '2024-04-01 00:00:00', '2024-04-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000),
+       ('HD9', '1', '3', '1', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000),
+       ('HD10', '1', '3', '1', '2024-02-01 00:00:00', '2024-02-01 00:00:00', N'Đã thanh toán', N'Chuyển khoản', 'V5',
+        5000000)
 
 
 insert into HOA_DON_CHI_TIET(MAHD, MASPCT, SOLUONG, MALSG, MAKM)

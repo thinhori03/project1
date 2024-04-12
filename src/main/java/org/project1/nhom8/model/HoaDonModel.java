@@ -12,20 +12,19 @@ import org.project1.nhom8.util.data.DataTable;
 import java.util.Date;
 
 /**
- *
  * @author ngtnthori03
- *
+ * <p>
  * SQL table
  * CREATE TABLE HOA_DON
  * (
- *     MAHD          varchar(20) PRIMARY KEY,
- *     MAKH          INT references KHACH_HANG (MAKH),
- *     MANV          INT references NHAN_VIEN (MANV),
- *     NGAYTAO       DATETIME,
- *     NGAYTHANHTOAN DATETIME,
- *     TRANGTHAI     VARCHAR(100),
- *     PHUONGTHUC    VARCHAR(100),
- *     MAV           VARCHAR(10) references VOUCHER (MAV)
+ * MAHD          varchar(20) PRIMARY KEY,
+ * MAKH          INT references KHACH_HANG (MAKH),
+ * MANV          INT references NHAN_VIEN (MANV),
+ * NGAYTAO       DATETIME,
+ * NGAYTHANHTOAN DATETIME,
+ * TRANGTHAI     VARCHAR(100),
+ * PHUONGTHUC    VARCHAR(100),
+ * MAV           VARCHAR(10) references VOUCHER (MAV)
  * )
  */
 
@@ -42,6 +41,9 @@ public class HoaDonModel {
     @DataField(name = "MANV")
     private int maNV;
 
+    @DataField(name = "MANV_THANH_TOAN")
+    private Integer maNVXacNhan;
+
     @DataField(name = "TRANGTHAI")
     private String trangThai;
 
@@ -57,18 +59,23 @@ public class HoaDonModel {
     @DataField(name = "NGAYTHANHTOAN")
     private Date ngayThanhToan;
 
+    @DataField(name = "TIEN_THANH_TOAN")
+    private Double tienThanhToan;
+
     public HoaDonModel() {
     }
 
-    public HoaDonModel(String maHoaDon, int maKH, int maNV, String trangThai, String phuongThuc, String maVoucher, Date ngayTao, Date ngayThanhToan) {
+    public HoaDonModel(String maHoaDon, int maKH, int maNV, Integer maNVXacNhan, String trangThai, String phuongThuc, String maVoucher, Date ngayTao, Date ngayThanhToan, Double tienThanhToan) {
         this.maHoaDon = maHoaDon;
         this.maKH = maKH;
         this.maNV = maNV;
+        this.maNVXacNhan = maNVXacNhan;
         this.trangThai = trangThai;
         this.phuongThuc = phuongThuc;
         this.maVoucher = maVoucher;
         this.ngayTao = ngayTao;
         this.ngayThanhToan = ngayThanhToan;
+        this.tienThanhToan = tienThanhToan;
     }
 
     public String getMaHoaDon() {
@@ -134,5 +141,20 @@ public class HoaDonModel {
     public void setNgayThanhToan(Date ngayThanhToan) {
         this.ngayThanhToan = ngayThanhToan;
     }
-    
+
+    public Integer getMaNVXacNhan() {
+        return maNVXacNhan;
+    }
+
+    public void setMaNVXacNhan(Integer maNVXacNhan) {
+        this.maNVXacNhan = maNVXacNhan;
+    }
+
+    public Double getTienThanhToan() {
+        return tienThanhToan;
+    }
+
+    public void setTienThanhToan(Double tienThanhToan) {
+        this.tienThanhToan = tienThanhToan;
+    }
 }

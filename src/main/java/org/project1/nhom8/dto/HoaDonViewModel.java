@@ -19,11 +19,11 @@ public class HoaDonViewModel {
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayThanhToan;
 
-    @DataHeader(name = "mã nhân viên")
+    @DataHeader(name = "mã nhân viên tạo")
     private Integer maNV;
 
-    @DataHeader(name = "tên nhân viên")
-    private String tenNV;
+    @DataHeader(name = "mã nhân viên xác nhận")
+    private Integer maNvXacNhan;
 
     @DataHeader(name = "tên khách hàng")
     private String tenKH;
@@ -34,6 +34,9 @@ public class HoaDonViewModel {
     @DataHeader(name = "giá voucher")
     private Double voucher;
 
+    @DataHeader(name = "tiền khách đưa")
+    private Double tienThanhToan;
+
     @DataHeader(name = "trạng thái")
     private String TrangThai;
 
@@ -41,16 +44,17 @@ public class HoaDonViewModel {
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String maHoaDon, Date ngayTao, Date ngayThanhToan, Integer maNV, String tenNV, String tenKH, Double tongTien, String trangThai, Double voucher) {
+    public HoaDonViewModel(String maHoaDon, Date ngayTao, Date ngayThanhToan, Integer maNV, Integer maNvXacNhan, String tenKH, Double tongTien, Double voucher, Double tienThanhToan, String trangThai) {
         this.maHoaDon = maHoaDon;
         this.ngayTao = ngayTao;
         this.ngayThanhToan = ngayThanhToan;
         this.maNV = maNV;
-        this.tenNV = tenNV;
+        this.maNvXacNhan = maNvXacNhan;
         this.tenKH = tenKH;
         this.tongTien = tongTien;
-        TrangThai = trangThai;
         this.voucher = voucher;
+        this.tienThanhToan = tienThanhToan;
+        TrangThai = trangThai;
     }
 
     public String getMaHoaDon() {
@@ -85,12 +89,12 @@ public class HoaDonViewModel {
         this.maNV = maNV;
     }
 
-    public String getTenNV() {
-        return tenNV;
+    public Integer getMaNvXacNhan() {
+        return maNvXacNhan;
     }
 
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
+    public void setMaNvXacNhan(Integer maNvXacNhan) {
+        this.maNvXacNhan = maNvXacNhan;
     }
 
     public String getTenKH() {
@@ -109,14 +113,6 @@ public class HoaDonViewModel {
         this.tongTien = tongTien;
     }
 
-    public String getTrangThai() {
-        return TrangThai;
-    }
-
-    public void setTrangThai(String trangThai) {
-        TrangThai = trangThai;
-    }
-
     public Double getVoucher() {
         return voucher;
     }
@@ -124,4 +120,21 @@ public class HoaDonViewModel {
     public void setVoucher(Double voucher) {
         this.voucher = voucher;
     }
+
+    public Double getTienThanhToan() {
+        return tienThanhToan;
+    }
+
+    public void setTienThanhToan(Double tienThanhToan) {
+        this.tienThanhToan = tienThanhToan;
+    }
+
+    public String getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        TrangThai = trangThai;
+    }
 }
+
