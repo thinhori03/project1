@@ -107,22 +107,22 @@ public class QL_SanPham extends javax.swing.JPanel {
          * txt_MaSP changed event
          */
         this.txt_MaSP.getDocument().addDocumentListener(new GeneralDocumentListener() {
-            @Override
-            public void onChange() {
+                                                            @Override
+                                                            public void onChange() {
 
-                try {
-                    osp = Optional.ofNullable(sanPhamRepository
-                            .findById(Integer.parseInt(txt_MaSP
-                                    .getText().trim())));
-                } catch (Exception e) {
-                    osp = Optional.empty();
-                }
+                                                                try {
+                                                                    osp = Optional.ofNullable(sanPhamRepository
+                                                                            .findById(Integer.parseInt(txt_MaSP
+                                                                                    .getText().trim())));
+                                                                } catch (Exception e) {
+                                                                    osp = Optional.empty();
+                                                                }
 
-                osp.ifPresentOrElse(o -> txt_TenSPCT.setText(o.getTensp()),
-                        () -> txt_TenSPCT.setText(""));
+                                                                osp.ifPresentOrElse(o -> txt_TenSPCT.setText(o.getTensp()),
+                                                                        () -> txt_TenSPCT.setText(""));
 
-            }
-        }
+                                                            }
+                                                        }
         );
         id_Ma_Tk.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
@@ -866,11 +866,12 @@ public class QL_SanPham extends javax.swing.JPanel {
 
     private void cbo_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_SizeActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cbo_SizeActionPerformed
 
     private void btn_ADDSize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDSize1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
 
 //        String tensize = JOptionPane.showInputDialog(this,"Nhập size:");
 //        if(tensize != null){
@@ -886,10 +887,15 @@ public class QL_SanPham extends javax.swing.JPanel {
         fillCombSize();
 
 
+=======
+        new SizeDialog(null, true).setVisible(true);
+        fillCombSize();
+>>>>>>> 550b651 (saved)
     }//GEN-LAST:event_btn_ADDSize1ActionPerformed
 
     private void btn_ADDMau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDMau1ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
 
 //        String tenmau = JOptionPane.showInputDialog(this,"Nhập màu:");
 //        if(tenmau != null){
@@ -904,6 +910,10 @@ public class QL_SanPham extends javax.swing.JPanel {
         new MauSacDialog(null, true).setVisible(true);
         fillCombMauSac();
 
+=======
+        new MauSacDialog(null, true).setVisible(true);
+        fillCombMauSac();
+>>>>>>> 550b651 (saved)
     }//GEN-LAST:event_btn_ADDMau1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
