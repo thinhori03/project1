@@ -12,23 +12,32 @@
         .text-left {
             text-align: left;
         }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
-    <link th:href="@{/css/bootstrap.css}" type="text/css">
 </head>
 <body>
 
 <h2>LV Store</h2>
 <div>
-    <strong class="text-left">tên khách hàng: </strong>
-    <i th:text="${invoice.customerName}" class="text-right"></i>
+    <strong class="">mã hóa đơn: </strong>
+    <i th:text="${invoice.invoiceId}" class=""></i>
+</div>
+
+<div>
+    <strong class="">tên khách hàng: </strong>
+    <i th:text="${invoice.customerName}" class=""></i>
 </div>
 <br>
 <div>
-    <strong class="text-left">số điện thoại: </strong>
-    <i th:text="${invoice.customerPhoneNumber}" class="text-right">-number</i>
+    <strong class="">số điện thoại: </strong>
+    <i th:text="${invoice.customerPhoneNumber}" class="">-number</i>
 </div>
 <br>
-<table class="table-info">
+<table class="table-info" style="width: 100%">
     <thead>
     <tr>
         <th>STT</th>

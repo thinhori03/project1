@@ -17,6 +17,5 @@ public class Main {
             ex.printStackTrace();
         }
         new org.project1.nhom8.View.LoginDialog().setVisible(true);
-
     }
 }

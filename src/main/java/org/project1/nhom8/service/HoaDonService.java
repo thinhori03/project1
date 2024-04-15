@@ -160,9 +160,14 @@ public class HoaDonService {
 
         ConverterProperties convProp = new ConverterProperties();
 
+        FileOutputStream outputFile = new FileOutputStream(targetDir + "/" + cart.getInvoiceId() + ".pdf");
+
         HtmlConverter.convertToPdf(html
-                , new FileOutputStream(targetDir + "/" + cart.getInvoiceId() + ".pdf")
+                , outputFile
                 , convProp
         );
+
+
+        // Desktop.getDesktop().browseFileDirectory(new File(targetDir + "/" + cart.getInvoiceId() + ".pdf"));
     }
 }

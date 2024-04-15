@@ -1,0 +1,69 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .text-right {
+            text-align: right;
+            float: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<h2>LV Store</h2>
+<div>
+    <strong class="">mã hóa đơn: </strong>
+    <i class="">HD20240415090949</i>
+</div>
+
+<div>
+    <strong class="">tên khách hàng: </strong>
+    <i class="">a</i>
+</div>
+<br>
+<div>
+    <strong class="">số điện thoại: </strong>
+    <i class="">0987656432</i>
+</div>
+<br>
+<table class="table-info" style="width: 100%">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>tên sản phẩm</th>
+        <th>màu sắc</th>
+        <th>size</th>
+        <th>số lượng</th>
+        <th>giá</th>
+        <th>giá gốc</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+        <td>1</td>
+        <td>Dép Adidas</td>
+        <td>Đen</td>
+        <td>38</td>
+        <td>5</td>
+        <td>300000.0</td>
+        
+        <td>300000.0</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
