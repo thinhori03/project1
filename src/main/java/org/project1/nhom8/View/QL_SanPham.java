@@ -871,49 +871,14 @@ public class QL_SanPham extends javax.swing.JPanel {
 
     private void btn_ADDSize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDSize1ActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
-
-//        String tensize = JOptionPane.showInputDialog(this,"Nhập size:");
-//        if(tensize != null){
-//        if(ss.ADD_SIZE(this.readSIZE(tensize))>0){
-//            JOptionPane.showMessageDialog(this, "Thêm thành công");
-//            loadTableSPCT(spctViewModelProvider.SPCTViewModel());
-//        }else{
-//            JOptionPane.showMessageDialog(this, "Thêm thất bại");
-//        }
-//    }
-
         new SizeDialog(null, true).setVisible(true);
         fillCombSize();
-
-
-=======
-        new SizeDialog(null, true).setVisible(true);
-        fillCombSize();
->>>>>>> 550b651 (saved)
     }//GEN-LAST:event_btn_ADDSize1ActionPerformed
 
     private void btn_ADDMau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDMau1ActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
-
-//        String tenmau = JOptionPane.showInputDialog(this,"Nhập màu:");
-//        if(tenmau != null){
-//            if(ms.ADD_MAU(this.readMAU(tenmau))>0){
-//                JOptionPane.showMessageDialog(this, "Thêm thành công");
-//                 loadTableSPCT(spctViewModelProvider.SPCTViewModel());
-//            }else{
-//                JOptionPane.showMessageDialog(this, "Thêm thất bại");
-//            }
-//        }
-
         new MauSacDialog(null, true).setVisible(true);
         fillCombMauSac();
-
-=======
-        new MauSacDialog(null, true).setVisible(true);
-        fillCombMauSac();
->>>>>>> 550b651 (saved)
     }//GEN-LAST:event_btn_ADDMau1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

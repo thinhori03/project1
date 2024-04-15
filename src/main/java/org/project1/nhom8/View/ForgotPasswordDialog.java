@@ -17,7 +17,6 @@ import java.awt.*;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -25,8 +24,6 @@ import org.project1.nhom8.service.MailService;
 import org.project1.nhom8.model.NhanVien;
 import org.project1.nhom8.service.NhanVienService;
 import org.project1.nhom8.util.MD5Util;
-=======
->>>>>>> 550b651 (saved)
 
 /**
  * @author ngtnthori03

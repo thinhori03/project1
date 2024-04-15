@@ -23,10 +23,10 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                + "\n"
-                + "JOIN SAN_PHAM"
-                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                + "\n\tWHERE SAN_PHAM.TENSP LIKE ?";
+                       + "\n"
+                       + "JOIN SAN_PHAM"
+                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                       + "\n\tWHERE SAN_PHAM.TENSP LIKE ?";
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
@@ -55,10 +55,10 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                + "\n"
-                + "JOIN SAN_PHAM"
-                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                + "\n\tWHERE SAN_PHAM.MASP = ? ";
+                       + "\n"
+                       + "JOIN SAN_PHAM"
+                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                       + "\n\tWHERE SAN_PHAM.MASP = ? ";
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
@@ -86,11 +86,11 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                + "\n"
-                + "JOIN SAN_PHAM"
-                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
-                + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0";
+                       + "\n"
+                       + "JOIN SAN_PHAM"
+                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                       + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
+                       + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0";
 
         try {
             ResultSet resultSet = getConnection().prepareStatement(query)
@@ -141,35 +141,35 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         return Double.valueOf(0);
     }
 
-//    public Double getGiaKM(Integer maSPCT) {
-//
-//        String query = """
-//                SELECT
-//                    MAX(GIA)
-//                FROM KHUYEN_MAI_COUPON
-//                JOIN KHUYEN_MAI_COUPON_CT
-//                    ON KHUYEN_MAI_COUPON.MAKM = KHUYEN_MAI_COUPON_CT.MAKM
-//                WHERE
-//                    KHUYEN_MAI_COUPON_CT.MASPCT = ?
-//                    AND GETDATE() BETWEEN  NGAYBATDAU AND NGAYKETTHUC
-//                """;
-//
-//        try {
-//            PreparedStatement preStat = getConnection().prepareStatement(query);
-//
-//            preStat.setInt(1, maSPCT);
-//
-//            ResultSet resultSet = preStat.executeQuery();
-//
-//            if (resultSet.next()) {
-//                return resultSet.getDouble(1);
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return Double.valueOf(0);
-//        }
-//
-//        return Double.valueOf(0);
-//    }
+    public String getIdKM(Integer maSPCT) {
+
+        String query = """
+                SELECT
+                    coupon.MAKM AS id
+                FROM KHUYEN_MAI_COUPON AS coupon
+                JOIN KHUYEN_MAI_COUPON_CT
+                    ON KHUYEN_MAI_COUPON.MAKM = KHUYEN_MAI_COUPON_CT.MAKM
+                WHERE
+                    KHUYEN_MAI_COUPON_CT.MASPCT = ?
+                    AND GETDATE() BETWEEN  NGAYBATDAU AND NGAYKETTHUC
+                """;
+
+        try {
+            PreparedStatement preStat = getConnection().prepareStatement(query);
+
+            preStat.setInt(1, maSPCT);
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
 }

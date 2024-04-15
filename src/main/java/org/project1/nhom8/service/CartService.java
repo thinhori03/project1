@@ -3,8 +3,7 @@ package org.project1.nhom8.service;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.exception.CustomerPhoneNumberExistedException;
-import org.project1.nhom8.model.KhuyenMai;
-import org.project1.nhom8.model.SPCTModel;
+import org.project1.nhom8.repository.GiaRepository;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
 
@@ -24,6 +23,8 @@ public class CartService {
 
     private final KhuyenMaiService khuyenMaiService;
 
+    private final GiaRepository giaRepository;
+
     public CartService() {
 
         this.carts = new HashMap<>();
@@ -35,6 +36,8 @@ public class CartService {
         this.spctRepository = new SPCTRepository();
 
         this.khuyenMaiService = new KhuyenMaiService();
+
+        this.giaRepository = new GiaRepository();
     }
 
     /**
@@ -77,20 +80,28 @@ public class CartService {
         return carts.values().stream().toList();
     }
 
-    public void updateProductAfterPayment(Cart cart) {
 
-        SPCTModel spct = null;
-        KhuyenMai coupon = null;
+    public void refresh() {
 
-        for (CartDetail cd : cart.getProducts().values().stream().toList()) {
-            spct = cd.getProduct();
-            spct.setSoluong(spct.getSoluong() - cd.getQuantity());
-            spctRepository.update(spct);
+        for (Cart cart : this.getCartsAsList()) {
+            refreshOne(cart);
+        }
 
-            if (cd.getCoupon() != null) {
-                coupon = cd.getCoupon();
-                khuyenMaiService.UpdateKhuyenMai(coupon.getMakm(), coupon);
+    }
+
+    public void refreshOne(Cart cart) {
+
+        String couponId = null;
+
+        for (CartDetail cd : cart.getProducts().values()) {
+
+            couponId = spctRepository.getIdKM(cd.getProduct().getMaSPCT());
+
+            if (couponId != null) {
+                cd.setCoupon(khuyenMaiService.findById(couponId));
             }
+
+            cd.setPrice(giaRepository.getgiaMoiNhat(cd.getProduct().getMaSPCT()));
         }
     }
 }

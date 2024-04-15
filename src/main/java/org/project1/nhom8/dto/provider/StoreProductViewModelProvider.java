@@ -59,7 +59,9 @@ public class StoreProductViewModelProvider {
             productViewModel.setName(sp.getTensp());
             productViewModel.setColor(mauSacRepository.findById(model1.getMaMauSac()).getTenmau());
             productViewModel.setSize(sizeRepository.findById(model1.getMasize()).getTensize());
-            productViewModel.setPrice(giaRepository.getgiaMoiNhat(model1.getMaSPCT()).getGia() - coupon);
+            productViewModel.setPrice(giaRepository.getgiaMoiNhat(model1.getMaSPCT()).getGia());
+            productViewModel.setSellingPrice(productViewModel.getPrice() - coupon);
+
             productViewModel.setQuantity(model1.getSoluong());
 
             result.add(productViewModel);

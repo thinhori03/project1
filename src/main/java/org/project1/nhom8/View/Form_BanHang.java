@@ -117,6 +117,9 @@ public class Form_BanHang extends javax.swing.JPanel {
     }
 
     public void loadInvoice() {
+
+        cartService.refresh();
+
         this.invoiceView.setModel(cartTableModel.toTableModel(cartViewModelProvider
                 .getModel(cartService.getCartsAsList())));
     }

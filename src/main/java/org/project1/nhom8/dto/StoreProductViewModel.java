@@ -16,22 +16,26 @@ public class StoreProductViewModel {
     @DataHeader(name = "size")
     private String size;
 
-    @DataHeader(name = "giá")
-    private Double price;
-
     @DataHeader(name = "số lượng")
     private Integer quantity;
+
+    @DataHeader(name = "giá gốc")
+    private Double price;
+
+    @DataHeader(name = "giá bán")
+    private Double sellingPrice;
 
     public StoreProductViewModel() {
     }
 
-    public StoreProductViewModel(Integer id, String name, String color, String size, Double price, Integer quantity) {
+    public StoreProductViewModel(Integer id, String name, String color, String size, Integer quantity, Double price, Double sellingPrice) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.size = size;
-        this.price = price;
         this.quantity = quantity;
+        this.price = price;
+        this.sellingPrice = sellingPrice;
     }
 
     public Integer getId() {
@@ -66,6 +70,14 @@ public class StoreProductViewModel {
         this.size = size;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -74,11 +86,11 @@ public class StoreProductViewModel {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Double getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 }
