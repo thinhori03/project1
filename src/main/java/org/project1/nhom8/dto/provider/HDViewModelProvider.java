@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HDViewModelProvider {
 
@@ -56,10 +55,9 @@ public class HDViewModelProvider {
     public DefaultTableModel toTableMode(List<HoaDonViewModel> viewModels) {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-        List<Field> fields = Arrays.asList(HoaDonViewModel.class.getDeclaredFields())
-                .stream()
+        List<Field> fields = Arrays.stream(HoaDonViewModel.class.getDeclaredFields())
                 .filter(o -> o.isAnnotationPresent(DataHeader.class))
-                .collect(Collectors.toList());
+                .toList();
 
 
         defaultTableModel.setColumnCount(0);
@@ -77,7 +75,7 @@ public class HDViewModelProvider {
                 for (Field j : fields) {
                     j.setAccessible(true);
                     if (j.getType().equals(Date.class)
-                            && j.isAnnotationPresent(DateFormat.class)) {
+                        && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(gia)));
                     } else {
                         rowData.add(j.get(gia).toString());
@@ -107,7 +105,7 @@ public class HDViewModelProvider {
             hdvm.setNgayThanhToan(hdm.getNgayThanhToan());
             hdvm.setTenKH(khachHangConnection.getTenByMa(hdm.getMaKH()));
             hdvm.setMaNV(hdm.getMaNV());
-            hdvm.setTenNV(nhanVienService.timKiem(hdm.getMaNV()).get(0).getHoTen());
+            hdvm.setMaNvXacNhan(hdm.getMaNVXN());
 
             if (hdm.getMaVoucher() != null) {
                 hdvm.setVoucher(voucherRepository.findById(hdm.getMaVoucher()).getGiaTri());

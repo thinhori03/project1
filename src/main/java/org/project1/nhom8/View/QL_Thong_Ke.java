@@ -4,11 +4,11 @@
  */
 package org.project1.nhom8.View;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.knowm.xchart.CategoryChart;
+import org.knowm.xchart.CategoryChartBuilder;
+import org.knowm.xchart.XChartPanel;
+import org.knowm.xchart.style.Styler;
 import org.project1.nhom8.dto.RevenueByMonth;
 import org.project1.nhom8.model.ThongKeModel;
 import org.project1.nhom8.repository.ThongKeConnection;
@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author acer
@@ -49,28 +50,26 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
 
     public void drawRevenueByMonthChart() {
 
-        final String revenue = "Doanh thu";
-        DefaultCategoryDataset dds = new DefaultCategoryDataset();
+        CategoryChart categoryChart = new CategoryChartBuilder()
+                .title("Doanh thu")
+                .xAxisTitle("thời gian")
+                .yAxisTitle("doanh thu")
+                .width(revenuePanel.getWidth())
+                .height(revenuePanel.getHeight())
+                .build();
+        categoryChart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
 
         List<RevenueByMonth> rbms = tkc.getRevenueByMonth();
 
-        for (RevenueByMonth rbm : rbms) {
-            dds.addValue(rbm.getRevenue(), revenue, "tháng " + rbm.getMonth());
-        }
+        List<String> monthYear = rbms.stream().map(o -> o.getMonth() + "")
+                .toList();
+        List<Double> revenues = rbms.stream().map(o -> o.getRevenue())
+                .collect(Collectors.toList());
 
-        this.revenueByMonthChart = ChartFactory.createBarChart(
-                "biểu đồ doanh thi theo tháng"
-                , "tháng"
-                , revenue
-                , dds
-                , PlotOrientation.VERTICAL
-                , true, true, false
-        );
+        categoryChart.addSeries("doanh thu", monthYear, revenues);
 
-        ChartPanel chartPanel = new ChartPanel(revenueByMonthChart);
-        chartPanel.setPreferredSize(revenuePanel.getSize());
         revenuePanel.setLayout(new BorderLayout());
-        revenuePanel.add(chartPanel, BorderLayout.CENTER);
+        revenuePanel.add(new XChartPanel<>(categoryChart));
         revenuePanel.validate();
     }
 

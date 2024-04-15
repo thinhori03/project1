@@ -14,13 +14,11 @@ import java.sql.SQLException;
  */
 public class DBConnect {
 
-
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
     public static final String DBNAME = "DU_AN_NHOM_8";
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "r00t:R00T";
-
 
     /**
      * Get connection to MSSQL Server
@@ -31,7 +29,7 @@ public class DBConnect {
 
         // Create a variable for the connection string.
         String connectionUrl = "jdbc:sqlserver://" + HOSTNAME + ":" + PORT + ";"
-                + "databaseName=" + DBNAME + ";encrypt=true;trustservercertificate=true;";
+                               + "databaseName=" + DBNAME + ";encrypt=true;trustservercertificate=true;";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             return DriverManager.getConnection(connectionUrl, USERNAME, PASSWORD);
