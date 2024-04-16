@@ -828,13 +828,23 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
 
+        // ignored
+        // no invoice selected
         if (this.cart == null) {
             JOptionPane.showMessageDialog(this, " hãy chọn hóa đơn trước");
             return;
         }
 
+        // ignored
+        // invoice have no products
         if (this.cart.getProducts().isEmpty()) {
             JOptionPane.showMessageDialog(this, "không thể thanh toán hóa đơn trống");
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(this, "xác nhân thanh toán hóa đơn : " + this.cart.getInvoiceId()
+                , "xác nhận", JOptionPane.YES_NO_OPTION
+                , JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -869,7 +879,8 @@ public class Form_BanHang extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thành công");
 
         // export invoice
-        int exportInvoice = JOptionPane.showConfirmDialog(this, "bạn có muốn xuất hóa đơn không");
+        int exportInvoice = JOptionPane.showConfirmDialog(this, "bạn có muốn xuất hóa đơn không", "xác nhận"
+                , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (exportInvoice == JOptionPane.YES_OPTION) {
 
@@ -878,15 +889,17 @@ public class Form_BanHang extends javax.swing.JPanel {
             fileChooser.showOpenDialog(this);
             try {
                 hoaDonService.export(this.cart.getInvoiceId(), fileChooser.getSelectedFile().toString());
+                JOptionPane.showMessageDialog(this, "Xuất hóa đơn " + this.cart.getInvoiceId() + " thành công");
             } catch (java.io.IOException e) {
                 e.printStackTrace();
+
+                JOptionPane.showMessageDialog(this, "Xuất hóa đơn " + this.cart.getInvoiceId() + " thất bại");
             }
         }
 
-
         this.cart = null;
         this.cartService.remove(invoiceId);
-
+    
         loadInvoice();
         loadProductView();
         loadCartDetail(this.cart);

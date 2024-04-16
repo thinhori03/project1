@@ -1,19 +1,28 @@
 package org.project1.nhom8.dto;
 
+import org.project1.nhom8.util.data.visual.DataHeader;
+
 public class ProductExport {
 
+    @DataHeader(name = "mã sản phẩm")
     private String id;
 
+    @DataHeader(name = "tên sản phẩm")
     private String name;
 
+    @DataHeader(name = "màu màu sắc")
     private String color;
 
+    @DataHeader(name = "size")
     private String size;
 
+    @DataHeader(name = "số luợng")
     private Integer quantity;
 
+    @DataHeader(name = "giá gốc")
     private Integer price;
 
+    @DataHeader(name = "giá bán")
     private Integer sellingPrice;
 
     public ProductExport() {

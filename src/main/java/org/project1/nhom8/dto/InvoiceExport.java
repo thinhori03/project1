@@ -12,6 +12,8 @@ public class InvoiceExport {
 
     private String paymentDate;
 
+    private String creationDate;
+
     private NhanVien creator;
 
     private NhanVien seller;
@@ -30,9 +32,10 @@ public class InvoiceExport {
 
     }
 
-    public InvoiceExport(String id, String paymentDate, NhanVien creator, NhanVien seller, Double totalPrice, Integer payment, KhachHangModel customer, VoucherModel voucherModel, List<ProductExport> products) {
+    public InvoiceExport(String id, String paymentDate, String creationDate, NhanVien creator, NhanVien seller, Double totalPrice, Integer payment, KhachHangModel customer, VoucherModel voucherModel, List<ProductExport> products) {
         this.id = id;
         this.paymentDate = paymentDate;
+        this.creationDate = creationDate;
         this.creator = creator;
         this.seller = seller;
         this.totalPrice = totalPrice;
@@ -40,6 +43,14 @@ public class InvoiceExport {
         this.customer = customer;
         this.voucherModel = voucherModel;
         this.products = products;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Double getTotalPrice() {

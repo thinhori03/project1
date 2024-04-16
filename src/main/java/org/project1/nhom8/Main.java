@@ -11,7 +11,7 @@ public class Main {
 
         try {
 
-            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
 
         } catch (Exception ex) {
             ex.printStackTrace();

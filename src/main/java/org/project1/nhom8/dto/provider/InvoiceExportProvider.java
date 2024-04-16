@@ -61,7 +61,10 @@ public class InvoiceExportProvider {
         invoice.setCreator(nhanVienService.findById(invoiceInfo.getMaNV()));
         invoice.setSeller(nhanVienService.findById(invoiceInfo.getMaNVXN()));
         invoice.setCustomer(khachHangConnection.findById(invoiceInfo.getMaKH()));
+
         invoice.setPaymentDate(simpleDateFormat.format(invoiceInfo.getNgayThanhToan()));
+        invoice.setCreationDate(simpleDateFormat.format(invoiceInfo.getNgayTao()));
+
         invoice.setPayment(invoiceInfo.getTienThanhToan().intValue());
 
         if (invoiceInfo.getMaVoucher() != null) {
@@ -72,6 +75,7 @@ public class InvoiceExportProvider {
 
 
         invoice.setProducts(this.getProducts(invoiceId));
+        
         invoice.setTotalPrice(invoice.getProducts().stream()
                 .mapToDouble(o -> o.getSellingPrice())
                 .sum());

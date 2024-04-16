@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    
+
     implementation("org.knowm.xchart:xchart:3.8.7")
 
     implementation("com.itextpdf:html2pdf:5.0.3")
@@ -26,7 +26,7 @@ dependencies {
 
     // colored ui
     runtimeOnly("com.formdev:flatlaf:3.4")
-    runtimeOnly("com.formdev:flatlaf-intellij-themes:3.4")
+//    runtimeOnly("com.formdev:flatlaf-intellij-themes:3.4")
 
     // export/import excel
     implementation("org.apache.poi:poi:5.2.5")
