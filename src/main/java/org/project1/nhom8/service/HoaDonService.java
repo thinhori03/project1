@@ -156,16 +156,6 @@ public class HoaDonService {
         invoiceContext.setVariable("prodViewProv", new SPCTViewModelProvider());
 
         String html = htmlResolver.revolve("invoice-export", invoiceContext);
-        System.out.println(html);
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(String.valueOf(this
-                    .getClass().getResourceAsStream("/_.html")))));
-            bw.write(html);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         ConverterProperties convProp = new ConverterProperties();
 
