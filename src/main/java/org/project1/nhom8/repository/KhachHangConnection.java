@@ -157,7 +157,6 @@ public class KhachHangConnection {
     public KhachHangModel findByPhoneNumber(String phoneNumber) {
 
         String query = """
-                    
                 SELECT
                         *
                     FROM KHACH_HANG
@@ -184,6 +183,7 @@ public class KhachHangConnection {
                 String diaChi = rs.getString("DIACHI");
                 KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
 
+                return kh;
             }
 
         } catch (SQLException ex) {
