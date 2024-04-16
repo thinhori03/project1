@@ -14,6 +14,7 @@ import org.project1.nhom8.model.VoucherModel;
 import org.project1.nhom8.repository.HDCTKMRepository;
 import org.project1.nhom8.repository.HDCTRepository;
 import org.project1.nhom8.repository.HoaDonRepository;
+import org.project1.nhom8.repository.KhachHangConnection;
 import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.util.HTMLResolver;
@@ -44,6 +45,8 @@ public class HoaDonService {
 
     private final VoucherRepository voucherRepository;
 
+    private final KhachHangConnection khachHangConnection;
+
     public HoaDonService() {
 
         hoaDonRepository = new HoaDonRepository();
@@ -60,6 +63,8 @@ public class HoaDonService {
 
         voucherRepository = new VoucherRepository();
 
+        khachHangConnection = new KhachHangConnection();
+
 
     }
 
@@ -72,7 +77,7 @@ public class HoaDonService {
         hoaDonModel.setNgayTao(cart.getCreationDate());
         hoaDonModel.setNgayThanhToan(new Date());
         hoaDonModel.setMaNV(cart.getCreator().getMa());
-        hoaDonModel.setMaKH(1);
+        hoaDonModel.setMaKH(khachHangConnection.findByPhoneNumber(cart.getCustomerPhoneNumber()).getMaKH());
         hoaDonModel.setTrangThai(trangThai.getValue());
         hoaDonModel.setMaNVXN(cart.getSaver().getMa());
         hoaDonModel.setTienThanhToan(cart.getPayment());

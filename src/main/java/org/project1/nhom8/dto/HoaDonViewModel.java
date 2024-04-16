@@ -19,10 +19,10 @@ public class HoaDonViewModel {
     @DateFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date ngayThanhToan;
 
-    @DataHeader(name = "mã nhân viên tạo")
+    // @DataHeader(name = "mã nhân viên tạo")
     private Integer maNV;
 
-    @DataHeader(name = "mã nhân viên xác nhận")
+    @DataHeader(name = "mã nhân viên thanh toán")
     private Integer maNvXacNhan;
 
     @DataHeader(name = "tên khách hàng")
@@ -39,7 +39,7 @@ public class HoaDonViewModel {
 
     @DataHeader(name = "trạng thái")
     private String TrangThai;
-    
+
     public HoaDonViewModel() {
     }
 

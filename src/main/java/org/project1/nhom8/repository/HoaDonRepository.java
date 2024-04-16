@@ -29,13 +29,13 @@ public class HoaDonRepository extends GeneralRepository<HoaDonModel, String> {
         String query = getQueryGenerator().generateSelectAllQuery()
                 + "\n"
                 + "\n\tJOIN  KHACH_HANG on KHACH_HANG.MAKH = HOA_DON.MAKH"
-                + "\n\tWHERE TENKH LIKE ? AND KHACH_HANG.SDT = ?";
+                + "\n\tWHERE TENKH LIKE ? AND KHACH_HANG.SDT LIKE ?";
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
 
             preStat.setNString(1, tenKhachHang);
-            preStat.setString(2, SDT);
+            preStat.setString(2, '%' + SDT + '%');
 
             ResultSet resultSet = preStat.executeQuery();
 

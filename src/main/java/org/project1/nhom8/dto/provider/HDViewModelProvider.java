@@ -75,7 +75,7 @@ public class HDViewModelProvider {
                 for (Field j : fields) {
                     j.setAccessible(true);
                     if (j.getType().equals(Date.class)
-                        && j.isAnnotationPresent(DateFormat.class)) {
+                            && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(gia)));
                     } else {
                         rowData.add(j.get(gia).toString());
@@ -112,7 +112,8 @@ public class HDViewModelProvider {
             } else {
                 hdvm.setVoucher((double) 0);
             }
-
+            
+            hdvm.setTienThanhToan(hdm.getTienThanhToan());
             hdvm.setTrangThai(hdm.getTrangThai());
 
             Double totalPrice = Double.valueOf(0);
