@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -24,37 +24,37 @@
 <br>
 <div>
     <strong class="">mã hóa đơn: </strong>
-    <i th:text="${invoice.id}" class=""></i>
+    <i class="">HD20240416053107</i>
 </div>
 
 <div>
     <strong class="">tên khách hàng: </strong>
-    <i th:text="${invoice.customer.ten}" class=""></i>
+    <i class="">Nguyễn Văn Tuấn</i>
 </div>
 
 <div>
     <strong>số điện thoại: </strong>
-    <i th:text="${invoice.customer.sdt}" class="">-number</i>
+    <i class="">0856790234</i>
 </div>
 <br>
 <div>
     <strong>thời gian thanh toán: </strong>
-    <i th:text="${invoice.paymentDate}"></i>
+    <i>16-04-2024 05:31</i>
 </div>
 
 <div>
     <strong class="">tổng tiền: </strong>
-    <i th:text="${invoice.totalPrice + ' vnđ'}" class=""></i>
+    <i class="">570000.0 vnđ</i>
 </div>
 
 <div>
     <strong class="">voucher: </strong>
-    <i th:text="${invoice.voucherModel.giaTri + ' vnđ'}" class=""></i>
+    <i class="">100000.0 vnđ</i>
 </div>
 
 <div>
     <strong class="">thành tiền: </strong>
-    <i th:text="${invoice.totalPrice - invoice.voucherModel.giaTri + ' vnđ'}" class=""></i>
+    <i class="">470000.0 vnđ</i>
 </div>
 
 <br>
@@ -75,14 +75,25 @@
     <tbody>
 
 
-    <tr th:each="prod, iter: ${invoice.products}">
-        <td th:text="${iter.count}"></td>
-        <td th:text="${prod.id}"></td>
-        <td th:text="${prod.color}"></td>
-        <td th:text="${prod.size}"></td>
-        <td th:text="${prod.quantity}"></td>
-        <td th:text="${prod.sellingPrice + ' vnđ'}"></td>
-        <td th:text="${prod.price + ' vnđ'}"></td>
+    <tr>
+        <td>1</td>
+        <td>3</td>
+        <td>Đỏ vàng</td>
+        <td>39</td>
+        <td>10</td>
+        <td>120000 vnđ</td>
+        <td>150000 vnđ</td>
+    </tr>
+
+
+    <tr>
+        <td>2</td>
+        <td>2</td>
+        <td>Đỏ</td>
+        <td>38</td>
+        <td>1</td>
+        <td>450000 vnđ</td>
+        <td>450000 vnđ</td>
     </tr>
     </tbody>
 </table>

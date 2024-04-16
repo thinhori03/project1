@@ -211,9 +211,9 @@ public class NhanVienService {
         }
         return 0; // insert, update failed
     }
-    
-    public NhanVien findByEma(String email) {
-        
+
+    public NhanVien findByEmail(String email) {
+
         sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE EMAIL like ?";
         try {
             con = DBConnect.getConnection();
@@ -226,7 +226,26 @@ public class NhanVienService {
             e.printStackTrace();
             return null;
         }
-        
+
+        return null;
+    }
+
+    public NhanVien findById(int ma) {
+        sql = "SELECT MANV,TENNV,SDT,EMAIL,GIOTINH,CCCD,MATKHAU,VAITRO,TRANGTHAI FROM NHAN_VIEN WHERE MANV like ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, ma);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
         return null;
     }
 }

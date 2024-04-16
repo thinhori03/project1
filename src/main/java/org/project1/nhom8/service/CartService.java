@@ -97,8 +97,13 @@ public class CartService {
 
             couponId = spctRepository.getIdKM(cd.getProduct().getMaSPCT());
 
+            System.out.println(couponId);
+
             if (couponId != null) {
                 cd.setCoupon(khuyenMaiService.findById(couponId));
+                System.out.println(cd.getCoupon().getGia());
+            } else {
+                cd.setCoupon(null);
             }
 
             cd.setPrice(giaRepository.getgiaMoiNhat(cd.getProduct().getMaSPCT()));

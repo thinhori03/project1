@@ -4,6 +4,7 @@ import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.dto.CartDetailViewModel;
 import org.project1.nhom8.model.SanPhamModel;
 import org.project1.nhom8.repository.MauSacRepository;
+import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.SanPhamRepository;
 import org.project1.nhom8.repository.SizeRepository;
 
@@ -18,10 +19,13 @@ public class CartDetailViewModelProvider {
 
     private final SizeRepository sizeRepository;
 
+    private final SPCTRepository spctRepository;
+
     public CartDetailViewModelProvider() {
         sanPhamRepository = new SanPhamRepository();
         mauSacRepository = new MauSacRepository();
         sizeRepository = new SizeRepository();
+        spctRepository = new SPCTRepository();
     }
 
     public List<CartDetailViewModel> getModel(List<CartDetail> models) {
@@ -51,7 +55,7 @@ public class CartDetailViewModelProvider {
             if (model.getCoupon() == null) {
                 cdvm.setCouponPrice(Double.valueOf(0));
             } else {
-
+                cdvm.setCouponPrice((double) model.getCoupon().getGia());
             }
 
             result.add(cdvm);

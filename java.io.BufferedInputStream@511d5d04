@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,20 +21,44 @@
 <body>
 
 <h2>LV Store</h2>
+<br>
 <div>
     <strong class="">mã hóa đơn: </strong>
-    <i class="">HD20240415090949</i>
+    <i class="">HD1</i>
 </div>
 
 <div>
     <strong class="">tên khách hàng: </strong>
-    <i class="">a</i>
+    <i class="">Nguyễn Văn Tuấn</i>
+</div>
+
+<div>
+    <strong>số điện thoại: </strong>
+    <i class="">0856790234</i>
 </div>
 <br>
 <div>
-    <strong class="">số điện thoại: </strong>
-    <i class="">0987656432</i>
+    <strong>thời gian thanh toán: </strong>
+    <i>10-03-2024 12:00</i>
 </div>
+
+<div>
+    <strong class="">tổng tiền: </strong>
+    <i class="">220000.0 vnđ</i>
+</div>
+
+<div>
+    <strong class="">voucher: </strong>
+    <i class="">40000.0 vnđ</i>
+</div>
+
+<div>
+    <strong class="">thành tiền: </strong>
+    <i class="">180000.0 vnđ</i>
+</div>
+
+<br>
+<h5>danh sách sản phẩm</h5>
 <br>
 <table class="table-info" style="width: 100%">
     <thead>
@@ -54,13 +77,23 @@
 
     <tr>
         <td>1</td>
-        <td>Dép Adidas</td>
-        <td>Đen</td>
-        <td>38</td>
-        <td>5</td>
-        <td>300000.0</td>
-        
-        <td>300000.0</td>
+        <td>1</td>
+        <td>Đỏ</td>
+        <td>37</td>
+        <td>6</td>
+        <td>110000 vnđ</td>
+        <td>150000 vnđ</td>
+    </tr>
+
+
+    <tr>
+        <td>2</td>
+        <td>1</td>
+        <td>Đỏ</td>
+        <td>37</td>
+        <td>2</td>
+        <td>110000 vnđ</td>
+        <td>150000 vnđ</td>
     </tr>
     </tbody>
 </table>

@@ -148,7 +148,7 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
                     coupon.MAKM AS id
                 FROM KHUYEN_MAI_COUPON AS coupon
                 JOIN KHUYEN_MAI_COUPON_CT
-                    ON KHUYEN_MAI_COUPON.MAKM = KHUYEN_MAI_COUPON_CT.MAKM
+                    ON coupon.MAKM = KHUYEN_MAI_COUPON_CT.MAKM
                 WHERE
                     KHUYEN_MAI_COUPON_CT.MASPCT = ?
                     AND GETDATE() BETWEEN  NGAYBATDAU AND NGAYKETTHUC

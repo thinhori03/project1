@@ -12,22 +12,32 @@
         .text-left {
             text-align: left;
         }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
 
 <h2>LV Store</h2>
 <div>
-    <strong class="text-left">tên khách hàng: </strong>
-    <i class="text-right">bae deu</i>
+    <strong class="">mã hóa đơn: </strong>
+    <i class="">HD20240416020116</i>
+</div>
+
+<div>
+    <strong class="">tên khách hàng: </strong>
+    <i class="">thinh</i>
 </div>
 <br>
 <div>
-    <strong class="text-left">số điện thoại: </strong>
-    <i class="text-right">0987656765</i>
+    <strong class="">số điện thoại: </strong>
+    <i class="">0987654321</i>
 </div>
 <br>
-<table class="table-info">
+<table class="table-info" style="width: 100%">
     <thead>
     <tr>
         <th>STT</th>
@@ -44,13 +54,13 @@
 
     <tr>
         <td>1</td>
-        <td>Dép Adidas</td>
-        <td>Đen</td>
-        <td>38</td>
-        <td>5</td>
-        <td>250000.0</td>
+        <td>Dép Gucci</td>
+        <td>Đỏ vàng</td>
+        <td>39</td>
+        <td>1</td>
+        <td>150000.0</td>
+        <td>120000.0</td>
         
-        <td>250000.0</td>
     </tr>
     </tbody>
 </table>

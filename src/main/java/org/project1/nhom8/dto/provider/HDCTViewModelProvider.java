@@ -76,7 +76,7 @@ public class HDCTViewModelProvider {
             hdctvm.setSoLuong(hdctm.getSoLuong());
 
             if (hdctm.getMaKM() != null) {
-                hdctvm.setGiaKhuyenMai((double) khuyenMaiService.findById(hdctm.getMaKM()).getGia());
+                hdctvm.setGiaKhuyenMai((double) spctRepository.getGiaKM(hdctm.getMaSPCT()));
             } else {
                 hdctvm.setGiaKhuyenMai((double) 0);
             }
@@ -111,7 +111,7 @@ public class HDCTViewModelProvider {
                 for (Field j : fields) {
                     j.setAccessible(true);
                     if (j.getType().equals(Date.class)
-                            && j.isAnnotationPresent(DateFormat.class)) {
+                        && j.isAnnotationPresent(DateFormat.class)) {
                         rowData.add(DefaultConverter.VietnameseDateFormat((Date) j.get(hdct)));
                     } else {
                         rowData.add(j.get(hdct).toString());

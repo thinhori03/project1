@@ -1,5 +1,7 @@
 package org.project1.nhom8.dto;
 
+import org.project1.nhom8.model.Login;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,15 @@ public class Cart {
     private Date creationDate;
 
     private String voucherId;
+
+
+    private Double payment;
+
+    private Login creator;
+
+    private Login saver;
+
+    private String paymentMethod;
 
     private Map<Integer, CartDetail> products;
 
@@ -69,6 +80,38 @@ public class Cart {
 
     public void setVoucherId(String voucherId) {
         this.voucherId = voucherId;
+    }
+
+    public Double getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Double payment) {
+        this.payment = payment;
+    }
+
+    public Login getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Login creator) {
+        this.creator = creator;
+    }
+
+    public Login getSaver() {
+        return saver;
+    }
+
+    public void setSaver(Login saver) {
+        this.saver = saver;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Map<Integer, CartDetail> getProducts() {

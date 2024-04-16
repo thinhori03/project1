@@ -4,6 +4,7 @@ import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
+import org.project1.nhom8.dto.provider.InvoiceExportProvider;
 import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
@@ -70,10 +71,11 @@ public class HoaDonService {
         hoaDonModel.setMaHoaDon(cart.getInvoiceId());
         hoaDonModel.setNgayTao(cart.getCreationDate());
         hoaDonModel.setNgayThanhToan(new Date());
-        hoaDonModel.setMaNV(LoginService.lg.getMa());
+        hoaDonModel.setMaNV(cart.getCreator().getMa());
         hoaDonModel.setMaKH(1);
         hoaDonModel.setTrangThai(trangThai.getValue());
-
+        hoaDonModel.setMaNVXN(cart.getSaver().getMa());
+        hoaDonModel.setTienThanhToan(cart.getPayment());
 
         if (cart.getVoucherId() != null) {
             hoaDonModel.setMaVoucher(cart.getVoucherId());
@@ -85,6 +87,8 @@ public class HoaDonService {
                 voucherRepository.update(voucherModel);
             }
         }
+
+        hoaDonModel.setPhuongThuc(cart.getPaymentMethod());
 
         hoaDonRepository.add(hoaDonModel);
 
@@ -161,6 +165,36 @@ public class HoaDonService {
         ConverterProperties convProp = new ConverterProperties();
 
         FileOutputStream outputFile = new FileOutputStream(targetDir + "/" + cart.getInvoiceId() + ".pdf");
+
+        HtmlConverter.convertToPdf(html
+                , outputFile
+                , convProp
+        );
+
+
+        // Desktop.getDesktop().browseFileDirectory(new File(targetDir + "/" + cart.getInvoiceId() + ".pdf"));
+    }
+
+    public void export(String invoiceId, String targetDir) throws IOException {
+        HTMLResolver htmlResolver = new HTMLResolver();
+
+        Context invoiceContext = new Context();
+        invoiceContext.setVariable("invoice", new InvoiceExportProvider().getInvoice(invoiceId));
+
+        String html = htmlResolver.revolve("invoice-export", invoiceContext);
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(String.valueOf(this
+                    .getClass().getResourceAsStream("/_.html")))));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ConverterProperties convProp = new ConverterProperties();
+
+        FileOutputStream outputFile = new FileOutputStream(targetDir + "/" + invoiceId + ".pdf");
 
         HtmlConverter.convertToPdf(html
                 , outputFile

@@ -17,13 +17,6 @@ import java.awt.*;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import org.project1.nhom8.service.MailService;
-import org.project1.nhom8.model.NhanVien;
-import org.project1.nhom8.service.NhanVienService;
-import org.project1.nhom8.util.MD5Util;
 
 /**
  * @author ngtnthori03
@@ -62,7 +55,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
                 mailService.autoAuth();
 
                 mailService.send(email.getText().trim(),
-                        "xác thực đổi mạt khẩu",
+                        "xác thực đổi mật khẩu",
                         htmlResolver.revolve("forgot-password",
                                 forgotPasswordService.getMailContext()
                         )
@@ -262,7 +255,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
 
     private void getCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCodeActionPerformed
 
-        nhanVien = nhanVienService.findByEma(email.getText().trim());
+        nhanVien = nhanVienService.findByEmail(email.getText().trim());
 
         if (Optional.ofNullable(nhanVien).isPresent()) {
             try {
@@ -271,7 +264,7 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
                 Logger.getLogger(ForgotPasswordDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "không tìm thấy nhân vien code email " + email.getText().trim());
+            JOptionPane.showMessageDialog(this, "email: " + email.getText().trim() + " không tồn tại");
         }
 
     }//GEN-LAST:event_getCodeActionPerformed
@@ -290,10 +283,10 @@ public class ForgotPasswordDialog extends javax.swing.JDialog {
             this.nhanVien.setMatKhau(MD5Util.hashPassword(pwd));
 
             if (this.nhanVienService.update(nhanVien.getMaNV(), nhanVien) > 0) {
-                JOptionPane.showMessageDialog(this, "đỏi mật khẩu thành công");
+                JOptionPane.showMessageDialog(this, "đổi mật khẩu thành công");
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "đỏi mật khẩu thất bại");
+                JOptionPane.showMessageDialog(this, "đổi mật khẩu thất bại");
             }
         }
 

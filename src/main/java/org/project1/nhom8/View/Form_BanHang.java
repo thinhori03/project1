@@ -27,6 +27,7 @@ import org.project1.nhom8.repository.SPCTRepository;
 import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.service.CartService;
 import org.project1.nhom8.service.HoaDonService;
+import org.project1.nhom8.service.LoginService;
 import org.project1.nhom8.service.StoreProductService;
 import org.project1.nhom8.util.CartUtil;
 import org.project1.nhom8.util.InvoiceCreateUpdateState;
@@ -113,22 +114,14 @@ public class Form_BanHang extends javax.swing.JPanel {
         customerName.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                if (customerName.getText().trim().matches(VietNamPattern.TEN.getValue())) {
-                    createInvoice.setEnabled(true);
-                } else {
-                    createInvoice.setEnabled(false);
-                }
+                createInvoice.setEnabled(customerName.getText().trim().matches(VietNamPattern.TEN.getValue()));
             }
         });
 
         customerPhoneNumber.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                if (customerPhoneNumber.getText().trim().matches("^0([1-9]+){9}$")) {
-                    createInvoice.setEnabled(true);
-                } else {
-                    createInvoice.setEnabled(false);
-                }
+                createInvoice.setEnabled(customerPhoneNumber.getText().trim().matches("^0([1-9]+){9}$"));
             }
         });
 
@@ -144,9 +137,12 @@ public class Form_BanHang extends javax.swing.JPanel {
 
                 try {
 
-                    if (Double.parseDouble(buy.getText()) < CartUtil.getFinalPrice(cart)) {
+                    Double paymentPrice = Double.parseDouble(buy.getText());
+
+                    if (paymentPrice < CartUtil.getFinalPrice(cart)) {
                         payment.setEnabled(false);
                     } else {
+                        cart.setPayment(paymentPrice);
                         payment.setEnabled(true);
                     }
 
@@ -224,8 +220,8 @@ public class Form_BanHang extends javax.swing.JPanel {
         }
 
         loadProductView();
-        loadCartDetail(this.cart);
         loadInvoice();
+        loadCartDetail(this.cart);
     }
 
     public void getVoucher() {
@@ -613,6 +609,7 @@ public class Form_BanHang extends javax.swing.JPanel {
 
     private void createInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInvoiceActionPerformed
 
+        // update customer info
         if (this.cart != null) {
             this.cart.setCustomerName(customerName.getText().trim());
             this.cart.setCustomerPhoneNumber(customerPhoneNumber.getText().trim());
@@ -625,6 +622,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         cart.setCustomerPhoneNumber(customerPhoneNumber.getText().trim());
 
         cart.setCreationDate(new Date());
+        cart.setCreator(LoginService.lg);
 
         try {
             cartService.add(cart);
@@ -772,7 +770,13 @@ public class Form_BanHang extends javax.swing.JPanel {
         }
 
         if (this.cart.getProducts().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "đã xóa hóa đơn tróng");
+
+            cartService.remove(this.cart.getInvoiceId());
+
+            JOptionPane.showMessageDialog(this, "đã hủy hóa đơn tróng");
+
+            this.cart = null;
+
             return;
         }
 
@@ -829,9 +833,21 @@ public class Form_BanHang extends javax.swing.JPanel {
             this.cart.setCustomerName(customer.getTen());
         }
 
+        this.cart.setSaver(LoginService.lg);
+        this.cart.setPaymentMethod(paymentMethod.getSelectedItem().toString().trim());
+
         // save invoice to DB
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
 
+
+        if (invoiceId == null) {
+            JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thất bại");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thành công");
+
+        // export invoice
         int exportInvoice = JOptionPane.showConfirmDialog(this, "bạn có muốn xuất hóa đơn không");
 
         if (exportInvoice == JOptionPane.YES_OPTION) {
@@ -840,18 +856,15 @@ public class Form_BanHang extends javax.swing.JPanel {
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             fileChooser.showOpenDialog(this);
             try {
-                hoaDonService.export(this.cart, fileChooser.getSelectedFile().toString());
+                hoaDonService.export(this.cart.getInvoiceId(), fileChooser.getSelectedFile().toString());
             } catch (java.io.IOException e) {
                 e.printStackTrace();
             }
         }
 
-        if (invoiceId != null) {
-            JOptionPane.showMessageDialog(this, "thanh toán hóa đơn " + cart.getInvoiceId() + " thành công");
-            this.cart = null;
-            this.cartService.remove(invoiceId);
-        }
 
+        this.cart = null;
+        this.cartService.remove(invoiceId);
 
         loadInvoice();
         loadProductView();

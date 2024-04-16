@@ -119,13 +119,6 @@ CREATE TABLE HOA_DON_CHI_TIET
 )
 go
 
-CREATE TABLE hoa_don_chi_tiet__khuyen_mai
-(
-    maHDCT int references HOA_DON_CHI_TIET (MAHDCT),
-    maKM   VARCHAR(14) references KHUYEN_MAI_COUPON (maKM)
-)
-GO
-
 INSERT INTO NHAN_VIEN (TENNV, SDT, EMAIL, GIOTINH, MATKHAU, CCCD, VAITRO, TRANGTHAI)
 VALUES (N'Trịnh Tiến Tuấn', '0827890913', 'tuanttph45460@fpt.edu.vn', N'Nam',
         CONVERT(VARCHAR(32), HASHBYTES('MD5', 'tuan2004'), 2), '03734002912', N'Quản lý', N'Đang làm việc'),
@@ -249,6 +242,8 @@ values ('HD1', '1', 6, '1', 'KM1'),
        ('HD9', '4', 1, '4', 'KM4'),
        ('HD10', '5', 4, '4', 'KM5')
 ----------------------------------------------------------------------------------------------------------------
+
+
 /*
 INSERT INTO SAN_PHAM_CHI_TIET (TENSP, SOLUONG, MASIZE, MAMAU, MAKM, MASP, TRANGTHAI, MALSG)
 SELECT 'Tên sản phẩm', 10, 5, MAMAU, 5, 5, 'Trạng thái', 5
