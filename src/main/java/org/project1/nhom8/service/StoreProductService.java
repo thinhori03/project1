@@ -18,16 +18,28 @@ public class StoreProductService {
     public StoreProductService() {
         this.storeProductModel = new HashMap<>();
 
+        fetch();
+    }
+
+    public void fetch() {
+        this.storeProductModel.clear();
         for (SPCTModel spct : spctRepository.findAvailable()) {
             this.storeProductModel.put(spct.getMaSPCT(), spct);
         }
     }
 
-    public void refresh() {
-        for (SPCTModel prod : spctRepository.findAvailable()) {
-            this.storeProductModel.put(prod.getMaSPCT(), prod);
+    public void fetch(String name) {
+        this.storeProductModel.clear();
+        for (SPCTModel spct : spctRepository.findAvailable(name)) {
+            this.storeProductModel.put(spct.getMaSPCT(), spct);
         }
     }
+
+//    public void refresh() {
+//        for (SPCTModel prod : spctRepository.findAvailable()) {
+//            this.storeProductModel.put(prod.getMaSPCT(), prod);
+//        }
+//    }
 
     public void refreshAdd(CartDetail cartDetail, Integer quantity) {
 
@@ -44,7 +56,6 @@ public class StoreProductService {
     }
 
     public void refreshAll(List<Cart> carts) {
-        this.refresh();
         for (Cart cart : carts) {
             for (CartDetail cd : cart.getProducts().values().stream().toList()) {
                 this.refreshAdd(cd, cd.getQuantity());

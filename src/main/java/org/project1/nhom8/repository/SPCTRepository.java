@@ -23,10 +23,10 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                       + "\n"
-                       + "JOIN SAN_PHAM"
-                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                       + "\n\tWHERE SAN_PHAM.TENSP LIKE ?";
+                + "\n"
+                + "JOIN SAN_PHAM"
+                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                + "\n\tWHERE SAN_PHAM.TENSP LIKE ?";
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
@@ -55,10 +55,10 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                       + "\n"
-                       + "JOIN SAN_PHAM"
-                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                       + "\n\tWHERE SAN_PHAM.MASP = ? ";
+                + "\n"
+                + "JOIN SAN_PHAM"
+                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                + "\n\tWHERE SAN_PHAM.MASP = ? ";
 
         try {
             PreparedStatement preStat = getConnection().prepareStatement(query);
@@ -86,11 +86,11 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         List<SPCTModel> result = new ArrayList<>();
 
         String query = getQueryGenerator().generateSelectAllQuery()
-                       + "\n"
-                       + "JOIN SAN_PHAM"
-                       + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
-                       + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
-                       + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0";
+                + "\n"
+                + "JOIN SAN_PHAM"
+                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
+                + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0";
 
         try {
             ResultSet resultSet = getConnection().prepareStatement(query)
@@ -105,6 +105,35 @@ public class SPCTRepository extends GeneralRepository<SPCTModel, Integer> {
         }
 
 //        System.out.println(query);
+
+        return result;
+    }
+
+    public List<SPCTModel> findAvailable(String name) {
+
+        List<SPCTModel> result = new ArrayList<>();
+
+        String query = getQueryGenerator().generateSelectAllQuery()
+                + "\n"
+                + "JOIN SAN_PHAM"
+                + "\n\tON SAN_PHAM_CHI_TIET.MASP = SAN_PHAM.MASP"
+                + "\n\tWHERE SAN_PHAM.TRANGTHAI LIKE N'Đang bán'"
+                + "\n\tAND SAN_PHAM_CHI_TIET.SOLUONG > 0"
+                + "\n\tAND SAN_PHAM.TENSP LIKE ?";
+
+        try {
+            PreparedStatement preStat = getConnection().prepareStatement(query);
+            preStat.setNString(1, "%" + name + "%");
+
+            ResultSet resultSet = preStat.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(getQueryGenerator().map(resultSet));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }

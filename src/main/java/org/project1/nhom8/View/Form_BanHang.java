@@ -156,10 +156,18 @@ public class Form_BanHang extends javax.swing.JPanel {
             }
         });
 
+        findByProductName.getDocument().addDocumentListener(new GeneralDocumentListener() {
+            @Override
+            public void onChange() {
+                loadProductView();
+            }
+        });
+
         fillCart();
     }
 
     public void loadProductView() {
+        this.storeProductService.fetch(findByProductName.getText().trim());
         storeProductService.refreshAll(this.cartService.getCartsAsList());
         this.productView.setModel(tabletableModel
                 .toTableModel(storeProductProvider.getModel(storeProductService.getStoreProductAsList())));
@@ -272,6 +280,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         productView = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         findByProductName = new javax.swing.JTextField();
+        refreshProducts = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -385,17 +394,27 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         jLabel1.setText("Tìm kiếm sản phẩm:");
 
+        refreshProducts.setText("kàn niwu");
+        refreshProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshProductsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(findByProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(findByProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(refreshProducts)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -404,7 +423,9 @@ public class Form_BanHang extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(findByProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(findByProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(refreshProducts))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8))
@@ -820,9 +841,8 @@ public class Form_BanHang extends javax.swing.JPanel {
             this.cartService.remove(invoiceId);
         }
 
-        loadInvoice();
-        loadProductView();
-        loadCartDetail(this.cart);
+        clear();
+        fillCart();
 
     }//GEN-LAST:event_cancelInvoiceActionPerformed
 
@@ -899,12 +919,16 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         this.cart = null;
         this.cartService.remove(invoiceId);
-    
-        loadInvoice();
-        loadProductView();
-        loadCartDetail(this.cart);
+
+        clear();
+        fillCart();
     }//GEN-LAST:event_paymentActionPerformed
 
+    private void refreshProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshProductsActionPerformed
+        this.storeProductService.fetch();
+        this.findByProductName.setText("");
+        loadProductView();
+    }//GEN-LAST:event_refreshProductsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField applyVoucher;
@@ -943,6 +967,7 @@ public class Form_BanHang extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> paymentMethod;
     private javax.swing.JTable productView;
     private javax.swing.JButton refresh;
+    private javax.swing.JButton refreshProducts;
     private javax.swing.JTextField totalPrice;
     // End of variables declaration//GEN-END:variables
 
