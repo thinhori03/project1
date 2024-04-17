@@ -20,10 +20,7 @@ import org.project1.nhom8.util.HTMLResolver;
 import org.project1.nhom8.util.TrangThaiHoaDon;
 import org.thymeleaf.context.Context;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -155,14 +152,14 @@ public class HoaDonService {
 
         String html = htmlResolver.revolve("invoice-export", invoiceContext);
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(String.valueOf(this
-                    .getClass().getResourceAsStream("/_.html")))));
-            bw.write(html);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(String.valueOf(this
+//                    .getClass().getResourceAsStream("/_.html")))));
+//            bw.write(html);
+//            bw.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         ConverterProperties convProp = new ConverterProperties();
 
