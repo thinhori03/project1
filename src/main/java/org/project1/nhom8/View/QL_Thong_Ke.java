@@ -7,8 +7,11 @@ package org.project1.nhom8.View;
 import org.jfree.chart.JFreeChart;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler;
+import org.project1.nhom8.dto.ProductRevenue;
 import org.project1.nhom8.dto.RevenueByMonth;
 import org.project1.nhom8.model.ThongKeModel;
 import org.project1.nhom8.repository.ThongKeConnection;
@@ -35,6 +38,9 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
     DefaultTableModel defaultTableModel;
     ThongKeService ql = new ThongKeService();
 
+    private CategoryChart categoryChart;
+    private PieChart pieChart;
+
     private JFreeChart revenueByMonthChart;
 
     public QL_Thong_Ke() {
@@ -45,32 +51,53 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
         LoadSP(listSP);
         Tong();
 
-        drawRevenueByMonthChart();
-    }
-
-    public void drawRevenueByMonthChart() {
-
-        CategoryChart categoryChart = new CategoryChartBuilder()
+        categoryChart = new CategoryChartBuilder()
                 .title("Doanh thu")
                 .xAxisTitle("thời gian")
                 .yAxisTitle("doanh thu")
-                .width(revenuePanel.getWidth())
-                .height(revenuePanel.getHeight())
+                .width(100)
+                .height(100)
                 .build();
         categoryChart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
 
-        List<RevenueByMonth> rbms = tkc.getRevenueByMonth();
+        revenuePanel.setLayout(new BorderLayout());
+        revenuePanel.add(new XChartPanel<>(categoryChart));
+        revenuePanel.validate();
+
+        drawRevenueByMonthChart(tkc.getRevenueByMonth());
+
+
+        pieChart = new PieChartBuilder()
+                .width(800)
+                .height(600)
+                .title(getClass()
+                        .getSimpleName()).build();
+
+        productRevenue.setLayout(new BorderLayout());
+        productRevenue.add(new XChartPanel<>(pieChart));
+        productRevenue.validate();
+
+        drawProductRevenue(tkc.getProductRevenue());
+    }
+
+    public void drawRevenueByMonthChart(List<RevenueByMonth> rbms) {
+
 
         List<String> monthYear = rbms.stream().map(o -> o.getMonth() + "")
                 .toList();
         List<Double> revenues = rbms.stream().map(o -> o.getRevenue())
                 .collect(Collectors.toList());
 
+        categoryChart.removeSeries("doanh thu");
         categoryChart.addSeries("doanh thu", monthYear, revenues);
+    }
 
-        revenuePanel.setLayout(new BorderLayout());
-        revenuePanel.add(new XChartPanel<>(categoryChart));
-        revenuePanel.validate();
+    public void drawProductRevenue(List<ProductRevenue> prs) {
+
+        for (ProductRevenue pr : prs) {
+            pieChart.addSeries(pr.getName(), pr.getRevenue());
+        }
+
     }
 
     public void LoadData(ArrayList<ThongKeModel> list) {
@@ -138,6 +165,7 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSP = new javax.swing.JTable();
         revenuePanel = new javax.swing.JPanel();
+        productRevenue = new javax.swing.JPanel();
 
         setFocusable(false);
 
@@ -279,6 +307,19 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("doang thu  theo tháng", revenuePanel);
 
+        javax.swing.GroupLayout productRevenueLayout = new javax.swing.GroupLayout(productRevenue);
+        productRevenue.setLayout(productRevenueLayout);
+        productRevenueLayout.setHorizontalGroup(
+                productRevenueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1048, Short.MAX_VALUE)
+        );
+        productRevenueLayout.setVerticalGroup(
+                productRevenueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 489, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("doanh thu theo sản phẩm", productRevenue);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,6 +357,9 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Khong co thong ke");
         } else {
             LoadData(list);
+            drawProductRevenue(tkc.getProductRevenue(ngaybd, ngaykt));
+            drawProductRevenue(tkc.getProductRevenue(ngaybd, ngaykt));
+
         }
     }//GEN-LAST:event_txtNgayBDKeyReleased
 
@@ -356,6 +400,7 @@ public class QL_Thong_Ke extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel productRevenue;
     private javax.swing.JPanel revenuePanel;
     private javax.swing.JTable tblSP;
     private javax.swing.JTable tblThongKe;

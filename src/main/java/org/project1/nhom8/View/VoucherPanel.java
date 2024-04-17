@@ -4,7 +4,6 @@ import org.project1.nhom8.dto.provider.VoucherViewModelProvider;
 import org.project1.nhom8.model.VoucherModel;
 import org.project1.nhom8.repository.VoucherRepository;
 import org.project1.nhom8.util.TrangThaiVoucher;
-import org.project1.nhom8.util.VietNamPattern;
 import org.project1.nhom8.util.swing.GeneralDocumentListener;
 import org.project1.nhom8.util.swing.PopupNotification;
 import org.project1.nhom8.util.swing.ValidatedTextField;
@@ -13,8 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 import java.util.Optional;
-import org.apache.poi.ss.util.DateFormatConverter;
-import org.project1.nhom8.util.data.convert.DefaultConverter;
 
 /**
  * @author ngtnthori03
@@ -41,30 +38,28 @@ public class VoucherPanel extends javax.swing.JPanel {
         this.voucherViewModelProvider = new VoucherViewModelProvider();
 
         voucherRepository = new VoucherRepository();
-        
+
         condPrice.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                if (!condPrice.getText().trim().matches(VietNamPattern.SO_THUC.getValue())) {
-                    validateForm();
+                if (!condPrice.getText().trim().matches("^[1-9]([0-9]+)?")) {
                     condPrice.setForeground(Color.RED);
                 } else {
-                    validateForm();
-                    condPrice.setForeground(Color.green);
+                    condPrice.setForeground(Color.GREEN);
                 }
+                validateForm();
             }
         });
 
         price.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                if (!price.getText().trim().matches(VietNamPattern.SO_THUC.getValue())) {
-                    validateForm();
+                if (!price.getText().trim().matches("^[1-9]([0-9]+)?")) {
                     price.setForeground(Color.RED);
                 } else {
-                    validateForm();
-                    price.setForeground(Color.green);
+                    price.setForeground(Color.GREEN);
                 }
+                validateForm();
             }
         });
 
@@ -72,14 +67,15 @@ public class VoucherPanel extends javax.swing.JPanel {
             @Override
             public void onChange() {
                 if (!quantity.getText().trim().matches("^[1-9]([0-9]+)?")) {
-                    validateForm();
                     quantity.setForeground(Color.RED);
                 } else {
-                    validateForm();
                     quantity.setForeground(Color.GREEN);
                 }
+                validateForm();
             }
         });
+
+        this.cencelVoucher.setEnabled(false);
 
         loadTable();
         clearForm();
@@ -92,13 +88,10 @@ public class VoucherPanel extends javax.swing.JPanel {
 
     public void validateForm() {
 
-        if (condPrice.getForeground().equals(Color.green)
-                && price.getForeground().equals(Color.green)
-                && quantity.getForeground().equals(Color.green)) {
-            addVoucher.setEnabled(true);
-        } else {
-            addVoucher.setEnabled(false);
-        }
+        addVoucher.setEnabled(condPrice.getForeground().equals(Color.GREEN)
+                && price.getForeground().equals(Color.GREEN)
+                && quantity.getForeground().equals(Color.GREEN));
+
     }
 
     public void clearForm() {
@@ -107,6 +100,7 @@ public class VoucherPanel extends javax.swing.JPanel {
         quantity.setText("");
         startDate.setDate(new Date());
         endDate.setDate(new Date());
+        this.cencelVoucher.setEnabled(false);
     }
 
     /**
@@ -160,15 +154,15 @@ public class VoucherPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
 
         Voucherview.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         Voucherview.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -215,79 +209,84 @@ public class VoucherPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                            .addComponent(condPrice, javax.swing.GroupLayout.Alignment.LEADING)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(addVoucher)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(cencelVoucher)))
-                                .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(price))
-                                        .addGap(111, 111, 111)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(reset))
-                                .addGap(0, 66, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                        .addComponent(jScrollPane1)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                                                                                        .addComponent(condPrice, javax.swing.GroupLayout.Alignment.LEADING)))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(addVoucher)
+                                                                                .addGap(35, 35, 35)
+                                                                                .addComponent(cencelVoucher)))
+                                                                .addGap(75, 75, 75)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                                                                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                        .addComponent(price))
+                                                                                .addGap(111, 111, 111)
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(reset))
+                                                                .addGap(0, 66, Short.MAX_VALUE)))
+                                                .addContainerGap())))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(condPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addVoucher)
-                        .addComponent(cencelVoucher))
-                    .addComponent(reset))
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(condPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(addVoucher)
+                                                .addComponent(cencelVoucher))
+                                        .addComponent(reset))
+                                .addGap(21, 21, 21)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVoucherActionPerformed
+
+        if (startDate.getDate().compareTo(this.endDate.getDate()) > 0) {
+            JOptionPane.showMessageDialog(this, "ngày bắt đầu phải trước ngày kết thức");
+            return;
+        }
 
         map();
 
@@ -307,32 +306,32 @@ public class VoucherPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_resetActionPerformed
 
     private void cencelVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cencelVoucherActionPerformed
-        
-       
-       if (new Date().compareTo(voucherModel.getNgayBatDau()) >= 0) {
-           JOptionPane.showMessageDialog(this, "không thể hủy hóa đơn đã bắt đầu (" + DefaultConverter.VietnameseDateFormat(voucherModel.getNgayBatDau()) + ")");
-           return;
-       }
-       
-       voucherModel.setTrangThai(TrangThaiVoucher.DA_HUY.getValue());
-       voucherModel.setNgayCapNhat(new Date());
-       
-       if ((voucherRepository.update(voucherModel))) {
-           loadTable();
-           clearForm();
-           JOptionPane.showMessageDialog(this
-                   , "hủy voucher " + voucherModel.getMaVoucher() + " thành công");
-       }
+
+
+//        if (new Date().compareTo(voucherModel.getNgayBatDau()) >= 0) {
+//            JOptionPane.showMessageDialog(this, "không thể hủy hóa đơn đã bắt đầu (" + DefaultConverter.VietnameseDateFormat(voucherModel.getNgayBatDau()) + ")");
+//            return;
+//        }
+
+        voucherModel.setTrangThai(TrangThaiVoucher.DA_HUY.getValue());
+        voucherModel.setNgayCapNhat(new Date());
+
+        if ((voucherRepository.update(voucherModel))) {
+            loadTable();
+            clearForm();
+            JOptionPane.showMessageDialog(this
+                    , "hủy voucher " + voucherModel.getMaVoucher() + " thành công");
+        }
     }//GEN-LAST:event_cencelVoucherActionPerformed
 
     private void VoucherviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VoucherviewMouseClicked
-        
+
         String voucherId = voucherViewModelProvider.getVoucherViewModel()
                 .get(Voucherview.getSelectedRow()).getMaVoucher();
-        
-       voucherModel = voucherRepository.findById(voucherId);
-        
-        if (Voucherview.getSelectedRow() >= 0 
+
+        voucherModel = voucherRepository.findById(voucherId);
+
+        if (Voucherview.getSelectedRow() >= 0
                 && voucherModel.getTrangThai().equals(TrangThaiVoucher.DANG_HOAT_DONG.getValue())) {
             cencelVoucher.setEnabled(true);
         } else {

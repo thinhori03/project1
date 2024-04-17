@@ -11,6 +11,6 @@ public class TestExportInvoice {
 
     @Test
     public void export() throws IOException {
-        hoaDonService.export("HD1", System.getenv("NTZOE_HOME_DIR") + "/store");
+        hoaDonService.export("HD20240417044203", System.getenv("NTZOE_HOME_DIR") + "/store");
     }
 }

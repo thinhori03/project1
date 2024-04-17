@@ -4,6 +4,7 @@
  */
 package org.project1.nhom8.repository;
 
+import org.project1.nhom8.dto.ProductRevenue;
 import org.project1.nhom8.dto.RevenueByMonth;
 import org.project1.nhom8.model.ThongKeModel;
 import org.project1.nhom8.service.DBConnect;
@@ -144,5 +145,137 @@ public class ThongKeConnection {
         }
 
         return result;
+    }
+
+    public List<RevenueByMonth> getRevenueByMonth(Date startDate, Date endDate) {
+
+        List<RevenueByMonth> result = new ArrayList<>();
+
+        String query = """
+                SELECT
+                    SUM(REVENUE) AS REVENUE
+                    , MON
+                from (SELECT
+                    SUM(LSG.GIA) * hdct.SOLUONG AS REVENUE
+                    , MONTH(HD.NGAYTHANHTOAN) AS MON
+                FROM HOA_DON_CHI_TIET AS HDCT
+                    JOIN SAN_PHAM_CHI_TIET AS SPCT ON SPCT.MASPCT = HDCT.MASPCT
+                    JOIN SAN_PHAM AS SP ON SPCT.MASP = SP.MASP
+                    JOIN LICH_SU_GIA AS LSG ON SPCT.MASPCT = LSG.MASPCT
+                    JOIN HOA_DON AS HD ON HDCT.MAHD = HD.MAHD
+                    WHERE  GETDATE() BETWEEN ? AND ?
+                group by hdct.SOLUONG, MONTH(HD.NGAYTHANHTOAN)) as GM
+                GROUP BY MON
+                """;
+
+        try {
+            PreparedStatement prestat = DBConnect.getConnection().prepareStatement(query);
+
+            prestat.setDate(1, new java.sql.Date(startDate.getTime()));
+            prestat.setDate(2, new java.sql.Date(endDate.getTime()));
+
+            ResultSet resultSet = prestat.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(new RevenueByMonth(
+                        resultSet.getDouble("REVENUE")
+                        , resultSet.getByte("MON")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return result;
+        }
+
+        return result;
+    }
+
+    public List<ProductRevenue> getProductRevenue() {
+
+        List<ProductRevenue> result = new ArrayList<>();
+
+        String query = """
+                SELECT
+                    SUM(REVENUE) AS REVENUE
+                , product_name
+                from (SELECT
+                          SUM(LSG.GIA) * hdct.SOLUONG AS REVENUE
+                           , MONTH(HD.NGAYTHANHTOAN) AS MON
+                            , SP.TENSP as product_name
+                      FROM HOA_DON_CHI_TIET AS HDCT
+                               JOIN SAN_PHAM_CHI_TIET AS SPCT ON SPCT.MASPCT = HDCT.MASPCT
+                               JOIN SAN_PHAM AS SP ON SPCT.MASP = SP.MASP
+                               JOIN LICH_SU_GIA AS LSG ON SPCT.MASPCT = LSG.MASPCT
+                               JOIN HOA_DON AS HD ON HDCT.MAHD = HD.MAHD
+                      group by hdct.SOLUONG, SP.TENSP, MONTH(HD.NGAYTHANHTOAN)) as GM
+                GROUP BY Product_name
+                """;
+
+        try {
+            PreparedStatement prestat = DBConnect.getConnection().prepareStatement(query);
+
+            ResultSet resultSet = prestat.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(new ProductRevenue(
+                        resultSet.getString("product_name")
+                        , resultSet.getDouble("REVENUE")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return result;
+        }
+
+        return result;
+
+    }
+
+    public List<ProductRevenue> getProductRevenue(Date startDate, Date endDate) {
+
+        List<ProductRevenue> result = new ArrayList<>();
+
+        String query = """
+                SELECT
+                    SUM(REVENUE) AS REVENUE
+                , product_name
+                from (SELECT
+                          SUM(LSG.GIA) * hdct.SOLUONG AS REVENUE
+                           , MONTH(HD.NGAYTHANHTOAN) AS MON
+                            , SP.TENSP as product_name
+                      FROM HOA_DON_CHI_TIET AS HDCT
+                               JOIN SAN_PHAM_CHI_TIET AS SPCT ON SPCT.MASPCT = HDCT.MASPCT
+                               JOIN SAN_PHAM AS SP ON SPCT.MASP = SP.MASP
+                               JOIN LICH_SU_GIA AS LSG ON SPCT.MASPCT = LSG.MASPCT
+                               JOIN HOA_DON AS HD ON HDCT.MAHD = HD.MAHD
+                               WHERE  GETDATE() BETWEEN ? AND ?
+                      group by hdct.SOLUONG, SP.TENSP, MONTH(HD.NGAYTHANHTOAN)) as GM
+                GROUP BY Product_name
+                """;
+
+        try {
+            PreparedStatement prestat = DBConnect.getConnection().prepareStatement(query);
+
+            prestat.setDate(1, new java.sql.Date(startDate.getTime()));
+            prestat.setDate(2, new java.sql.Date(endDate.getTime()));
+
+            ResultSet resultSet = prestat.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(new ProductRevenue(
+                        resultSet.getString("product_name")
+                        , resultSet.getDouble("REVENUE")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return result;
+        }
+
+        return result;
+
     }
 }

@@ -5,7 +5,6 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import org.project1.nhom8.dto.Cart;
 import org.project1.nhom8.dto.CartDetail;
 import org.project1.nhom8.dto.provider.InvoiceExportProvider;
-import org.project1.nhom8.dto.provider.SPCTViewModelProvider;
 import org.project1.nhom8.model.HDCTModel;
 import org.project1.nhom8.model.HoaDonModel;
 import org.project1.nhom8.model.KhuyenMai;
@@ -146,29 +145,7 @@ public class HoaDonService {
     public Integer taoMaHDCT() {
         return hdctRepository.count() + 1;
     }
-
-    public void export(Cart cart, String targetDir) throws IOException {
-        HTMLResolver htmlResolver = new HTMLResolver();
-
-        Context invoiceContext = new Context();
-        invoiceContext.setVariable("invoice", cart);
-        invoiceContext.setVariable("user", LoginService.lg);
-        invoiceContext.setVariable("prodViewProv", new SPCTViewModelProvider());
-
-        String html = htmlResolver.revolve("invoice-export", invoiceContext);
-
-        ConverterProperties convProp = new ConverterProperties();
-
-        FileOutputStream outputFile = new FileOutputStream(targetDir + "/" + cart.getInvoiceId() + ".pdf");
-
-        HtmlConverter.convertToPdf(html
-                , outputFile
-                , convProp
-        );
-
-
-        // Desktop.getDesktop().browseFileDirectory(new File(targetDir + "/" + cart.getInvoiceId() + ".pdf"));
-    }
+    
 
     public void export(String invoiceId, String targetDir) throws IOException {
         HTMLResolver htmlResolver = new HTMLResolver();
