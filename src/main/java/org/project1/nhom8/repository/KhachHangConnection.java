@@ -199,7 +199,7 @@ public class KhachHangConnection {
                         *
                     FROM KHACH_HANG
                     WHERE KHACH_HANG.SDT LIKE ?
-                    AND KHACH_HANG.TEN_KH LIKE ?
+                    AND KHACH_HANG.TENKH LIKE ?
                     """;
         try {
 

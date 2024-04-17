@@ -145,7 +145,7 @@ public class HoaDonService {
     public Integer taoMaHDCT() {
         return hdctRepository.count() + 1;
     }
-    
+
 
     public void export(String invoiceId, String targetDir) throws IOException {
         HTMLResolver htmlResolver = new HTMLResolver();
@@ -176,4 +176,13 @@ public class HoaDonService {
 
         // Desktop.getDesktop().browseFileDirectory(new File(targetDir + "/" + cart.getInvoiceId() + ".pdf"));
     }
+
+//    public void exportToExcel(List<HoaDonModel> invoices, String path) {
+//
+//        String fileName = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss").format(new Date());
+//
+//        Workbook wb = new XSSFWorkbook(path + "/" + fileName);
+//
+//        Sheet invoiceSheet = wb.createSheet("hóa đơn");
+//    }
 }
