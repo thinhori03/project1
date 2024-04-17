@@ -824,15 +824,15 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         if (customer == null) {
             customer = new KhachHangModel();
+
             customer.setSdt(customerPhoneNumber.getText().trim());
             customer.setTen(customerName.getText().trim());
             khachHangConnection.add(customer);
-
-            this.cart.setCustomerName(customer.getTen());
-            this.cart.setCustomerPhoneNumber(customer.getSdt());
-        } else {
-            this.cart.setCustomerName(customer.getTen());
+            customer = khachHangConnection.findByNameAndPhoneNumber(customer.getTen(), customer.getSdt());
         }
+        this.cart.setCustomerId(customer.getMaKH());
+        this.cart.setCustomerName(customer.getTen());
+        this.cart.setCustomerPhoneNumber(customer.getSdt());
 
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_HUY);
 
@@ -872,11 +872,8 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         if (customer == null) {
             customer = new KhachHangModel();
-            if (customerPhoneNumber.getText().isEmpty()) {
-                customer.setSdt("none");
-            } else {
-                customer.setSdt(customerPhoneNumber.getText().trim());
-            }
+
+            customer.setSdt(customerPhoneNumber.getText().trim());
             customer.setTen(customerName.getText().trim());
             khachHangConnection.add(customer);
             customer = khachHangConnection.findByNameAndPhoneNumber(customer.getTen(), customer.getSdt());
