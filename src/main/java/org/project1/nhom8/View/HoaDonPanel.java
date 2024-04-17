@@ -89,6 +89,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
         byPaymentTime.setSelected(false);
         beginPaymantDate.setEnabled(false);
         endPaymantDate.setEnabled(false);
+        
     }
 
     /**

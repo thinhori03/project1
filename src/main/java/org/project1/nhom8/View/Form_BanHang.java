@@ -834,9 +834,14 @@ public class Form_BanHang extends javax.swing.JPanel {
         this.cart.setCustomerName(customer.getTen());
         this.cart.setCustomerPhoneNumber(customer.getSdt());
 
+        this.cart.setSaver(LoginService.lg);
+        this.cart.setPaymentMethod(paymentMethod.getSelectedItem().toString().trim());
+
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_HUY);
 
         if (invoiceId != null) {
+            JOptionPane.showMessageDialog(this, "hủy hóa đơn " + this.cart.getInvoiceId() + " thành  công");
+
             this.cart = null;
             this.cartService.remove(invoiceId);
         }
@@ -885,8 +890,6 @@ public class Form_BanHang extends javax.swing.JPanel {
         this.cart.setSaver(LoginService.lg);
         this.cart.setPaymentMethod(paymentMethod.getSelectedItem().toString().trim());
 
-        System.out.println(cart.getCustomerPhoneNumber());
-
         // save invoice to DB
         String invoiceId = hoaDonService.taoHoaDon(this.cart, TrangThaiHoaDon.DA_THANH_TOAN);
 
@@ -911,8 +914,6 @@ public class Form_BanHang extends javax.swing.JPanel {
                 hoaDonService.export(this.cart.getInvoiceId(), fileChooser.getSelectedFile().toString());
                 JOptionPane.showMessageDialog(this, "Xuất hóa đơn " + this.cart.getInvoiceId() + " thành công");
             } catch (java.io.IOException e) {
-                e.printStackTrace();
-
                 JOptionPane.showMessageDialog(this, "Xuất hóa đơn " + this.cart.getInvoiceId() + " thất bại");
             }
         }
