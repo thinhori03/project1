@@ -121,7 +121,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         customerPhoneNumber.getDocument().addDocumentListener(new GeneralDocumentListener() {
             @Override
             public void onChange() {
-                createInvoice.setEnabled(customerPhoneNumber.getText().trim().matches("^0([1-9]+){9}$"));
+                createInvoice.setEnabled(customerPhoneNumber.getText().trim().matches("^0([1-9]+){9}$") || customerPhoneNumber.getText().isEmpty());
             }
         });
 
@@ -820,7 +820,7 @@ public class Form_BanHang extends javax.swing.JPanel {
             return;
         }
 
-        KhachHangModel customer = khachHangConnection.findByPhoneNumber(customerPhoneNumber.getText().trim());
+        KhachHangModel customer = khachHangConnection.findByNameAndPhoneNumber(customerName.getText().trim(), customerPhoneNumber.getText().trim());
 
         if (customer == null) {
             customer = new KhachHangModel();
@@ -868,7 +868,7 @@ public class Form_BanHang extends javax.swing.JPanel {
             return;
         }
 
-        KhachHangModel customer = khachHangConnection.findByPhoneNumber(customerPhoneNumber.getText().trim());
+        KhachHangModel customer = khachHangConnection.findByNameAndPhoneNumber(customerName.getText().trim(), customerPhoneNumber.getText().trim());
 
         if (customer == null) {
             customer = new KhachHangModel();

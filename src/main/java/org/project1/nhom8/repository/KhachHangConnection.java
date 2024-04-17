@@ -192,6 +192,45 @@ public class KhachHangConnection {
         return null;
     }
 
+    public KhachHangModel findByNameAndPhoneNumber(String name, String phoneNumber) {
+
+        String query = """
+                SELECT
+                        *
+                    FROM KHACH_HANG
+                    WHERE KHACH_HANG.SDT LIKE ?
+                    AND KHACH_HANG.TEN_KH LIKE ?
+                    """;
+        try {
+
+            Connection connection = DBConnect.getConnection();
+
+            PreparedStatement preStat = connection.prepareStatement(query);
+
+            preStat.setString(1, name);
+            preStat.setString(2, phoneNumber);
+
+            ResultSet rs = preStat.executeQuery();
+
+            if (rs.next()) {
+                Integer ma = rs.getInt("MAKH");
+                String ten = rs.getString("TENKH");
+                String sdt = rs.getString("SDT");
+                String gioiTinh = rs.getString("GIOITINH");
+                String email = rs.getString("EMAIL");
+                Date ngay = rs.getDate("NGAYSINH");
+                String diaChi = rs.getString("DIACHI");
+                KhachHangModel kh = new KhachHangModel(ma, ten, sdt, gioiTinh, email, ngay, diaChi);
+
+                return kh;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public KhachHangModel findById(Integer id) {
 
         String query = """
