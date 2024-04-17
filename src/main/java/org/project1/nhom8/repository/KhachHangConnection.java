@@ -198,8 +198,8 @@ public class KhachHangConnection {
                 SELECT
                         *
                     FROM KHACH_HANG
-                    WHERE KHACH_HANG.SDT LIKE ?
-                    AND KHACH_HANG.TENKH LIKE ?
+                    WHERE KHACH_HANG.TENKH LIKE ?
+                    AND KHACH_HANG.SDT LIKE ?
                     """;
         try {
 
@@ -207,7 +207,7 @@ public class KhachHangConnection {
 
             PreparedStatement preStat = connection.prepareStatement(query);
 
-            preStat.setString(1, name);
+            preStat.setNString(1, name);
             preStat.setString(2, phoneNumber);
 
             ResultSet rs = preStat.executeQuery();

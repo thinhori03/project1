@@ -10,6 +10,8 @@ public class Cart {
 
     private String invoiceId;
 
+    private Integer customerId;
+
     private String customerName;
 
     // id customer exists in DB
@@ -40,6 +42,14 @@ public class Cart {
         this.customerPhoneNumber = customerPhoneNumber;
 
         this.products = new HashMap<>();
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getInvoiceId() {

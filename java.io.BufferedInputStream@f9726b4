@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .text-right {
+            text-align: right;
+            float: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<h2>LV Store</h2>
+<br>
+<div>
+    <strong class="">mã hóa đơn: </strong>
+    <i class="">HD20240417121439</i>
+</div>
+
+<div>
+    <strong class="">tên khách hàng: </strong>
+    <i class="">thinh</i>
+</div>
+
+<div>
+    <strong>số điện thoại: </strong>
+    <i class=""></i>
+</div>
+<br>
+<div>
+    <strong>thời gian thanh toán: </strong>
+    <i>17-04-2024 12:14</i>
+</div>
+
+<div>
+    <strong class="">tổng tiền: </strong>
+    <i class="">570000.0 vnđ</i>
+</div>
+
+<div>
+    <strong class="">voucher: </strong>
+    
+    <i class="">0 vnđ</i>
+</div>
+
+<div>
+    <strong class="">thành tiền: </strong>
+    
+    <i class="">570000.0 vnđ</i>
+</div>
+
+<br>
+<h5>danh sách sản phẩm</h5>
+<br>
+<table class="table-info" style="width: 100%">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>tên sản phẩm</th>
+        <th>màu sắc</th>
+        <th>size</th>
+        <th>số lượng</th>
+        <th>giá</th>
+        <th>giá gốc</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+        <td>1</td>
+        <td>3</td>
+        <td>Đỏ vàng</td>
+        <td>39</td>
+        <td>10</td>
+        <td>120000 vnđ</td>
+        <td>150000 vnđ</td>
+    </tr>
+
+
+    <tr>
+        <td>2</td>
+        <td>2</td>
+        <td>Đỏ</td>
+        <td>38</td>
+        <td>2</td>
+        <td>450000 vnđ</td>
+        <td>450000 vnđ</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

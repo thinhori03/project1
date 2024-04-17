@@ -872,15 +872,18 @@ public class Form_BanHang extends javax.swing.JPanel {
 
         if (customer == null) {
             customer = new KhachHangModel();
-            customer.setSdt(customerPhoneNumber.getText().trim());
+            if (customerPhoneNumber.getText().isEmpty()) {
+                customer.setSdt("none");
+            } else {
+                customer.setSdt(customerPhoneNumber.getText().trim());
+            }
             customer.setTen(customerName.getText().trim());
             khachHangConnection.add(customer);
-
-            this.cart.setCustomerName(customer.getTen());
-            this.cart.setCustomerPhoneNumber(customer.getSdt());
-        } else {
-            this.cart.setCustomerName(customer.getTen());
+            customer = khachHangConnection.findByNameAndPhoneNumber(customer.getTen(), customer.getSdt());
         }
+        this.cart.setCustomerId(customer.getMaKH());
+        this.cart.setCustomerName(customer.getTen());
+        this.cart.setCustomerPhoneNumber(customer.getSdt());
 
         this.cart.setSaver(LoginService.lg);
         this.cart.setPaymentMethod(paymentMethod.getSelectedItem().toString().trim());

@@ -14,7 +14,6 @@ public class InsertKhachHang {
     @Test
     public void insert() {
         var kh = new KhachHangModel();
-        kh.setTen("thinh");
-        khachHangConnection.add(kh);
+        System.out.println(khachHangConnection.findByNameAndPhoneNumber("deo phai khach hang", "none").getMaKH());
     }
 }

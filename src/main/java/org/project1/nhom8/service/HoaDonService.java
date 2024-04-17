@@ -76,7 +76,7 @@ public class HoaDonService {
         hoaDonModel.setNgayTao(cart.getCreationDate());
         hoaDonModel.setNgayThanhToan(new Date());
         hoaDonModel.setMaNV(cart.getCreator().getMa());
-        hoaDonModel.setMaKH(khachHangConnection.findByPhoneNumber(cart.getCustomerPhoneNumber()).getMaKH());
+        hoaDonModel.setMaKH(cart.getCustomerId());
         hoaDonModel.setTrangThai(trangThai.getValue());
         hoaDonModel.setMaNVXN(cart.getSaver().getMa());
         hoaDonModel.setTienThanhToan(cart.getPayment());
